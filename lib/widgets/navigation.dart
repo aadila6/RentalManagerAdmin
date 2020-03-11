@@ -4,7 +4,7 @@ import 'package:RentalAdmin/views/InventoryView.dart';
 import 'package:RentalAdmin/views/chatBoxView.dart';
 import 'package:RentalAdmin/views/ReservationView.dart';
 import 'package:RentalAdmin/widgets/testlist.dart';
-
+import 'package:RentalAdmin/widgets/signInScreen.dart';
 import 'package:RentalAdmin/widgets/chat.dart';
 import 'googleSignin.dart';
 
@@ -83,7 +83,7 @@ class NavigationBar extends StatelessWidget {
                   color: Colors.teal,
                   onPressed: () {
                      print("Pressed Support button!!");
-                    //  Navigator.push(context, MaterialPageRoute(builder: (context) => signInScreen()));
+                     Navigator.push(context, MaterialPageRoute(builder: (context) => signInScreen()));
                   },
                   child: Text(
                     "Admin Login",
