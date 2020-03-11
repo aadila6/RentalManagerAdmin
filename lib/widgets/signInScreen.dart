@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:RentalAdmin/views/homeView.dart';
+import 'auth.dart';
+import 'googleSigninVC.dart';
 
 class signInScreen extends StatefulWidget {
   @override
@@ -6,19 +12,59 @@ class signInScreen extends StatefulWidget {
 }
 
 class _signInScreenState extends State<signInScreen> {
-  @override
   String username, password, resetPassword;
+
+  bool _Accountvalidate = false;
+  String _contactText;
+  GoogleSignInAccount _currentUser;
+
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
+
+  Future<FirebaseUser> _handleSignIn() async {
+    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    final FirebaseUser user =
+        (await _auth.signInWithCredential(credential)).user;
+    print("signed in " + user.displayName);
+    return user;
+  }
+
+  String googleLogInName = '';
+  BuildContext _context;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = new GoogleSignIn();
+  FirebaseUser _user;
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
           child: Column(
+            
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage('images/appstore.png'),
+              
+                          // CircleAvatar(
+              //   radius: 50,
+              //   backgroundImage: AssetImage('images/appstore.png'),
+              // ),
+              Image(
+                image: NetworkImage(
+                    'https://pluspng.com/img-png/google-logo-png-open-2000.png'),
+                height: 30,
               ),
               SizedBox(height: 10, width: 150),
               Text(
@@ -47,19 +93,21 @@ class _signInScreenState extends State<signInScreen> {
                   color: Colors.teal.shade900,
                 ),
               ),
-              SizedBox(
-                  height: 10, width: 150
-              ),
-
-              TextField(
-                onChanged:(text){
+              SizedBox(height: 10, width: 150),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
+                child: TextField(
+                onChanged: (text) {
                   username = text;
                   print("First text field: $text");
                 },
                 // controller: _username,
                 cursorColor: Colors.teal.shade900,
-                scrollPadding:  const EdgeInsets.symmetric(vertical: 10.0,horizontal: 30),
+                scrollPadding:
+                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 100),
                 decoration: InputDecoration(
+                  contentPadding:
+                      new EdgeInsets.fromLTRB(20.0, 10.0, 100.0, 10.0),
                   border: new OutlineInputBorder(
                     borderRadius: const BorderRadius.all(
                       const Radius.circular(8.0),
@@ -69,30 +117,30 @@ class _signInScreenState extends State<signInScreen> {
                       width: 1.0,
                     ),
                   ),
-                  labelText: 'Enter your Email Address',
+                  labelText: 'Email',
                   prefixIcon: const Icon(Icons.person, color: Colors.black),
                   // labelStyle:
                   // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 30),
-
                 ),
-
               ),
-              SizedBox(
-                  height: 20,width: 150
               ),
-              TextField(
+              
 
-                onChanged:(text){
+              SizedBox(height: 20, width: 150),
+               Padding(
+                padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
+                child: TextField(
+                onChanged: (text) {
                   password = text;
 
                   //print("First text field: $text");
                 },
-
+                //decoration: new InputDecoration(hintText: "Enter Something", contentPadding: const EdgeInsets.all(20.0)
                 obscureText: true,
                 cursorColor: Colors.teal.shade900,
                 decoration: InputDecoration(
-                  contentPadding: new EdgeInsets.fromLTRB(20.0, 10.0, 100.0, 10.0),
+                  contentPadding:
+                      new EdgeInsets.fromLTRB(20.0, 10.0, 100.0, 10.0),
                   border: new OutlineInputBorder(
                     borderRadius: const BorderRadius.all(
                       const Radius.circular(8.0),
@@ -102,31 +150,31 @@ class _signInScreenState extends State<signInScreen> {
                       width: 1.0,
                     ),
                   ),
-                  labelText: 'Enter your Password',
+                  labelText: 'Password',
                   prefixIcon: const Icon(Icons.lock, color: Colors.black),
                   // labelStyle:
                   // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
                   // contentPadding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 50),
                 ),
-              ),
-
-
+              ),),
 
               SizedBox(
                 height: 15,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                
                 children: <Widget>[
                   SizedBox(
-                    width: MediaQuery. of(context). size. width / 6 * 5,
+                    width: MediaQuery.of(context).size.width / 20 * 5,
                     child: RaisedButton(
                       highlightElevation: 0.0,
                       splashColor: Colors.greenAccent,
                       highlightColor: Colors.green,
                       elevation: 0.0,
                       color: Colors.green,
-                      shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -141,38 +189,43 @@ class _signInScreenState extends State<signInScreen> {
                               ),
                             ),
                           ),
-
                         ],
                       ),
-                      onPressed: () async{
+                      onPressed: () async {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeView()));
                       },
-                      padding: EdgeInsets.all(7.0),
+                      padding: EdgeInsets.all(10.0),
                       //color: Colors.teal.shade900,
                       disabledColor: Colors.black,
                       disabledTextColor: Colors.black,
-
                     ),
                   ),
-
-
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(
-                    width: MediaQuery. of(context). size. width / 6 * 5,
+                    width: MediaQuery.of(context).size.width / 20 * 5,
                     child: RaisedButton(
                       highlightElevation: 0.0,
                       splashColor: Colors.greenAccent,
                       highlightColor: Colors.green,
                       elevation: 0.0,
                       color: Colors.green,
-                      shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Image(image: NetworkImage('https://pluspng.com/img-png/google-logo-png-open-2000.png'), height: 30,),
+                          Image(
+                            image: NetworkImage(
+                                'https://pluspng.com/img-png/google-logo-png-open-2000.png'),
+                            height: 30,
+                          ),
                           SizedBox(width: 20.0),
                           Center(
                             child: Text(
@@ -185,27 +238,50 @@ class _signInScreenState extends State<signInScreen> {
                               ),
                             ),
                           ),
-
                         ],
                       ),
-                      onPressed: () async{
-
+                      onPressed: () async {
+                        _handleSignIn()
+                            .then((FirebaseUser user) => print(user))
+                            .catchError((e) => print(e));
+                        // try{
+                        //   // FirebaseUser googleuser = await _myGoogleSignIn();
+                        //   bool check =await _myGoogleSignIn();
+                        //   if(check){
+                        //   // if(googleuser != null){
+                        //   //  globals.username = googleuser.displayName;
+                        //   //  globals.email = googleuser.email;
+                        //   //  globals.uid = 'GoogleSignInUser' + globals.email;
+                        //   //  prLOGIN.update(
+                        //   //    message: 'Successfully Login...',
+                        //   //    progressWidget: CircularProgressIndicator(),
+                        //   //    progressTextStyle: TextStyle(
+                        //   //        color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
+                        //   //    messageTextStyle: TextStyle(
+                        //   //        color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600),
+                        //   //  );
+                        //   //  await prLOGIN.show();
+                        //   //  prLOGIN.hide();
+                        //     print("Successfully loged in Google user");
+                        //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeView()));
+                        //   }
+                        //   _handleSignIn();
+                        // }catch(e){
+                        //   print(e);
+                        // }
+                        //  Navigator.push(context, MaterialPageRoute(builder: (context) => ggSignin()));
                       },
                       padding: EdgeInsets.all(7.0),
                       //color: Colors.teal.shade900,
                       disabledColor: Colors.black,
                       disabledTextColor: Colors.black,
-
                     ),
                   ),
-
-
                 ],
               ),
               SizedBox(
                 height: 15,
               ),
-
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -217,7 +293,10 @@ class _signInScreenState extends State<signInScreen> {
                   SizedBox(width: 5.0),
                   InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SignUpPage()));
                     },
                     child: Text(
                       'Register',
@@ -235,13 +314,14 @@ class _signInScreenState extends State<signInScreen> {
               ),
               Center(
                 child: Container(
-
                   //alignment: Alignment(1.0, 0.0),
                   //padding: EdgeInsets.only(top: 15.0, left: 20.0),
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPassword()));
-
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ResetPassword()));
                     },
                     child: Text(
                       'Forgot Password',
@@ -255,8 +335,7 @@ class _signInScreenState extends State<signInScreen> {
                 ),
               ),
               Row(
-                children: <Widget>[
-                ],
+                children: <Widget>[],
               ),
             ],
           ),
@@ -267,6 +346,7 @@ class _signInScreenState extends State<signInScreen> {
   }
 }
 
+mixin UserCredential {}
 
 class ResetPassword extends StatefulWidget {
   @override
@@ -290,9 +370,7 @@ class _ResetPasswordState extends State<ResetPassword> {
         backgroundColor: Colors.white,
         body: SafeArea(
           child: Column(
-
             children: <Widget>[
-
               SizedBox(height: 10, width: 150),
               Text(
                 'Rental Manager',
@@ -310,7 +388,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                   fontFamily: 'Source Sans Pro',
                   color: Colors.teal.shade900,
                   fontSize: 20,
-
                 ),
               ),
               SizedBox(
@@ -320,17 +397,16 @@ class _ResetPasswordState extends State<ResetPassword> {
                   color: Colors.teal.shade900,
                 ),
               ),
-              SizedBox(
-                  height: 10, width: 150
-              ),
+              SizedBox(height: 10, width: 150),
 
               TextField(
-                onChanged:(text){
+                onChanged: (text) {
                   email = text;
                 },
                 // controller: _username,
                 cursorColor: Colors.teal.shade900,
-                scrollPadding:  const EdgeInsets.symmetric(vertical: 10.0,horizontal: 30),
+                scrollPadding:
+                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30),
                 decoration: InputDecoration(
                   border: new OutlineInputBorder(
                     borderRadius: const BorderRadius.all(
@@ -345,14 +421,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                   prefixIcon: const Icon(Icons.email, color: Colors.black),
                   // labelStyle:
                   // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 30),
-
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 30),
                 ),
-
               ),
-              SizedBox(
-                  height: 20,width: 150
-              ),
+              SizedBox(height: 20, width: 150),
 
               SizedBox(
                 height: 5,
@@ -361,14 +434,15 @@ class _ResetPasswordState extends State<ResetPassword> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(
-                    width: MediaQuery. of(context). size. width / 6 * 5,
+                    width: MediaQuery.of(context).size.width / 6 * 5,
                     child: RaisedButton(
                       highlightElevation: 0.0,
                       splashColor: Colors.greenAccent,
                       highlightColor: Colors.green,
                       elevation: 0.0,
                       color: Colors.green,
-                      shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -383,21 +457,15 @@ class _ResetPasswordState extends State<ResetPassword> {
                               ),
                             ),
                           ),
-
                         ],
                       ),
-                      onPressed: () async{
-                      },
+                      onPressed: () async {},
                       padding: EdgeInsets.all(7.0),
                       //color: Colors.teal.shade900,
                       disabledColor: Colors.black,
                       disabledTextColor: Colors.black,
-
                     ),
                   ),
-
-
-
                 ],
               ),
               SizedBox(
@@ -456,7 +524,6 @@ class _ResetPasswordState extends State<ResetPassword> {
   }
 }
 
-
 class SignUpPage extends StatefulWidget {
   @override
   _State createState() => _State();
@@ -466,10 +533,7 @@ class _State extends State<SignUpPage> {
   @override
   String email, usernameFirst, usernameLast, password, confirmpw;
 
-
-
   Widget build(BuildContext context) {
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -479,15 +543,16 @@ class _State extends State<SignUpPage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
 
+          children: <Widget>[
             TextField(
-              onChanged:(text){
+              onChanged: (text) {
                 email = text;
                 //print("First text field: $text");
               },
               cursorColor: Colors.teal.shade900,
-              scrollPadding:  const EdgeInsets.symmetric(vertical: 20.0,horizontal: 50),
+              scrollPadding:
+                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
               decoration: InputDecoration(
                 border: new OutlineInputBorder(
                   borderRadius: const BorderRadius.all(
@@ -502,14 +567,15 @@ class _State extends State<SignUpPage> {
                 prefixIcon: const Icon(Icons.email, color: Colors.black),
                 // labelStyle:
                 // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                contentPadding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 50),
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
               ),
             ),
             SizedBox(
               height: 20,
             ),
             TextField(
-              onChanged:(text){
+              onChanged: (text) {
                 usernameFirst = text;
                 //print("username: $text");
               },
@@ -530,14 +596,15 @@ class _State extends State<SignUpPage> {
                 prefixIcon: const Icon(Icons.person, color: Colors.black),
                 // labelStyle:
                 // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                contentPadding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 50),
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
               ),
             ),
             SizedBox(
               height: 20,
             ),
             TextField(
-              onChanged:(text){
+              onChanged: (text) {
                 usernameLast = text;
                 //print("username: $text");
               },
@@ -558,20 +625,22 @@ class _State extends State<SignUpPage> {
                 prefixIcon: const Icon(Icons.person, color: Colors.black),
                 // labelStyle:
                 // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                contentPadding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 50),
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
               ),
             ),
             SizedBox(
               height: 20,
             ),
             TextField(
-              onChanged:(text){
+              onChanged: (text) {
                 password = text;
                 //print("First password field: $text");
               },
               obscureText: true,
               cursorColor: Colors.teal.shade900,
-              scrollPadding:  const EdgeInsets.symmetric(vertical: 20.0,horizontal: 50),
+              scrollPadding:
+                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
               decoration: InputDecoration(
                 border: new OutlineInputBorder(
                   borderRadius: const BorderRadius.all(
@@ -586,14 +655,15 @@ class _State extends State<SignUpPage> {
                 prefixIcon: const Icon(Icons.lock, color: Colors.black),
                 // labelStyle:
                 // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                contentPadding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 50),
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
               ),
             ),
             SizedBox(
               height: 20,
             ),
             TextField(
-              onChanged:(text){
+              onChanged: (text) {
                 confirmpw = text;
                 //print("Second password field: $text");
               },
@@ -614,7 +684,8 @@ class _State extends State<SignUpPage> {
                 prefixIcon: const Icon(Icons.lock, color: Colors.black),
                 // labelStyle:
                 // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                contentPadding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 50),
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
               ),
             ),
             SizedBox(
@@ -625,15 +696,11 @@ class _State extends State<SignUpPage> {
               textColor: Colors.white,
               color: Colors.teal.shade900,
               child: Text('SIGN UP'),
-
-              onPressed: () async{
-              },
+              onPressed: () async {},
               padding: EdgeInsets.all(10.0),
               disabledColor: Colors.black,
               disabledTextColor: Colors.black,
-
             ),
-
           ],
         ),
       ),

@@ -44,7 +44,7 @@ class NavigationBar extends StatelessWidget {
                   color: Colors.teal,
                   onPressed: () {
                     print("Pressed Support button!!");
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => InventoryView()));
+                     Navigator.push(context, MaterialPageRoute(builder: (context) => LocationPage(title:'Select a Location')));
                   },
                   child: Text(
                     "Inventory",
