@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'custom_gridcell.dart';
+import "itemGrid.dart";
 import 'item_page.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -19,7 +20,7 @@ class _CategoryPageState extends State<CategoryPage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => ItemPage(category: categorySelected)));
+            builder: (context) => ItemGridPage(category: categorySelected)));
   }
 
   @override

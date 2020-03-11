@@ -48,16 +48,15 @@ class _signInScreenState extends State<signInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var authHandler = new Auth();
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
           child: Column(
-            
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              
-                          // CircleAvatar(
+              // CircleAvatar(
               //   radius: 50,
               //   backgroundImage: AssetImage('images/appstore.png'),
               // ),
@@ -97,73 +96,72 @@ class _signInScreenState extends State<signInScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
                 child: TextField(
-                onChanged: (text) {
-                  username = text;
-                  print("First text field: $text");
-                },
-                // controller: _username,
-                cursorColor: Colors.teal.shade900,
-                scrollPadding:
-                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 100),
-                decoration: InputDecoration(
-                  contentPadding:
-                      new EdgeInsets.fromLTRB(20.0, 10.0, 100.0, 10.0),
-                  border: new OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(
-                      const Radius.circular(8.0),
+                  onChanged: (text) {
+                    username = text;
+                    print("First text field: $text");
+                  },
+                  // controller: _username,
+                  cursorColor: Colors.teal.shade900,
+                  scrollPadding: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 100),
+                  decoration: InputDecoration(
+                    contentPadding:
+                        new EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
+                    border: new OutlineInputBorder(
+                      borderRadius: const BorderRadius.all(
+                        const Radius.circular(8.0),
+                      ),
+                      borderSide: new BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
                     ),
-                    borderSide: new BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
-                    ),
+                    labelText: 'Email',
+                    prefixIcon: const Icon(Icons.person, color: Colors.black),
+                    // labelStyle:
+                    // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
                   ),
-                  labelText: 'Email',
-                  prefixIcon: const Icon(Icons.person, color: Colors.black),
-                  // labelStyle:
-                  // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
                 ),
               ),
-              ),
-              
 
               SizedBox(height: 20, width: 150),
-               Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
                 child: TextField(
-                onChanged: (text) {
-                  password = text;
+                  onChanged: (text) {
+                    password = text;
 
-                  //print("First text field: $text");
-                },
-                //decoration: new InputDecoration(hintText: "Enter Something", contentPadding: const EdgeInsets.all(20.0)
-                obscureText: true,
-                cursorColor: Colors.teal.shade900,
-                decoration: InputDecoration(
-                  contentPadding:
-                      new EdgeInsets.fromLTRB(20.0, 10.0, 100.0, 10.0),
-                  border: new OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(
-                      const Radius.circular(8.0),
+                    //print("First text field: $text");
+                  },
+                  //decoration: new InputDecoration(hintText: "Enter Something", contentPadding: const EdgeInsets.all(20.0)
+                  obscureText: true,
+                  cursorColor: Colors.teal.shade900,
+                  decoration: InputDecoration(
+                    contentPadding:
+                        new EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
+                    border: new OutlineInputBorder(
+                      borderRadius: const BorderRadius.all(
+                        const Radius.circular(8.0),
+                      ),
+                      borderSide: new BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
                     ),
-                    borderSide: new BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
-                    ),
+                    labelText: 'Password',
+                    prefixIcon: const Icon(Icons.lock, color: Colors.black),
+                    // labelStyle:
+                    // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
+                    // contentPadding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 50),
                   ),
-                  labelText: 'Password',
-                  prefixIcon: const Icon(Icons.lock, color: Colors.black),
-                  // labelStyle:
-                  // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                  // contentPadding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 50),
                 ),
-              ),),
+              ),
 
               SizedBox(
                 height: 15,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                
                 children: <Widget>[
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 20 * 5,
@@ -192,10 +190,74 @@ class _signInScreenState extends State<signInScreen> {
                         ],
                       ),
                       onPressed: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeView()));
+                        var e = await authHandler.signIn(username, password);
+                        if (e == "false") {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text('Invalid Input'),
+                                  actions: <Widget>[
+                                    new FlatButton(
+                                      child: new Text('CANCEL'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              });
+                        } else {
+
+                          // prLOGIN.update(
+                          //   message: 'Successfully Login...',
+                          //   progressWidget: CircularProgressIndicator(),
+                          //   progressTextStyle: TextStyle(
+                          //       color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
+                          //   messageTextStyle: TextStyle(
+                          //       color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600),
+                          // );
+                          // await prLOGIN.show();
+                          // username = username.trim();
+                          // var email = username;
+
+                          // globals.email = email;
+
+                          // final QuerySnapshot result =
+                          // await Firestore.instance.collection('usersByFullName').getDocuments();
+                          // final List<DocumentSnapshot> documents = result.documents;
+                          // List<String> userNameList = [];
+                          // documents.forEach((data) => userNameList.add(data.documentID));
+                          // String value = '';
+                          // bool found = false;
+                          // for(var i = 0; i < userNameList.length; i++){
+                          //   String currentOne = userNameList[i];
+                          //   Firestore.instance
+                          //       .collection('usersByFullName')
+                          //       .document('$currentOne')
+                          //       .get()
+                          //       .then((DocumentSnapshot ds) {
+                          //     // use ds as a snapshot
+
+                          //     if(currentOne == email){
+                          //       globals.username = ds["name"];
+                          //       globals.uid = ds["uid"];
+                          //       found = true;
+                          //     }
+
+                          //   });
+
+                          //   if(found){
+                          //     break;
+                          //   }
+                          // }
+                          // prLOGIN.hide();
+                          // Navigator.of(context).pushReplacementNamed('/MainViewScreen');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomeView()));
+                        }
                       },
                       padding: EdgeInsets.all(10.0),
                       //color: Colors.teal.shade900,
@@ -543,7 +605,6 @@ class _State extends State<SignUpPage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-
           children: <Widget>[
             TextField(
               onChanged: (text) {

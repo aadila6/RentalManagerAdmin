@@ -28,6 +28,15 @@ class listOfInventory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: new AppBar(
+            backgroundColor: Colors.teal,
+            title: new Text(
+              "Reservations",
+              style: TextStyle(
+              color: Colors.white,
+              ),
+            ),),
+        backgroundColor: Colors.teal.shade100,
         body: GridView.count(
           // Create a grid with 2 columns. If you change the scrollDirection to
           // horizontal, this produces 2 rows.

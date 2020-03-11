@@ -45,7 +45,7 @@ class _ListPageState extends State<ListPage> {
                     customCard(index, snapshot)
                 // return ListTile(
                 //   title: Text(snapshot.data[index].data['name']),
-                //   leading: CircleAvatar(
+                //   leading: CircleAvatar(c
                 //     child: Image.network(
                 //         snapshot.data[index].data['imageURL']),
                 //   ),

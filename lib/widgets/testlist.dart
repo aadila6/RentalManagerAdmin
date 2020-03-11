@@ -13,6 +13,11 @@ class ReservationListPage extends StatefulWidget {
 class _ReservationListPage extends State<ReservationListPage> {
   @override
   Widget build(BuildContext context) {
+    
+    appBar: AppBar(
+          title: Text('History Reservation'),
+          backgroundColor: Colors.teal,
+        );
     // TODO: implement build
     return Container(
         child: FutureBuilder(
@@ -29,6 +34,7 @@ class _ReservationListPage extends State<ReservationListPage> {
                   ),
                 );
               } else {
+                
                 return ListView.builder(
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) =>

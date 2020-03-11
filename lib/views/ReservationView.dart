@@ -11,6 +11,17 @@ class ReservationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: new AppBar(
+            backgroundColor: Colors.teal,
+            title: new Text(
+              "Help Chat",
+              style: TextStyle(
+              color: Colors.white,
+              ),
+            ),
+            // elevation: defaultTargetPlatform == TargetPlatform.iOS ? 0.0 : 4.0
+
+        ),
       backgroundColor: Colors.teal.shade100,
       body: CenteredView(
         child: Column(
