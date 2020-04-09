@@ -1,0 +1,1 @@
+{"isEntrypoint":true,"deps":["flutter|lib/material.dart","RentalAdmin|lib/views/inventory/list_page.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":false}

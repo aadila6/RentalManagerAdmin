@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["cloud_firestore_platform_interface|lib/cloud_firestore_platform_interface.dart","cloud_firestore_platform_interface|lib/src/method_channel/method_channel_document_change.dart","cloud_firestore_platform_interface|lib/src/method_channel/utils/maps.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":false}

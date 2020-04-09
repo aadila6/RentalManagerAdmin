@@ -28,7 +28,7 @@ class Auth {
       assert(user.uid == currentUser.uid);
       return user.uid;
     } catch (e) {
-      print(e);
+      // print(e);
       return e.toString();
     }
 

@@ -1,0 +1,26 @@
+Error compiling dartdevc module:google_sign_in_web|lib/google_sign_in_web.ddc.js
+
+packages/google_sign_in_web/src/generated/gapiauth2.dart:26:3: Error: JS interop classes do not support non-external constructors.
+Try annotating with `external`.
+  GoogleAuth.fakeConstructor$();
+  ^
+packages/google_sign_in_web/src/generated/gapiauth2.dart:216:3: Error: JS interop classes do not support non-external constructors.
+Try annotating with `external`.
+  SigninOptionsBuilder.fakeConstructor$();
+  ^
+packages/google_sign_in_web/src/generated/gapi.dart:351:3: Error: JS interop classes do not support non-external constructors.
+Try annotating with `external`.
+  HttpRequestPromise.fakeConstructor$();
+  ^
+packages/google_sign_in_web/src/generated/gapi.dart:378:3: Error: JS interop classes do not support non-external constructors.
+Try annotating with `external`.
+  HttpRequest.fakeConstructor$() : super.fakeConstructor$();
+  ^
+packages/google_sign_in_web/src/generated/gapi.dart:402:3: Error: JS interop classes do not support non-external constructors.
+Try annotating with `external`.
+  HttpBatch.fakeConstructor$();
+  ^
+packages/google_sign_in_web/src/generated/gapi.dart:440:3: Error: JS interop classes do not support non-external constructors.
+Try annotating with `external`.
+  RpcRequest.fakeConstructor$();
+  ^

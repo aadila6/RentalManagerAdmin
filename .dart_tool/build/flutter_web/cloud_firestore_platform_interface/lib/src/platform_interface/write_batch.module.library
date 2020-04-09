@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["plugin_platform_interface|lib/plugin_platform_interface.dart","cloud_firestore_platform_interface|lib/cloud_firestore_platform_interface.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async"],"hasMain":false}

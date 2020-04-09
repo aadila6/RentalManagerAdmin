@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["firebase_core|lib/firebase_core.dart","flutter|lib/services.dart","cloud_firestore_platform_interface|lib/cloud_firestore_platform_interface.dart","cloud_firestore_platform_interface|lib/src/method_channel/method_channel_firestore.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async"],"hasMain":false}

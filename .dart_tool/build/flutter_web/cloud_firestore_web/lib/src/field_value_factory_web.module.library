@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["cloud_firestore_platform_interface|lib/cloud_firestore_platform_interface.dart","firebase|lib/firestore.dart","js|lib/js_util.dart","cloud_firestore_web|lib/src/field_value_web.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":false}

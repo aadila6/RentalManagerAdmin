@@ -13,13 +13,6 @@ class reservationCell extends StatefulWidget {
     return _reservationCell();
   }
 }
-// List lala = passedFirestoreData.data['categories']
-//                     .map<String>((categoryInfo) {
-//                   return GridTile(
-//                     child: CustomCell(categoryInfo),
-//                   );
-//                 }).toList(),
-
 class _reservationCell extends State<reservationCell> {
   @override
   Widget build(BuildContext context) {

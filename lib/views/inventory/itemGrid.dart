@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:rental_manager/PlatformWidget/platform_alert_dialog.dart';
 // import 'package:rental_manager/PlatformWidget/strings.dart';
 // import 'package:flutter/services.dart';
-import 'detail_page.dart';
+import 'ItemDetails.dart';
 
 class ItemGridPage extends StatefulWidget {
   String category;
@@ -57,6 +57,7 @@ class _ItemGridPageState extends State<ItemGridPage> {
               .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) return const Text('loading...');
+
             // return ListView.builder(
             //   itemCount: snapshot.data.documents.length,
             //   itemBuilder: (BuildContext context, int index) => ListTile(
@@ -64,71 +65,49 @@ class _ItemGridPageState extends State<ItemGridPage> {
             //         snapshot.data.documents[index].data['name'].toString()),
             //     subtitle: Text(
             //         'Total amount: ${snapshot.data.documents[index].data['# of items'].toString()}'),
-                // onTap: () {
-                //   navigateToDetail(snapshot.data.documents[index]);
-                //   // testingReservations(
-                //   //     snapshot.data.documents[index].documentID);
-                // },
+            //     onTap: () {
+            //       navigateToDetail(snapshot.data.documents[index]);
+            //       // testingReservations(
+            //       //     snapshot.data.documents[index].documentID);
+            //     },
             //   ),
             // );
+
+
+            // return GridView.builder(
+            //   itemCount: snapshot.data.documents.length,
+            //   gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+            //       crossAxisCount: 5),
+            //   itemBuilder: (BuildContext context, int index) => CustommCell(
+            //       snapshot.data.documents[index].data['name'].toString(),
+            //       snapshot.data.documents[index].data['imageURL'].toString()),
+            // );
+
             return GridView.builder(
               itemCount: snapshot.data.documents.length,
-              gridDelegate:
-                new SliverGridDelegateWithFixedCrossAxisCount(
-                                   crossAxisCount: 5),
-                itemBuilder: (BuildContext context, int index) => CustommCell(snapshot.data.documents[index].data['name'].toString(),),
-               
+              gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 5),
+              itemBuilder: (BuildContext context, int index) {
+                return InkWell(
+                  child: CustommCell(
+                  snapshot.data.documents[index].data['name'].toString(),
+                  snapshot.data.documents[index].data['imageURL'].toString()),
+                  onTap: (){
+                    print(snapshot.data.documents[index].data['name'].toString());
+                    navigateToDetail(snapshot.data.documents[index]);
+                  },
                 );
+
+              }
+            );
           }),
     );
   }
 }
-  // Widget build(){
-  //   return Scaffold(
-  //     appBar: AppBar(
-  //       title: Text('Category Selection Page'),
-  //       backgroundColor: Colors.teal,
-  //     ),
-  //     body: Column(
-  //       mainAxisAlignment: MainAxisAlignment.start,
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       mainAxisSize: MainAxisSize.min,
-  //       children: <Widget>[
-  //         Flexible(
-  //           child: Padding(
-  //             padding: EdgeInsets.all(5.0),
-  //             child: GridView.count(
-  //               crossAxisCount: 5,
-  //               childAspectRatio: 1.0,
-  //               mainAxisSpacing: 4.0,
-  //               crossAxisSpacing: 4.0,
-  //               children:
-  //                   widget.passedFirestoreData.data['categories'].map<Widget>(
-  //                 (categoryInfo) {
-  //                   return GestureDetector(
-  //                     child: GridTile(
-  //                       child: CustomCell(categoryInfo),
-  //                     ),
-  //                     onTap: () {
-  //                       // print("tapped ${categoryInfo.toString()}");
-  //                       navigateToItem(categoryInfo['name']);
-  //                     },
-  //                   );
-  //                 },
-  //               ).toList(),
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-
-      
-  //   );
-  // }
-
 class CustommCell extends StatelessWidget {
   String name;
-  CustommCell(this.name);
+  String url;
+  CustommCell(this.name, this.url);
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +129,7 @@ class CustommCell extends StatelessWidget {
               Flexible(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
-                  // child: Image.network(categoryInfo['imageURL']),
+                  child: Image.network(url),
                 ),
               ),
               Padding(
@@ -161,8 +140,8 @@ class CustommCell extends StatelessWidget {
                   softWrap: true,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
               ),

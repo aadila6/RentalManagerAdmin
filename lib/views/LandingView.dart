@@ -65,22 +65,7 @@ class Landing extends StatelessWidget {
               width: 20,
               height: 20,
             ),
-          //  MaterialButton(
-          //     color: Colors.white,
-          //     shape: RoundedRectangleBorder(
-          //         borderRadius: BorderRadius.all(Radius.circular(10.0))),
-          //     onPressed: () {
-              
-          //   },
-          //     child: Padding(
-          //       padding: const EdgeInsets.symmetric(
-          //           vertical: 20.0, horizontal: 40.0),
-          //       child: Text(
-          //         "Google Sign In",
-          //         style: TextStyle(color: Colors.black),
-          //       ),
-          //     ),
-          //   ),
+          
           ],
         ),
     );

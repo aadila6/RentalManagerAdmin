@@ -1,0 +1,1 @@
+{"isEntrypoint":true,"deps":["flutter|lib/foundation.dart","flutter|lib/material.dart","google_sign_in|lib/src/common.dart","google_sign_in|lib/src/fife.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["typed_data"],"hasMain":false}

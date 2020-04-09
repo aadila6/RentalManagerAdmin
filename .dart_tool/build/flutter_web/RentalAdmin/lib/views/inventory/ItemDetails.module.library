@@ -1,0 +1,1 @@
+{"isEntrypoint":true,"deps":["flutter|lib/material.dart","cloud_firestore|lib/cloud_firestore.dart","intl|lib/intl.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":false}

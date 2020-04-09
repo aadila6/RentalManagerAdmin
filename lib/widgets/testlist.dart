@@ -13,12 +13,16 @@ class ReservationListPage extends StatefulWidget {
 class _ReservationListPage extends State<ReservationListPage> {
   @override
   Widget build(BuildContext context) {
-    
-    appBar: AppBar(
-          title: Text('History Reservation'),
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('All Reservations'),
           backgroundColor: Colors.teal,
-        );
-    // TODO: implement build
+        ),
+        backgroundColor: Colors.blueGrey,
+        body: reservation());
+  }
+
+  Container reservation() {
     return Container(
         child: FutureBuilder(
             future: getFirestoreData(),
@@ -34,7 +38,6 @@ class _ReservationListPage extends State<ReservationListPage> {
                   ),
                 );
               } else {
-                
                 return ListView.builder(
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) =>
@@ -59,27 +62,27 @@ class _ReservationListPage extends State<ReservationListPage> {
   }
 
   Widget customCell(int index, AsyncSnapshot snapshot) {
-    String res = "lalalalala";
-    // getItemName(snapshot.data[index].data['item']);
-    // print("Got this: " + lala);
-    Future<String> getFirestoreItemData() async {
-      // final firestoreItem = Firestore.instance;
-      DocumentReference itemListDOC = Firestore.instance
-          .collection("items")
-          .document(snapshot.data[index].data['item']);
-      itemListDOC.get().then((datasnapshot) {
-        //print(datasnapshot.data);
-        if (datasnapshot.data.containsKey('name')) {
-          // print(datasnapshot.data['name']);
-          return datasnapshot.data['name'].toString();
-        } else {
-          return "null1";
-          print("No such item in database!?");
-        }
-      });
-      return "null3";
-      // return res;
-    }
+    
+    // // getItemName(snapshot.data[index].data['item']);
+    // // print("Got this: " + lala);
+    // Future<String> getFirestoreItemData() async {
+    //   // final firestoreItem = Firestore.instance;
+    //   DocumentReference itemListDOC = Firestore.instance
+    //       .collection("items")
+    //       .document(snapshot.data[index].data['item']);
+    //   itemListDOC.get().then((datasnapshot) {
+    //     //print(datasnapshot.data);
+    //     if (datasnapshot.data.containsKey('name')) {
+    //       return datasnapshot.data['name'].toString();
+    //     } else {
+    //       return "null1";
+    //       print("No such item in database!?");
+    //     }
+    //   });
+    //   return "null3";
+    //   // return res;
+    // }
+
     return Material(
       child: InkWell(
         // onTap: () => navigateToDetail(snapshot.data[index]),
@@ -104,9 +107,7 @@ class _ReservationListPage extends State<ReservationListPage> {
                         Stack(
                           children: <Widget>[
                             Column(
-                              
                               children: <Widget>[
-                              
                                 Text(
                                   snapshot.data[index].data['name'],
                                   style: TextStyle(
