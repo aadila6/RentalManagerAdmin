@@ -14,14 +14,39 @@ class _ReservationListPage extends State<ReservationListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('All Reservations'),
-          backgroundColor: Colors.teal,
-        ),
-        backgroundColor: Colors.blueGrey,
+        // appBar: AppBar(
+        //   title: Text('All Reservations'),
+        //   backgroundColor: Colors.teal,
+        // ),
+        backgroundColor: Colors.yellow,
         body: reservation());
   }
+  
+  
 
+  // Container reservation() {
+  //   return Container(
+  //       child: FutureBuilder(
+  //           future: getFirestoreData(),
+  //           builder: (_, snapshot) {
+  //             if (snapshot.connectionState == ConnectionState.waiting) {
+  //               return Center(
+  //                 child: Text(
+  //                   'Loading...',
+  //                   style: TextStyle(
+  //                     fontSize: 10,
+  //                     fontWeight: FontWeight.bold,
+  //                   ),
+  //                 ),
+  //               );
+  //             } else {
+  //               return ListView.builder(
+  //                   itemCount: snapshot.data.length,
+  //                   itemBuilder: (BuildContext context, int index) =>
+  //                       customCell(index, snapshot));
+  //             }
+  //           }));
+  // }
   Container reservation() {
     return Container(
         child: FutureBuilder(
@@ -41,7 +66,17 @@ class _ReservationListPage extends State<ReservationListPage> {
                 return ListView.builder(
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) =>
-                        customCell(index, snapshot));
+                        ListTile(
+                title: Text(
+                    // snapshot.data.documents[index].data['name'].toString()
+                    'Data'
+                    ),
+                subtitle: Text(
+                    // 'Total amount: ${snapshot.data.documents[index].data['# of items'].toString()}'),
+                    'Total amount: '),
+                // onTap: () => testingReservations(
+                //     snapshot.data.documents[index].documentID, context),
+              ),);
               }
             }));
   }
@@ -53,13 +88,13 @@ class _ReservationListPage extends State<ReservationListPage> {
     return itemListDOC.documents;
   }
 
-  navigateToDetail(DocumentSnapshot indexedData) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                reservationCell(passedFirestoreData: indexedData)));
-  }
+  // navigateToDetail(DocumentSnapshot indexedData) {
+  //   Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //           builder: (context) =>
+  //               reservationCell(passedFirestoreData: indexedData)));
+  // }
 
   Widget customCell(int index, AsyncSnapshot snapshot) {
     

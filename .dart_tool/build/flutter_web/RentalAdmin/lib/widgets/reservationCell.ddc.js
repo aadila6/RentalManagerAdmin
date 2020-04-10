@@ -29,7 +29,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "data",
         [_Location_column]: 21,
-        [_Location_line]: 34,
+        [_Location_line]: 27,
         [_Location_file]: null
       });
     },
@@ -42,7 +42,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C1 || CT.C1,
         [_Location_name]: null,
         [_Location_column]: 16,
-        [_Location_line]: 34,
+        [_Location_line]: 27,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -52,7 +52,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "title",
         [_Location_column]: 9,
-        [_Location_line]: 34,
+        [_Location_line]: 27,
         [_Location_file]: null
       });
     },
@@ -62,7 +62,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "backgroundColor",
         [_Location_column]: 9,
-        [_Location_line]: 35,
+        [_Location_line]: 28,
         [_Location_file]: null
       });
     },
@@ -75,7 +75,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C4 || CT.C4,
         [_Location_name]: null,
         [_Location_column]: 15,
-        [_Location_line]: 33,
+        [_Location_line]: 26,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -85,7 +85,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "height",
         [_Location_column]: 15,
-        [_Location_line]: 41,
+        [_Location_line]: 34,
         [_Location_file]: null
       });
     },
@@ -98,7 +98,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C8 || CT.C8,
         [_Location_name]: null,
         [_Location_column]: 13,
-        [_Location_line]: 40,
+        [_Location_line]: 33,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -108,7 +108,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "data",
         [_Location_column]: 19,
-        [_Location_line]: 47,
+        [_Location_line]: 40,
         [_Location_file]: null
       });
     },
@@ -118,7 +118,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "style",
         [_Location_column]: 19,
-        [_Location_line]: 48,
+        [_Location_line]: 41,
         [_Location_file]: null
       });
     },
@@ -131,7 +131,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C11 || CT.C11,
         [_Location_name]: null,
         [_Location_column]: 17,
-        [_Location_line]: 46,
+        [_Location_line]: 39,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -141,7 +141,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "mainAxisAlignment",
         [_Location_column]: 15,
-        [_Location_line]: 44,
+        [_Location_line]: 37,
         [_Location_file]: null
       });
     },
@@ -151,7 +151,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "children",
         [_Location_column]: 15,
-        [_Location_line]: 45,
+        [_Location_line]: 38,
         [_Location_file]: null
       });
     },
@@ -164,7 +164,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C15 || CT.C15,
         [_Location_name]: null,
         [_Location_column]: 13,
-        [_Location_line]: 43,
+        [_Location_line]: 36,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -174,7 +174,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "height",
         [_Location_column]: 19,
-        [_Location_line]: 61,
+        [_Location_line]: 54,
         [_Location_file]: null
       });
     },
@@ -187,7 +187,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C19 || CT.C19,
         [_Location_name]: null,
         [_Location_column]: 17,
-        [_Location_line]: 60,
+        [_Location_line]: 53,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -197,7 +197,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "children",
         [_Location_column]: 15,
-        [_Location_line]: 59,
+        [_Location_line]: 52,
         [_Location_file]: null
       });
     },
@@ -210,7 +210,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C22 || CT.C22,
         [_Location_name]: null,
         [_Location_column]: 13,
-        [_Location_line]: 58,
+        [_Location_line]: 51,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -220,7 +220,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "color",
         [_Location_column]: 21,
-        [_Location_line]: 72,
+        [_Location_line]: 65,
         [_Location_file]: null
       });
     },
@@ -233,7 +233,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C25 || CT.C25,
         [_Location_name]: null,
         [_Location_column]: 26,
-        [_Location_line]: 71,
+        [_Location_line]: 64,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -243,7 +243,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "height",
         [_Location_column]: 19,
-        [_Location_line]: 69,
+        [_Location_line]: 62,
         [_Location_file]: null
       });
     },
@@ -253,7 +253,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "width",
         [_Location_column]: 19,
-        [_Location_line]: 70,
+        [_Location_line]: 63,
         [_Location_file]: null
       });
     },
@@ -263,7 +263,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "child",
         [_Location_column]: 19,
-        [_Location_line]: 71,
+        [_Location_line]: 64,
         [_Location_file]: null
       });
     },
@@ -276,7 +276,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C28 || CT.C28,
         [_Location_name]: null,
         [_Location_column]: 17,
-        [_Location_line]: 68,
+        [_Location_line]: 61,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -286,7 +286,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "mainAxisAlignment",
         [_Location_column]: 15,
-        [_Location_line]: 66,
+        [_Location_line]: 59,
         [_Location_file]: null
       });
     },
@@ -296,7 +296,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "children",
         [_Location_column]: 15,
-        [_Location_line]: 67,
+        [_Location_line]: 60,
         [_Location_file]: null
       });
     },
@@ -309,7 +309,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C33 || CT.C33,
         [_Location_name]: null,
         [_Location_column]: 13,
-        [_Location_line]: 65,
+        [_Location_line]: 58,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -319,7 +319,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "data",
         [_Location_column]: 76,
-        [_Location_line]: 80,
+        [_Location_line]: 73,
         [_Location_file]: null
       });
     },
@@ -329,7 +329,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "style",
         [_Location_column]: 19,
-        [_Location_line]: 81,
+        [_Location_line]: 74,
         [_Location_file]: null
       });
     },
@@ -342,7 +342,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C37 || CT.C37,
         [_Location_name]: null,
         [_Location_column]: 17,
-        [_Location_line]: 79,
+        [_Location_line]: 72,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -352,7 +352,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "children",
         [_Location_column]: 15,
-        [_Location_line]: 78,
+        [_Location_line]: 71,
         [_Location_file]: null
       });
     },
@@ -365,7 +365,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C41 || CT.C41,
         [_Location_name]: null,
         [_Location_column]: 13,
-        [_Location_line]: 77,
+        [_Location_line]: 70,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -375,7 +375,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "data",
         [_Location_column]: 75,
-        [_Location_line]: 93,
+        [_Location_line]: 86,
         [_Location_file]: null
       });
     },
@@ -385,7 +385,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "style",
         [_Location_column]: 19,
-        [_Location_line]: 94,
+        [_Location_line]: 87,
         [_Location_file]: null
       });
     },
@@ -398,7 +398,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C44 || CT.C44,
         [_Location_name]: null,
         [_Location_column]: 17,
-        [_Location_line]: 92,
+        [_Location_line]: 85,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -408,7 +408,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "children",
         [_Location_column]: 15,
-        [_Location_line]: 91,
+        [_Location_line]: 84,
         [_Location_file]: null
       });
     },
@@ -421,7 +421,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C48 || CT.C48,
         [_Location_name]: null,
         [_Location_column]: 13,
-        [_Location_line]: 90,
+        [_Location_line]: 83,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -431,7 +431,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "data",
         [_Location_column]: 75,
-        [_Location_line]: 106,
+        [_Location_line]: 99,
         [_Location_file]: null
       });
     },
@@ -441,7 +441,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "style",
         [_Location_column]: 19,
-        [_Location_line]: 107,
+        [_Location_line]: 100,
         [_Location_file]: null
       });
     },
@@ -454,7 +454,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C51 || CT.C51,
         [_Location_name]: null,
         [_Location_column]: 17,
-        [_Location_line]: 105,
+        [_Location_line]: 98,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -464,7 +464,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "children",
         [_Location_column]: 15,
-        [_Location_line]: 104,
+        [_Location_line]: 97,
         [_Location_file]: null
       });
     },
@@ -477,7 +477,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C55 || CT.C55,
         [_Location_name]: null,
         [_Location_column]: 13,
-        [_Location_line]: 103,
+        [_Location_line]: 96,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -487,7 +487,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "data",
         [_Location_column]: 42,
-        [_Location_line]: 119,
+        [_Location_line]: 112,
         [_Location_file]: null
       });
     },
@@ -497,7 +497,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "style",
         [_Location_column]: 19,
-        [_Location_line]: 120,
+        [_Location_line]: 113,
         [_Location_file]: null
       });
     },
@@ -510,7 +510,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C58 || CT.C58,
         [_Location_name]: null,
         [_Location_column]: 17,
-        [_Location_line]: 118,
+        [_Location_line]: 111,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -520,7 +520,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "children",
         [_Location_column]: 15,
-        [_Location_line]: 117,
+        [_Location_line]: 110,
         [_Location_file]: null
       });
     },
@@ -533,7 +533,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C62 || CT.C62,
         [_Location_name]: null,
         [_Location_column]: 13,
-        [_Location_line]: 116,
+        [_Location_line]: 109,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -543,7 +543,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "height",
         [_Location_column]: 19,
-        [_Location_line]: 146,
+        [_Location_line]: 139,
         [_Location_file]: null
       });
     },
@@ -556,7 +556,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C65 || CT.C65,
         [_Location_name]: null,
         [_Location_column]: 17,
-        [_Location_line]: 145,
+        [_Location_line]: 138,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -566,7 +566,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "children",
         [_Location_column]: 15,
-        [_Location_line]: 144,
+        [_Location_line]: 137,
         [_Location_file]: null
       });
     },
@@ -579,7 +579,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C68 || CT.C68,
         [_Location_name]: null,
         [_Location_column]: 13,
-        [_Location_line]: 143,
+        [_Location_line]: 136,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -589,7 +589,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "height",
         [_Location_column]: 19,
-        [_Location_line]: 153,
+        [_Location_line]: 146,
         [_Location_file]: null
       });
     },
@@ -602,7 +602,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C71 || CT.C71,
         [_Location_name]: null,
         [_Location_column]: 17,
-        [_Location_line]: 152,
+        [_Location_line]: 145,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -612,7 +612,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "children",
         [_Location_column]: 15,
-        [_Location_line]: 151,
+        [_Location_line]: 144,
         [_Location_file]: null
       });
     },
@@ -625,7 +625,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C74 || CT.C74,
         [_Location_name]: null,
         [_Location_column]: 13,
-        [_Location_line]: 150,
+        [_Location_line]: 143,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -635,7 +635,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "data",
         [_Location_column]: 19,
-        [_Location_line]: 160,
+        [_Location_line]: 153,
         [_Location_file]: null
       });
     },
@@ -645,7 +645,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "style",
         [_Location_column]: 19,
-        [_Location_line]: 161,
+        [_Location_line]: 154,
         [_Location_file]: null
       });
     },
@@ -658,7 +658,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C77 || CT.C77,
         [_Location_name]: null,
         [_Location_column]: 17,
-        [_Location_line]: 159,
+        [_Location_line]: 152,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -668,7 +668,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "data",
         [_Location_column]: 19,
-        [_Location_line]: 168,
+        [_Location_line]: 161,
         [_Location_file]: null
       });
     },
@@ -678,7 +678,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "style",
         [_Location_column]: 19,
-        [_Location_line]: 169,
+        [_Location_line]: 162,
         [_Location_file]: null
       });
     },
@@ -691,7 +691,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C81 || CT.C81,
         [_Location_name]: null,
         [_Location_column]: 17,
-        [_Location_line]: 167,
+        [_Location_line]: 160,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -701,7 +701,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "children",
         [_Location_column]: 15,
-        [_Location_line]: 158,
+        [_Location_line]: 151,
         [_Location_file]: null
       });
     },
@@ -714,7 +714,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C85 || CT.C85,
         [_Location_name]: null,
         [_Location_column]: 13,
-        [_Location_line]: 157,
+        [_Location_line]: 150,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -724,7 +724,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "height",
         [_Location_column]: 19,
-        [_Location_line]: 181,
+        [_Location_line]: 174,
         [_Location_file]: null
       });
     },
@@ -737,7 +737,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C88 || CT.C88,
         [_Location_name]: null,
         [_Location_column]: 17,
-        [_Location_line]: 180,
+        [_Location_line]: 173,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -747,7 +747,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "children",
         [_Location_column]: 15,
-        [_Location_line]: 179,
+        [_Location_line]: 172,
         [_Location_file]: null
       });
     },
@@ -760,7 +760,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C91 || CT.C91,
         [_Location_name]: null,
         [_Location_column]: 13,
-        [_Location_line]: 178,
+        [_Location_line]: 171,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -770,7 +770,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "height",
         [_Location_column]: 19,
-        [_Location_line]: 189,
+        [_Location_line]: 182,
         [_Location_file]: null
       });
     },
@@ -783,7 +783,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C94 || CT.C94,
         [_Location_name]: null,
         [_Location_column]: 17,
-        [_Location_line]: 188,
+        [_Location_line]: 181,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -793,7 +793,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "children",
         [_Location_column]: 15,
-        [_Location_line]: 187,
+        [_Location_line]: 180,
         [_Location_file]: null
       });
     },
@@ -806,7 +806,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C97 || CT.C97,
         [_Location_name]: null,
         [_Location_column]: 13,
-        [_Location_line]: 186,
+        [_Location_line]: 179,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -816,7 +816,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "data",
         [_Location_column]: 17,
-        [_Location_line]: 202,
+        [_Location_line]: 195,
         [_Location_file]: null
       });
     },
@@ -826,7 +826,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "style",
         [_Location_column]: 17,
-        [_Location_line]: 203,
+        [_Location_line]: 196,
         [_Location_file]: null
       });
     },
@@ -839,7 +839,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C100 || CT.C100,
         [_Location_name]: null,
         [_Location_column]: 22,
-        [_Location_line]: 201,
+        [_Location_line]: 194,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -849,7 +849,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "minWidth",
         [_Location_column]: 15,
-        [_Location_line]: 194,
+        [_Location_line]: 187,
         [_Location_file]: null
       });
     },
@@ -859,7 +859,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "height",
         [_Location_column]: 15,
-        [_Location_line]: 195,
+        [_Location_line]: 188,
         [_Location_file]: null
       });
     },
@@ -869,7 +869,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "color",
         [_Location_column]: 15,
-        [_Location_line]: 196,
+        [_Location_line]: 189,
         [_Location_file]: null
       });
     },
@@ -879,7 +879,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "splashColor",
         [_Location_column]: 15,
-        [_Location_line]: 197,
+        [_Location_line]: 190,
         [_Location_file]: null
       });
     },
@@ -889,7 +889,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "onPressed",
         [_Location_column]: 15,
-        [_Location_line]: 198,
+        [_Location_line]: 191,
         [_Location_file]: null
       });
     },
@@ -899,7 +899,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "child",
         [_Location_column]: 15,
-        [_Location_line]: 201,
+        [_Location_line]: 194,
         [_Location_file]: null
       });
     },
@@ -912,7 +912,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C104 || CT.C104,
         [_Location_name]: null,
         [_Location_column]: 13,
-        [_Location_line]: 193,
+        [_Location_line]: 186,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -922,7 +922,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "children",
         [_Location_column]: 11,
-        [_Location_line]: 39,
+        [_Location_line]: 32,
         [_Location_file]: null
       });
     },
@@ -935,7 +935,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C112 || CT.C112,
         [_Location_name]: null,
         [_Location_column]: 16,
-        [_Location_line]: 38,
+        [_Location_line]: 31,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -945,7 +945,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "child",
         [_Location_column]: 9,
-        [_Location_line]: 38,
+        [_Location_line]: 31,
         [_Location_file]: null
       });
     },
@@ -958,7 +958,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C115 || CT.C115,
         [_Location_name]: null,
         [_Location_column]: 13,
-        [_Location_line]: 37,
+        [_Location_line]: 30,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     },
@@ -968,7 +968,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "appBar",
         [_Location_column]: 7,
-        [_Location_line]: 33,
+        [_Location_line]: 26,
         [_Location_file]: null
       });
     },
@@ -978,7 +978,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: null,
         [_Location_name]: "body",
         [_Location_column]: 7,
-        [_Location_line]: 37,
+        [_Location_line]: 30,
         [_Location_file]: null
       });
     },
@@ -991,7 +991,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
         [_Location_parameterLocations]: C118 || CT.C118,
         [_Location_name]: null,
         [_Location_column]: 12,
-        [_Location_line]: 32,
+        [_Location_line]: 25,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/widgets/reservationCell.dart"
       });
     }
@@ -1177,7 +1177,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/cloud_fire
   dart.trackLibraries("packages/RentalAdmin/widgets/reservationCell", {
     "package:RentalAdmin/widgets/reservationCell.dart": reservationCell
   }, {
-  }, '{"version":3,"sourceRoot":"","sources":["reservationCell.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;IAKyB;;;;;;;AAIU,MAA/B,WAAM,AAAoB;AAG1B,YAAO;IACT;;;QAPsB;;;AAAtB;;EAA2C;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;UAkBjB;AACpB,gBAAM;AACN,qBAAW;AACX,sBAAY;AACZ,sBAAY;AACZ,qBAAW;AAEf,YAAO,oCACG,+BACC,kBAAK,gGACY,iFAEpB,mCACG,gCACa,sBAChB,gCACU,6DAEV,sCACuC,8CACnB,sBAChB,kBACE,4BACO,0CACO,WACE,8BACJ,qBACK,2HAMvB,6BACoB,sBAChB,gCACU,0HAId,sCACuC,8CACnB,sBAChB,gCACU,aACD,cACA,gCACS,iMAKtB,6BACoB,sBAChB,kBACE,AAAyD,2BAAzC,AAAO,AAAoB,AAAI,4CAAC,kBACzC,0CACO,0BACE,8BACJ,qBACK,2HAKvB,6BACoB,sBAChB,kBACE,AAAwD,wBAA3C,AAAO,AAAoB,AAAI,4CAAC,oBACtC,0CACO,0BACE,8BACJ,qBACK,2HAKvB,6BACoB,sBAChB,kBACE,AAAwD,wBAA3C,AAAO,AAAoB,AAAI,4CAAC,oBACtC,0CACO,0BACE,8BACJ,qBACK,2HAKvB,6BACoB,sBAChB,kBACE,AAAuB,iBAAT,QAAQ,UACf,0CACO,0BACE,8BACJ,qBACK,2HAmBvB,6BACoB,sBAChB,gCACU,0HAId,6BACoB,sBAChB,gCACU,0HAId,6BACoB,sBAChB,kBACE,oCACO,qCACS,gCACF,6BACF,iEAGd,kBACE,sBACO,qCACS,gCACF,6BACF,qBACK,2HAKvB,6BACoB,sBAChB,gCACU,0HAKd,6BACoB,sBAChB,gCACU,0HAId,kDACY,eACF,aACM,iCACM,oCACT;AACkB,kBAA3B,WAAM;yCAED,kBACL,8BACO,qCACS,+BACJ;IAQ1B;;;;;EACF","file":"reservationCell.ddc.js"}');
+  }, '{"version":3,"sourceRoot":"","sources":["reservationCell.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;IAKyB;;;;;;;AAIU,MAA/B,WAAM,AAAoB;AAG1B,YAAO;IACT;;;QAPsB;;;AAAtB;;EAA2C;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;UAWjB;AACpB,gBAAM;AACN,qBAAW;AACX,sBAAY;AACZ,sBAAY;AACZ,qBAAW;AAEf,YAAO,oCACG,+BACC,kBAAK,gGACY,iFAEpB,mCACG,gCACa,sBAChB,gCACU,6DAEV,sCACuC,8CACnB,sBAChB,kBACE,4BACO,0CACO,WACE,8BACJ,qBACK,2HAMvB,6BACoB,sBAChB,gCACU,0HAId,sCACuC,8CACnB,sBAChB,gCACU,aACD,cACA,gCACS,iMAKtB,6BACoB,sBAChB,kBACE,AAAyD,2BAAzC,AAAO,AAAoB,AAAI,4CAAC,kBACzC,0CACO,0BACE,8BACJ,qBACK,2HAKvB,6BACoB,sBAChB,kBACE,AAAwD,wBAA3C,AAAO,AAAoB,AAAI,4CAAC,oBACtC,0CACO,0BACE,8BACJ,qBACK,2HAKvB,6BACoB,sBAChB,kBACE,AAAwD,wBAA3C,AAAO,AAAoB,AAAI,4CAAC,oBACtC,0CACO,0BACE,8BACJ,qBACK,2HAKvB,6BACoB,sBAChB,kBACE,AAAuB,iBAAT,QAAQ,UACf,0CACO,0BACE,8BACJ,qBACK,2HAmBvB,6BACoB,sBAChB,gCACU,0HAId,6BACoB,sBAChB,gCACU,0HAId,6BACoB,sBAChB,kBACE,oCACO,qCACS,gCACF,6BACF,iEAGd,kBACE,sBACO,qCACS,gCACF,6BACF,qBACK,2HAKvB,6BACoB,sBAChB,gCACU,0HAKd,6BACoB,sBAChB,gCACU,0HAId,kDACY,eACF,aACM,iCACM,oCACT;AACkB,kBAA3B,WAAM;yCAED,kBACL,8BACO,qCACS,+BACJ;IAQ1B;;;;;EACF","file":"reservationCell.ddc.js"}');
   // Exports:
   return {
     widgets__reservationCell: reservationCell

@@ -13,7 +13,8 @@ class NavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 100,
+      color: Colors.greenAccent,
+        height: 80,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -22,68 +23,69 @@ class NavigationBar extends StatelessWidget {
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.teal.shade900,
-                  fontSize: 30),
+                  fontSize: 20),
             ),
             Row(
               children: <Widget>[
-                MaterialButton(
-                  color: Colors.teal,
-                  onPressed: () {
-                    print("Pressed home button!!");
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeView()));
-                  },
-                  child: Text(
-                    "Home",
-                    style: TextStyle(color: Colors.white),
-                  ),
+                // MaterialButton(
+                //   color: Colors.teal,
+                //   onPressed: () {
+                //     print("Pressed home button!!");
+                //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeView()));
+                //   },
+                //   child: Text(
+                //     "Home",
+                //     style: TextStyle(color: Colors.white),
+                //   ),
                   
-                ), SizedBox(
-                  width: 20,
-                ),
-                MaterialButton(
-                  color: Colors.teal,
-                  onPressed: () {
-                    print("Pressed Support button!!");
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => LocationPage(title:'Select a Location')));
-                  },
-                  child: Text(
-                    "Inventory",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ), SizedBox(
-                  width: 20,
-                ),
-                MaterialButton(
-                 color: Colors.teal,
-                  onPressed: () {
-                     print("Pressed Inventory button!!");
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => ChatScreen()));
-                  },
-                  child: Text(
-                    "ChatBox",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ), SizedBox(
-                  width: 20,
-                ),
-                MaterialButton(
-                  color: Colors.teal,
-                  onPressed: () {
-                     print("Pressed Reservation button!!");
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));
-                  },
-                  child: Text(
-                    "Reservations",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ), SizedBox(
-                  width: 20,
-                ),
+                // ), SizedBox(
+                //   width: 20,
+                // ),
+                // MaterialButton(
+                //   color: Colors.teal,
+                //   onPressed: () {
+                //     print("Pressed Support button!!");
+                //      Navigator.push(context, MaterialPageRoute(builder: (context) => LocationPage(title:'Select a Location')));
+                //   },
+                //   child: Text(
+                //     "Inventory",
+                //     style: TextStyle(color: Colors.white),
+                //   ),
+                // ), SizedBox(
+                //   width: 20,
+                // ),
+                // MaterialButton(
+                //  color: Colors.teal,
+                //   onPressed: () {
+                //      print("Pressed Inventory button!!");
+                //      Navigator.push(context, MaterialPageRoute(builder: (context) => ChatScreen()));
+                //   },
+                //   child: Text(
+                //     "ChatBox",
+                //     style: TextStyle(color: Colors.white),
+                //   ),
+                // ), SizedBox(
+                //   width: 20,
+                // ),
+                // MaterialButton(
+                //   color: Colors.teal,
+                //   onPressed: () {
+                //      print("Pressed Reservation button!!");
+                //      Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));
+                //   },
+                //   child: Text(
+                //     "Reservations",
+                //     style: TextStyle(color: Colors.white),
+                //   ),
+                // ), SizedBox(
+                //   width: 20,
+                // ),
                 MaterialButton(
                   color: Colors.teal,
                   onPressed: () {
                      print("Pressed Support button!!");
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => signInScreen()));
+                    //  Navigator.push(context, MaterialPageRoute(builder: (context) => signInScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));
                   },
                   child: Text(
                     "Admin Login",

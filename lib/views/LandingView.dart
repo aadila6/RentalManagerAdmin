@@ -2,27 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:RentalAdmin/widgets/actionButton.dart';
 import 'package:RentalAdmin/views/ReservationView.dart';
 
-
 TextEditingController _textFieldController = TextEditingController();
+
 class Landing extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return Container(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: Text(
-                "Please click administrator login in order to start the process ",
-                style: TextStyle(fontSize: 16.0, color: Colors.white),
-              ),
-            ),
+            //checkOutButton() ,returnButton()
             MaterialButton(
-              color: Colors.white,
+              color: Colors.teal,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
               onPressed: () {
                 print("pressed redeem:)");
                 showDialog(
@@ -54,23 +47,21 @@ class Landing extends StatelessWidget {
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                    vertical: 20.0, horizontal: 40.0),
+                    vertical: 40.0, horizontal: 40.0),
                 child: Text(
-                  "Redeem Item",
-                  style: TextStyle(color: Colors.black),
+                  "Check Out Item",
+                  style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.w100),
                 ),
               ),
             ),
             SizedBox(
-              width: 20,
-              height: 20,
+              width: 30,
+              height: 30,
             ),
-          
+
           ],
         ),
     );
   }
+  
 }
-
-
-
