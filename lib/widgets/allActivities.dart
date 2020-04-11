@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:RentalAdmin/widgets/reservationCell.dart';
-import 'package:RentalAdmin/views/homeView.dart';
 
-//
-class ReservationListPage extends StatefulWidget {
+class AllActivities extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _ReservationListPage();
+    return _AllActivities();
   }
 }
-
 TextEditingController _textFieldController = TextEditingController();
-
-class _ReservationListPage extends State<ReservationListPage> {
+class _AllActivities extends State<AllActivities> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Reservations For Today'),
+          title: Text('All Reservations'),
           backgroundColor: Colors.teal,
         ),
         // backgroundColor: Colors.teal,
         body: reservation());
   }
-
+  
   Container reservation() {
     return Container(
         child: FutureBuilder(
@@ -59,49 +55,22 @@ class _ReservationListPage extends State<ReservationListPage> {
                                     context: context,
                                     builder: (context) {
                                       return AlertDialog(
-                                        title: Text('Swipe ID card'),
-                                        content: TextField(
-                                          controller: _textFieldController,
-                                          decoration: InputDecoration(
-                                              hintText: "Please enter SID#"),
-                                        ),
+                                        title: Text('Details'),
+                                        content: Text(itemInfo(index,snapshot)),
                                         actions: <Widget>[
                                           new FlatButton(
-                                            child: new Text('CANCEL'),
+                                            
+                                            child: new Text('OK'),
                                             onPressed: () {
                                               Navigator.of(context).pop();
                                             },
                                           ),
-                                          new FlatButton(
-                                            child: new Text('CONFIRM'),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                              showDialog(
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return AlertDialog(
-                                                      title: Text(
-                                                          'Please remember to return the Item, enjoy!'),
-                                                      actions: <Widget>[
-                                                        new FlatButton(
-                                                          child: new Text('OK'),
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                            Navigator.push(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                    builder:
-                                                                        (context) =>
-                                                                            HomeView()));
-                                                          },
-                                                        )
-                                                      ],
-                                                    );
-                                                  });
-                                            },
-                                          )
+                                          // new FlatButton(
+                                          //   child: new Text('CONFIRM'),
+                                          //   onPressed: () {
+                                          //     Navigator.of(context).pop();
+                                          //   },
+                                          // )
                                         ],
                                       );
                                     });
@@ -110,49 +79,22 @@ class _ReservationListPage extends State<ReservationListPage> {
               }
             }));
   }
-  // Container reservation() {
-  //   return Container(
-  //       child: FutureBuilder(
-  //           future: getFirestoreData(),
-  //           builder: (_, snapshot) {
-  //             if (snapshot.connectionState == ConnectionState.waiting) {
-  //               return Center(
-  //                 child: Text(
-  //                   'Loading...',
-  //                   style: TextStyle(
-  //                     fontSize: 10,
-  //                     fontWeight: FontWeight.bold,
-  //                   ),
-  //                 ),
-  //               );
-  //             } else {
-  //               return ListView.builder(
-  //                   itemCount: snapshot.data.length,
-  //                   itemBuilder: (BuildContext context, int index) =>
-  //                       ListTile(
-  //               title: Text(
-  //                   // snapshot.data.documents[index].data['name'].toString()
-  //                   'Data'
-  //                   ),
-  //               subtitle: Text(
-  //                   // 'Total amount: ${snapshot.data.documents[index].data['# of items'].toString()}'),
-  //                   'Total amount: '),
-  //               // onTap: () => testingReservations(
-  //               //     snapshot.data.documents[index].documentID, context),
-  //             ),);
-  //             }
-  //           }));
-  // }
 
   Future getFirestoreData() async {
     final firestore = Firestore.instance;
     QuerySnapshot itemListDOC =
         // await firestore.collection('reservation').orderBy('startTime').getDocuments();
-        await firestore
-            .collection('reservation')
-            .where('status', isEqualTo: 'Reserved')
-            .getDocuments();
+        await firestore.collection('reservation').orderBy('startTime').getDocuments();
     return itemListDOC.documents;
+  }
+  String itemInfo(int index, AsyncSnapshot snapshot){
+  String ret = '';
+  ret += 'Item Name:' + snapshot.data[index].data['name'].toString() + '\n';
+  ret += 'Item Amount: ' + snapshot.data[index].data['amount'].toString() + '\n';
+  ret += 'Item Status: ' + snapshot.data[index].data['status'].toString() + '\n';
+  ret += 'Item Start Time: ' + snapshot.data[index].data['startTime'].toString() + '\n';
+  // ret += 'Item End Tiem: ' + item.endTime + '\n';
+  return ret;
   }
 
   // navigateToDetail(DocumentSnapshot indexedData) {
@@ -204,16 +146,17 @@ class _ReservationListPage extends State<ReservationListPage> {
                         Stack(
                           children: <Widget>[
                             Text(
-                              snapshot.data[index].data['startTime'],
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.teal.shade900,
-                              ),
-                            ),
+                                  snapshot.data[index].data['startTime'],
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.teal.shade900,
+                                  ),
+                                ),
                           ],
                         ),
                       ],
                     ),
+                     
                     Text(
                       snapshot.data[index].data['status'],
                       style: TextStyle(
@@ -226,6 +169,7 @@ class _ReservationListPage extends State<ReservationListPage> {
               ),
             ),
           ),
+          
         ),
       ),
     );

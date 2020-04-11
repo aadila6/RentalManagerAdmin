@@ -2,24 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:RentalAdmin/widgets/reservationCell.dart';
 import 'package:RentalAdmin/views/homeView.dart';
-
 //
-class ReservationListPage extends StatefulWidget {
+class ActiveActivity extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _ReservationListPage();
+    return _ActiveActivity();
   }
 }
 
 TextEditingController _textFieldController = TextEditingController();
 
-class _ReservationListPage extends State<ReservationListPage> {
+class _ActiveActivity extends State<ActiveActivity> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Reservations For Today'),
+          title: Text('Checked Out Activities'),
           backgroundColor: Colors.teal,
         ),
         // backgroundColor: Colors.teal,
@@ -42,6 +41,22 @@ class _ReservationListPage extends State<ReservationListPage> {
                   ),
                 );
               } else {
+                // return ListView.builder(
+                //     itemCount: snapshot.data.length,
+                //     itemBuilder: (BuildContext context, int index) =>
+                //         customCell(index, snapshot));
+
+                // return ListView.builder(
+                //   itemCount: snapshot.data.length,
+                //   itemBuilder: (BuildContext context, int index) => ListTile(
+                //     title: Text(snapshot.data[index].data['name'].toString()),
+                //     subtitle: Text(
+                //       snapshot.data[index].data['status'].toString(),
+                //     ),
+                //     // onTap: () => testingReservations(
+                //     //     snapshot.data.documents[index].documentID, context),
+                //   ),
+                // );
                 return ListView.builder(
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -52,6 +67,7 @@ class _ReservationListPage extends State<ReservationListPage> {
                               subtitle: Text(
                                 snapshot.data[index].data['status'].toString(),
                               ),
+                              
                               // onTap: () => testingReservations(
                               //     snapshot.data.documents[index].documentID, context),
                               onTap: () {
@@ -73,7 +89,7 @@ class _ReservationListPage extends State<ReservationListPage> {
                                             },
                                           ),
                                           new FlatButton(
-                                            child: new Text('CONFIRM'),
+                                            child: new Text('RETURN'),
                                             onPressed: () {
                                               Navigator.of(context).pop();
                                               showDialog(
@@ -81,7 +97,7 @@ class _ReservationListPage extends State<ReservationListPage> {
                                                   builder: (context) {
                                                     return AlertDialog(
                                                       title: Text(
-                                                          'Please remember to return the Item, enjoy!'),
+                                                          'Thanks for returning the item!'),
                                                       actions: <Widget>[
                                                         new FlatButton(
                                                           child: new Text('OK'),
@@ -100,6 +116,7 @@ class _ReservationListPage extends State<ReservationListPage> {
                                                       ],
                                                     );
                                                   });
+                                              
                                             },
                                           )
                                         ],
@@ -108,7 +125,8 @@ class _ReservationListPage extends State<ReservationListPage> {
                               }));
                     });
               }
-            }));
+            })
+            );
   }
   // Container reservation() {
   //   return Container(
@@ -131,15 +149,15 @@ class _ReservationListPage extends State<ReservationListPage> {
   //                   itemBuilder: (BuildContext context, int index) =>
   //                       ListTile(
   //               title: Text(
-  //                   // snapshot.data.documents[index].data['name'].toString()
-  //                   'Data'
+  //                   snapshot.data.documents[index].data['name'].toString()
+
   //                   ),
   //               subtitle: Text(
-  //                   // 'Total amount: ${snapshot.data.documents[index].data['# of items'].toString()}'),
-  //                   'Total amount: '),
+  //                   'Total amount: ${snapshot.data.documents[index].data['# of items'].toString()}'),
+  //                   ),
   //               // onTap: () => testingReservations(
   //               //     snapshot.data.documents[index].documentID, context),
-  //             ),);
+  //             );
   //             }
   //           }));
   // }
@@ -150,11 +168,10 @@ class _ReservationListPage extends State<ReservationListPage> {
         // await firestore.collection('reservation').orderBy('startTime').getDocuments();
         await firestore
             .collection('reservation')
-            .where('status', isEqualTo: 'Reserved')
+            .where('status', isEqualTo: 'Picked Up')
             .getDocuments();
     return itemListDOC.documents;
   }
-
   // navigateToDetail(DocumentSnapshot indexedData) {
   //   Navigator.push(
   //       context,
@@ -163,71 +180,99 @@ class _ReservationListPage extends State<ReservationListPage> {
   //               reservationCell(passedFirestoreData: indexedData)));
   // }
 
-  Widget customCell(int index, AsyncSnapshot snapshot) {
-    return Material(
-      child: InkWell(
-        // onTap: () => navigateToDetail(snapshot.data[index]),
-        child: Container(
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 10.0,
-              ),
-            ],
-          ),
-          child: Card(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Stack(
-                          children: <Widget>[
-                            Column(
-                              children: <Widget>[
-                                Text(
-                                  snapshot.data[index].data['name'],
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Spacer(),
-                        Stack(
-                          children: <Widget>[
-                            Text(
-                              snapshot.data[index].data['startTime'],
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.teal.shade900,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Text(
-                      snapshot.data[index].data['status'],
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: Colors.teal,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+//   Widget customCell(int index, AsyncSnapshot snapshot) {
+//     return Material(
+//       child: InkWell(
+//         // onTap: () => navigateToDetail(snapshot.data[index]),
+//         child: Container(
+//           decoration: BoxDecoration(
+//             boxShadow: [
+//               BoxShadow(
+//                 color: Colors.grey,
+//                 blurRadius: 10.0,
+//               ),
+//             ],
+//           ),
+//           child: Card(
+//             child: Container(
+//               child: Padding(
+//                 padding: const EdgeInsets.all(10.0),
+//                 child: Column(
+//                   children: <Widget>[
+//                     Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: <Widget>[
+//                         Stack(
+//                           children: <Widget>[
+//                             Column(
+//                               children: <Widget>[
+//                                 Text(
+//                                   snapshot.data[index].data['name'],
+//                                   style: TextStyle(
+//                                     fontSize: 15,
+//                                     fontWeight: FontWeight.bold,
+//                                   ),
+//                                 ),
+//                               ],
+//                             ),
+//                           ],
+//                         ),
+//                         Spacer(),
+//                         Stack(
+//                           children: <Widget>[
+//                             Text(
+//                               snapshot.data[index].data['startTime'],
+//                               style: TextStyle(
+//                                 fontSize: 15,
+//                                 color: Colors.teal.shade900,
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                       ],
+//                     ),
+//                     Text(
+//                       snapshot.data[index].data['status'],
+//                       style: TextStyle(
+//                         fontSize: 10,
+//                         color: Colors.teal,
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+  testingReservations(String itemID, context) async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Swipe ID card'),
+            content: TextField(
+              controller: _textFieldController,
+              decoration: InputDecoration(hintText: "Please enter SID#"),
             ),
-          ),
-        ),
-      ),
-    );
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('CANCEL'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              new FlatButton(
+                child: new Text('RETURN'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
   }
 }

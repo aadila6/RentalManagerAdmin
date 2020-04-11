@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:RentalAdmin/views/homeView.dart';
 import 'package:intl/intl.dart';
 
 class DetailPage extends StatefulWidget {
@@ -12,7 +12,9 @@ class DetailPage extends StatefulWidget {
     return _DetailPage();
   }
 }
+
 TextEditingController _textFieldController = TextEditingController();
+
 class _DetailPage extends State<DetailPage> {
   Container reserveButton() {
     return Container(
@@ -115,7 +117,7 @@ class _DetailPage extends State<DetailPage> {
     print("Reservation Created time: " + time);
     print("Reservation pickup before time: " +
         DateFormat("yyyy-MM-dd hh:mm:ss").format(pickUpBefore));
-        showDialog(
+    showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
@@ -125,38 +127,39 @@ class _DetailPage extends State<DetailPage> {
                 child: new Text('OK'),
                 onPressed: () {
                   Navigator.of(context).pop();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomeView()));
                 },
               ),
             ],
           );
         });
-        showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text('Swipe ID card'),
-                        content: TextField(
-                          controller: _textFieldController,
-                          decoration:
-                              InputDecoration(hintText: "Please enter SID#"),
-                        ),
-                        actions: <Widget>[
-                          new FlatButton(
-                            child: new Text('Cancel'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          new FlatButton(
-                            child: new Text('Confirm'),
-                            onPressed: () {
-                              print("URL Request sent");
-                              Navigator.of(context).pop();
-                            },
-                          )
-                        ],
-                      );
-                    });
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Swipe ID card'),
+            content: TextField(
+              controller: _textFieldController,
+              decoration: InputDecoration(hintText: "Please enter SID#"),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              new FlatButton(
+                child: new Text('Confirm'),
+                onPressed: () {
+                  print("URL Request sent");
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
     // uploadData(itemID, '0000000000', time);
   }
 

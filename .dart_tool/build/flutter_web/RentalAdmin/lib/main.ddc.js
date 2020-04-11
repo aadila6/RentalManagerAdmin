@@ -1,4 +1,4 @@
-define(['dart_sdk', 'packages/flutter/material', 'packages/RentalAdmin/views/LandingView', 'packages/flutter/src/widgets/actions'], function(dart_sdk, packages__flutter__material, packages__RentalAdmin__views__LandingView, packages__flutter__src__widgets__actions) {
+define(['dart_sdk', 'packages/flutter/material', 'packages/RentalAdmin/views/InventoryView', 'packages/flutter/src/widgets/actions'], function(dart_sdk, packages__flutter__material, packages__RentalAdmin__views__InventoryView, packages__flutter__src__widgets__actions) {
   'use strict';
   const core = dart_sdk.core;
   const dart = dart_sdk.dart;
@@ -6,7 +6,7 @@ define(['dart_sdk', 'packages/flutter/material', 'packages/RentalAdmin/views/Lan
   const app = packages__flutter__material.src__material__app;
   const theme_data = packages__flutter__material.src__material__theme_data;
   const colors = packages__flutter__material.src__material__colors;
-  const signInScreen = packages__RentalAdmin__views__LandingView.widgets__signInScreen;
+  const signInScreen = packages__RentalAdmin__views__InventoryView.widgets__signInScreen;
   const widget_inspector = packages__flutter__src__widgets__actions.src__widgets__widget_inspector;
   const framework = packages__flutter__src__widgets__actions.src__widgets__framework;
   const binding = packages__flutter__src__widgets__actions.src__widgets__binding;

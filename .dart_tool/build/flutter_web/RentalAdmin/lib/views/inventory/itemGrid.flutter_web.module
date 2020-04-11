@@ -1,1 +1,0 @@
-{"p":["RentalAdmin","lib/views/inventory/itemGrid.dart"],"s":[["RentalAdmin","lib/views/inventory/itemGrid.dart"]],"d":[["RentalAdmin","lib/views/inventory/ItemDetails.dart"],["cloud_firestore","lib/cloud_firestore.dart"],["flutter","lib/material.dart"]],"m":false,"is":true,"pf":"flutter_web"}

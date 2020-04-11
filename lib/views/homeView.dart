@@ -1,9 +1,12 @@
-import 'package:RentalAdmin/views/LandingView.dart';
+
+import 'package:RentalAdmin/views/inventory/return.dart';
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/widgets/navigation.dart';
-import 'package:RentalAdmin/widgets/centerer.dart';
-import 'package:RentalAdmin/widgets/testlist.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:RentalAdmin/views/inventory/checkOutB.dart';
+import 'package:RentalAdmin/views/LandingView.dart';
+
 
 class HomeView extends StatelessWidget {
   const HomeView({Key key}) : super(key: key);
@@ -30,7 +33,7 @@ class HomeView extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          leftDashboard(context),
+          // leftDashboard(context),
           rightDashboard(context),
         ],
       ),
@@ -55,6 +58,7 @@ class HomeView extends StatelessWidget {
 
   Container rightDashboard(BuildContext context) {
     return Container(
+      padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
       height: MediaQuery.of(context).size.height * .65,
       width: MediaQuery.of(context).size.width / 3,
       decoration: BoxDecoration(
@@ -63,76 +67,77 @@ class HomeView extends StatelessWidget {
       ),
       child: Column(
         children: <Widget>[
+          CheckingIn(),
+          Returning(),
           Landing(),
-          Landing(),
-          Landing(),
+          // ReservationCheckIn(),
         ],
       ),
     );
   }
 
-  Container res(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(width: 10, color: Colors.pink),
-        borderRadius: const BorderRadius.all(const Radius.circular(8)),
-      ),
-      child: Column(
-        children: <Widget>[
-          ListView.separated(
-              separatorBuilder: (context, index) => Divider(
-                color: Colors.black,
-              ),
-              itemCount: 20,
-              itemBuilder: (context, index) => Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Center(child: Text("Index $index")),
-              ),
-            )
-        ],
-      ),
-    );
-  }
+  // Container res(BuildContext context) {
+  //   return Container(
+  //     decoration: BoxDecoration(
+  //       border: Border.all(width: 10, color: Colors.pink),
+  //       borderRadius: const BorderRadius.all(const Radius.circular(8)),
+  //     ),
+  //     child: Column(
+  //       children: <Widget>[
+  //         ListView.separated(
+  //             separatorBuilder: (context, index) => Divider(
+  //               color: Colors.black,
+  //             ),
+  //             itemCount: 20,
+  //             itemBuilder: (context, index) => Padding(
+  //               padding: EdgeInsets.all(8.0),
+  //               child: Center(child: Text("Index $index")),
+  //             ),
+  //           )
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Container reservation() {
-    return Container(
-        child: FutureBuilder(
-            future: getFirestoreData(),
-            builder: (_, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: Text(
-                    'Loading...',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                );
-              } else {
-                return ListView.builder(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (BuildContext context, int index) => ListTile(
-                    title: Text(
-                        // snapshot.data.documents[index].data['name'].toString()
-                        'Data'),
-                    subtitle: Text(
-                        // 'Total amount: ${snapshot.data.documents[index].data['# of items'].toString()}'),
-                        'Total amount: '),
-                    // onTap: () => testingReservations(
-                    //     snapshot.data.documents[index].documentID, context),
-                  ),
-                );
-              }
-            }));
-  }
+  // Container reservation() {
+  //   return Container(
+  //       child: FutureBuilder(
+  //           future: getFirestoreData(),
+  //           builder: (_, snapshot) {
+  //             if (snapshot.connectionState == ConnectionState.waiting) {
+  //               return Center(
+  //                 child: Text(
+  //                   'Loading...',
+  //                   style: TextStyle(
+  //                     fontSize: 10,
+  //                     fontWeight: FontWeight.bold,
+  //                   ),
+  //                 ),
+  //               );
+  //             } else {
+  //               return ListView.builder(
+  //                 itemCount: snapshot.data.length,
+  //                 itemBuilder: (BuildContext context, int index) => ListTile(
+  //                   title: Text(
+  //                       // snapshot.data.documents[index].data['name'].toString()
+  //                       'Data'),
+  //                   subtitle: Text(
+  //                       // 'Total amount: ${snapshot.data.documents[index].data['# of items'].toString()}'),
+  //                       'Total amount: '),
+  //                   // onTap: () => testingReservations(
+  //                   //     snapshot.data.documents[index].documentID, context),
+  //                 ),
+  //               );
+  //             }
+  //           }));
+  // }
 
-  Future getFirestoreData() async {
-    final firestore = Firestore.instance;
-    QuerySnapshot itemListDOC =
-        await firestore.collection('reservation').getDocuments();
-    return itemListDOC.documents;
-  }
+  // Future getFirestoreData() async {
+  //   final firestore = Firestore.instance;
+  //   QuerySnapshot itemListDOC =
+  //       await firestore.collection('reservation').getDocuments();
+  //   return itemListDOC.documents;
+  // }
   // Widget customCell(int index, AsyncSnapshot snapshot) {
   //   return Material(
   //     child: InkWell(

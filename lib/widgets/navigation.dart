@@ -13,7 +13,8 @@ class NavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.greenAccent,
+        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+        color: Colors.teal,
         height: 80,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -22,7 +23,7 @@ class NavigationBar extends StatelessWidget {
               "Rental Manager Administrator",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.teal.shade900,
+                  color: Colors.white,
                   fontSize: 20),
             ),
             Row(
@@ -37,7 +38,7 @@ class NavigationBar extends StatelessWidget {
                 //     "Home",
                 //     style: TextStyle(color: Colors.white),
                 //   ),
-                  
+
                 // ), SizedBox(
                 //   width: 20,
                 // ),
@@ -82,16 +83,23 @@ class NavigationBar extends StatelessWidget {
                 // ),
                 MaterialButton(
                   color: Colors.teal,
+                  shape: new RoundedRectangleBorder(
+                      // borderRadius: new BorderRadius.circular(18.0),
+                      side: BorderSide(color: Colors.white)),
                   onPressed: () {
-                     print("Pressed Support button!!");
-                    //  Navigator.push(context, MaterialPageRoute(builder: (context) => signInScreen()));
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));
+                    print("Pressed Support button!!");
+                     Navigator.push(context, MaterialPageRoute(builder: (context) => signInScreen()));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => ReservationListPage()));
                   },
                   child: Text(
                     "Admin Login",
                     style: TextStyle(color: Colors.white),
                   ),
-                ), SizedBox(
+                ),
+                SizedBox(
                   width: 20,
                 ),
               ],
@@ -107,8 +115,6 @@ class _NavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-    );
+    return Container();
   }
 }
