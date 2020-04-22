@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:RentalAdmin/widgets/reservationCell.dart';
+// import 'package:RentalAdmin/widgets/reservationCell.dart';
 import 'package:RentalAdmin/views/homeView.dart';
 //
 class ActiveActivity extends StatefulWidget {
@@ -168,7 +168,7 @@ class _ActiveActivity extends State<ActiveActivity> {
         // await firestore.collection('reservation').orderBy('startTime').getDocuments();
         await firestore
             .collection('reservation')
-            .where('status', isEqualTo: 'Picked Up')
+            .where('uid', isEqualTo: 'AppSignInUserladydilaa@gmail.com')
             .getDocuments();
     return itemListDOC.documents;
   }

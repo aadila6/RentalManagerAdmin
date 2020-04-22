@@ -22,7 +22,7 @@ class _CategoryPageState extends State<CategoryPage> {
         MaterialPageRoute(
             builder: (context) => ItemGridPage(category: categorySelected)));
   }
-
+  
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -64,38 +64,6 @@ class _CategoryPageState extends State<CategoryPage> {
         ],
       ),
 
-      // body:
-      // body: Container(
-      // child: FutureBuilder(
-      //   future: getFirestoreData(),
-      //   builder: (_, snapshot) {
-      //     if (snapshot.connectionState == ConnectionState.waiting) {
-      //       return Center(
-      //         child: Text('Loading...'),
-      //       );
-      //     } else {
-      //       return ListView.builder(
-      //           itemCount: snapshot.data.length,
-      //           itemBuilder: (BuildContext context, int index) => ListTile(
-      //                 title: Text(snapshot.data[index].data['name']),
-      //               ));
-      //     }
-      //   },
-      // ),
-
-      // widget.passedFirestoreData.data['categories']
-      //     .forEach((categ) => print(categ.toString()))
-
-      // Text(
-      //     widget.passedFirestoreData.data['categories'].length.toString())
-
-      // child: Card(
-      //   child: ListTile(
-      //     title:
-      //         Text(widget.passedFirestoreData.data['categories'][0]['name']),
-      //   ),
-      // ),
-      // ),
     );
   }
 }

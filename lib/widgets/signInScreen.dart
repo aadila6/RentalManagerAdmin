@@ -17,32 +17,6 @@ class _signInScreenState extends State<signInScreen> {
   bool _Accountvalidate = false;
   String _contactText;
   GoogleSignInAccount _currentUser;
-
-  // Future<FirebaseUser> _handleSignIn() async {
-  //   final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-  //   final GoogleSignInAuthentication googleAuth =
-  //       await googleUser.authentication;
-  //   final AuthCredential credential = GoogleAuthProvider.getCredential(
-  //     accessToken: googleAuth.accessToken,
-  //     idToken: googleAuth.idToken,
-  //   );
-  //   final FirebaseUser user =
-  //       (await _auth.signInWithCredential(credential)).user;
-  //   print("signed in " + user.displayName);
-  //   return user;
-  // }
-
-  // String googleLogInName = '';
-  // BuildContext _context;
-  // final FirebaseAuth _auth = FirebaseAuth.instance;
-  // final GoogleSignIn googleSignIn = new GoogleSignIn();
-  // FirebaseUser _user;
-  // String username;
-  // String password;
-  // bool _Accountvalidate = false;
-  // String _contactText;
-  // GoogleSignInAccount _currentUser;
-
   GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
       'email',
@@ -88,15 +62,6 @@ class _signInScreenState extends State<signInScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // CircleAvatar(
-              //   radius: 50,
-              //   backgroundImage: AssetImage('images/appstore.png'),
-              // ),
-              // Image(
-              //   image: NetworkImage(
-              //       'https://pluspng.com/img-png/google-logo-png-open-2000.png'),
-              //   height: 30,
-              // ),
               SizedBox(height: 10, width: 150),
               Text(
                 'Rental Manager',
@@ -150,22 +115,16 @@ class _signInScreenState extends State<signInScreen> {
                     ),
                     labelText: 'Email',
                     prefixIcon: const Icon(Icons.person, color: Colors.black),
-                    // labelStyle:
-                    // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
                   ),
                 ),
               ),
-
               SizedBox(height: 20, width: 150),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
                 child: TextField(
                   onChanged: (text) {
                     password = text;
-
-                    //print("First text field: $text");
                   },
-                  //decoration: new InputDecoration(hintText: "Enter Something", contentPadding: const EdgeInsets.all(20.0)
                   obscureText: true,
                   cursorColor: Colors.teal.shade900,
                   decoration: InputDecoration(
@@ -182,13 +141,9 @@ class _signInScreenState extends State<signInScreen> {
                     ),
                     labelText: 'Password',
                     prefixIcon: const Icon(Icons.lock, color: Colors.black),
-                    // labelStyle:
-                    // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                    // contentPadding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 50),
                   ),
                 ),
               ),
-
               SizedBox(
                 height: 15,
               ),
@@ -233,7 +188,8 @@ class _signInScreenState extends State<signInScreen> {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title: Text('Your Email needs to be verified.'),
+                                  title:
+                                      Text('Your Email needs to be verified.'),
                                   actions: <Widget>[
                                     new FlatButton(
                                       child: new Text('CANCEL'),
@@ -244,8 +200,7 @@ class _signInScreenState extends State<signInScreen> {
                                   ],
                                 );
                               });
-                         
-                        } else if(ErrorDetect(e)){
+                        } else if (ErrorDetect(e)) {
                           showDialog(
                               context: context,
                               builder: (context) {
@@ -261,7 +216,7 @@ class _signInScreenState extends State<signInScreen> {
                                   ],
                                 );
                               });
-                        }else{
+                        } else {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -312,7 +267,6 @@ class _signInScreenState extends State<signInScreen> {
                         ],
                       ),
                       onPressed: () async {
-                        
                         // _handleSignIn()
                         //     .then((FirebaseUser user) => print(user))
                         //     .catchError((e) => print(e));
@@ -333,16 +287,14 @@ class _signInScreenState extends State<signInScreen> {
                         //   //  await prLOGIN.show();
                         //   //  prLOGIN.hide();
                         //   //  Navigator.of(context).pushReplacementNamed('/MainViewScreen');
-                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomeView()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeView()));
                         //   }
                         // }catch(e){
                         //   print(e);
                         // }
-
-
                       },
                       padding: EdgeInsets.all(7.0),
                       //color: Colors.teal.shade900,
@@ -413,12 +365,12 @@ class _signInScreenState extends State<signInScreen> {
           ),
         ),
       ),
-      
     );
   }
 }
 
 mixin UserCredential {}
+
 class ResetPassword extends StatefulWidget {
   @override
   _ResetPasswordState createState() => _ResetPasswordState();
@@ -470,34 +422,34 @@ class _ResetPasswordState extends State<ResetPassword> {
               ),
               SizedBox(height: 10, width: 150),
 
-               Padding(
-                padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
-                child: TextField(
-                onChanged: (text) {
-                  email = text;
-                },
-                // controller: _username,
-                cursorColor: Colors.teal.shade900,
-                scrollPadding:
-                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30),
-                decoration: InputDecoration(
-                  border: new OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(
-                      const Radius.circular(8.0),
+              Padding(
+                  padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
+                  child: TextField(
+                    onChanged: (text) {
+                      email = text;
+                    },
+                    // controller: _username,
+                    cursorColor: Colors.teal.shade900,
+                    scrollPadding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 30),
+                    decoration: InputDecoration(
+                      border: new OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(
+                          const Radius.circular(8.0),
+                        ),
+                        borderSide: new BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                      ),
+                      labelText: 'Enter your Email Address',
+                      prefixIcon: const Icon(Icons.email, color: Colors.black),
+                      // labelStyle:
+                      // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 30),
                     ),
-                    borderSide: new BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
-                    ),
-                  ),
-                  labelText: 'Enter your Email Address',
-                  prefixIcon: const Icon(Icons.email, color: Colors.black),
-                  // labelStyle:
-                  // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 30),
-                ),
-              )),
+                  )),
               SizedBox(height: 20, width: 150),
 
               SizedBox(
@@ -544,55 +496,10 @@ class _ResetPasswordState extends State<ResetPassword> {
               SizedBox(
                 height: 5,
               ),
-//              Row(
-//                mainAxisAlignment: MainAxisAlignment.center,
-//                children: <Widget>[
-//                  SizedBox(
-//                    width: screenWidth / 6 * 5,
-//                    child: RaisedButton(
-//                      highlightElevation: 0.0,
-//                      splashColor: Colors.greenAccent,
-//                      highlightColor: Colors.green,
-//                      elevation: 0.0,
-//                      color: Colors.green,
-//                      shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-//                      child: Row(
-//                        mainAxisAlignment: MainAxisAlignment.center,
-//                        children: <Widget>[
-//                          Center(
-//                            child: Text(
-//                              "Back to Login Page",
-//                              style: TextStyle(
-//                                fontSize: 15,
-//                                // backgroundColor:  Colors.teal[50],
-//                                color: Colors.white,
-//                                fontFamily: 'Montserrat',
-//                              ),
-//                            ),
-//                          ),
-//
-//                        ],
-//                      ),
-//                      onPressed: () {
-//                        Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
-//                      },
-//                      padding: EdgeInsets.all(7.0),
-//                      //color: Colors.teal.shade900,
-//                      disabledColor: Colors.black,
-//                      disabledTextColor: Colors.black,
-//
-//                    ),
-//                  ),
-//
-//
-//
-//                ],
-//              ),
             ],
           ),
         ),
       ),
-      //home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -617,194 +524,192 @@ class _State extends State<SignUpPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-             Padding(
+            Padding(
                 padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
                 child: TextField(
-              onChanged: (text) {
-                email = text;
-                //print("First text field: $text");
-              },
-              cursorColor: Colors.teal.shade900,
-              scrollPadding:
-                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
-              decoration: InputDecoration(
-                border: new OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(
-                    const Radius.circular(8.0),
+                  onChanged: (text) {
+                    email = text;
+                    //print("First text field: $text");
+                  },
+                  cursorColor: Colors.teal.shade900,
+                  scrollPadding: const EdgeInsets.symmetric(
+                      vertical: 20.0, horizontal: 50),
+                  decoration: InputDecoration(
+                    border: new OutlineInputBorder(
+                      borderRadius: const BorderRadius.all(
+                        const Radius.circular(8.0),
+                      ),
+                      borderSide: new BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                    ),
+                    labelText: 'Email',
+                    prefixIcon: const Icon(Icons.email, color: Colors.black),
+                    // labelStyle:
+                    // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 20.0, horizontal: 50),
                   ),
-                  borderSide: new BorderSide(
-                    color: Colors.transparent,
-                    width: 1.0,
-                  ),
-                ),
-                labelText: 'Email',
-                prefixIcon: const Icon(Icons.email, color: Colors.black),
-                // labelStyle:
-                // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
-              ),
-            )),
+                )),
             SizedBox(
               height: 20,
             ),
-             Padding(
+            Padding(
                 padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
                 child: TextField(
-              onChanged: (text) {
-                usernameFirst = text;
-                //print("username: $text");
-              },
-              // obscureText: true,
-              cursorColor: Colors.teal.shade900,
-              decoration: InputDecoration(
-                // contentPadding: new EdgeInsets.fromLTRB(20.0, 10.0, 100.0, 10.0),
-                border: new OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(
-                    const Radius.circular(8.0),
+                  onChanged: (text) {
+                    usernameFirst = text;
+                    //print("username: $text");
+                  },
+                  // obscureText: true,
+                  cursorColor: Colors.teal.shade900,
+                  decoration: InputDecoration(
+                    // contentPadding: new EdgeInsets.fromLTRB(20.0, 10.0, 100.0, 10.0),
+                    border: new OutlineInputBorder(
+                      borderRadius: const BorderRadius.all(
+                        const Radius.circular(8.0),
+                      ),
+                      borderSide: new BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                    ),
+                    labelText: 'First Name',
+                    prefixIcon: const Icon(Icons.person, color: Colors.black),
+                    // labelStyle:
+                    // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 20.0, horizontal: 50),
                   ),
-                  borderSide: new BorderSide(
-                    color: Colors.transparent,
-                    width: 1.0,
-                  ),
-                ),
-                labelText: 'First Name',
-                prefixIcon: const Icon(Icons.person, color: Colors.black),
-                // labelStyle:
-                // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
-              ),
-            )),
+                )),
             SizedBox(
               height: 20,
             ),
-             Padding(
+            Padding(
                 padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
                 child: TextField(
-              onChanged: (text) {
-                usernameLast = text;
-                //print("username: $text");
-              },
-              // obscureText: true,
-              cursorColor: Colors.teal.shade900,
-              decoration: InputDecoration(
-                // contentPadding: new EdgeInsets.fromLTRB(20.0, 10.0, 100.0, 10.0),
-                border: new OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(
-                    const Radius.circular(8.0),
+                  onChanged: (text) {
+                    usernameLast = text;
+                    //print("username: $text");
+                  },
+                  // obscureText: true,
+                  cursorColor: Colors.teal.shade900,
+                  decoration: InputDecoration(
+                    // contentPadding: new EdgeInsets.fromLTRB(20.0, 10.0, 100.0, 10.0),
+                    border: new OutlineInputBorder(
+                      borderRadius: const BorderRadius.all(
+                        const Radius.circular(8.0),
+                      ),
+                      borderSide: new BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                    ),
+                    labelText: 'Lastname',
+                    prefixIcon: const Icon(Icons.person, color: Colors.black),
+                    // labelStyle:
+                    // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 20.0, horizontal: 50),
                   ),
-                  borderSide: new BorderSide(
-                    color: Colors.transparent,
-                    width: 1.0,
-                  ),
-                ),
-                labelText: 'Lastname',
-                prefixIcon: const Icon(Icons.person, color: Colors.black),
-                // labelStyle:
-                // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
-              ),
-            )),
+                )),
             SizedBox(
               height: 20,
             ),
-             Padding(
+            Padding(
                 padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
                 child: TextField(
-              onChanged: (text) {
-                password = text;
-                //print("First password field: $text");
-              },
-              obscureText: true,
-              cursorColor: Colors.teal.shade900,
-              scrollPadding:
-                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
-              decoration: InputDecoration(
-                border: new OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(
-                    const Radius.circular(8.0),
+                  onChanged: (text) {
+                    password = text;
+                    //print("First password field: $text");
+                  },
+                  obscureText: true,
+                  cursorColor: Colors.teal.shade900,
+                  scrollPadding: const EdgeInsets.symmetric(
+                      vertical: 20.0, horizontal: 50),
+                  decoration: InputDecoration(
+                    border: new OutlineInputBorder(
+                      borderRadius: const BorderRadius.all(
+                        const Radius.circular(8.0),
+                      ),
+                      borderSide: new BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                    ),
+                    labelText: 'Password',
+                    prefixIcon: const Icon(Icons.lock, color: Colors.black),
+                    // labelStyle:
+                    // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 20.0, horizontal: 50),
                   ),
-                  borderSide: new BorderSide(
-                    color: Colors.transparent,
-                    width: 1.0,
-                  ),
-                ),
-                labelText: 'Password',
-                prefixIcon: const Icon(Icons.lock, color: Colors.black),
-                // labelStyle:
-                // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
-              ),
-            )),
+                )),
             SizedBox(
               height: 20,
             ),
-             Padding(
+            Padding(
                 padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
                 child: TextField(
-              onChanged: (text) {
-                confirmpw = text;
-                //print("Second password field: $text");
-              },
-              obscureText: true,
-              cursorColor: Colors.teal.shade900,
-              decoration: InputDecoration(
-                // contentPadding: new EdgeInsets.fromLTRB(20.0, 10.0, 100.0, 10.0),
-                border: new OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(
-                    const Radius.circular(8.0),
+                  onChanged: (text) {
+                    confirmpw = text;
+                    //print("Second password field: $text");
+                  },
+                  obscureText: true,
+                  cursorColor: Colors.teal.shade900,
+                  decoration: InputDecoration(
+                    // contentPadding: new EdgeInsets.fromLTRB(20.0, 10.0, 100.0, 10.0),
+                    border: new OutlineInputBorder(
+                      borderRadius: const BorderRadius.all(
+                        const Radius.circular(8.0),
+                      ),
+                      borderSide: new BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                    ),
+                    labelText: 'Confirm Password',
+                    prefixIcon: const Icon(Icons.lock, color: Colors.black),
+                    // labelStyle:
+                    // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 20.0, horizontal: 50),
                   ),
-                  borderSide: new BorderSide(
-                    color: Colors.transparent,
-                    width: 1.0,
-                  ),
-                ),
-                labelText: 'Confirm Password',
-                prefixIcon: const Icon(Icons.lock, color: Colors.black),
-                // labelStyle:
-                // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
-              ),
-            )),
+                )),
             SizedBox(
               height: 20,
             ),
             Text('Click sign up after entering all of above'),
-             SizedBox(
-                    width: MediaQuery.of(context).size.width / 20 * 5,
-                    child: RaisedButton(
-              textColor: Colors.white,
-              color: Colors.teal.shade900,
-              child: Text('SIGN UP'),
-              onPressed: () async {
-
-              },
-              padding: EdgeInsets.all(10.0),
-              disabledColor: Colors.black,
-              disabledTextColor: Colors.black,
-            )),
+            SizedBox(
+                width: MediaQuery.of(context).size.width / 20 * 5,
+                child: RaisedButton(
+                  textColor: Colors.white,
+                  color: Colors.teal.shade900,
+                  child: Text('SIGN UP'),
+                  onPressed: () async {},
+                  padding: EdgeInsets.all(10.0),
+                  disabledColor: Colors.black,
+                  disabledTextColor: Colors.black,
+                )),
           ],
         ),
       ),
     );
   }
 }
-bool ErrorDetect(String e){
-  if(e.contains('FirebaseError')){
+
+bool ErrorDetect(String e) {
+  if (e.contains('FirebaseError')) {
     return true;
-  }else{
+  } else {
     return false;
   }
 }
-String errorDetect(String e, {int pos = 1}){
-  
-    List<String> strList = e.split(":");
-    String _retstr = strList[pos];
-    List<String> str = _retstr.split("(");
-    return str[0];
 
+String errorDetect(String e, {int pos = 1}) {
+  List<String> strList = e.split(":");
+  String _retstr = strList[pos];
+  List<String> str = _retstr.split("(");
+  return str[0];
 }

@@ -1,9 +1,9 @@
 import 'package:RentalAdmin/views/homeView.dart';
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/InventoryView.dart';
-import 'package:RentalAdmin/views/chatBoxView.dart';
+// import 'package:RentalAdmin/views/chatBoxView.dart';
 import 'package:RentalAdmin/views/ReservationView.dart';
-import 'package:RentalAdmin/widgets/testlist.dart';
+import 'package:RentalAdmin/widgets/userReservation.dart';
 import 'package:RentalAdmin/widgets/signInScreen.dart';
 import 'package:RentalAdmin/widgets/chat.dart';
 import 'googleSignin.dart';
@@ -28,59 +28,6 @@ class NavigationBar extends StatelessWidget {
             ),
             Row(
               children: <Widget>[
-                // MaterialButton(
-                //   color: Colors.teal,
-                //   onPressed: () {
-                //     print("Pressed home button!!");
-                //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeView()));
-                //   },
-                //   child: Text(
-                //     "Home",
-                //     style: TextStyle(color: Colors.white),
-                //   ),
-
-                // ), SizedBox(
-                //   width: 20,
-                // ),
-                // MaterialButton(
-                //   color: Colors.teal,
-                //   onPressed: () {
-                //     print("Pressed Support button!!");
-                //      Navigator.push(context, MaterialPageRoute(builder: (context) => LocationPage(title:'Select a Location')));
-                //   },
-                //   child: Text(
-                //     "Inventory",
-                //     style: TextStyle(color: Colors.white),
-                //   ),
-                // ), SizedBox(
-                //   width: 20,
-                // ),
-                // MaterialButton(
-                //  color: Colors.teal,
-                //   onPressed: () {
-                //      print("Pressed Inventory button!!");
-                //      Navigator.push(context, MaterialPageRoute(builder: (context) => ChatScreen()));
-                //   },
-                //   child: Text(
-                //     "ChatBox",
-                //     style: TextStyle(color: Colors.white),
-                //   ),
-                // ), SizedBox(
-                //   width: 20,
-                // ),
-                // MaterialButton(
-                //   color: Colors.teal,
-                //   onPressed: () {
-                //      print("Pressed Reservation button!!");
-                //      Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));
-                //   },
-                //   child: Text(
-                //     "Reservations",
-                //     style: TextStyle(color: Colors.white),
-                //   ),
-                // ), SizedBox(
-                //   width: 20,
-                // ),
                 MaterialButton(
                   color: Colors.teal,
                   shape: new RoundedRectangleBorder(
@@ -89,10 +36,7 @@ class NavigationBar extends StatelessWidget {
                   onPressed: () {
                     print("Pressed Support button!!");
                      Navigator.push(context, MaterialPageRoute(builder: (context) => signInScreen()));
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => ReservationListPage()));
+                   
                   },
                   child: Text(
                     "Admin Login",

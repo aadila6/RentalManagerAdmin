@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:RentalAdmin/views/homeView.dart';
 import 'package:intl/intl.dart';
-
+import 'package:RentalAdmin/widgets/userReservation.dart';
 class DetailPage extends StatefulWidget {
   var itemSelected;
   DetailPage({this.itemSelected});
@@ -109,58 +109,24 @@ class _DetailPage extends State<DetailPage> {
         ));
   }
 
-  testingReservations(String itemID) async {
+testingReservations(String itemID) async {
+    // print(globals.uid);
+    // final QuerySnapshot result =
+    // await Firestore.instance.collection('items').getDocuments();
+    // final List<DocumentSnapshot> documents = result.documents;
+    // List<String> itemIDs = [];
+    // documents.forEach((data) => itemIDs.add(data.documentID));
+    // print(documents.length);
+    //for(int i = 0; i< snapshot.length;i++){
     print(itemID);
+    //}
     var now = new DateTime.now();
     var time = DateFormat("yyyy-MM-dd hh:mm:ss").format(now);
     var pickUpBefore = now.add(new Duration(minutes: 10));
-    print("Reservation Created time: " + time);
-    print("Reservation pickup before time: " +
-        DateFormat("yyyy-MM-dd hh:mm:ss").format(pickUpBefore));
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Check Out Complete'),
-            actions: <Widget>[
-              new FlatButton(
-                child: new Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomeView()));
-                },
-              ),
-            ],
-          );
-        });
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Swipe ID card'),
-            content: TextField(
-              controller: _textFieldController,
-              decoration: InputDecoration(hintText: "Please enter SID#"),
-            ),
-            actions: <Widget>[
-              new FlatButton(
-                child: new Text('Cancel'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              new FlatButton(
-                child: new Text('Confirm'),
-                onPressed: () {
-                  print("URL Request sent");
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
-        });
-    // uploadData(itemID, '0000000000', time);
+    // print("Reservation Created time: " + time);
+    // print("Reservation pickup before time: " +
+    //     DateFormat("yyyy-MM-dd hh:mm:ss").format(pickUpBefore));
+    uploadData(itemID, 'AppSignInUserladydilaa@gmail.com', time);
   }
 
   void uploadData(itemID, uid, dateTime) async {
@@ -201,31 +167,24 @@ class _DetailPage extends State<DetailPage> {
       imageURL = "www.gooogle.com";
     }
 
-    await databaseReference.collection("Record").document().setData({
+    // final FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    final userID = 'AppSignInUserladydilaa@gmail.com';
+    await databaseReference.collection("reservation").document().setData({
       'imageURL': imageURL,
       'name': itemName,
       'uid': uid,
       'item': itemID,
+      'userID': userID,
       'amount': "1",
       'startTime': dateTime,
       'status': "Picked Up",
       'endTime': "TBD",
     });
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Check Out Complete'),
-            actions: <Widget>[
-              new FlatButton(
-                child: new Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        });
-    print("success!");
-  }
-}
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));
+    // PlatformAlertDialog(
+    //   title: 'Your item has placed',
+    //   content:
+    //       'Your reservation is successful confirmed, please pick it up on time',
+    //   defaultActionText: Strings.ok,
+    // ).show(context);
+  }}

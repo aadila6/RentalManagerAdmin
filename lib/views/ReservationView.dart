@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:RentalAdmin/widgets/navigation.dart';
 import 'package:RentalAdmin/widgets/centerer.dart';
 import 'package:RentalAdmin/widgets/actionButton.dart';
-import 'package:RentalAdmin/widgets/testlist.dart';
+import 'package:RentalAdmin/widgets/userReservation.dart';
 class ReservationView extends StatelessWidget {
   const ReservationView({Key key}) : super(key: key);
 
