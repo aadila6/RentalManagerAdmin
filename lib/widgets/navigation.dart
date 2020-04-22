@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/InventoryView.dart';
 // import 'package:RentalAdmin/views/chatBoxView.dart';
 import 'package:RentalAdmin/views/ReservationView.dart';
-import 'package:RentalAdmin/widgets/userReservation.dart';
-import 'package:RentalAdmin/widgets/signInScreen.dart';
-import 'package:RentalAdmin/widgets/chat.dart';
-import 'googleSignin.dart';
+import 'package:RentalAdmin/views/ReservationView.dart';
+import 'package:RentalAdmin/views/signInScreen.dart';
+
 
 class NavigationBar extends StatelessWidget {
   const NavigationBar({Key key}) : super(key: key);

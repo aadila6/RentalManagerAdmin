@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:RentalAdmin/widgets/userReservation.dart';
+import 'package:RentalAdmin/views/ReservationView.dart';
 
 TextEditingController _textFieldController = TextEditingController();
 

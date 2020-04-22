@@ -3,7 +3,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:RentalAdmin/views/homeView.dart';
-import 'auth.dart';
+import '../widgets/auth.dart';
 import 'package:http/http.dart' as http;
 
 class signInScreen extends StatefulWidget {
@@ -31,26 +31,6 @@ class _signInScreenState extends State<signInScreen> {
       print(error);
     }
   }
-
-  // String googleLogInName = '';
-
-  // final FirebaseAuth _auth = FirebaseAuth.instance;
-  // final GoogleSignIn googleSignIn = new GoogleSignIn();
-  // FirebaseUser _user;
-
-  // Future<FirebaseUser> _myGoogleSignIn() async {
-  //   GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-  //   GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-  //   final AuthCredential credential = GoogleAuthProvider.getCredential(
-  //     accessToken: googleAuth.accessToken,
-  //     idToken: googleAuth.idToken,
-  //   );
-  //   final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
-  //   print("signed in " + user.displayName);
-  //   print("signed in " + user.email);
-
-  //   return user;
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -177,10 +157,7 @@ class _signInScreenState extends State<signInScreen> {
                         ],
                       ),
                       onPressed: () async {
-                        //  Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //           builder: (context) => HomeView()));
+                       
                         var e = await authHandler.signIn(username, password);
                         print("on Press Error: " + e);
                         if (e == "false") {
@@ -287,14 +264,15 @@ class _signInScreenState extends State<signInScreen> {
                         //   //  await prLOGIN.show();
                         //   //  prLOGIN.hide();
                         //   //  Navigator.of(context).pushReplacementNamed('/MainViewScreen');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeView()));
+                        
                         //   }
                         // }catch(e){
                         //   print(e);
                         // }
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeView()));
                       },
                       padding: EdgeInsets.all(7.0),
                       //color: Colors.teal.shade900,
@@ -428,7 +406,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                     onChanged: (text) {
                       email = text;
                     },
-                    // controller: _username,
                     cursorColor: Colors.teal.shade900,
                     scrollPadding: const EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 30),
@@ -444,8 +421,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                       ),
                       labelText: 'Enter your Email Address',
                       prefixIcon: const Icon(Icons.email, color: Colors.black),
-                      // labelStyle:
-                      // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 10.0, horizontal: 30),
                     ),
@@ -476,7 +451,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                               "Send Verification Email",
                               style: TextStyle(
                                 fontSize: 15,
-                                // backgroundColor:  Colors.teal[50],
                                 color: Colors.white,
                                 fontFamily: 'Montserrat',
                               ),
@@ -486,7 +460,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                       ),
                       onPressed: () async {},
                       padding: EdgeInsets.all(7.0),
-                      //color: Colors.teal.shade900,
                       disabledColor: Colors.black,
                       disabledTextColor: Colors.black,
                     ),
