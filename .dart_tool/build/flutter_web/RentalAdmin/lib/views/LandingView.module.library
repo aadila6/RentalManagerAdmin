@@ -1,1 +1,0 @@
-{"isEntrypoint":true,"deps":["flutter|lib/material.dart","RentalAdmin|lib/widgets/actionButton.dart","RentalAdmin|lib/widgets/allActivities.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":false}
