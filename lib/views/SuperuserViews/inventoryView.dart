@@ -1,13 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import 'newItemDialog.dart';
+
 Future<List<DocumentSnapshot>> getAllInventory(self) async {
-  final firestore = Firestore.instance;
-  QuerySnapshot docs = await firestore.collection('items').getDocuments();
-  self.setState(() {
-    self.isReady = true;
-  });
-  return docs.documents;
+  // final firestore = Firestore.instance;
+  // QuerySnapshot docs = await firestore.collection('items').getDocuments();
+  // self.setState(() {
+  //   self.isReady = true;
+  // });
+  // return docs.documents;
+  print("FUCK");
+  return null;
 }
 
 class SuperuserInventoryView extends StatefulWidget {
@@ -22,7 +26,12 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
   @override
   Widget build(BuildContext context) {
     return Column(children:[
-      FlatButton(onPressed: (){}, child: Text("Add new item")),
+      FlatButton(onPressed: (){
+        showDialog(context: context, 
+        builder: (ctxt){
+          return NewItemDialog();
+          });
+        }, child: Text("Add new item")),
       FutureBuilder(
         future: getAllInventory(this),
         builder: (ctxt, snap) {
@@ -32,7 +41,6 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
                 child: ListView.builder(
                     itemCount: snapData.length,
                     itemBuilder: (context, i) {
-                      //print(snap.data[i].runtimeType);
                       return ListTile(
                         title: Text(snapData[i].data['name']),
                       );
