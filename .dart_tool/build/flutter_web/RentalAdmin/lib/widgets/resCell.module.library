@@ -1,1 +1,1 @@
-{"isEntrypoint":true,"deps":["firebase_auth|lib/firebase_auth.dart","flutter|lib/material.dart","cloud_firestore|lib/cloud_firestore.dart","RentalAdmin|lib/widgets/testlist.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":false}
+{"isEntrypoint":true,"deps":["firebase_auth|lib/firebase_auth.dart","flutter|lib/material.dart","cloud_firestore|lib/cloud_firestore.dart","RentalAdmin|lib/views/ReservationView.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":false}

@@ -595,7 +595,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/flutter/sr
         [_Location_parameterLocations]: null,
         [_Location_name]: "data",
         [_Location_column]: 72,
-        [_Location_line]: 131,
+        [_Location_line]: 130,
         [_Location_file]: null
       });
     },
@@ -608,7 +608,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/flutter/sr
         [_Location_parameterLocations]: C67 || CT.C67,
         [_Location_name]: null,
         [_Location_column]: 18,
-        [_Location_line]: 131,
+        [_Location_line]: 130,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/views/inventory/detail_page.dart"
       });
     },
@@ -618,7 +618,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/flutter/sr
         [_Location_parameterLocations]: null,
         [_Location_name]: "title",
         [_Location_column]: 11,
-        [_Location_line]: 131,
+        [_Location_line]: 130,
         [_Location_file]: null
       });
     },
@@ -628,7 +628,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/flutter/sr
         [_Location_parameterLocations]: null,
         [_Location_name]: "backgroundColor",
         [_Location_column]: 11,
-        [_Location_line]: 132,
+        [_Location_line]: 131,
         [_Location_file]: null
       });
     },
@@ -641,7 +641,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/flutter/sr
         [_Location_parameterLocations]: C70 || CT.C70,
         [_Location_name]: null,
         [_Location_column]: 17,
-        [_Location_line]: 130,
+        [_Location_line]: 129,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/views/inventory/detail_page.dart"
       });
     },
@@ -651,7 +651,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/flutter/sr
         [_Location_parameterLocations]: null,
         [_Location_name]: "children",
         [_Location_column]: 13,
-        [_Location_line]: 140,
+        [_Location_line]: 139,
         [_Location_file]: null
       });
     },
@@ -664,7 +664,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/flutter/sr
         [_Location_parameterLocations]: C74 || CT.C74,
         [_Location_name]: null,
         [_Location_column]: 17,
-        [_Location_line]: 139,
+        [_Location_line]: 138,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/views/inventory/detail_page.dart"
       });
     },
@@ -674,7 +674,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/flutter/sr
         [_Location_parameterLocations]: null,
         [_Location_name]: "body",
         [_Location_column]: 11,
-        [_Location_line]: 139,
+        [_Location_line]: 138,
         [_Location_file]: null
       });
     },
@@ -687,7 +687,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/flutter/sr
         [_Location_parameterLocations]: C77 || CT.C77,
         [_Location_name]: null,
         [_Location_column]: 15,
-        [_Location_line]: 138,
+        [_Location_line]: 137,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/views/inventory/detail_page.dart"
       });
     },
@@ -697,7 +697,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/flutter/sr
         [_Location_parameterLocations]: null,
         [_Location_name]: "appBar",
         [_Location_column]: 9,
-        [_Location_line]: 130,
+        [_Location_line]: 129,
         [_Location_file]: null
       });
     },
@@ -707,7 +707,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/flutter/sr
         [_Location_parameterLocations]: null,
         [_Location_name]: "backgroundColor",
         [_Location_column]: 9,
-        [_Location_line]: 134,
+        [_Location_line]: 133,
         [_Location_file]: null
       });
     },
@@ -717,7 +717,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/flutter/sr
         [_Location_parameterLocations]: null,
         [_Location_name]: "body",
         [_Location_column]: 9,
-        [_Location_line]: 138,
+        [_Location_line]: 137,
         [_Location_file]: null
       });
     },
@@ -730,7 +730,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/flutter/sr
         [_Location_parameterLocations]: C80 || CT.C80,
         [_Location_name]: null,
         [_Location_column]: 12,
-        [_Location_line]: 129,
+        [_Location_line]: 128,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/views/inventory/detail_page.dart"
       });
     }
@@ -918,7 +918,7 @@ define(['dart_sdk', 'packages/flutter/src/widgets/actions', 'packages/flutter/sr
   dart.trackLibraries("packages/RentalAdmin/views/inventory/detail_page", {
     "package:RentalAdmin/views/inventory/detail_page.dart": detail_page
   }, {
-  }, '{"version":3,"sourceRoot":"","sources":["detail_page.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;IASM;;;;;;;AAKF,YAAO;IACT;;;QALiB;;;AAAjB;;EAA+B;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAU7B,YAAO,yCACgB,mCACR,2CACa,WAAJ,WAApB,AAAO,4CAAkB,qBACb,8BACJ;IAId;;AAGE,YAAO,yCACgB,mCAEd,kBAAK;IAEhB;;AAiBE,YAAO,uCACe,gDAAoB,eACtB,AAAY,AAAK,0BAAd,iCACd,+CACM;AACyB,YAAlC,WAAM;mCAGD,kBAAK,uBAAsB,qCAAwB,uFAC5C;IAGpB;;AAGE,YAAO,sCAEsC,aAAxB,AAAY,AAAK,0BAAd,6BAAuB,iBAE7B,6CACH,iDACF,2DAAqC,WAAJ,WAApB,AAAO,4CAAkB,qBAEjC;IAIpB;;AAGE,YAAO,mBAAK,oCAAmC,wCAAoB;IACrE;;AAGE,YAAO,uCACe,oCAAS,KAAG,MAAI,MAAI,aACjC,gCACgB,wCACd,qDACa,AACb,AACA,AACA,8CAFW,yCACkB,WAApB,AAAO,gEAEZ,SAAC,SAAS;AACjB,6BAAK,AAAS,QAAD,WAAU;AACvB,oBAAO,mBAAK,AAAkD,gCAAhB,WAAb,AAAS,QAAD,gBAAM,yBACpC,wCACO,aACI,qCACS;;IAKzC;;AAGE,YAAO,qCAEa,AAAY,AAAK,0BAAd,mCAED,oCAAS,MAAM,MAAM,MAAM,cAExC,6BACE,gCACa,sBAAC,wBAAmB;IAI9C;UAG0B;AAExB,YAAO,oCACK,+BACC,kBAAK,AAAiD,0BAAV,WAAJ,WAApB,AAAO,4CAAkB,sFAC5B,8FAEF,8BAIlB,iCACE,gCACc,sBAAC,YAAO,eAAU;IAM9C;;;;;EAiFF","file":"detail_page.ddc.js"}');
+  }, '{"version":3,"sourceRoot":"","sources":["detail_page.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;IASM;;;;;;;AAKF,YAAO;IACT;;;QALiB;;;AAAjB;;EAA+B;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAU7B,YAAO,yCACgB,mCACR,2CACa,WAAJ,WAApB,AAAO,4CAAkB,qBACb,8BACJ;IAId;;AAGE,YAAO,yCACgB,mCAEd,kBAAK;IAEhB;;AAiBE,YAAO,uCACe,gDAAoB,eACtB,AAAY,AAAK,0BAAd,iCACd,+CACM;AACyB,YAAlC,WAAM;mCAGD,kBAAK,uBAAsB,qCAAwB,uFAC5C;IAGpB;;AAGE,YAAO,sCAEsC,aAAxB,AAAY,AAAK,0BAAd,6BAAuB,iBAE7B,6CACH,iDACF,2DAAqC,WAAJ,WAApB,AAAO,4CAAkB,qBAEjC;IAIpB;;AAGE,YAAO,mBAAK,oCAAmC,wCAAoB;IACrE;;AAGE,YAAO,uCACe,oCAAS,KAAG,MAAI,MAAI,aACjC,gCACgB,wCACd,qDACa,AACb,AACA,AACA,8CAFW,yCACkB,WAApB,AAAO,gEAEZ,SAAC,SAAS;AACjB,6BAAK,AAAS,QAAD,WAAU;AACvB,oBAAO,mBAAK,AAAkD,gCAAhB,WAAb,AAAS,QAAD,gBAAM,yBACpC,wCACO,aACI,qCACS;;IAKzC;;AAGE,YAAO,qCAEa,AAAY,AAAK,0BAAd,mCAED,oCAAS,MAAM,MAAM,MAAM,cAExC,6BACE,gCACa,sBAAC,wBAAmB;IAI9C;UAG0B;AACxB,YAAO,oCACK,+BACC,kBAAK,AAAiD,0BAAV,WAAJ,WAApB,AAAO,4CAAkB,sFAC5B,8FAEF,8BAIlB,iCACE,gCACc,sBAAC,YAAO,eAAU;IAI9C;;;;;EACF","file":"detail_page.ddc.js"}');
   // Exports:
   return {
     views__inventory__detail_page: detail_page

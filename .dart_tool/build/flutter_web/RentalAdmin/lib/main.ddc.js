@@ -6,7 +6,7 @@ define(['dart_sdk', 'packages/flutter/material', 'packages/RentalAdmin/views/Inv
   const app = packages__flutter__material.src__material__app;
   const theme_data = packages__flutter__material.src__material__theme_data;
   const colors = packages__flutter__material.src__material__colors;
-  const signInScreen = packages__RentalAdmin__views__InventoryView.widgets__signInScreen;
+  const signInScreen = packages__RentalAdmin__views__InventoryView.views__signInScreen;
   const widget_inspector = packages__flutter__src__widgets__actions.src__widgets__widget_inspector;
   const framework = packages__flutter__src__widgets__actions.src__widgets__framework;
   const binding = packages__flutter__src__widgets__actions.src__widgets__binding;

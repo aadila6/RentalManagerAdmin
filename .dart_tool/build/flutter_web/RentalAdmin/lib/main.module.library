@@ -1,1 +1,1 @@
-{"isEntrypoint":true,"deps":["flutter|lib/material.dart","RentalAdmin|lib/views/homeView.dart","RentalAdmin|lib/widgets/signInScreen.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":true}
+{"isEntrypoint":true,"deps":["flutter|lib/material.dart","RentalAdmin|lib/views/homeView.dart","RentalAdmin|lib/views/signInScreen.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":true}
