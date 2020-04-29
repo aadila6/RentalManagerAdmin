@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:RentalAdmin/views/homeView.dart';
 import '../widgets/auth.dart';
 import 'package:http/http.dart' as http;
+import 'package:RentalAdmin/views/SuperUser/SuperLanding.dart';
 
 class signInScreen extends StatefulWidget {
   @override
@@ -194,10 +195,16 @@ class _signInScreenState extends State<signInScreen> {
                                 );
                               });
                         } else {
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => HomeView()));
+
+                          //Direct To SuperUserView directly
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomeView()));
+                                  builder: (context) => MainPage()));
                         }
                       },
                       padding: EdgeInsets.all(10.0),
