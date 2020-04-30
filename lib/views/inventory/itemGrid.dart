@@ -58,31 +58,6 @@ class _ItemGridPageState extends State<ItemGridPage> {
           builder: (context, snapshot) {
             if (!snapshot.hasData) return const Text('loading...');
 
-            // return ListView.builder(
-            //   itemCount: snapshot.data.documents.length,
-            //   itemBuilder: (BuildContext context, int index) => ListTile(
-            //     title: Text(
-            //         snapshot.data.documents[index].data['name'].toString()),
-            //     subtitle: Text(
-            //         'Total amount: ${snapshot.data.documents[index].data['# of items'].toString()}'),
-            //     onTap: () {
-            //       navigateToDetail(snapshot.data.documents[index]);
-            //       // testingReservations(
-            //       //     snapshot.data.documents[index].documentID);
-            //     },
-            //   ),
-            // );
-
-
-            // return GridView.builder(
-            //   itemCount: snapshot.data.documents.length,
-            //   gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-            //       crossAxisCount: 5),
-            //   itemBuilder: (BuildContext context, int index) => CustommCell(
-            //       snapshot.data.documents[index].data['name'].toString(),
-            //       snapshot.data.documents[index].data['imageURL'].toString()),
-            // );
-
             return GridView.builder(
               itemCount: snapshot.data.documents.length,
               gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
@@ -104,6 +79,7 @@ class _ItemGridPageState extends State<ItemGridPage> {
     );
   }
 }
+
 class CustommCell extends StatelessWidget {
   String name;
   String url;

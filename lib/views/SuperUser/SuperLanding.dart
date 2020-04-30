@@ -6,9 +6,12 @@ import 'package:RentalAdmin/views/SuperUser/BarMenu.dart';
 import 'package:RentalAdmin/views/SuperUser/currentDash.dart';
 
 class MainPage extends StatelessWidget {
+  // final GlobalKey<SideBarMenu> _myWidgetState = GlobalKey<SideBarMenu>();
+  // GlobalKey<_SideBarMenuState> _keyChild1 = GlobalKey();
   @override
   Widget build(BuildContext context) {
     final _media = MediaQuery.of(context).size;
+    // int selectedView = 0;
     // print(_media);
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
@@ -18,7 +21,7 @@ class MainPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SideBarMenu(),
+              // SideBarMenu(),
               Flexible(
                 fit: FlexFit.loose,
                 child: Column(

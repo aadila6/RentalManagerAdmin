@@ -1,1 +1,0 @@
-{"isEntrypoint":false,"deps":["image|lib/image.dart","image|lib/src/image.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["typed_data"],"hasMain":false}

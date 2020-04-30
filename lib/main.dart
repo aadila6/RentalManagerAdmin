@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/homeView.dart';
 import 'package:RentalAdmin/views/signInScreen.dart';
+
+import 'package:RentalAdmin/views/SuperUser/SuperuserPanel.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -14,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: signInScreen(),
+      home: SuperuserPanel(),
     );
   }
 }

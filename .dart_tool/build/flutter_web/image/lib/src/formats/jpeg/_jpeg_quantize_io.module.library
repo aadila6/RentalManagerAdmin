@@ -1,1 +1,0 @@
-{"isEntrypoint":false,"deps":["image|lib/src/color.dart","image|lib/src/exif_data.dart","image|lib/src/image.dart","image|lib/src/image_exception.dart","image|lib/src/formats/jpeg/_component_data.dart","image|lib/src/formats/jpeg/jpeg_data.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["typed_data"],"hasMain":false}

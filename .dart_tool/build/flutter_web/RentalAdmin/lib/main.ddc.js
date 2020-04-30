@@ -1,4 +1,4 @@
-define(['dart_sdk', 'packages/flutter/material', 'packages/RentalAdmin/views/InventoryView', 'packages/flutter/src/widgets/actions'], function(dart_sdk, packages__flutter__material, packages__RentalAdmin__views__InventoryView, packages__flutter__src__widgets__actions) {
+define(['dart_sdk', 'packages/flutter/material', 'packages/RentalAdmin/views/SuperUser/SuperuserPanel', 'packages/flutter/src/widgets/actions'], function(dart_sdk, packages__flutter__material, packages__RentalAdmin__views__SuperUser__SuperuserPanel, packages__flutter__src__widgets__actions) {
   'use strict';
   const core = dart_sdk.core;
   const dart = dart_sdk.dart;
@@ -6,7 +6,7 @@ define(['dart_sdk', 'packages/flutter/material', 'packages/RentalAdmin/views/Inv
   const app = packages__flutter__material.src__material__app;
   const theme_data = packages__flutter__material.src__material__theme_data;
   const colors = packages__flutter__material.src__material__colors;
-  const signInScreen = packages__RentalAdmin__views__InventoryView.views__signInScreen;
+  const SuperuserPanel = packages__RentalAdmin__views__SuperUser__SuperuserPanel.views__SuperUser__SuperuserPanel;
   const widget_inspector = packages__flutter__src__widgets__actions.src__widgets__widget_inspector;
   const framework = packages__flutter__src__widgets__actions.src__widgets__framework;
   const binding = packages__flutter__src__widgets__actions.src__widgets__binding;
@@ -22,7 +22,7 @@ define(['dart_sdk', 'packages/flutter/material', 'packages/RentalAdmin/views/Inv
         [_Location_parameterLocations]: C1 || CT.C1,
         [_Location_name]: null,
         [_Location_column]: 13,
-        [_Location_line]: 17,
+        [_Location_line]: 20,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/main.dart"
       });
     },
@@ -32,7 +32,7 @@ define(['dart_sdk', 'packages/flutter/material', 'packages/RentalAdmin/views/Inv
         [_Location_parameterLocations]: null,
         [_Location_name]: "title",
         [_Location_column]: 7,
-        [_Location_line]: 13,
+        [_Location_line]: 16,
         [_Location_file]: null
       });
     },
@@ -42,7 +42,7 @@ define(['dart_sdk', 'packages/flutter/material', 'packages/RentalAdmin/views/Inv
         [_Location_parameterLocations]: null,
         [_Location_name]: "theme",
         [_Location_column]: 7,
-        [_Location_line]: 14,
+        [_Location_line]: 17,
         [_Location_file]: null
       });
     },
@@ -52,7 +52,7 @@ define(['dart_sdk', 'packages/flutter/material', 'packages/RentalAdmin/views/Inv
         [_Location_parameterLocations]: null,
         [_Location_name]: "home",
         [_Location_column]: 7,
-        [_Location_line]: 17,
+        [_Location_line]: 20,
         [_Location_file]: null
       });
     },
@@ -65,7 +65,7 @@ define(['dart_sdk', 'packages/flutter/material', 'packages/RentalAdmin/views/Inv
         [_Location_parameterLocations]: C3 || CT.C3,
         [_Location_name]: null,
         [_Location_column]: 12,
-        [_Location_line]: 12,
+        [_Location_line]: 15,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/main.dart"
       });
     },
@@ -75,7 +75,7 @@ define(['dart_sdk', 'packages/flutter/material', 'packages/RentalAdmin/views/Inv
         [_Location_parameterLocations]: C1 || CT.C1,
         [_Location_name]: null,
         [_Location_column]: 10,
-        [_Location_line]: 5,
+        [_Location_line]: 8,
         [_Location_file]: "org-dartlang-app:///packages/RentalAdmin/main.dart"
       });
     }
@@ -94,7 +94,7 @@ define(['dart_sdk', 'packages/flutter/material', 'packages/RentalAdmin/views/Inv
   let C2;
   main.MyApp = class MyApp extends framework.StatelessWidget {
     build(context) {
-      return new app.MaterialApp.new({title: "Flutter Demo", theme: theme_data.ThemeData.new({primarySwatch: colors.Colors.blue}), home: new signInScreen.signInScreen.new({$creationLocationd_0dea112b090073317d4: C0 || CT.C0}), $creationLocationd_0dea112b090073317d4: C2 || CT.C2});
+      return new app.MaterialApp.new({title: "Flutter Demo", theme: theme_data.ThemeData.new({primarySwatch: colors.Colors.blue}), home: new SuperuserPanel.SuperuserPanel.new({$creationLocationd_0dea112b090073317d4: C0 || CT.C0}), $creationLocationd_0dea112b090073317d4: C2 || CT.C2});
     }
   };
   (main.MyApp.new = function(opts) {
@@ -115,7 +115,7 @@ define(['dart_sdk', 'packages/flutter/material', 'packages/RentalAdmin/views/Inv
   dart.trackLibraries("packages/RentalAdmin/main", {
     "package:RentalAdmin/main.dart": main
   }, {
-  }, '{"version":3,"sourceRoot":"","sources":["main.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;UAU4B;AACxB,YAAO,iCACE,uBACA,yCACiB,4BAElB;IAEV;;;;;;EACF;;;;;;;;;AAfiB,IAAf,eAAO;EACT","file":"main.ddc.js"}');
+  }, '{"version":3,"sourceRoot":"","sources":["main.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;UAa4B;AACxB,YAAO,iCACE,uBACA,yCACiB,4BAElB;IAEV;;;;;;EACF;;;;;;;;;AAfiB,IAAf,eAAO;EACT","file":"main.ddc.js"}');
   // Exports:
   return {
     main: main

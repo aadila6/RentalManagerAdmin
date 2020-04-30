@@ -1,1 +1,0 @@
-{"isEntrypoint":true,"deps":["RentalAdmin|lib/views/inventory/return.dart","flutter|lib/material.dart","RentalAdmin|lib/widgets/navigation.dart","cloud_firestore|lib/cloud_firestore.dart","RentalAdmin|lib/views/inventory/checkOutB.dart","RentalAdmin|lib/views/LandingView.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":false}

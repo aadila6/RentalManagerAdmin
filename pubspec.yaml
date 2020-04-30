@@ -27,6 +27,8 @@ dependencies:
   firebase_analytics: ^1.0.4
   rxdart: 0.20.0
   cupertino_icons: ^0.1.3
+  image_picker_web: any  
+  firebase_storage: ^3.0.3 
   intl: ^0.15.8
 dev_dependencies:
   flutter_test:

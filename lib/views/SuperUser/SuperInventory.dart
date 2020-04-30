@@ -9,6 +9,7 @@ class InventoryManagement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _media = MediaQuery.of(context).size;
+    // int selectedView
     print(_media);
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
@@ -19,7 +20,7 @@ class InventoryManagement extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 // ResponsiveWidget.isLargeScreen(context)
-                    SideBarMenu(),
+                    // SideBarMenu(),
                     // : Container(),
                 Flexible(
                   fit: FlexFit.loose,

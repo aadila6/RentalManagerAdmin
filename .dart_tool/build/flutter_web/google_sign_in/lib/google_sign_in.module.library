@@ -1,1 +1,0 @@
-{"isEntrypoint":true,"deps":["flutter|lib/services.dart","google_sign_in_platform_interface|lib/google_sign_in_platform_interface.dart","google_sign_in|lib/src/common.dart","google_sign_in|lib/widgets.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async","ui"],"hasMain":false}

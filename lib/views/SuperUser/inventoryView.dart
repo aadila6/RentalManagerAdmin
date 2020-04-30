@@ -1,0 +1,188 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:RentalAdmin/views/SuperUser/theme.dart';
+import 'newItemDialog.dart';
+
+Future<List<DocumentSnapshot>> getAllInventory(self) async {
+  // final firestore = Firestore.instance;
+  // QuerySnapshot docs = await firestore.collection('items').getDocuments();
+  // self.setState(() {
+  //   self.isReady = true;
+  // });
+  // return docs.documents;
+  // print("FUCK");
+  return null;
+}
+
+class SuperuserInventoryView extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return SuperuserInventoryViewState();
+  }
+}
+
+class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
+  bool isReady = false;
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      SizedBox(
+        height: 55,
+        width: MediaQuery.of(context).size.width,
+        child: AppBar(
+          elevation: 4,
+          centerTitle: true,
+          title: Text(
+            'Rental Manager Admin ',
+          ),
+          backgroundColor: drawerBgColor,
+        ),
+      ),
+
+      // FlatButton(
+      //     onPressed: () {
+      //       showDialog(
+      //           context: context,
+      //           builder: (ctxt) {
+      //             return NewItemDialog();
+      //           });
+      //     },
+      //     child: Text("Add new item")),
+      //  ItemsPreview(context),
+      MaterialButton(
+        color: Colors.teal,
+        shape: new RoundedRectangleBorder(
+            // borderRadius: new BorderRadius.circular(18.0),
+            side: BorderSide(color: Colors.white)),
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (ctxt) {
+                return NewItemDialog();
+              });
+        },
+        child: Text(
+          "Add new item",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      Expanded(
+        child:
+            // StreamBuilder(
+            //     stream: Firestore.instance.collection('items').snapshots(),
+            //     builder: (context, snapshot) {
+            //       if (!snapshot.hasData) return const Text('loading...');
+            //       print("SUCCESS!!!!");
+            //       return ListView.builder(
+            //         itemExtent: 25.0,
+            //         itemCount: snapshot.data.documents.length,
+            //         itemBuilder: (BuildContext context, int index) => ListTile(
+            //           title: Text(
+            //               snapshot.data.documents[index].data['name'].toString()),
+            //           subtitle: Text(
+            //               'Total amount: ${snapshot.data.documents[index].data['# of items'].toString()}'),
+            //           onTap: () {
+            //             // navigateToDetail(snapshot.data.documents[index]);
+            //             // testingReservations(
+            //             //     snapshot.data.documents[index].documentID);
+            //           },
+            //         ),
+            //       );
+            //     }),
+            StreamBuilder(
+                stream: Firestore.instance.collection('items').snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) return const Text('loading...');
+
+                  return GridView.builder(
+                      itemCount: snapshot.data.documents.length,
+                      gridDelegate:
+                          new SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 5),
+                      itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
+                          child: CustommCell(
+                              snapshot.data.documents[index].data['name']
+                                  .toString(),
+                              snapshot.data.documents[index].data['imageURL']
+                                  .toString()),
+                          onTap: () {
+                            print(snapshot.data.documents[index].data['name']
+                                .toString());
+                            // navigateToDetail(snapshot.data.documents[index]);
+                          },
+                        );
+                      });
+                }),
+      )
+
+      // FutureBuilder(
+      //   future: getAllInventory(this),
+      //   builder: (ctxt, snap) {
+      //     if (isReady) {
+      //       List<DocumentSnapshot> snapData = snap.data;
+      //       return Flexible(
+      //           child: ListView.builder(
+      //               itemCount: snapData.length,
+      //               itemBuilder: (context, i) {
+      //                 return ListTile(
+      //                   title: Text(snapData[i].data['name']),
+      //                 );
+      //               }));
+      //     } else {
+      //       return CircularProgressIndicator();
+      //     }
+      //   })
+    ]);
+  }
+}
+
+class CustommCell extends StatelessWidget {
+  String name;
+  String url;
+  CustommCell(this.name, this.url);
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      color: Colors.white,
+      child: Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Container(
+          alignment: Alignment.center,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Flexible(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: Image.network(url),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  name,
+                  maxLines: 1,
+                  softWrap: true,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
