@@ -10,5 +10,5 @@ List<Menu> menuItems = [
   Menu(title: 'Dashboard', icon: Icons.dashboard),
   Menu(title: 'Item Management', icon: Icons.web),
   Menu(title: 'Users', icon: Icons.supervised_user_circle),
-  Menu(title: 'Sign Out', icon: Icons.arrow_left),
+  Menu(title: 'Sign Out', icon: Icons.exit_to_app),
 ];

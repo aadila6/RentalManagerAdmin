@@ -6,7 +6,7 @@ import 'package:RentalAdmin/views/homeView.dart';
 import '../widgets/auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:RentalAdmin/views/SuperUser/SuperLanding.dart';
-
+import 'package:RentalAdmin/views/SuperUser/SuperuserPanel.dart';
 class signInScreen extends StatefulWidget {
   @override
   _signInScreenState createState() => _signInScreenState();
@@ -204,7 +204,7 @@ class _signInScreenState extends State<signInScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Dashboard()));
+                                  builder: (context) => SuperuserPanel()));
                         }
                       },
                       padding: EdgeInsets.all(10.0),

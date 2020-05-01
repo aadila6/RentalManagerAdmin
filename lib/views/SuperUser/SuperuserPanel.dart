@@ -100,8 +100,8 @@ class SuperuserPanelState extends State<SuperuserPanel>
             height: 80,
           ),
           ListTile(
-            leading: Icon(menuItems[0].icon),
-            title: Text(menuItems[0].title),
+            leading: Icon(menuItems[0].icon,size: 40),
+            title: Text(menuItems[0].title,style: menuListTileDefaultText),
             selected: tabController.index == 0 ? true : false,
             onTap: () {
               tabController.animateTo(0);
@@ -109,8 +109,8 @@ class SuperuserPanelState extends State<SuperuserPanel>
             },
           ),
           ListTile(
-            leading: Icon(menuItems[1].icon),
-            title: Text(menuItems[1].title),
+            leading: Icon(menuItems[1].icon,size: 40),
+            title: Text(menuItems[1].title,style: menuListTileDefaultText),
             selected: tabController.index == 1 ? true : false,
             onTap: () {
               tabController.animateTo(1);
@@ -118,8 +118,10 @@ class SuperuserPanelState extends State<SuperuserPanel>
             },
           ),
           ListTile(
-            leading: Icon(menuItems[2].icon),
-            title: Text(menuItems[2].title),
+            leading: Icon(menuItems[2].icon,size: 40),
+            title: Text(
+              menuItems[2].title,
+              style: menuListTileDefaultText),
             selected: tabController.index == 2 ? true : false,
             onTap: () {
               tabController.animateTo(2);
@@ -127,8 +129,8 @@ class SuperuserPanelState extends State<SuperuserPanel>
             },
           ),
           ListTile(
-            leading: Icon(menuItems[3].icon),
-            title: Text(menuItems[3].title),
+            leading: Icon(menuItems[3].icon,size: 40,),
+            title: Text(menuItems[3].title,style: menuListTileDefaultText),
             selected: tabController.index == 3 ? true : false,
             onTap: () {
               // tabController.animateTo(3);

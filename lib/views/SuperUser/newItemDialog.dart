@@ -140,9 +140,18 @@ class _NewItemDialogState extends State<NewItemDialog> {
                 padding: EdgeInsets.all(30),
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
                   CircleAvatar(
+                    radius: 50,
                     backgroundImage: NetworkImage(_url),
                   ),
-                  Text("Add new item"),
+                  SizedBox(height:10),
+                   _image == null
+                      ? RaisedButton(
+                          child: Text('Choose Image'),
+                          onPressed: chooseFile,
+                          color: Colors.cyan,
+                        )
+                      : Container(),
+                  // Text("Add new item"),
                   TextField(
                     onChanged: (text) {
                       _itemName = text;
@@ -162,13 +171,7 @@ class _NewItemDialogState extends State<NewItemDialog> {
                       labelText: "Item Amount",
                     ),
                   ),
-                  _image == null
-                      ? RaisedButton(
-                          child: Text('Choose File'),
-                          onPressed: chooseFile,
-                          color: Colors.cyan,
-                        )
-                      : Container(),
+                 
                   RaisedButton(
                       onPressed: () {
                         // uploadFile();
