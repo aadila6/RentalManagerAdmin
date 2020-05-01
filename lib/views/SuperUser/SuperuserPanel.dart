@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/SuperUser/inventoryView.dart';
 import 'package:RentalAdmin/views/SuperUser/SuperLanding.dart';
-import 'package:RentalAdmin/views/SuperUser/BarMenu.dart';
+import 'package:RentalAdmin/views/signInScreen.dart';
 import 'package:RentalAdmin/views/SuperUser/menu.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
 import 'package:RentalAdmin/views/SuperUser/UserManagement.dart';
+
 // import 'package:RentalAdmin/views/SuperUser/theme.dart';
 class SuperuserPanel extends StatefulWidget {
   @override
@@ -17,9 +18,10 @@ class SuperuserPanelState extends State<SuperuserPanel>
     with SingleTickerProviderStateMixin {
   TabController tabController;
   final List<Tab> myTabs = <Tab>[
-    Tab(child: MainPage()),
+    Tab(child: Dashboard()),
     Tab(child: SuperuserInventoryView()),
     Tab(child: SuperUserMgtView()),
+    // Tab(child: ),
   ];
 
   @override
@@ -33,7 +35,7 @@ class SuperuserPanelState extends State<SuperuserPanel>
     return Scaffold(
       body: Row(children: [
         // sideMenu(this, tabController),
-       
+
         sideMenus(tabController),
         Flexible(
             flex: 5,
@@ -68,7 +70,6 @@ class SuperuserPanelState extends State<SuperuserPanel>
   //           self.setState(() {});
   //         },
   //       ),
-        
 
   //     ],
   //   ));
@@ -107,26 +108,41 @@ class SuperuserPanelState extends State<SuperuserPanel>
               setState(() {});
             },
           ),
-        ListTile(
-          leading: Icon(menuItems[1].icon),
-          title: Text(menuItems[1].title),
-          selected: tabController.index == 1 ? true : false,
-          onTap: () {
-            tabController.animateTo(1);
-            setState(() {});
-          },
-        ),
-        ListTile(
-          leading: Icon(menuItems[2].icon),
-          title: Text(menuItems[2].title),
-          selected: tabController.index == 1 ? true : false,
-          onTap: () {
-            tabController.animateTo(2);
-            setState(() {});
-          },
-        ),
+          ListTile(
+            leading: Icon(menuItems[1].icon),
+            title: Text(menuItems[1].title),
+            selected: tabController.index == 1 ? true : false,
+            onTap: () {
+              tabController.animateTo(1);
+              setState(() {});
+            },
+          ),
+          ListTile(
+            leading: Icon(menuItems[2].icon),
+            title: Text(menuItems[2].title),
+            selected: tabController.index == 2 ? true : false,
+            onTap: () {
+              tabController.animateTo(2);
+              setState(() {});
+            },
+          ),
+          ListTile(
+            leading: Icon(menuItems[3].icon),
+            title: Text(menuItems[3].title),
+            selected: tabController.index == 3 ? true : false,
+            onTap: () {
+              // tabController.animateTo(3);
+              Signout(context);
+              setState(() {});
+            },
+          ),
         ],
       ),
     );
+  }
+
+  static Signout(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => signInScreen()));
   }
 }
