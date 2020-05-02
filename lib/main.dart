@@ -4,6 +4,8 @@ import 'package:RentalAdmin/views/signInScreen.dart';
 
 import 'package:RentalAdmin/views/SuperUser/SuperuserPanel.dart';
 
+import 'views/signInScreen.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -17,7 +19,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SuperuserPanel(),
+      // home: SuperuserPanel(),
+      home: signInScreen(),
     );
   }
 }

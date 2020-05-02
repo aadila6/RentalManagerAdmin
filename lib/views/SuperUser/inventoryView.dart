@@ -1,18 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
+import 'package:RentalAdmin/views/SuperUser/UpdateItemDialog.dart';
 import 'newItemDialog.dart';
 
-Future<List<DocumentSnapshot>> getAllInventory(self) async {
-  // final firestore = Firestore.instance;
-  // QuerySnapshot docs = await firestore.collection('items').getDocuments();
-  // self.setState(() {
-  //   self.isReady = true;
-  // });
-  // return docs.documents;
-  // print("FUCK");
-  return null;
-}
 
 class SuperuserInventoryView extends StatefulWidget {
   @override
@@ -88,7 +79,7 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
                           onTap: () {
                             print(snapshot.data.documents[index].data['name']
                                 .toString());
-                            // navigateToDetail(snapshot.data.documents[index]);
+                            navigateToDetail(snapshot.data.documents[index]);
                           },
                         );
                       });
@@ -96,7 +87,14 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
       )
     ]);
   }
+  navigateToDetail(DocumentSnapshot indexedData) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => UpdateItemDialog(itemSelected: indexedData)));
+  }
 }
+
 
 class CustommCell extends StatelessWidget {
   String name;
