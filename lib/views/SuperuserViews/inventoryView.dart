@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import 'newItemDialog.dart';
+//import 'newItemDialog.dart';
 
 Future<List<DocumentSnapshot>> getAllInventory(self) async {
   if (self.isReady == false) {
@@ -34,7 +34,7 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
       FlatButton(onPressed: (){
         showDialog(context: context, 
         builder: (ctxt){
-          return NewItemDialog();
+          return Text("Placeholder");//NewItemDialog();
           });
         }, child: Text("Add new item")),
       FutureBuilder(

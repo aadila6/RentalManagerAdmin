@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/homeView.dart';
 import 'package:RentalAdmin/views/signInScreen.dart';
 
-import 'package:RentalAdmin/views/SuperuserPanel.dart';
+import 'package:RentalAdmin/views/SuperUser/SuperuserPanel.dart';
 
 void main() {
   runApp(MyApp());

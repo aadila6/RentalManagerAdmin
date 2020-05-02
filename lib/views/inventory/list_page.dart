@@ -92,34 +92,7 @@ class _ListPageState extends State<ListPage> {
                           ],
                         ),
                         Spacer(),
-                        // Stack(
-                        //   children: <Widget>[
-                        //     Text(
-                        //       '>',
-                        //       style: TextStyle(
-                        //         fontSize: 20,
-                        //         fontWeight: FontWeight.bold,
-                        //         // color: Colors.white,
-                        //         foreground: Paint()
-                        //           ..style = PaintingStyle.stroke
-                        //           ..strokeWidth = 6
-                        //           ..color = Colors.blue[700],
-                        //       ),
-                        //     ),
-                        //     Text(
-                        //       '>',
-                        //       style: TextStyle(
-                        //         fontSize: 20,
-                        //         fontWeight: FontWeight.bold,
-                        //         color: Colors.white,
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
-                        // Icon(
-                        //   Icons.keyboard_arrow_right,
-                        //   color: Colors.white,
-                        // ),
+                        
                       ],
                     ),
                   ],
