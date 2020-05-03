@@ -47,33 +47,6 @@ class SuperuserPanelState extends State<SuperuserPanel>
     );
   }
 
-  // Widget sideMenu(self, tabController) {
-  //   return Flexible(
-  //       child: ListView(
-  //     shrinkWrap: true,
-  //     children: <Widget>[
-  //       ListTile(
-  //         leading: Icon(Icons.list),
-  //         title: Text('Items'),
-  //         selected: tabController.index == 0 ? true : false,
-  //         onTap: () {
-  //           tabController.animateTo(0);
-  //           self.setState(() {});
-  //         },
-  //       ),
-  //       ListTile(
-  //         leading: Icon(Icons.people),
-  //         title: Text('Users'),
-  //         selected: tabController.index == 1 ? true : false,
-  //         onTap: () {
-  //           tabController.animateTo(1);
-  //           self.setState(() {});
-  //         },
-  //       ),
-
-  //     ],
-  //   ));
-  // }
 
   Widget sideMenus(tabController) {
     return Container(

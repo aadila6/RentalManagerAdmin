@@ -3,75 +3,10 @@ import 'dart:io';
 import 'package:image_picker_web/image_picker_web.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase/firebase.dart' as fb;
 import 'package:path/path.dart' as Path;
-// class NewItemDialog extends StatelessWidget {
-//   Image _image;
-//   String _uploadedFileURL;
+import 'package:universal_html/prefer_universal/html.dart' as html;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Dialog(
-//       child:ConstrainedBox(
-//         constraints: BoxConstraints(
-//           maxWidth: 500,
-//           maxHeight: 500
-//         ),
-//       child: Container(
-//         padding: EdgeInsets.all(30),
-//         child: Column(
-//         mainAxisSize: MainAxisSize.min,
-//         children: [
-//           Text("Add new item"),
-//           TextField(
-//             autofocus: true,
-//             decoration: InputDecoration(
-//                 labelText: "Item Name",
-//             ),
-//           ),
-//           TextField(
-//             decoration: InputDecoration(
-//                 labelText: "Item Amount",
-//             ),
-//           ),
-//           _image == null
-//                ? RaisedButton(
-//                    child: Text('Choose File'),
-//                    onPressed: chooseFile,
-//                    color: Colors.cyan,
-//                  )
-//                : Container(),
-
-//           RaisedButton(onPressed: (
-
-//           ){ uploadFile();}, child: Text("Submit"))
-//         ]
-//       ))
-//     ));
-//   }
-//    Future chooseFile() async{
-//     Image fromPicker = await ImagePickerWeb.getImage(outputType: ImageType.widget);
-
-//     if (fromPicker != null) {
-//       // setState(() {
-//       //   _image = fromPicker;
-//       // });
-//     }
-//   }
-//    Future uploadFile() async {
-//    StorageReference storageReference = FirebaseStorage.instance
-//        .ref()
-//        .child('images/${Path.basename(_image.path)}}');
-//    StorageUploadTask uploadTask = storageReference.putFile(_image);
-//    await uploadTask.onComplete;
-//    print('File Uploaded');
-//    storageReference.getDownloadURL().then((fileURL) {
-//     //  setState(() {
-//     //    _uploadedFileURL = fileURL;
-//     //    print(fileURL);
-//     //  });
-//    });
-//  }
-// }
 class NewItemDialog extends StatefulWidget {
   @override
   _NewItemDialogState createState() => _NewItemDialogState();
@@ -80,57 +15,34 @@ class NewItemDialog extends StatefulWidget {
 class _NewItemDialogState extends State<NewItemDialog> {
   File _image;
   String _uploadedFileURL;
-  Future chooseFile() async {
-    File fromPicker = await ImagePickerWeb.getImage(outputType: ImageType.file);
-    // print("Image selecting");
-    if (fromPicker != null) {
-      setState(() {
-        _image = fromPicker;
-      });
-      print("Image selected");
+  html.File image;
+  Future pickImage() async {
+  print("Begin pick Image");
+    html.File imageFile =
+        await ImagePickerWeb.getImage(outputType: ImageType.file);
+    if (imageFile != null) {
+      debugPrint(imageFile.name.toString());
+      image = imageFile;
       uploadFile();
     }
   }
-
-//    Future uploadFile() async {
-//      print("Inside upload~ ");
-//    StorageReference storageReference = FirebaseStorage.instance
-//        .ref()
-//        .child('/${Path.basename(_image.path)}}');
-//    StorageUploadTask uploadTask = storageReference.putFile(_image);
-//    await uploadTask.onComplete;
-//    print('File Uploaded');
-//    storageReference.getDownloadURL().then((fileURL) {
-//      setState(() {
-//        _uploadedFileURL = fileURL;
-//        print(fileURL);
-//      });
-//    });
-//  }
   Future uploadFile() async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    StorageReference reference = FirebaseStorage.instance.ref().child(fileName);
-    StorageUploadTask uploadTask = reference.putFile(_image);
-    StorageTaskSnapshot storageTaskSnapshot = await uploadTask.onComplete;
-    storageTaskSnapshot.ref.getDownloadURL().then((downloadUrl) {
-      _uploadedFileURL = downloadUrl;
-      setState(() {
-        _uploadedFileURL = downloadUrl;
-      });
-      print("Success?????");
-      print(_uploadedFileURL);
-    }, onError: (err) {
-      setState(() {
-        print('ERRRRRR');
-      });
-      print('ERRRRRR');
-    });
+    fb.StorageReference storageRef = fb.storage().ref('images/$fileName');
+    fb.UploadTaskSnapshot uploadTaskSnapshot = await storageRef.put(image).future;
+    await uploadTaskSnapshot.ref.getDownloadURL().then((fileURL) {
+     setState(() {
+       print("DEBUG URLLLLLL:" + fileURL.toString());
+        defaultURL = fileURL.toString();
+     });
+     _uploadedFileURL = fileURL.toString();
+   });
   }
 
   String _itemName;
   String _itemCount;
-  String _url =
-      'https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/cat.jpg?alt=media&token=78818628-9471-421d-8969-76d68b07f591';
+  String defaultURL = "https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b";
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -141,13 +53,13 @@ class _NewItemDialogState extends State<NewItemDialog> {
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage: NetworkImage(_url),
+                    backgroundImage: NetworkImage(defaultURL),
                   ),
                   SizedBox(height:10),
                    _image == null
                       ? RaisedButton(
                           child: Text('Choose Image'),
-                          onPressed: chooseFile,
+                          onPressed: pickImage,
                           color: Colors.cyan,
                         )
                       : Container(),
@@ -174,22 +86,22 @@ class _NewItemDialogState extends State<NewItemDialog> {
                  
                   RaisedButton(
                       onPressed: () {
-                        // uploadFile();
-                        //Convert the image to a file
-
-                        //First upload to firebase Storage and get the image URL
-
-                        //Second create in cloud firestore of the new item with the given URL
-
-                        //Display them on inventory page
-                        testingUploadItem(_itemName, _itemCount, _url);
+                        // uploadFile().then((value) => testingUploadItem(_itemName, _itemCount));
+                        testingUploadItem(_itemName, _itemCount);
                       },
                       child: Text("Submit"))
                 ]))));
   }
 
-  testingUploadItem(String itemName, String itemCount, String url) async {
+  testingUploadItem(String itemName, String itemCount) async {
     final databaseReference = Firestore.instance;
+    String url;
+    if(_uploadedFileURL == null){
+      print("DEBUG:  URL is Empty bitch");
+      String url = defaultURL;
+    }else{
+      url = _uploadedFileURL;
+    }
     await databaseReference.collection("items").document().setData({
       'Category': "sport",
       'imageURL': url,

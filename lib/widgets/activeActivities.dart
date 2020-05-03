@@ -116,7 +116,6 @@ class _ActiveActivity extends State<ActiveActivity> {
                                                       ],
                                                     );
                                                   });
-                                              
                                             },
                                           )
                                         ],
