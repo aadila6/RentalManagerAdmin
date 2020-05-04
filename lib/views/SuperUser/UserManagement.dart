@@ -19,7 +19,7 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
   void initState() {
     super.initState();
     //print("@#!@#!@#!@#!@#!#@");
-    allUserFuture = fetchUser();
+    //allUserFuture = fetchUser();
     print("Init Finished");
   }
 
@@ -36,23 +36,41 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
         ),
         body: SingleChildScrollView(
             child: FutureBuilder(
-                future: allUserFuture,
+                future: fetchUserFake(),
                 builder: (ctxt, snapshot) {
                   if (snapshot.hasData)
                     return Column(
                         children: snapshot.data.map<Widget>((e) {
-                      return Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Text(e.userId),
-                            Text(e.email),
-                            Text(e.roles.toString()),
-                            IconButton(
-                                icon: Icon(Icons.edit), onPressed: () {}),
-                          ]);
+                      return userRowBuilder(e);
                     }).toList());
                   else
                     return Text("NULL");
                 })));
+  }
+
+  Widget userRowBuilder(User u) {
+    return Row(
+      //mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        Spacer(),
+        Text(u.email),
+        Spacer(),
+        Row(
+            children:
+                u.roles.map<Widget>((e) => ActionChip(
+                  label: Text(e),
+                  //deleteIcon: Icon(Icons.delete),
+                  onPressed: (){
+                    print("Will pop up, let user confirm if to to delete");
+                  },
+                  )).toList() +
+                    [ActionChip(
+                      avatar: Icon(Icons.add),
+                      onPressed: () {},
+                      label: Text("New role"),
+                    )]),
+        Spacer(),
+      ],
+    );
   }
 }

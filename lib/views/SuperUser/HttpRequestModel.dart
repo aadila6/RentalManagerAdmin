@@ -31,7 +31,7 @@ Future<List<User>> fetchUser() async {
   return res;
 }
 
-List<User> fetchUserFake() {
+Future<List<User>> fetchUserFake() {
 var fake_result = {
     "result": [
         {
@@ -209,9 +209,7 @@ var fake_result = {
             ]
         }]
 };
-return fake_result['result'].map((e){
-  //print(e.toString());
-
+return Future.delayed(Duration(milliseconds: 500)).then((value) =>fake_result['result'].map((e){
   return User(email: e['email'], userId: e['uid'], roles: List.from(e['roles']));
-}).toList();
+}).toList());
 }
