@@ -4,23 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'globals.dart' as globals;
 
-
 class Auth {
   PlatformException errorCatch;
   final FirebaseAuth auth = FirebaseAuth.instance;
   String userID = '';
   bool isSignUp = false;
-  Future<String> signIn(username,password) async {
+  Future<String> signIn(username, password) async {
     try {
       FirebaseUser user = (await auth.signInWithEmailAndPassword(
-          email: username, password: password)).user;
+              email: username, password: password))
+          .user;
 
       assert(user != null);
       assert(await user.getIdToken() != null);
 
       final FirebaseUser currentUser = await auth.currentUser();
 
-      if(currentUser.isEmailVerified == false){
+      if (currentUser.isEmailVerified == false) {
         print("False!");
         return "false";
       }
@@ -31,7 +31,6 @@ class Auth {
       // print(e);
       return e.toString();
     }
-
   }
 
   Future<String> signUp(email, password) async {
@@ -48,7 +47,7 @@ class Auth {
       user = authResult.user;
       userID = user.uid;
       return user.uid;
-    }catch(e){
+    } catch (e) {
       //errorHands(e);
       print(e);
       userID = e.toString();

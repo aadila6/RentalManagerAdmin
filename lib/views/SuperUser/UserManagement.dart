@@ -1,3 +1,4 @@
+import 'package:RentalAdmin/widgets/newRolePopup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
@@ -61,15 +62,41 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
                   label: Text(e),
                   //deleteIcon: Icon(Icons.delete),
                   onPressed: (){
-                    print("Will pop up, let user confirm if to to delete");
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return confirmationPopup(u.email, e);
+                      },
+                      );
                   },
                   )).toList() +
                     [ActionChip(
                       avatar: Icon(Icons.add),
-                      onPressed: () {},
+                      onPressed: () {
+
+                        showDialog(context: context,
+                        builder:(context){
+                          return NewRolePopup();
+                        });
+                      },
                       label: Text("New role"),
                     )]),
         Spacer(),
+      ],
+    );
+  }
+
+  Widget confirmationPopup(String user, String s) {
+    return AlertDialog(
+      title: Text("Delete"),
+      content: Text("Deleting Role $s from user $user. Are you sure?"),
+      actions: <Widget>[
+        RaisedButton(child: Text("No"),onPressed: (){
+          Navigator.of(context).pop();
+        }),
+        RaisedButton(child: Text("Yes"),onPressed: (){
+          //Send http request.
+        }),
       ],
     );
   }

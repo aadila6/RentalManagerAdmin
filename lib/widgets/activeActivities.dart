@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:RentalAdmin/widgets/reservationCell.dart';
 import 'package:RentalAdmin/views/homeView.dart';
+
 //
 class ActiveActivity extends StatefulWidget {
   @override
@@ -67,7 +68,7 @@ class _ActiveActivity extends State<ActiveActivity> {
                               subtitle: Text(
                                 snapshot.data[index].data['status'].toString(),
                               ),
-                              
+
                               // onTap: () => testingReservations(
                               //     snapshot.data.documents[index].documentID, context),
                               onTap: () {
@@ -124,8 +125,7 @@ class _ActiveActivity extends State<ActiveActivity> {
                               }));
                     });
               }
-            })
-            );
+            }));
   }
   // Container reservation() {
   //   return Container(

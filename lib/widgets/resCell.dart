@@ -12,7 +12,9 @@ class reservationCell extends StatefulWidget {
     return _reservationCell();
   }
 }
+
 String action = "Pick Up";
+
 class _reservationCell extends State<reservationCell> {
   Future pickedUp() async {
     final firestore = Firestore.instance;
@@ -21,17 +23,20 @@ class _reservationCell extends State<reservationCell> {
         .document(widget.passedFirestoreData.documentID.toString())
         .updateData({'status': 'Picked Up'}).catchError(
             (error) => print(error));
-            Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ReservationListPage()));
   }
+
   Future returned() async {
     final firestore = Firestore.instance;
     await firestore
         .collection('reservation')
         .document(widget.passedFirestoreData.documentID.toString())
-        .updateData({'status': 'Returned'}).catchError(
-            (error) => print(error));
-            Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));
+        .updateData({'status': 'Returned'}).catchError((error) => print(error));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ReservationListPage()));
   }
+
   Future cancelReservation() async {
     final firestore = Firestore.instance;
     await firestore
@@ -39,21 +44,22 @@ class _reservationCell extends State<reservationCell> {
         .document(widget.passedFirestoreData.documentID.toString())
         .delete()
         .catchError((error) => print(error));
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ReservationListPage()));
   }
 
   @override
   Widget build(BuildContext context) {
-    if(widget.passedFirestoreData['status'] == 'Reserved'){
+    if (widget.passedFirestoreData['status'] == 'Reserved') {
       action = "Pick Up";
-    }else if(widget.passedFirestoreData['status'] == 'Picked Up'){
+    } else if (widget.passedFirestoreData['status'] == 'Picked Up') {
       action = "Return";
     }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
         title: Text('Activity Details'),
-         ),
+      ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
         child: Column(
@@ -157,14 +163,15 @@ class _reservationCell extends State<reservationCell> {
                 ),
                 onPressed: () async {
                   // print(widget.passedFirestoreData.documentID.toString());
-                  if(widget.passedFirestoreData['status'] == 'Reserved'){
+                  if (widget.passedFirestoreData['status'] == 'Reserved') {
                     pickedUp();
                     //  Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));
-                  }else if(widget.passedFirestoreData['status'] == 'Picked Up'){
+                  } else if (widget.passedFirestoreData['status'] ==
+                      'Picked Up') {
                     returned();
                     //  Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));
                   }
-                  
+
                   Navigator.pop(context);
                 },
                 icon: Icon(Icons.insert_emoticon, size: 30.0),
@@ -187,7 +194,10 @@ class _reservationCell extends State<reservationCell> {
                 ),
                 onPressed: () async {
                   cancelReservation();
-                   Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ReservationListPage()));
                   Navigator.pop(context);
                 },
                 icon: Icon(
