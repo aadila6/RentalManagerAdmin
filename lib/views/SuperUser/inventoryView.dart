@@ -4,7 +4,6 @@ import 'package:RentalAdmin/views/SuperUser/theme.dart';
 import 'package:RentalAdmin/views/SuperUser/UpdateItemDialog.dart';
 import 'newItemDialog.dart';
 
-
 class SuperuserInventoryView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -30,16 +29,6 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
         ),
       ),
 
-      // FlatButton(
-      //     onPressed: () {
-      //       showDialog(
-      //           context: context,
-      //           builder: (ctxt) {
-      //             return NewItemDialog();
-      //           });
-      //     },
-      //     child: Text("Add new item")),
-      //  ItemsPreview(context),
       MaterialButton(
         color: Colors.teal,
         shape: new RoundedRectangleBorder(
@@ -58,43 +47,42 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
         ),
       ),
       Expanded(
-        child:
-            StreamBuilder(
-                stream: Firestore.instance.collection('items').snapshots(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) return const Text('loading...');
+        child: StreamBuilder(
+            stream: Firestore.instance.collection('items').snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) return const Text('loading...');
 
-                  return GridView.builder(
-                      itemCount: snapshot.data.documents.length,
-                      gridDelegate:
-                          new SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 5),
-                      itemBuilder: (BuildContext context, int index) {
-                        return InkWell(
-                          child: CustommCell(
-                              snapshot.data.documents[index].data['name']
-                                  .toString(),
-                              snapshot.data.documents[index].data['imageURL']
-                                  .toString()),
-                          onTap: () {
-                            print(snapshot.data.documents[index].data['name']
-                                .toString());
-                            navigateToDetail(snapshot.data.documents[index]);
-                          },
-                        );
-                      });
-                }),
+              return GridView.builder(
+                  itemCount: snapshot.data.documents.length,
+                  gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 5),
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      child: CustommCell(
+                          snapshot.data.documents[index].data['name']
+                              .toString(),
+                          snapshot.data.documents[index].data['imageURL']
+                              .toString()),
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (ctxt) {
+                              return UpdateItemDialog(
+                                  itemSelected: snapshot.data.documents[index]);
+                            });
+                        // navigateToDetail(snapshot.data.documents[index]);
+                      },
+                    );
+                  });
+            }),
       )
     ]);
   }
+
   navigateToDetail(DocumentSnapshot indexedData) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => UpdateItemDialog(itemSelected: indexedData)));
+    return UpdateItemDialog(itemSelected: indexedData);
   }
 }
-
 
 class CustommCell extends StatelessWidget {
   String name;
@@ -143,5 +131,3 @@ class CustommCell extends StatelessWidget {
     );
   }
 }
-
-

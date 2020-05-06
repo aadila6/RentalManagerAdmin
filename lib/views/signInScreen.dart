@@ -25,13 +25,16 @@ class _signInScreenState extends State<signInScreen> {
     ],
   );
 
-  Future<FirebaseUser> _handleSignIn() async {
+   Future<void> _handleSignIn() async {
     try {
       await _googleSignIn.signIn();
     } catch (error) {
       print(error);
     }
   }
+
+  Future<void> _handleSignOut() => _googleSignIn.disconnect();
+
 
   @override
   Widget build(BuildContext context) {
@@ -276,10 +279,12 @@ class _signInScreenState extends State<signInScreen> {
                         // }catch(e){
                         //   print(e);
                         // }
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeView()));
+
+                        _handleSignIn();
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => HomeView()));
                       },
                       padding: EdgeInsets.all(7.0),
                       //color: Colors.teal.shade900,
