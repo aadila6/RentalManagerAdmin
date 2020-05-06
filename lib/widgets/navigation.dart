@@ -6,7 +6,6 @@ import 'package:RentalAdmin/views/ReservationView.dart';
 import 'package:RentalAdmin/views/ReservationView.dart';
 import 'package:RentalAdmin/views/signInScreen.dart';
 
-
 class NavigationBar extends StatelessWidget {
   const NavigationBar({Key key}) : super(key: key);
   @override
@@ -34,8 +33,10 @@ class NavigationBar extends StatelessWidget {
                       side: BorderSide(color: Colors.white)),
                   onPressed: () {
                     print("Pressed Support button!!");
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => signInScreen()));
-                   
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => signInScreen()));
                   },
                   child: Text(
                     "Admin Login",

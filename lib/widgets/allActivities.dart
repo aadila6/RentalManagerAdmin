@@ -7,7 +7,9 @@ class AllActivities extends StatefulWidget {
     return _AllActivities();
   }
 }
+
 TextEditingController _textFieldController = TextEditingController();
+
 class _AllActivities extends State<AllActivities> {
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class _AllActivities extends State<AllActivities> {
         // backgroundColor: Colors.teal,
         body: reservation());
   }
-  
+
   Container reservation() {
     return Container(
         child: FutureBuilder(
@@ -54,10 +56,10 @@ class _AllActivities extends State<AllActivities> {
                                     builder: (context) {
                                       return AlertDialog(
                                         title: Text('Details'),
-                                        content: Text(itemInfo(index,snapshot)),
+                                        content:
+                                            Text(itemInfo(index, snapshot)),
                                         actions: <Widget>[
                                           new FlatButton(
-                                            
                                             child: new Text('OK'),
                                             onPressed: () {
                                               Navigator.of(context).pop();
@@ -76,17 +78,25 @@ class _AllActivities extends State<AllActivities> {
     final firestore = Firestore.instance;
     QuerySnapshot itemListDOC =
         // await firestore.collection('reservation').orderBy('startTime').getDocuments();
-        await firestore.collection('reservation').orderBy('startTime').getDocuments();
+        await firestore
+            .collection('reservation')
+            .orderBy('startTime')
+            .getDocuments();
     return itemListDOC.documents;
   }
-  String itemInfo(int index, AsyncSnapshot snapshot){
-  String ret = '';
-  ret += 'Item Name:' + snapshot.data[index].data['name'].toString() + '\n';
-  ret += 'Item Amount: ' + snapshot.data[index].data['amount'].toString() + '\n';
-  ret += 'Item Status: ' + snapshot.data[index].data['status'].toString() + '\n';
-  ret += 'Item Start Time: ' + snapshot.data[index].data['startTime'].toString() + '\n';
-  // ret += 'Item End Tiem: ' + item.endTime + '\n';
-  return ret;
+
+  String itemInfo(int index, AsyncSnapshot snapshot) {
+    String ret = '';
+    ret += 'Item Name:' + snapshot.data[index].data['name'].toString() + '\n';
+    ret +=
+        'Item Amount: ' + snapshot.data[index].data['amount'].toString() + '\n';
+    ret +=
+        'Item Status: ' + snapshot.data[index].data['status'].toString() + '\n';
+    ret += 'Item Start Time: ' +
+        snapshot.data[index].data['startTime'].toString() +
+        '\n';
+    // ret += 'Item End Tiem: ' + item.endTime + '\n';
+    return ret;
   }
 
   Widget customCell(int index, AsyncSnapshot snapshot) {
@@ -130,17 +140,16 @@ class _AllActivities extends State<AllActivities> {
                         Stack(
                           children: <Widget>[
                             Text(
-                                  snapshot.data[index].data['startTime'],
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.teal.shade900,
-                                  ),
-                                ),
+                              snapshot.data[index].data['startTime'],
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.teal.shade900,
+                              ),
+                            ),
                           ],
                         ),
                       ],
                     ),
-                     
                     Text(
                       snapshot.data[index].data['status'],
                       style: TextStyle(
@@ -153,7 +162,6 @@ class _AllActivities extends State<AllActivities> {
               ),
             ),
           ),
-          
         ),
       ),
     );
