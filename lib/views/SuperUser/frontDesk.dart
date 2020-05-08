@@ -4,14 +4,14 @@ import 'package:RentalAdmin/views/SuperUser/theme.dart';
 import 'package:RentalAdmin/views/SuperUser/UpdateItemDialog.dart';
 import 'newItemDialog.dart';
 
-class SuperuserInventoryView extends StatefulWidget {
+class FrontDesk extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return SuperuserInventoryViewState();
+    return FrontDeskState();
   }
 }
 
-class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
+class FrontDeskState extends State<FrontDesk> {
   bool isReady = false;
   @override
   Widget build(BuildContext context) {
@@ -29,29 +29,11 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
         ),
       ),
 
-      MaterialButton(
-        color: Colors.teal,
-        shape: new RoundedRectangleBorder(
-            // borderRadius: new BorderRadius.circular(18.0),
-            side: BorderSide(color: Colors.white)),
-        onPressed: () {
-          showDialog(
-              context: context,
-              builder: (ctxt) {
-                return NewItemDialog();
-              });
-        },
-        child: Text(
-          "Add new item",
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
       Expanded(
         child: StreamBuilder(
             stream: Firestore.instance.collection('items').snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) return const Text('loading...');
-
               return GridView.builder(
                   itemCount: snapshot.data.documents.length,
                   gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
@@ -70,7 +52,6 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
                               return UpdateItemDialog(
                                   itemSelected: snapshot.data.documents[index]);
                             });
-                        // navigateToDetail(snapshot.data.documents[index]);
                       },
                     );
                   });
@@ -78,6 +59,7 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
       )
     ]);
   }
+
   navigateToDetail(DocumentSnapshot indexedData) {
     return UpdateItemDialog(itemSelected: indexedData);
   }

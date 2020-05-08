@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:RentalAdmin/views/homeView.dart';
+import 'package:RentalAdmin/views/SignUpDialog.dart';
 import '../widgets/auth.dart';
-import 'package:http/http.dart' as http;
-import 'package:RentalAdmin/views/SuperUser/SuperLanding.dart';
 import 'package:RentalAdmin/views/SuperUser/SuperuserPanel.dart';
+
+
 class signInScreen extends StatefulWidget {
   @override
   _signInScreenState createState() => _signInScreenState();
@@ -25,13 +25,15 @@ class _signInScreenState extends State<signInScreen> {
     ],
   );
 
-  Future<FirebaseUser> _handleSignIn() async {
+   Future<void> _handleSignIn() async {
     try {
       await _googleSignIn.signIn();
     } catch (error) {
       print(error);
     }
   }
+
+  Future<void> _handleSignOut() => _googleSignIn.disconnect();
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +78,7 @@ class _signInScreenState extends State<signInScreen> {
                 child: TextField(
                   onChanged: (text) {
                     username = text;
-                    print("First text field: $text");
+                    // print("First text field: $text");
                   },
                   // controller: _username,
                   cursorColor: Colors.teal.shade900,
@@ -158,7 +160,6 @@ class _signInScreenState extends State<signInScreen> {
                         ],
                       ),
                       onPressed: () async {
-                       
                         var e = await authHandler.signIn(username, password);
                         print("on Press Error: " + e);
                         if (e == "false") {
@@ -251,35 +252,12 @@ class _signInScreenState extends State<signInScreen> {
                         ],
                       ),
                       onPressed: () async {
-                        // _handleSignIn()
-                        //     .then((FirebaseUser user) => print(user))
-                        //     .catchError((e) => print(e));
-                        // try{
-                        //   FirebaseUser googleuser = await _myGoogleSignIn();
-                        //   if(googleuser != null){
-                        //   //  globals.username = googleuser.displayName;
-                        //   //  globals.email = googleuser.email;
-                        //   //  globals.uid = 'GoogleSignInUser' + globals.email;
-                        //   //  prLOGIN.update(
-                        //   //    message: 'Successfully Login...',
-                        //   //    progressWidget: CircularProgressIndicator(),
-                        //   //    progressTextStyle: TextStyle(
-                        //   //        color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
-                        //   //    messageTextStyle: TextStyle(
-                        //   //        color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600),
-                        //   //  );
-                        //   //  await prLOGIN.show();
-                        //   //  prLOGIN.hide();
-                        //   //  Navigator.of(context).pushReplacementNamed('/MainViewScreen');
                         
-                        //   }
-                        // }catch(e){
-                        //   print(e);
-                        // }
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeView()));
+                        _handleSignIn();
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => HomeView()));
                       },
                       padding: EdgeInsets.all(7.0),
                       //color: Colors.teal.shade900,
@@ -302,10 +280,15 @@ class _signInScreenState extends State<signInScreen> {
                   SizedBox(width: 5.0),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SignUpPage()));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => SignUpPage()));
+                      showDialog(
+                            context: context,
+                            builder: (ctxt) {
+                              return SignUpPage();
+                            });
                     },
                     child: Text(
                       'Register',
@@ -478,201 +461,6 @@ class _ResetPasswordState extends State<ResetPassword> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class SignUpPage extends StatefulWidget {
-  @override
-  _State createState() => _State();
-}
-
-class _State extends State<SignUpPage> {
-  @override
-  String email, usernameFirst, usernameLast, password, confirmpw;
-
-  Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text('Account Sign Up'),
-        backgroundColor: Colors.teal,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-                padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
-                child: TextField(
-                  onChanged: (text) {
-                    email = text;
-                    //print("First text field: $text");
-                  },
-                  cursorColor: Colors.teal.shade900,
-                  scrollPadding: const EdgeInsets.symmetric(
-                      vertical: 20.0, horizontal: 50),
-                  decoration: InputDecoration(
-                    border: new OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(
-                        const Radius.circular(8.0),
-                      ),
-                      borderSide: new BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
-                      ),
-                    ),
-                    labelText: 'Email',
-                    prefixIcon: const Icon(Icons.email, color: Colors.black),
-                    // labelStyle:
-                    // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 50),
-                  ),
-                )),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-                padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
-                child: TextField(
-                  onChanged: (text) {
-                    usernameFirst = text;
-                    //print("username: $text");
-                  },
-                  // obscureText: true,
-                  cursorColor: Colors.teal.shade900,
-                  decoration: InputDecoration(
-                    // contentPadding: new EdgeInsets.fromLTRB(20.0, 10.0, 100.0, 10.0),
-                    border: new OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(
-                        const Radius.circular(8.0),
-                      ),
-                      borderSide: new BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
-                      ),
-                    ),
-                    labelText: 'First Name',
-                    prefixIcon: const Icon(Icons.person, color: Colors.black),
-                    // labelStyle:
-                    // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 50),
-                  ),
-                )),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-                padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
-                child: TextField(
-                  onChanged: (text) {
-                    usernameLast = text;
-                    //print("username: $text");
-                  },
-                  // obscureText: true,
-                  cursorColor: Colors.teal.shade900,
-                  decoration: InputDecoration(
-                    // contentPadding: new EdgeInsets.fromLTRB(20.0, 10.0, 100.0, 10.0),
-                    border: new OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(
-                        const Radius.circular(8.0),
-                      ),
-                      borderSide: new BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
-                      ),
-                    ),
-                    labelText: 'Lastname',
-                    prefixIcon: const Icon(Icons.person, color: Colors.black),
-                    // labelStyle:
-                    // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 50),
-                  ),
-                )),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-                padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
-                child: TextField(
-                  onChanged: (text) {
-                    password = text;
-                    //print("First password field: $text");
-                  },
-                  obscureText: true,
-                  cursorColor: Colors.teal.shade900,
-                  scrollPadding: const EdgeInsets.symmetric(
-                      vertical: 20.0, horizontal: 50),
-                  decoration: InputDecoration(
-                    border: new OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(
-                        const Radius.circular(8.0),
-                      ),
-                      borderSide: new BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
-                      ),
-                    ),
-                    labelText: 'Password',
-                    prefixIcon: const Icon(Icons.lock, color: Colors.black),
-                    // labelStyle:
-                    // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 50),
-                  ),
-                )),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-                padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
-                child: TextField(
-                  onChanged: (text) {
-                    confirmpw = text;
-                    //print("Second password field: $text");
-                  },
-                  obscureText: true,
-                  cursorColor: Colors.teal.shade900,
-                  decoration: InputDecoration(
-                    // contentPadding: new EdgeInsets.fromLTRB(20.0, 10.0, 100.0, 10.0),
-                    border: new OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(
-                        const Radius.circular(8.0),
-                      ),
-                      borderSide: new BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
-                      ),
-                    ),
-                    labelText: 'Confirm Password',
-                    prefixIcon: const Icon(Icons.lock, color: Colors.black),
-                    // labelStyle:
-                    // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 50),
-                  ),
-                )),
-            SizedBox(
-              height: 20,
-            ),
-            Text('Click sign up after entering all of above'),
-            SizedBox(
-                width: MediaQuery.of(context).size.width / 20 * 5,
-                child: RaisedButton(
-                  textColor: Colors.white,
-                  color: Colors.teal.shade900,
-                  child: Text('SIGN UP'),
-                  onPressed: () async {},
-                  padding: EdgeInsets.all(10.0),
-                  disabledColor: Colors.black,
-                  disabledTextColor: Colors.black,
-                )),
-          ],
         ),
       ),
     );

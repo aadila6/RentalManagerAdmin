@@ -4,7 +4,6 @@ import 'package:image_picker_web/image_picker_web.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/firebase.dart' as fb;
-import 'package:path/path.dart' as Path;
 import 'package:universal_html/prefer_universal/html.dart' as html;
 
 class NewItemDialog extends StatefulWidget {
@@ -38,7 +37,6 @@ class _NewItemDialogState extends State<NewItemDialog> {
      _uploadedFileURL = fileURL.toString();
    });
   }
-
   String _itemName;
   String _itemCount;
   String defaultURL = "https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b";
@@ -98,7 +96,7 @@ class _NewItemDialogState extends State<NewItemDialog> {
     String url;
     if(_uploadedFileURL == null){
       print("DEBUG:  URL is Empty bitch");
-      String url = defaultURL;
+      url = defaultURL;
     }else{
       url = _uploadedFileURL;
     }
@@ -108,7 +106,10 @@ class _NewItemDialogState extends State<NewItemDialog> {
       'isAvaliable': "true",
       'name': itemName,
       'amount': itemCount,
+    }).then((value){
+      Navigator.pop(context);
     });
+    // return ;
     print("Finish uploading");
   }
 }
