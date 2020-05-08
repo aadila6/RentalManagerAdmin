@@ -106,7 +106,10 @@ class _NewItemDialogState extends State<NewItemDialog> {
       'isAvaliable': "true",
       'name': itemName,
       'amount': itemCount,
+    }).then((value){
+      Navigator.pop(context);
     });
+    // return ;
     print("Finish uploading");
   }
 }

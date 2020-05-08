@@ -2,14 +2,8 @@
 import 'package:flutter/material.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import '../views/inventory/list_page.dart';
-class FirstTab extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LocationPage(title: 'Select a Location'),
-    );
-  }
-}
+import '../views/InventoryView.dart';
+
 
 class LocationPage extends StatefulWidget {
   final String title;

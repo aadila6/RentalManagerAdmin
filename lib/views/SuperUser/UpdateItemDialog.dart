@@ -12,13 +12,15 @@ class UpdateItemDialog extends StatefulWidget {
   @override
   _UpdateItemDialogState createState() => _UpdateItemDialogState();
 }
+
 TextEditingController controller = TextEditingController();
 TextEditingController controller2 = TextEditingController();
+
 class _UpdateItemDialogState extends State<UpdateItemDialog> {
   File _image;
   html.File image;
   Future pickImage() async {
-  print("Begin pick Image");
+    print("Begin pick Image");
     html.File imageFile =
         await ImagePickerWeb.getImage(outputType: ImageType.file);
     if (imageFile != null) {
@@ -27,18 +29,21 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
       uploadFile();
     }
   }
+
   Future uploadFile() async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     fb.StorageReference storageRef = fb.storage().ref('images/$fileName');
-    fb.UploadTaskSnapshot uploadTaskSnapshot = await storageRef.put(image).future;
+    fb.UploadTaskSnapshot uploadTaskSnapshot =
+        await storageRef.put(image).future;
     await uploadTaskSnapshot.ref.getDownloadURL().then((fileURL) {
-     setState(() {
-       print("DEBUG URLLLLLL:" + fileURL.toString());
+      setState(() {
+        print("DEBUG URLLLLLL:" + fileURL.toString());
         _url = fileURL.toString();
-     });
-     _url = fileURL.toString();
-   });
+      });
+      _url = fileURL.toString();
+    });
   }
+
   String _itemName;
   String _itemCount;
   String _url =
@@ -61,8 +66,8 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
                     radius: 50,
                     backgroundImage: NetworkImage(_url),
                   ),
-                  SizedBox(height:10),
-                   _image == null
+                  SizedBox(height: 10),
+                  _image == null
                       ? RaisedButton(
                           child: Text('Change Image'),
                           onPressed: pickImage,
@@ -78,7 +83,7 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
                     },
                     autofocus: true,
                     decoration: InputDecoration(
-                      labelText:"Item Name",
+                      labelText: "Item Name",
                     ),
                   ),
                   TextField(
@@ -93,21 +98,27 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
                   ),
                   RaisedButton(
                       onPressed: () {
-                        deleteItem();
+                        deleteItem().then((value) {
+                          Navigator.pop(context);
+                        });
                       },
                       child: Text("Delete Item")),
                   RaisedButton(
                       onPressed: () {
                         updateAll();
+                          Navigator.pop(context);
+                        
                       },
                       child: Text("Update Item"))
                 ]))));
   }
-  Future updateAll(){
+
+  Future updateAll() {
     updateName();
     updateAmount();
     updateUrl();
   }
+
   Future deleteItem() async {
     final firestore = Firestore.instance;
     await firestore
@@ -122,23 +133,28 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
     await firestore
         .collection('items')
         .document(widget.itemSelected.documentID.toString())
-        .updateData({'name': _itemName,}).catchError(
-            (error) => print(error));
+        .updateData({
+      'name': _itemName,
+    }).catchError((error) => print(error));
   }
+
   Future updateAmount() async {
     final firestore = Firestore.instance;
     await firestore
         .collection('items')
         .document(widget.itemSelected.documentID.toString())
-        .updateData({'amount': _itemCount,}).catchError(
-            (error) => print(error));
+        .updateData({
+      'amount': _itemCount,
+    }).catchError((error) => print(error));
   }
+
   Future updateUrl() async {
     final firestore = Firestore.instance;
     await firestore
         .collection('items')
         .document(widget.itemSelected.documentID.toString())
-        .updateData({'imageURL': _url,}).catchError(
-            (error) => print(error));
+        .updateData({
+      'imageURL': _url,
+    }).catchError((error) => print(error));
   }
 }

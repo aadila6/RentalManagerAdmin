@@ -5,7 +5,8 @@ import 'package:RentalAdmin/views/signInScreen.dart';
 import 'package:RentalAdmin/views/SuperUser/menu.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
 import 'package:RentalAdmin/views/SuperUser/UserManagement.dart';
-
+import 'package:RentalAdmin/views/SuperUser/frontDesk.dart';
+import 'package:RentalAdmin/views/inventory/list_page.dart';
 // import 'package:RentalAdmin/views/SuperUser/theme.dart';
 class SuperuserPanel extends StatefulWidget {
   @override
@@ -21,6 +22,7 @@ class SuperuserPanelState extends State<SuperuserPanel>
     Tab(child: Dashboard()),
     Tab(child: SuperuserInventoryView()),
     Tab(child: SuperUserMgtView()),
+    Tab(child: ListPage()),
     // Tab(child: ),
   ];
 
@@ -35,7 +37,6 @@ class SuperuserPanelState extends State<SuperuserPanel>
     return Scaffold(
       body: Row(children: [
         // sideMenu(this, tabController),
-
         sideMenus(tabController),
         Flexible(
             flex: 5,
@@ -105,6 +106,16 @@ class SuperuserPanelState extends State<SuperuserPanel>
             leading: Icon(menuItems[3].icon,size: 40,),
             title: Text(menuItems[3].title,style: menuListTileDefaultText),
             selected: tabController.index == 3 ? true : false,
+            onTap: () {
+              tabController.animateTo(3);
+              // Signout(context);
+              setState(() {});
+            },
+          ),
+          ListTile(
+            leading: Icon(menuItems[4].icon,size: 40,),
+            title: Text(menuItems[4].title,style: menuListTileDefaultText),
+            selected: tabController.index == 4 ? true : false,
             onTap: () {
               // tabController.animateTo(3);
               Signout(context);
