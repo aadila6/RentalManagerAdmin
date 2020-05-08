@@ -75,8 +75,38 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
                       onPressed: () {
 
                         showDialog(context: context,
-                        builder:(context){
-                          return NewRolePopup();
+                        builder:(ctext){
+                          var selectedRole = 'admin';
+                          return AlertDialog(
+      title: Text("Add new role"),
+      content: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+        return DropdownButton(
+          value: selectedRole,
+          items: ["admin", "frontdesk", "user"]
+              .map((e) => DropdownMenuItem(child: Text(e), value: e))
+              .toList(),
+          onChanged: (v) {
+            print(v);
+            setState(() {
+              selectedRole = v;
+            });
+          });}),
+        actions: <Widget>[
+        RaisedButton(child: Text("No"),onPressed: (){
+          Navigator.of(context).pop();
+        }),
+        RaisedButton(child: Text("Yes"),onPressed: (){
+          modifyRoleFake(u.email,selectedRole,true);
+          setState(() {
+            
+          });
+          Navigator.of(context).pop();
+        }),
+      ],
+    );
+                        });
+                        setState(() {
+                          
                         });
                       },
                       label: Text("New role"),
@@ -85,6 +115,7 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
       ],
     );
   }
+  
 
   Widget confirmationPopup(String user, String s) {
     return AlertDialog(
@@ -95,7 +126,11 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
           Navigator.of(context).pop();
         }),
         RaisedButton(child: Text("Yes"),onPressed: (){
-          //Send http request.
+          modifyRoleFake(user,s,false);
+          setState(() {
+            
+          });
+          Navigator.of(context).pop();
         }),
       ],
     );

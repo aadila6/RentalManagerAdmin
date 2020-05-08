@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:RentalAdmin/views/SuperUser/HttpRequestModel.dart';
 class NewRolePopup extends StatefulWidget {
+  BuildContext ctxt;
+  final email;
+  NewRolePopup({this.ctxt,this.email});
   @override
   State<StatefulWidget> createState() => NewRolePopupState();
 }
@@ -27,7 +30,7 @@ class NewRolePopupState extends State<NewRolePopup> {
           Navigator.of(context).pop();
         }),
         RaisedButton(child: Text("Yes"),onPressed: (){
-          //Send http request.
+          modifyRoleFake(widget.email,selectedRole,true);
         }),
       ],
     );

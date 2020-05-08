@@ -30,8 +30,6 @@ Future<List<User>> fetchUser() async {
   print(res.runtimeType);
   return res;
 }
-
-Future<List<User>> fetchUserFake() {
 var fake_result = {
     "result": [
         {
@@ -209,7 +207,25 @@ var fake_result = {
             ]
         }]
 };
-return Future.delayed(Duration(milliseconds: 500)).then((value) =>fake_result['result'].map((e){
-  return User(email: e['email'], userId: e['uid'], roles: List.from(e['roles']));
-}).toList());
+
+Future<List<User>> fetchUserFake() {
+  return Future.delayed(Duration(milliseconds: 500)).then((value) =>fake_result['result'].map((e){
+    return User(email: e['email'], userId: e['uid'], roles: List.from(e['roles']));
+  }).toList());
+}
+void modifyRoleFake(String email, String role, bool op) {
+  for(var i in fake_result['result']) {
+    if(i['email'] == email) {
+      if(op) {
+        var tl = List.from(i['roles']);
+        tl.add(role);
+        i['roles'] = tl;
+      }
+      else {
+        var tl = List.from(i['roles']);
+        tl.remove(role);
+        i['roles'] = tl;
+      }
+    }
+  }
 }
