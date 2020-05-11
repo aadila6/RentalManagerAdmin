@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:universal_html/prefer_universal/html.dart' as html;
+import 'package:RentalAdmin/views/globals.dart' as globals;
 
 class UpdateItemDialog extends StatefulWidget {
   var itemSelected;
@@ -122,7 +123,7 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
   Future deleteItem() async {
     final firestore = Firestore.instance;
     await firestore
-        .collection('items')
+        .collection(globals.items_global)
         .document(widget.itemSelected.documentID.toString())
         .delete()
         .catchError((error) => print(error));
@@ -131,7 +132,7 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
   Future updateName() async {
     final firestore = Firestore.instance;
     await firestore
-        .collection('items')
+        .collection(globals.items_global)
         .document(widget.itemSelected.documentID.toString())
         .updateData({
       'name': _itemName,
@@ -141,7 +142,7 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
   Future updateAmount() async {
     final firestore = Firestore.instance;
     await firestore
-        .collection('items')
+        .collection(globals.items_global)
         .document(widget.itemSelected.documentID.toString())
         .updateData({
       'amount': _itemCount,
@@ -151,7 +152,7 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
   Future updateUrl() async {
     final firestore = Firestore.instance;
     await firestore
-        .collection('items')
+        .collection(globals.items_global)
         .document(widget.itemSelected.documentID.toString())
         .updateData({
       'imageURL': _url,

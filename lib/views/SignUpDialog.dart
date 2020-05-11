@@ -18,9 +18,9 @@ class SignUpPage extends StatefulWidget {
 class SignUpState extends State<SignUpPage> {
   String email, usernameFirst, usernameLast, password, confirmpw;
   var _organizations = [
-    'select an organization',
+    'Select an organization',
   ];
-  var _organizationSelected = 'select an organization';
+  var _organizationSelected = 'Select an organization';
 
   Future getOrganizations() async {
     QuerySnapshot list =
@@ -264,11 +264,11 @@ class SignUpState extends State<SignUpPage> {
     String thiscollectionName = '${organization}_users';
     await databaseReference.collection('global_users').document(uid).setData({
       'name': fullName,
-      'imageURL':
-          "https://images.unsplash.com/photo-1581660545544-83b8812f9516?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+
+      'imageURL':"https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b",
       'PhoneNumber': '',
-      'Sex': '',
-      'StudentID': '',
+      'Admin': 'True',
+      'isAdmin': 'True',
       'email': email,
       'organization': organization,
     });

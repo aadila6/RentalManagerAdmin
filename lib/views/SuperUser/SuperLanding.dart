@@ -3,17 +3,39 @@ import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
 import 'package:RentalAdmin/views/SuperUser/cardTiles.dart';
 import 'package:RentalAdmin/views/SuperUser/currentDash.dart';
-
+import 'package:RentalAdmin/views/globals.dart' as globals;
+import 'package:cloud_firestore/cloud_firestore.dart';
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
+  String numUsedToday = '0';
+  String numTotalInventory = '0';
+  String numDamaged = '0';
+
+  Future getFirestoreData() async {
+  //   numTotalInventory = Firestore.instance.collection(globals.items_global).snapshots().length.toString();
+  //   Firestore.instance.collection(globals.items_global).getDocuments().then((myDocuments){
+  //     numTotalInventory = myDocuments.documents.length.toString();
+  // });
+  //   numUsedToday = Firestore.instance.collection(globals.reservation_global).snapshots().length.toString();
+  //   print(numTotalInventory);
+  }
+  Future countDocuments() async {
+    QuerySnapshot _myDoc = await Firestore.instance.collection(globals.items_global).getDocuments();
+    List<DocumentSnapshot> _myDocCount = _myDoc.documents;
+    numTotalInventory = _myDocCount.length.toString();
+    print(globals.items_global);
+    print(numTotalInventory);  // Count of Documents in Collection
+}
 
   @override
   Widget build(BuildContext context) {
     final _media = MediaQuery.of(context).size;
+    countDocuments();
+    
     // int selectedView = 0;
     // print(_media);
     return LayoutBuilder(
@@ -68,7 +90,7 @@ class _DashboardState extends State<Dashboard> {
                                             cardTitle: 'Todays',
                                             icon: Icons.data_usage,
                                             subText: 'Items Usage',
-                                            mainText: '5',
+                                            mainText: numUsedToday,
                                           ),
                                           SizedBox(width: 20),
                                           CardTile(
@@ -85,7 +107,7 @@ class _DashboardState extends State<Dashboard> {
                                             cardTitle: 'Inventory',
                                             icon: Icons.home,
                                             subText: 'Total Number of Items',
-                                            mainText: '50',
+                                            mainText: numTotalInventory,
                                           ),
                                           SizedBox(width: 20),
                                         ],
