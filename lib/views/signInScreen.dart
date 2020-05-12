@@ -1,3 +1,4 @@
+import 'package:RentalAdmin/views/homeView.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -25,7 +26,7 @@ class _signInScreenState extends State<signInScreen> {
     ],
   );
 
-   Future<void> _handleSignIn() async {
+  Future<void> _handleSignIn() async {
     try {
       await _googleSignIn.signIn();
     } catch (error) {
@@ -35,28 +36,31 @@ class _signInScreenState extends State<signInScreen> {
 
   Future<void> _handleSignOut() => _googleSignIn.disconnect();
 
-  Future getData() async {
-  Firestore.instance
-      .collection('global_users')
-      .document(globals.uid)
-      .get()
-      .then((DocumentSnapshot ds) {
-    // use ds as a snapshot
-    var doc = ds.data;
-    // globals.studentID = doc["StudentID"];
-    globals.username = doc["name"];
-    globals.UserImageUrl = doc["imageURL"];
-    if (globals.UserImageUrl == null) {
-      globals.UserImageUrl =
-          "https://images.unsplash.com/photo-1581660545544-83b8812f9516?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
-    }
-    globals.phoneNumber = doc["PhoneNumber"];
-    globals.organization = doc['organization'];
-    globals.reservation_global = globals.organization + '_reservations';
-    globals.items_global = globals.organization + '_items';
-
-  });
-}
+  Future <bool> getData() async {
+    Firestore.instance
+        .collection('global_users')
+        .document(globals.uid)
+        .get()
+        .then((DocumentSnapshot ds) {
+      // use ds as a snapshot
+      var doc = ds.data;
+      globals.admin = doc["Admin"];
+      globals.username = doc["Name"];
+      globals.email = doc["Email"];
+      globals.rentalID = doc["RentalID"];
+      globals.userImageUrl = doc["imageURL"];
+      globals.phoneNumber = doc["PhoneNumber"];
+      if (globals.userImageUrl == null) {
+        globals.userImageUrl =
+            "https://images.unsplash.com/photo-1581660545544-83b8812f9516?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
+      }
+      globals.organization = doc['organization'];
+      globals.reservation_global = globals.organization + '_reservations';
+      globals.items_global = globals.organization + '_items';
+      
+    });
+    return globals.admin;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -219,26 +223,22 @@ class _signInScreenState extends State<signInScreen> {
                                 );
                               });
                         } else {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => HomeView()));
-
                           //Direct To SuperUserView directly
-                          print("UID??????: "+ e);
+                          print("UID??????: " + e);
                           globals.uid = e;
                           getData().then((value) {
-                            print( globals.uid);
-                          print( globals.organization);
-                          print( globals.items_global);
-                          print( globals.reservation_global);
-
+                          if (value) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SuperuserPanel()));
+                          } else {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomeView()));
+                          }
                           });
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SuperuserPanel()));
-
                         }
                       },
                       padding: EdgeInsets.all(10.0),
@@ -285,7 +285,6 @@ class _signInScreenState extends State<signInScreen> {
                         ],
                       ),
                       onPressed: () async {
-                        
                         _handleSignIn();
                         // Navigator.push(
                         //     context,
@@ -318,10 +317,10 @@ class _signInScreenState extends State<signInScreen> {
                       //     MaterialPageRoute(
                       //         builder: (context) => SignUpPage()));
                       showDialog(
-                            context: context,
-                            builder: (ctxt) {
-                              return SignUpPage();
-                            });
+                          context: context,
+                          builder: (ctxt) {
+                            return SignUpPage();
+                          });
                     },
                     child: Text(
                       'Register',
@@ -422,7 +421,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                 ),
               ),
               SizedBox(height: 10, width: 150),
-
               Padding(
                   padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
                   child: TextField(
@@ -449,7 +447,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                     ),
                   )),
               SizedBox(height: 20, width: 150),
-
               SizedBox(
                 height: 5,
               ),

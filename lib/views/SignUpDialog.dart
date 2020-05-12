@@ -263,13 +263,12 @@ class SignUpState extends State<SignUpPage> {
     String doc = "AppSignInUser" + email;
     String thiscollectionName = '${organization}_users';
     await databaseReference.collection('global_users').document(uid).setData({
-      'name': fullName,
-
+      'Name': fullName,
+      'Email': email,
+      'Admin': true,
       'imageURL':"https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b",
       'PhoneNumber': '',
-      'Admin': 'True',
-      'isAdmin': 'True',
-      'email': email,
+      'RentalID': '',
       'organization': organization,
     });
   }
@@ -300,7 +299,6 @@ Future<String> signUp(email, password) async {
 
     user.sendEmailVerification();
     // isSignUp = true;
-    print('True here');
     user = authResult.user;
     print(user.uid);
     // userID = user.uid;

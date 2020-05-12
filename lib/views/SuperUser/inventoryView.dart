@@ -32,7 +32,7 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
       MaterialButton(
         color: Colors.teal,
         shape: new RoundedRectangleBorder(
-            // borderRadius: new BorderRadius.circular(18.0),
+            borderRadius: new BorderRadius.circular(20.0),
             side: BorderSide(color: Colors.white)),
         onPressed: () {
           showDialog(

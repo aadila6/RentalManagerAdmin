@@ -5,6 +5,8 @@ import 'package:RentalAdmin/views/SuperUser/cardTiles.dart';
 import 'package:RentalAdmin/views/SuperUser/currentDash.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:RentalAdmin/views/SuperUser/ProfileDialog.dart';
+
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
@@ -16,26 +18,28 @@ class _DashboardState extends State<Dashboard> {
   String numDamaged = '0';
 
   Future getFirestoreData() async {
-  //   numTotalInventory = Firestore.instance.collection(globals.items_global).snapshots().length.toString();
-  //   Firestore.instance.collection(globals.items_global).getDocuments().then((myDocuments){
-  //     numTotalInventory = myDocuments.documents.length.toString();
-  // });
-  //   numUsedToday = Firestore.instance.collection(globals.reservation_global).snapshots().length.toString();
-  //   print(numTotalInventory);
+    //   numTotalInventory = Firestore.instance.collection(globals.items_global).snapshots().length.toString();
+    //   Firestore.instance.collection(globals.items_global).getDocuments().then((myDocuments){
+    //     numTotalInventory = myDocuments.documents.length.toString();
+    // });
+    //   numUsedToday = Firestore.instance.collection(globals.reservation_global).snapshots().length.toString();
+    //   print(numTotalInventory);
   }
   Future countDocuments() async {
-    QuerySnapshot _myDoc = await Firestore.instance.collection(globals.items_global).getDocuments();
+    QuerySnapshot _myDoc = await Firestore.instance
+        .collection(globals.items_global)
+        .getDocuments();
     List<DocumentSnapshot> _myDocCount = _myDoc.documents;
     numTotalInventory = _myDocCount.length.toString();
     print(globals.items_global);
-    print(numTotalInventory);  // Count of Documents in Collection
-}
+    print(numTotalInventory); // Count of Documents in Collection
+  }
 
   @override
   Widget build(BuildContext context) {
     final _media = MediaQuery.of(context).size;
     countDocuments();
-    
+
     // int selectedView = 0;
     // print(_media);
     return LayoutBuilder(
@@ -94,15 +98,6 @@ class _DashboardState extends State<Dashboard> {
                                           ),
                                           SizedBox(width: 20),
                                           CardTile(
-                                            iconBgColor: Colors.red,
-                                            cardTitle: 'Damaged',
-                                            icon: Icons.bug_report,
-                                            subText:
-                                                'Items needs attention',
-                                            mainText: '0',
-                                          ),
-                                          SizedBox(width: 20),
-                                          CardTile(
                                             iconBgColor: Colors.green,
                                             cardTitle: 'Inventory',
                                             icon: Icons.home,
@@ -116,6 +111,32 @@ class _DashboardState extends State<Dashboard> {
                                     SizedBox(
                                       height: 20,
                                     ),
+                                    // MaterialButton(
+                                    //   color: Colors.teal,
+                                    //   shape: RoundedRectangleBorder(
+                                    //       borderRadius: BorderRadius.all(
+                                    //           Radius.circular(20.0))),
+                                    //   onPressed: () {
+                                    //     print("Clicked Update Profile");
+
+                                    //     showDialog(
+                                    //         context: context,
+                                    //         builder: (ctxt) {
+                                    //           return UpdateProfile();
+                                    //         });
+                                    //   },
+                                    //   child: Padding(
+                                    //     padding: const EdgeInsets.symmetric(
+                                    //         vertical: 5.0, horizontal: 5.0),
+                                    //     child: Text(
+                                    //       "Update My Profile",
+                                    //       style: TextStyle(
+                                    //           fontSize: 15,
+                                    //           color: Colors.white,
+                                    //           fontWeight: FontWeight.w100),
+                                    //     ),
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                               ],

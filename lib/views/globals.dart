@@ -10,9 +10,11 @@ String uid = '';
 String username = 'Xu Liu';
 String email = '';
 String phoneNumber = '530-xxx-xxxx';
-String UserImageUrl = '';
-String collectionName = 'TestModeNew';
+String userImageUrl = '';
+// String collectionName = 'TestModeNew';
 String organization = '';
 String reservation_global = organization + '_reservations';
 String items_global = organization + 'items';
+bool admin = false;
+String rentalID = '';
 
