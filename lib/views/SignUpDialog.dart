@@ -1,16 +1,15 @@
+import 'package:RentalAdmin/views/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:RentalAdmin/views/homeView.dart';
-import '../widgets/auth.dart';
-import 'package:http/http.dart' as http;
-import 'package:RentalAdmin/views/SuperUser/SuperLanding.dart';
-import 'package:RentalAdmin/views/SuperUser/SuperuserPanel.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:RentalAdmin/views/signInScreen.dart';
 
 class SignUpPage extends StatefulWidget {
+  String organization;
+  SignUpPage({this.organization});
   @override
   SignUpState createState() => SignUpState();
 }
@@ -20,7 +19,7 @@ class SignUpState extends State<SignUpPage> {
   var _organizations = [
     'Select an organization',
   ];
-  var _organizationSelected = 'Select an organization';
+  // var _organizationSelected = widget.organization;
 
   Future getOrganizations() async {
     QuerySnapshot list =
@@ -192,29 +191,29 @@ class SignUpState extends State<SignUpPage> {
             SizedBox(
               height: 20,
             ),
-            DropdownButton<String>(
-              // dropdownColor: Colors.black,
-              iconSize: 28.0,
-              style: TextStyle(
-                  color: Colors.blue,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0),
-              icon: Icon(Icons.home, color: Colors.teal),
-              items: _organizations.map(
-                (String organization) {
-                  return DropdownMenuItem<String>(
-                      child: Text(organization), value: organization);
-                },
-              ).toList(),
-              onChanged: (String selected) {
-                setState(
-                  () {
-                    this._organizationSelected = selected;
-                  },
-                );
-              },
-              value: _organizationSelected,
-            ),
+            // DropdownButton<String>(
+            //   // dropdownColor: Colors.black,
+            //   iconSize: 28.0,
+            //   style: TextStyle(
+            //       color: Colors.blue,
+            //       fontWeight: FontWeight.bold,
+            //       fontSize: 20.0),
+            //   icon: Icon(Icons.home, color: Colors.teal),
+            //   items: _organizations.map(
+            //     (String organization) {
+            //       return DropdownMenuItem<String>(
+            //           child: Text(organization), value: organization);
+            //     },
+            //   ).toList(),
+            //   onChanged: (String selected) {
+            //     setState(
+            //       () {
+            //         this._organizationSelected = selected;
+            //       },
+            //     );
+            //   },
+            //   value: _organizationSelected,
+            // ),
             Text('Click sign up after entering all of above'),
             SizedBox(
                 width: MediaQuery.of(context).size.width / 20 * 5,
@@ -223,26 +222,38 @@ class SignUpState extends State<SignUpPage> {
                   color: Colors.teal.shade900,
                   child: Text('SIGN UP'),
                   onPressed: () async {
-                    var e = await signUp(email, password).then((uid){
+                    var e = await signUp(email, password);
+                    if (ErrorDetect(e)) {
+                      String a = errorDetect(e, pos: 0),
+                          b = errorDetect(e, pos: 1);
+                      // print(a);
+                      // print(b);
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text(b),
+                              actions: <Widget>[
+                                new FlatButton(
+                                  child: new Text('OK'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          });
+
+                      // pop_window(a, b, context);
+                    } else {
                       print("printing value (uid): " + uid);
-                      uploadData(usernameFirst, usernameLast, email,
-                          uid, _organizationSelected);
+                      print("ORG insde the Signup: " + organization);
+                      uploadData(usernameFirst, usernameLast, email, uid,
+                          organization);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => signInScreen()));
-                    });
-                    if (ErrorDetect(e)) {
-                      print("An Error OCCURED!!!");
-                    } else {
-                      // print("Inside the signUp and waiting to be uploading image");
-                      // print("UID : "+ errorDetect(e));
-                      // print("Name : "+ usernameFirst + ' '+ usernameLast);
-                      // print("Email : "+ email);
-                      // print("Organization : "+ _organizationSelected);
-                      // uploadData(usernameFirst, usernameLast, email,
-                      //     errorDetect(e), _organizationSelected);
-                      print("Inside the signUp and waiting to be uploading image");
                     }
                   },
                   padding: EdgeInsets.all(10.0),
@@ -254,7 +265,7 @@ class SignUpState extends State<SignUpPage> {
       ),
     );
   }
-  
+
   void uploadData(
       usernameFirst, usernameLast, email, uid, String organization) async {
     print("UPLOADING");
@@ -262,14 +273,16 @@ class SignUpState extends State<SignUpPage> {
     final databaseReference = Firestore.instance;
     String doc = "AppSignInUser" + email;
     String thiscollectionName = '${organization}_users';
-    await databaseReference.collection('global_users').document(uid).setData({
+    await databaseReference.collection('global_users').document(doc).setData({
       'Name': fullName,
       'Email': email,
-      'Admin': true,
-      'imageURL':"https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b",
+      'Admin': false,
+      'imageURL':
+          "https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b",
       'PhoneNumber': '',
       'RentalID': '',
       'organization': organization,
+      'uid' : uid,
     });
   }
 }

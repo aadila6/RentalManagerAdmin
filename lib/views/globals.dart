@@ -17,4 +17,6 @@ String reservation_global = organization + '_reservations';
 String items_global = organization + 'items';
 bool admin = false;
 String rentalID = '';
-
+String userLoginID = '';
+// String existingOrganizations = '';
+List<String> existingOrganizations = [];

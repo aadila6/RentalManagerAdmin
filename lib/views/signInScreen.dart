@@ -7,7 +7,7 @@ import 'package:RentalAdmin/views/SignUpDialog.dart';
 import '../widgets/auth.dart';
 import 'package:RentalAdmin/views/SuperUser/SuperuserPanel.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
-
+import 'package:RentalAdmin/views/SuperUser/organizationSelection.dart';
 class signInScreen extends StatefulWidget {
   @override
   _signInScreenState createState() => _signInScreenState();
@@ -39,12 +39,13 @@ class _signInScreenState extends State<signInScreen> {
   Future <bool> getData() async {
     Firestore.instance
         .collection('global_users')
-        .document(globals.uid)
+        .document(globals.userLoginID)
         .get()
         .then((DocumentSnapshot ds) {
       // use ds as a snapshot
       var doc = ds.data;
       globals.admin = doc["Admin"];
+      globals.uid = doc["uid"];
       globals.username = doc["Name"];
       globals.email = doc["Email"];
       globals.rentalID = doc["RentalID"];
@@ -225,7 +226,7 @@ class _signInScreenState extends State<signInScreen> {
                         } else {
                           //Direct To SuperUserView directly
                           print("UID??????: " + e);
-                          globals.uid = e;
+                          globals.userLoginID = "AppSignInUser" + username;
                           getData().then((value) {
                           if (value) {
                             Navigator.push(
@@ -316,11 +317,19 @@ class _signInScreenState extends State<signInScreen> {
                       //     context,
                       //     MaterialPageRoute(
                       //         builder: (context) => SignUpPage()));
-                      showDialog(
-                          context: context,
-                          builder: (ctxt) {
-                            return SignUpPage();
-                          });
+                       Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    //SignUpPage(),
+                                    OrganizationSelection(),
+                              ),
+                            );
+                      // showDialog(
+                      //     context: context,
+                      //     builder: (ctxt) {
+                      //       return SignUpPage();
+                      //     });
                     },
                     child: Text(
                       'Register',
