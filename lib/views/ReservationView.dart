@@ -4,7 +4,7 @@ import 'package:RentalAdmin/views/homeView.dart';
 import 'package:RentalAdmin/widgets/resCell.dart';
 import 'package:RentalAdmin/widgets/activeActivities.dart';
 import 'package:RentalAdmin/views/InventoryView.dart';
-
+import 'package:RentalAdmin/views/globals.dart' as globals;
 //
 class ReservationListPage extends StatefulWidget {
   @override
@@ -110,8 +110,8 @@ class _ReservationListPage extends State<ReservationListPage> {
     QuerySnapshot itemListDOC =
         // await firestore.collection('reservation').orderBy('startTime').getDocuments();
         await firestore
-            .collection('reservation')
-            .where('uid', isEqualTo: 'AppSignInUserladydilaa@gmail.com')
+            .collection(globals.reservation_global)
+            .where('Uid', isEqualTo:globals.uid)
             .where('status', whereIn: ['Reserved','Picked Up'])
             .getDocuments();
     return itemListDOC.documents;

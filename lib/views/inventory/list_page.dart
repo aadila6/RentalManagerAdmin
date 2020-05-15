@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_storage/firebase_storage.dart';
 import 'category_page.dart';
-
+import 'package:RentalAdmin/views/globals.dart' as globals;
 class ListPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -15,7 +15,7 @@ class _ListPageState extends State<ListPage> {
   Future getFirestoreData() async {
     final firestore = Firestore.instance;
     QuerySnapshot arrayOfLocationDocuments =
-        await firestore.collection('locations').getDocuments();
+        await firestore.collection(globals.items_global).getDocuments();
     return arrayOfLocationDocuments.documents;
   }
 

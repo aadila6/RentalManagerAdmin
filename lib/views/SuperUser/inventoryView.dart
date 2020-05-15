@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
 import 'package:RentalAdmin/views/SuperUser/UpdateItemDialog.dart';
 import 'newItemDialog.dart';
-
+import 'package:RentalAdmin/views/globals.dart' as globals;
 class SuperuserInventoryView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -32,7 +32,7 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
       MaterialButton(
         color: Colors.teal,
         shape: new RoundedRectangleBorder(
-            // borderRadius: new BorderRadius.circular(18.0),
+            borderRadius: new BorderRadius.circular(20.0),
             side: BorderSide(color: Colors.white)),
         onPressed: () {
           showDialog(
@@ -48,7 +48,7 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
       ),
       Expanded(
         child: StreamBuilder(
-            stream: Firestore.instance.collection('items').snapshots(),
+            stream: Firestore.instance.collection(globals.items_global).snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) return const Text('loading...');
 

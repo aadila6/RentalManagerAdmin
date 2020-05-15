@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // import '../reservations/reservationCell.dart';
 // import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 // import '../globals.dart' as globals;
+import 'package:RentalAdmin/views/globals.dart' as globals;
 
 class RecentActivities extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class _RecentActivities extends State<RecentActivities> {
     // final userID = user.uid;
     final firestore = Firestore.instance;
     QuerySnapshot itemListDOC = await firestore
-        .collection('reservation')
+        .collection(globals.reservation_global)
         .getDocuments();
     return itemListDOC.documents;
   }

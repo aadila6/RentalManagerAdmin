@@ -10,6 +10,6 @@ List<Menu> menuItems = [
   Menu(title: 'Dashboard', icon: Icons.dashboard),
   Menu(title: 'Item Management', icon: Icons.web),
   Menu(title: 'Users', icon: Icons.supervised_user_circle),
-  Menu(title: 'Front Desk', icon: Icons.headset_mic),
+ 
   Menu(title: 'Sign Out', icon: Icons.exit_to_app),
 ];

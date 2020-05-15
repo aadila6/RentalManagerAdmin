@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:universal_html/prefer_universal/html.dart' as html;
+import 'package:RentalAdmin/views/globals.dart' as globals;
 
 class NewItemDialog extends StatefulWidget {
   @override
@@ -95,12 +96,12 @@ class _NewItemDialogState extends State<NewItemDialog> {
     final databaseReference = Firestore.instance;
     String url;
     if(_uploadedFileURL == null){
-      print("DEBUG:  URL is Empty bitch");
+      print("DEBUG:  URL is Empty");
       url = defaultURL;
     }else{
       url = _uploadedFileURL;
     }
-    await databaseReference.collection("items").document().setData({
+    await databaseReference.collection(globals.items_global).document().setData({
       'Category': "sport",
       'imageURL': url,
       'isAvaliable': "true",

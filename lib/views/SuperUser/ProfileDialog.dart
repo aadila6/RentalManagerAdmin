@@ -7,17 +7,15 @@ import 'package:firebase/firebase.dart' as fb;
 import 'package:universal_html/prefer_universal/html.dart' as html;
 import 'package:RentalAdmin/views/globals.dart' as globals;
 
-class UpdateItemDialog extends StatefulWidget {
-  var itemSelected;
-  UpdateItemDialog({this.itemSelected});
+class UpdateProfile extends StatefulWidget {
   @override
-  _UpdateItemDialogState createState() => _UpdateItemDialogState();
+  _UpdateProfileState createState() => _UpdateProfileState();
 }
 
 TextEditingController controller = TextEditingController();
 TextEditingController controller2 = TextEditingController();
-
-class _UpdateItemDialogState extends State<UpdateItemDialog> {
+TextEditingController controller3 = TextEditingController();
+class _UpdateProfileState extends State<UpdateProfile> {
   File _image;
   html.File image;
   Future pickImage() async {
@@ -45,18 +43,18 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
     });
   }
 
-  String _itemName;
-  String _itemCount;
-  String _url =
-      'https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/cat.jpg?alt=media&token=78818628-9471-421d-8969-76d68b07f591';
+  String userName = globals.username;
+  String employeeID =  globals.rentalID;
+  String phoneNumber =  globals.phoneNumber;
+  String _url = globals.userImageUrl;
 
   @override
   Widget build(BuildContext context) {
-    _itemName = widget.itemSelected.data['name'];
-    _itemCount = widget.itemSelected.data['amount'];
-    _url = widget.itemSelected.data['imageURL'];
-    controller.text = widget.itemSelected.data['name'];
-    controller2.text = widget.itemSelected.data['amount'];
+    controller.text = globals.username;
+    controller2.text = globals.rentalID;
+    controller3.text = globals.phoneNumber;
+
+    print("Updateing??");
     return Dialog(
         child: ConstrainedBox(
             constraints: BoxConstraints(maxWidth: 500, maxHeight: 500),
@@ -79,83 +77,58 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
                   TextField(
                     controller: controller,
                     onChanged: (text) {
-                      _itemName = text;
-                      print("First text field: $text");
+                      userName = text;
+                      // print("First text field: $text");
                     },
                     autofocus: true,
                     decoration: InputDecoration(
-                      labelText: "Item Name",
+                      labelText: "Username",
                     ),
                   ),
                   TextField(
                     controller: controller2,
                     onChanged: (text) {
-                      _itemCount = text;
-                      print("First text field: $text");
+                      employeeID = text;
+                      // print("First text field: $text");
                     },
                     decoration: InputDecoration(
-                      labelText: "Item Amount",
+                      labelText: "Employee ID",
+                    ),
+                  ),
+                   TextField(
+                    controller: controller3,
+                    onChanged: (text) {
+                      phoneNumber = text;
+                      // print("First text field: $text");
+                    },
+                    decoration: InputDecoration(
+                      labelText: "Phone Number",
                     ),
                   ),
                   RaisedButton(
                       onPressed: () {
-                        deleteItem().then((value) {
+                         updateDBs();
                           Navigator.pop(context);
-                        });
                       },
-                      child: Text("Delete Item")),
-                  RaisedButton(
-                      onPressed: () {
-                        updateAll();
-                          Navigator.pop(context);
-                        
-                      },
-                      child: Text("Update Item"))
+                      child: Text("Update"))
                 ]))));
   }
 
-  Future updateAll() {
-    updateName();
-    updateAmount();
-    updateUrl();
-  }
-
-  Future deleteItem() async {
+  
+Future updateDBs() async{
     final firestore = Firestore.instance;
     await firestore
-        .collection(globals.items_global)
-        .document(widget.itemSelected.documentID.toString())
-        .delete()
-        .catchError((error) => print(error));
-  }
-
-  Future updateName() async {
-    final firestore = Firestore.instance;
-    await firestore
-        .collection(globals.items_global)
-        .document(widget.itemSelected.documentID.toString())
+        .collection('global_users')
+        .document(globals.uid)
         .updateData({
-      'name': _itemName,
+      'Name': userName,
+      'PhoneNumber': phoneNumber,
+      'RentalID':employeeID,
+      'imageURL':_url,
     }).catchError((error) => print(error));
-  }
-
-  Future updateAmount() async {
-    final firestore = Firestore.instance;
-    await firestore
-        .collection(globals.items_global)
-        .document(widget.itemSelected.documentID.toString())
-        .updateData({
-      'amount': _itemCount,
-    }).catchError((error) => print(error));
-  }
-
-  Future updateUrl() async {
-    final firestore = Firestore.instance;
-    await firestore
-        .collection(globals.items_global)
-        .document(widget.itemSelected.documentID.toString())
-        .updateData({
-      'imageURL': _url,
-    }).catchError((error) => print(error));
-  }
+    globals.rentalID = employeeID;
+    globals.username = userName;
+    globals.phoneNumber = phoneNumber;
+    globals.userImageUrl = _url;
+}
 }
