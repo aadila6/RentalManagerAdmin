@@ -49,7 +49,7 @@ class SuperuserPanelState extends State<SuperuserPanel>
       ]),
     );
   }
-  
+
   Widget sideMenus(tabController) {
     return Container(
       decoration: BoxDecoration(
@@ -69,46 +69,57 @@ class SuperuserPanelState extends State<SuperuserPanel>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                 SizedBox(height: 20,),
+            //     StreamBuilder( 
+            //       stream: Firestore.instance.collection('global_users').document(globals.userLoginID).snapshots(),
+            // builder: (context, snapshot) {
+            // // if (!snapshot.hasData) return const Text('loading...');
+            //  globals.userImageUrl = snapshot.data['imageURL'];
+            //   globals.username = snapshot.data['Name'];
+            //   return const Text('loading...');
+            // // print()
+            // }),
+                SizedBox(
+                  height: 20,
+                ),
                 CircleAvatar(
                     radius: 30,
-                    backgroundImage:
-                        NetworkImage(globals.userImageUrl)),
-                        SizedBox(height: 10,),
-                Text(globals.username,
-                   style: TextStyle(
-                  fontFamily: 'Pacifico',
-                  fontSize: 15,
-                  color: Colors.teal.shade100,
-                  fontWeight: FontWeight.bold,
+                    backgroundImage: NetworkImage(globals.userImageUrl)),
+                SizedBox(
+                  height: 10,
                 ),
+                Text(
+                  globals.username,
+                  style: TextStyle(
+                    fontFamily: 'Pacifico',
+                    fontSize: 15,
+                    color: Colors.teal.shade100,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                MaterialButton(
+                  color: Colors.teal,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                  onPressed: () {
+                    print("Clicked Update Profile");
+                    showDialog(
+                        context: context,
+                        builder: (ctxt) {
+                          return UpdateProfile();
+                        });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 3.0, horizontal: 3.0),
+                    child: Text(
+                      "Update My Profile",
+                      style: TextStyle(
+                          fontSize: 10,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w100),
                     ),
-                     MaterialButton(
-                                      color: Colors.teal,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20.0))),
-                                      onPressed: () {
-                                        print("Clicked Update Profile");
-                                        showDialog(
-                                            context: context,
-                                            builder: (ctxt) {
-                                              return UpdateProfile();
-                                            });
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 3.0, horizontal: 3.0),
-                                        child: Text(
-                                          "Update My Profile",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w100),
-                                        ),
-                                      ),
-                                    ),
-
+                  ),
+                ),
               ],
             ),
           ),

@@ -7,12 +7,12 @@ import 'package:firebase/firebase.dart' as fb;
 import 'package:universal_html/prefer_universal/html.dart' as html;
 import 'package:RentalAdmin/views/globals.dart' as globals;
 
-class NewItemDialog extends StatefulWidget {
+class NewCategory extends StatefulWidget {
   @override
-  _NewItemDialogState createState() => _NewItemDialogState();
+  _NewCategoryState createState() => _NewCategoryState();
 }
 
-class _NewItemDialogState extends State<NewItemDialog> {
+class _NewCategoryState extends State<NewCategory> {
   @override
   void initState() {
     super.initState();
@@ -92,7 +92,7 @@ class _NewItemDialogState extends State<NewItemDialog> {
   //   list.documents.forEach((doc) => globals.existingLocations.add(doc.data['name']));
   // }
 
-  String _itemName;
+  String _categoryName;
   String _itemCount;
   String defaultURL =
       "https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b";
@@ -123,12 +123,12 @@ class _NewItemDialogState extends State<NewItemDialog> {
                       child: customDropDownMwnu(
                           globals.existingLocations, _collectionSelected,0)),
                   //Selecting a category?
-                  SizedBox(
-                      child: customDropDownMwnu(
-                          globals.categories, _categorySelected,1)),
+                  // SizedBox(
+                  //     child: customDropDownMwnu(
+                  //         globals.categories, _categorySelected,1)),
                   TextField(
                     onChanged: (text) {
-                      _itemName = text;
+                      _categoryName = text;
                       print("First text field: $text");
                     },
                     autofocus: true,
@@ -136,20 +136,20 @@ class _NewItemDialogState extends State<NewItemDialog> {
                       labelText: "Item Name",
                     ),
                   ),
-                  TextField(
-                    onChanged: (text) {
-                      _itemCount = text;
-                      print("First text field: $text");
-                    },
-                    decoration: InputDecoration(
-                      labelText: "Item Amount",
-                    ),
-                  ),
+                  // TextField(
+                  //   onChanged: (text) {
+                  //     _itemCount = text;
+                  //     print("First text field: $text");
+                  //   },
+                  //   decoration: InputDecoration(
+                  //     labelText: "Item Amount",
+                  //   ),
+                  // ),
 
                   RaisedButton(
                       onPressed: () {
-                        // uploadFile().then((value) => testingUploadItem(_itemName, _itemCount));
-                        testingUploadItem(_itemName, _itemCount);
+                        // uploadFile().then((value) => testingUploadItem(_categoryName, _itemCount));
+                        testingUploadItem(_categoryName, _itemCount);
                       },
                       child: Text("Submit"))
                 ]))));

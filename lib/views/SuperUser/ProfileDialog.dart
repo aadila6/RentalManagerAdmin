@@ -38,22 +38,28 @@ class _UpdateProfileState extends State<UpdateProfile> {
       setState(() {
         print("DEBUG URLLLLLL:" + fileURL.toString());
         _url = fileURL.toString();
+        globals.userImageUrl = _url;
       });
+      print("NEW URL:" + _url);
       _url = fileURL.toString();
+      globals.userImageUrl = _url;
     });
   }
 
-  String userName = globals.username;
-  String employeeID =  globals.rentalID;
-  String phoneNumber =  globals.phoneNumber;
-  String _url = globals.userImageUrl;
+  String userName ;
+  String employeeID ;
+  String phoneNumber ;
+  String _url ;
 
   @override
   Widget build(BuildContext context) {
+     userName = globals.username;
+  employeeID =  globals.rentalID;
+  phoneNumber =  globals.phoneNumber;
+   _url = globals.userImageUrl;
     controller.text = globals.username;
     controller2.text = globals.rentalID;
     controller3.text = globals.phoneNumber;
-
     print("Updateing??");
     return Dialog(
         child: ConstrainedBox(
@@ -107,7 +113,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   ),
                   RaisedButton(
                       onPressed: () {
-                         updateDBs();
+                         updateDBs(_url);
                           Navigator.pop(context);
                       },
                       child: Text("Update"))
@@ -115,20 +121,22 @@ class _UpdateProfileState extends State<UpdateProfile> {
   }
 
   
-Future updateDBs() async{
+Future updateDBs(String urr) async{
+   print("uploading URL: " + urr);
     final firestore = Firestore.instance;
     await firestore
         .collection('global_users')
-        .document(globals.uid)
+        .document(globals.userLoginID)
         .updateData({
       'Name': userName,
       'PhoneNumber': phoneNumber,
       'RentalID':employeeID,
-      'imageURL':_url,
+      'imageURL':urr,
     }).catchError((error) => print(error));
+    print("uploading URL: " + urr);
     globals.rentalID = employeeID;
     globals.username = userName;
     globals.phoneNumber = phoneNumber;
-    globals.userImageUrl = _url;
+    globals.userImageUrl = urr;
 }
 }

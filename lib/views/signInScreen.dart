@@ -51,6 +51,7 @@ class _signInScreenState extends State<signInScreen> {
       globals.rentalID = doc["RentalID"];
       globals.userImageUrl = doc["imageURL"];
       globals.phoneNumber = doc["PhoneNumber"];
+
       if (globals.userImageUrl == null) {
         globals.userImageUrl =
             "https://images.unsplash.com/photo-1581660545544-83b8812f9516?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
@@ -58,10 +59,23 @@ class _signInScreenState extends State<signInScreen> {
       globals.organization = doc['organization'];
       globals.reservation_global = globals.organization + '_reservations';
       globals.items_global = globals.organization + '_items';
+      globals.locations = globals.organization + '_locations';
       
     });
     return globals.admin;
   }
+  Future getCollections() async {
+    QuerySnapshot list =
+        await Firestore.instance.collection(globals.locations).getDocuments();
+        print("ADDING LOCATIONS!!!");
+    list.documents.forEach((doc) {
+      globals.existingLocations.add(doc.data['name']);
+      // globals.categories.add(doc.data['categories']);
+
+      // print(doc.data['name']);
+    });
+  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -227,6 +241,8 @@ class _signInScreenState extends State<signInScreen> {
                           //Direct To SuperUserView directly
                           print("UID??????: " + e);
                           globals.userLoginID = "AppSignInUser" + username;
+                          getCollections();
+                          
                           getData().then((value) {
                           if (value) {
                             Navigator.push(

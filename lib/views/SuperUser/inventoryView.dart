@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
 import 'package:RentalAdmin/views/SuperUser/UpdateItemDialog.dart';
+import 'package:RentalAdmin/views/SuperUser/newLocationDialog.dart';
+import 'package:RentalAdmin/views/SuperUser/NewCategory.dart';
 import 'newItemDialog.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 class SuperuserInventoryView extends StatefulWidget {
@@ -38,11 +40,45 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
           showDialog(
               context: context,
               builder: (ctxt) {
+                return NewLocationDialog();
+              });
+        },
+        child: Text(
+          "Add Location",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      MaterialButton(
+        color: Colors.teal,
+        shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(20.0),
+            side: BorderSide(color: Colors.white)),
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (ctxt) {
+                return NewCategory();
+              });
+        },
+        child: Text(
+          "Add a Category",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      MaterialButton(
+        color: Colors.teal,
+        shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(20.0),
+            side: BorderSide(color: Colors.white)),
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (ctxt) {
                 return NewItemDialog();
               });
         },
         child: Text(
-          "Add new item",
+          "Add New item",
           style: TextStyle(color: Colors.white),
         ),
       ),

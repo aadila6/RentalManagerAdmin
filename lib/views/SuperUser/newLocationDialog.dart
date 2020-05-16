@@ -7,17 +7,16 @@ import 'package:firebase/firebase.dart' as fb;
 import 'package:universal_html/prefer_universal/html.dart' as html;
 import 'package:RentalAdmin/views/globals.dart' as globals;
 
-class NewItemDialog extends StatefulWidget {
+class NewLocationDialog extends StatefulWidget {
   @override
-  _NewItemDialogState createState() => _NewItemDialogState();
+  _NewLocationDialogState createState() => _NewLocationDialogState();
 }
 
-class _NewItemDialogState extends State<NewItemDialog> {
+class _NewLocationDialogState extends State<NewLocationDialog> {
   @override
   void initState() {
     super.initState();
     print(globals.existingLocations);
-    getCollections();
     // print(globals.existingLocations[0]);
     // getCollections();
   }
@@ -53,18 +52,6 @@ class _NewItemDialogState extends State<NewItemDialog> {
       _uploadedFileURL = fileURL.toString();
     });
   }
-  Future getCollections() async {
-    globals.existingLocations = ['Select a Location'];
-    QuerySnapshot list =
-        await Firestore.instance.collection(globals.locations).getDocuments();
-        print("ADDING LOCATIONS!!!");
-    list.documents.forEach((doc) {
-      globals.existingLocations.add(doc.data['name']);
-      // globals.categories.add(doc.data['categories']);
-
-      // print(doc.data['name']);
-    });
-  }
 
   Future getCategories(String locationName) async {
     List<dynamic> names;
@@ -81,7 +68,6 @@ class _NewItemDialogState extends State<NewItemDialog> {
       });
       print("GLOBAL CAT :");
       print(globals.categories);
-      
 
     });
   }
@@ -92,7 +78,7 @@ class _NewItemDialogState extends State<NewItemDialog> {
   //   list.documents.forEach((doc) => globals.existingLocations.add(doc.data['name']));
   // }
 
-  String _itemName;
+  String _locationNme;
   String _itemCount;
   String defaultURL =
       "https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b";
@@ -119,43 +105,43 @@ class _NewItemDialogState extends State<NewItemDialog> {
                       : Container(),
                   // Text("Add new item"),
                   //Selecting a location?
-                  SizedBox(
-                      child: customDropDownMwnu(
-                          globals.existingLocations, _collectionSelected,0)),
-                  //Selecting a category?
-                  SizedBox(
-                      child: customDropDownMwnu(
-                          globals.categories, _categorySelected,1)),
+                  // SizedBox(
+                  //     child: customDropDownMwnu(
+                  //         globals.existingLocations, _collectionSelected,0)),
+                  // //Selecting a category?
+                  // SizedBox(
+                  //     child: customDropDownMwnu(
+                  //         globals.categories, _categorySelected,1)),
                   TextField(
                     onChanged: (text) {
-                      _itemName = text;
+                      _locationNme = text;
                       print("First text field: $text");
                     },
                     autofocus: true,
                     decoration: InputDecoration(
-                      labelText: "Item Name",
+                      labelText: "Location Name",
                     ),
                   ),
-                  TextField(
-                    onChanged: (text) {
-                      _itemCount = text;
-                      print("First text field: $text");
-                    },
-                    decoration: InputDecoration(
-                      labelText: "Item Amount",
-                    ),
-                  ),
+                  // TextField(
+                  //   onChanged: (text) {
+                  //     _itemCount = text;
+                  //     print("First text field: $text");
+                  //   },
+                  //   decoration: InputDecoration(
+                  //     labelText: "Item Amount",
+                  //   ),
+                  // ),
 
                   RaisedButton(
                       onPressed: () {
-                        // uploadFile().then((value) => testingUploadItem(_itemName, _itemCount));
-                        testingUploadItem(_itemName, _itemCount);
+                        // uploadFile().then((value) => testingUploadItem(_locationNme, _itemCount));
+                        testingUploadItem(_locationNme);
                       },
                       child: Text("Submit"))
                 ]))));
   }
 
-  testingUploadItem(String itemName, String itemCount) async {
+  testingUploadItem(String itemName) async {
     final databaseReference = Firestore.instance;
     String url;
     if (_uploadedFileURL == null) {
@@ -165,14 +151,11 @@ class _NewItemDialogState extends State<NewItemDialog> {
       url = _uploadedFileURL;
     }
     await databaseReference
-        .collection(globals.items_global)
+        .collection(globals.locations)
         .document()
         .setData({
-      'category': _categorySelected,
       'imageURL': url,
       'name': itemName,
-      'Location':_collectionSelected,
-      '# of items': itemCount,
     }).then((value) {
       Navigator.pop(context);
     });
