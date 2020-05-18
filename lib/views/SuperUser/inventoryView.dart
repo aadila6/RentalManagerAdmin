@@ -4,6 +4,7 @@ import 'package:RentalAdmin/views/SuperUser/theme.dart';
 import 'package:RentalAdmin/views/SuperUser/UpdateItemDialog.dart';
 import 'newItemDialog.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
+import 'ImportCSVDialog.dart';
 
 class SuperuserInventoryView extends StatefulWidget {
   @override
@@ -29,23 +30,43 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
           backgroundColor: drawerBgColor,
         ),
       ),
-      MaterialButton(
-        color: Colors.teal,
-        shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(20.0),
-            side: BorderSide(color: Colors.white)),
-        onPressed: () {
-          showDialog(
-              context: context,
-              builder: (ctxt) {
-                return NewItemDialog();
-              });
-        },
-        child: Text(
-          "Add new item",
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
+      Row(
+        children:[
+          MaterialButton(
+            color: Colors.teal,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(20.0),
+                side: BorderSide(color: Colors.white)),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (ctxt) {
+                    return NewItemDialog();
+                  });
+            },
+            child: Text(
+              "Add new item",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          MaterialButton(
+            color: Colors.teal,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(20.0),
+                side: BorderSide(color: Colors.white)),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (ctxt) {
+                    return ImportCSVDialog();
+                  });
+            },
+            child: Text(
+              "Import CSV",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+      ]),
       Expanded(
         child: StreamBuilder(
             stream:

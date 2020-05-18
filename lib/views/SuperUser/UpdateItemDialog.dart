@@ -46,7 +46,7 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
   }
 
   String _itemName;
-  String _itemCount;
+  int _itemCount;
   String _url =
       'https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/cat.jpg?alt=media&token=78818628-9471-421d-8969-76d68b07f591';
 
@@ -56,7 +56,7 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
     _itemCount = widget.itemSelected.data['amount'];
     _url = widget.itemSelected.data['imageURL'];
     controller.text = widget.itemSelected.data['name'];
-    controller2.text = widget.itemSelected.data['amount'];
+    controller2.text = widget.itemSelected.data['amount'].toString();
     return Dialog(
         child: ConstrainedBox(
             constraints: BoxConstraints(maxWidth: 500, maxHeight: 500),
@@ -90,7 +90,7 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
                   TextField(
                     controller: controller2,
                     onChanged: (text) {
-                      _itemCount = text;
+                      _itemCount = int.parse(text);
                       print("First text field: $text");
                     },
                     decoration: InputDecoration(
