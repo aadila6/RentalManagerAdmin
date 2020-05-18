@@ -1,3 +1,4 @@
+import 'package:RentalAdmin/views/SuperUser/SuperuserPanel.dart';
 import 'package:RentalAdmin/views/homeView.dart';
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/InventoryView.dart';
@@ -5,7 +6,7 @@ import 'package:RentalAdmin/views/InventoryView.dart';
 import 'package:RentalAdmin/views/ReservationView.dart';
 import 'package:RentalAdmin/views/ReservationView.dart';
 import 'package:RentalAdmin/views/signInScreen.dart';
-
+import 'package:RentalAdmin/views/globals.dart' as globals;
 class NavigationBar extends StatelessWidget {
   const NavigationBar({Key key}) : super(key: key);
   @override
@@ -32,11 +33,14 @@ class NavigationBar extends StatelessWidget {
                       // borderRadius: new BorderRadius.circular(18.0),
                       side: BorderSide(color: Colors.white)),
                   onPressed: () {
-                    print("Pressed Support button!!");
-                    Navigator.push(
+                    print("Pressed Admin login");
+                    if(globals.admin)
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => signInScreen()));
+                            builder: (context) => SuperuserPanel()));
+                    else 
+                      print("No permission");
                   },
                   child: Text(
                     "Admin Login",

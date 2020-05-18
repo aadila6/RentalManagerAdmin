@@ -17,7 +17,7 @@ class _NewItemDialogState extends State<NewItemDialog> {
   String _uploadedFileURL;
   html.File image;
   Future pickImage() async {
-  print("Begin pick Image");
+    print("Begin pick Image");
     html.File imageFile =
         await ImagePickerWeb.getImage(outputType: ImageType.file);
     if (imageFile != null) {
@@ -26,21 +26,25 @@ class _NewItemDialogState extends State<NewItemDialog> {
       uploadFile();
     }
   }
+
   Future uploadFile() async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     fb.StorageReference storageRef = fb.storage().ref('images/$fileName');
-    fb.UploadTaskSnapshot uploadTaskSnapshot = await storageRef.put(image).future;
+    fb.UploadTaskSnapshot uploadTaskSnapshot =
+        await storageRef.put(image).future;
     await uploadTaskSnapshot.ref.getDownloadURL().then((fileURL) {
-     setState(() {
-       print("DEBUG URLLLLLL:" + fileURL.toString());
+      setState(() {
+        print("DEBUG URLLLLLL:" + fileURL.toString());
         defaultURL = fileURL.toString();
-     });
-     _uploadedFileURL = fileURL.toString();
-   });
+      });
+      _uploadedFileURL = fileURL.toString();
+    });
   }
+
   String _itemName;
   String _itemCount;
-  String defaultURL = "https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b";
+  String defaultURL =
+      "https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b";
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +58,8 @@ class _NewItemDialogState extends State<NewItemDialog> {
                     radius: 50,
                     backgroundImage: NetworkImage(defaultURL),
                   ),
-                  SizedBox(height:10),
-                   _image == null
+                  SizedBox(height: 10),
+                  _image == null
                       ? RaisedButton(
                           child: Text('Choose Image'),
                           onPressed: pickImage,
@@ -82,7 +86,7 @@ class _NewItemDialogState extends State<NewItemDialog> {
                       labelText: "Item Amount",
                     ),
                   ),
-                 
+
                   RaisedButton(
                       onPressed: () {
                         // uploadFile().then((value) => testingUploadItem(_itemName, _itemCount));
@@ -95,19 +99,22 @@ class _NewItemDialogState extends State<NewItemDialog> {
   testingUploadItem(String itemName, String itemCount) async {
     final databaseReference = Firestore.instance;
     String url;
-    if(_uploadedFileURL == null){
+    if (_uploadedFileURL == null) {
       print("DEBUG:  URL is Empty");
       url = defaultURL;
-    }else{
+    } else {
       url = _uploadedFileURL;
     }
-    await databaseReference.collection(globals.items_global).document().setData({
+    await databaseReference
+        .collection(globals.items_global)
+        .document()
+        .setData({
       'Category': "sport",
       'imageURL': url,
       'isAvaliable': "true",
       'name': itemName,
       'amount': itemCount,
-    }).then((value){
+    }).then((value) {
       Navigator.pop(context);
     });
     // return ;

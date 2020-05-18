@@ -1,9 +1,10 @@
-import 'package:RentalAdmin/widgets/newRolePopup.dart';
+//import 'package:RentalAdmin/widgets/newRolePopup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
 import 'newItemDialog.dart';
 import 'HttpRequestModel.dart';
+import 'package:RentalAdmin/views/globals.dart' as globals;
 
 class SuperUserMgtView extends StatefulWidget {
   @override
@@ -14,13 +15,26 @@ class SuperUserMgtView extends StatefulWidget {
 
 class SuperUserMgtViewState extends State<SuperUserMgtView> {
   bool isReady = false;
-  List<User> allUsers;
-  Future<List<User>> allUserFuture;
+  var allUsers;
+  List<User> allUserList = List();
+
+  void fetchFromFirebase() {
+    print("Firebase request1");
+    //List<User> res = List();
+    Firestore.instance.collection("global_users").where('organization', isEqualTo: globals.organization)
+    .snapshots().listen((s) {
+      s.documents.forEach((e) {
+        allUserList.add(User(email: e.data['Email'],admin: e.data['Admin']));
+      });
+      setState((){});
+    });
+  }
   @override
   void initState() {
     super.initState();
     //print("@#!@#!@#!@#!@#!#@");
-    //allUserFuture = fetchUser();
+    //allUserFuture = fetchUser();allUsers
+    fetchFromFirebase();
     print("Init Finished");
   }
 
@@ -35,104 +49,68 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
           ),
           backgroundColor: drawerBgColor,
         ),
-        body: SingleChildScrollView(
-            child: FutureBuilder(
-                future: fetchUserFake(),
-                builder: (ctxt, snapshot) {
-                  if (snapshot.hasData)
-                    return Column(
-                        children: snapshot.data.map<Widget>((e) {
-                      return userRowBuilder(e);
-                    }).toList());
-                  else
-                    return Text("NULL");
-                })));
+        body: ListView.builder(
+          padding: EdgeInsets.fromLTRB(30, 20, 30, 0),
+          itemCount: allUserList.length + 1,
+          itemBuilder: (c,i){
+            if(i==0)
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Email",
+                  style: TextStyle(
+                    fontSize: 30
+                  ),),
+                  Text("is Admin",
+                  style: TextStyle(
+                    fontSize: 30
+                  ))
+                ],
+              );
+            
+            return userRowBuilder(allUserList[i-1]);
+          }
+        )
+    );
   }
 
   Widget userRowBuilder(User u) {
     return Row(
       //mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        Spacer(),
         Text(u.email),
         Spacer(),
-        Row(
-            children:
-                u.roles.map<Widget>((e) => ActionChip(
-                  label: Text(e),
-                  //deleteIcon: Icon(Icons.delete),
-                  onPressed: (){
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return confirmationPopup(u.email, e);
-                      },
-                      );
-                  },
-                  )).toList() +
-                    [ActionChip(
-                      avatar: Icon(Icons.add),
-                      onPressed: () {
-
-                        showDialog(context: context,
-                        builder:(ctext){
-                          var selectedRole = 'admin';
-                          return AlertDialog(
-      title: Text("Add new role"),
-      content: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-        return DropdownButton(
-          value: selectedRole,
-          items: ["admin", "frontdesk", "user"]
-              .map((e) => DropdownMenuItem(child: Text(e), value: e))
-              .toList(),
-          onChanged: (v) {
-            print(v);
-            setState(() {
-              selectedRole = v;
-            });
-          });}),
-        actions: <Widget>[
-        RaisedButton(child: Text("No"),onPressed: (){
-          Navigator.of(context).pop();
-        }),
-        RaisedButton(child: Text("Yes"),onPressed: (){
-          modifyRoleFake(u.email,selectedRole,true);
-          setState(() {
-            
-          });
-          Navigator.of(context).pop();
-        }),
-      ],
-    );
-                        });
-                        setState(() {
-                          
-                        });
-                      },
-                      label: Text("New role"),
-                    )]),
-        Spacer(),
+        Checkbox(value: u.admin, onChanged: (newVal){
+          if(newVal) {
+            modifyAdmin(u.email,true);
+          } else {
+            modifyAdmin(u.email,false);
+          }
+          u.admin =! u.admin;
+          setState((){});
+        })
       ],
     );
   }
-  
 
-  Widget confirmationPopup(String user, String s) {
-    return AlertDialog(
-      title: Text("Delete"),
-      content: Text("Deleting Role $s from user $user. Are you sure?"),
-      actions: <Widget>[
-        RaisedButton(child: Text("No"),onPressed: (){
-          Navigator.of(context).pop();
-        }),
-        RaisedButton(child: Text("Yes"),onPressed: (){
-          modifyRoleFake(user,s,false);
-          setState(() {
-            
-          });
-          Navigator.of(context).pop();
-        }),
-      ],
-    );
-  }
+//   Widget confirmationPopup(String user, String s) {
+//     return AlertDialog(
+//       title: Text("Delete"),
+//       content: Text("Deleting Role $s from user $user. Are you sure?"),
+//       actions: <Widget>[
+//         RaisedButton(
+//             child: Text("No"),
+//             onPressed: () {
+//               Navigator.of(context).pop();
+//             }),
+//         RaisedButton(
+//             child: Text("Yes"),
+//             onPressed: () {
+//               modifyRoleFake(user, s, false);
+//               setState(() {});
+//               Navigator.of(context).pop();
+//             }),
+//       ],
+//     );
+//   }
 }

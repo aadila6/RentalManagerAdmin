@@ -185,9 +185,7 @@ class _SignUpDlgState extends State<SignUpDlg> {
                         textColor: Colors.white,
                         color: Colors.teal.shade900,
                         child: Text('SIGN UP'),
-                        onPressed: () async {
-                          
-                        },
+                        onPressed: () async {},
                         padding: EdgeInsets.all(10.0),
                         disabledColor: Colors.black,
                         disabledTextColor: Colors.black,

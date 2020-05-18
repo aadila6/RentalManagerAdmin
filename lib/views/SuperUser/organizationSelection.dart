@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:RentalAdmin/views/SignUpDialog.dart';
+
 class OrganizationSelection extends StatefulWidget {
   @override
   _OrganizationSelectionState createState() => _OrganizationSelectionState();
@@ -9,7 +10,7 @@ class OrganizationSelection extends StatefulWidget {
 
 class _OrganizationSelectionState extends State<OrganizationSelection> {
   Future navigateToSignUp(String orgSelected, BuildContext context) {
-    print("Selected the Organization: "+orgSelected);
+    print("Selected the Organization: " + orgSelected);
     return Navigator.push(
       context,
       MaterialPageRoute(
@@ -54,12 +55,13 @@ class _OrganizationSelectionState extends State<OrganizationSelection> {
           );
         });
   }
+
   Future addOrganization(String newOrganization) async {
-  await Firestore.instance
-      .collection('organizations')
-      .document()
-      .setData({'name': newOrganization});
-}
+    await Firestore.instance
+        .collection('organizations')
+        .document()
+        .setData({'name': newOrganization});
+  }
 
   Future exisitDialog(BuildContext context) {
     return showDialog(

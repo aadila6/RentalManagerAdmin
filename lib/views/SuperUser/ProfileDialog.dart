@@ -15,6 +15,7 @@ class UpdateProfile extends StatefulWidget {
 TextEditingController controller = TextEditingController();
 TextEditingController controller2 = TextEditingController();
 TextEditingController controller3 = TextEditingController();
+
 class _UpdateProfileState extends State<UpdateProfile> {
   File _image;
   html.File image;
@@ -44,8 +45,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
   }
 
   String userName = globals.username;
-  String employeeID =  globals.rentalID;
-  String phoneNumber =  globals.phoneNumber;
+  String employeeID = globals.rentalID;
+  String phoneNumber = globals.phoneNumber;
   String _url = globals.userImageUrl;
 
   @override
@@ -95,7 +96,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       labelText: "Employee ID",
                     ),
                   ),
-                   TextField(
+                  TextField(
                     controller: controller3,
                     onChanged: (text) {
                       phoneNumber = text;
@@ -107,15 +108,14 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   ),
                   RaisedButton(
                       onPressed: () {
-                         updateDBs();
-                          Navigator.pop(context);
+                        updateDBs();
+                        Navigator.pop(context);
                       },
                       child: Text("Update"))
                 ]))));
   }
 
-  
-Future updateDBs() async{
+  Future updateDBs() async {
     final firestore = Firestore.instance;
     await firestore
         .collection('global_users')
@@ -123,12 +123,12 @@ Future updateDBs() async{
         .updateData({
       'Name': userName,
       'PhoneNumber': phoneNumber,
-      'RentalID':employeeID,
-      'imageURL':_url,
+      'RentalID': employeeID,
+      'imageURL': _url,
     }).catchError((error) => print(error));
     globals.rentalID = employeeID;
     globals.username = userName;
     globals.phoneNumber = phoneNumber;
     globals.userImageUrl = _url;
-}
+  }
 }

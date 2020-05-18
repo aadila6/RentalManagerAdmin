@@ -4,6 +4,7 @@ import 'package:RentalAdmin/views/SuperUser/theme.dart';
 import 'package:RentalAdmin/views/SuperUser/UpdateItemDialog.dart';
 import 'newItemDialog.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
+
 class SuperuserInventoryView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -28,7 +29,6 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
           backgroundColor: drawerBgColor,
         ),
       ),
-
       MaterialButton(
         color: Colors.teal,
         shape: new RoundedRectangleBorder(
@@ -48,7 +48,8 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
       ),
       Expanded(
         child: StreamBuilder(
-            stream: Firestore.instance.collection(globals.items_global).snapshots(),
+            stream:
+                Firestore.instance.collection(globals.items_global).snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) return const Text('loading...');
 
@@ -78,6 +79,7 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
       )
     ]);
   }
+
   navigateToDetail(DocumentSnapshot indexedData) {
     return UpdateItemDialog(itemSelected: indexedData);
   }

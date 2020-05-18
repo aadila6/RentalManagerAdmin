@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
+
 class MenuItemTile extends StatefulWidget {
   final String title;
   final IconData icon;
@@ -18,7 +19,6 @@ class MenuItemTile extends StatefulWidget {
 
   @override
   _MenuItemTileState createState() => _MenuItemTileState();
-
 }
 
 class _MenuItemTileState extends State<MenuItemTile> {

@@ -22,9 +22,8 @@ class _RecentActivities extends State<RecentActivities> {
     final FirebaseUser user = await FirebaseAuth.instance.currentUser();
     // final userID = user.uid;
     final firestore = Firestore.instance;
-    QuerySnapshot itemListDOC = await firestore
-        .collection(globals.reservation_global)
-        .getDocuments();
+    QuerySnapshot itemListDOC =
+        await firestore.collection(globals.reservation_global).getDocuments();
     return itemListDOC.documents;
   }
 

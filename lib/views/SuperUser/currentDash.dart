@@ -12,8 +12,6 @@ class ActivityWidget extends StatefulWidget {
 }
 
 class _ActivityWidgetState extends State<ActivityWidget> {
-  
-  
   Future getFirestoreData() async {
     final firestore = Firestore.instance;
     QuerySnapshot itemListDOC = await firestore
@@ -51,8 +49,9 @@ class _ActivityWidgetState extends State<ActivityWidget> {
             // SizedBox(height: 20),
             Expanded(
               child: StreamBuilder(
-                  stream:
-                      Firestore.instance.collection(globals.reservation_global).snapshots(),
+                  stream: Firestore.instance
+                      .collection(globals.reservation_global)
+                      .snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) return const Text('loading...');
                     return ListView.builder(

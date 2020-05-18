@@ -107,8 +107,7 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
                   RaisedButton(
                       onPressed: () {
                         updateAll();
-                          Navigator.pop(context);
-                        
+                        Navigator.pop(context);
                       },
                       child: Text("Update Item"))
                 ]))));
