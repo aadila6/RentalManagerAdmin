@@ -111,32 +111,7 @@ class _DashboardState extends State<Dashboard> {
                                     SizedBox(
                                       height: 20,
                                     ),
-                                    // MaterialButton(
-                                    //   color: Colors.teal,
-                                    //   shape: RoundedRectangleBorder(
-                                    //       borderRadius: BorderRadius.all(
-                                    //           Radius.circular(20.0))),
-                                    //   onPressed: () {
-                                    //     print("Clicked Update Profile");
-
-                                    //     showDialog(
-                                    //         context: context,
-                                    //         builder: (ctxt) {
-                                    //           return UpdateProfile();
-                                    //         });
-                                    //   },
-                                    //   child: Padding(
-                                    //     padding: const EdgeInsets.symmetric(
-                                    //         vertical: 5.0, horizontal: 5.0),
-                                    //     child: Text(
-                                    //       "Update My Profile",
-                                    //       style: TextStyle(
-                                    //           fontSize: 15,
-                                    //           color: Colors.white,
-                                    //           fontWeight: FontWeight.w100),
-                                    //     ),
-                                    //   ),
-                                    // ),
+                                  
                                   ],
                                 ),
                               ],

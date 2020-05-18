@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
 import 'package:RentalAdmin/views/SuperUser/UpdateItemDialog.dart';
 import 'package:RentalAdmin/views/SuperUser/newLocationDialog.dart';
-import 'package:RentalAdmin/views/SuperUser/NewCategory.dart';
+import 'package:RentalAdmin/views/SuperUser/NewCategoryDialog.dart';
 import 'newItemDialog.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 class SuperuserInventoryView extends StatefulWidget {

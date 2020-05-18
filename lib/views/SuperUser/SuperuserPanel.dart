@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:RentalAdmin/views/SuperUser/inventoryView.dart';
+import 'package:RentalAdmin/views/SuperUser/SuperInventoryView.dart';
 import 'package:RentalAdmin/views/SuperUser/SuperLanding.dart';
 import 'package:RentalAdmin/views/signInScreen.dart';
 import 'package:RentalAdmin/views/SuperUser/menu.dart';

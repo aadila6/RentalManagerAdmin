@@ -60,9 +60,7 @@ class _NewCategoryState extends State<NewCategory> {
         print("ADDING LOCATIONS!!!");
     list.documents.forEach((doc) {
       globals.existingLocations.add(doc.data['name']);
-      // globals.categories.add(doc.data['categories']);
-
-      // print(doc.data['name']);
+     
     });
   }
 
@@ -85,12 +83,6 @@ class _NewCategoryState extends State<NewCategory> {
 
     });
   }
-
-  // Future getCollections() async {
-  //   QuerySnapshot list =
-  //       await Firestore.instance.collection(globals.locations).getDocuments();
-  //   list.documents.forEach((doc) => globals.existingLocations.add(doc.data['name']));
-  // }
 
   String _categoryName;
   String _itemCount;
