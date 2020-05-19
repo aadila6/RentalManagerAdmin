@@ -8,6 +8,7 @@ import '../widgets/auth.dart';
 import 'package:RentalAdmin/views/SuperUser/SuperuserPanel.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:RentalAdmin/views/SuperUser/organizationSelection.dart';
+
 class signInScreen extends StatefulWidget {
   @override
   _signInScreenState createState() => _signInScreenState();
@@ -36,7 +37,7 @@ class _signInScreenState extends State<signInScreen> {
 
   Future<void> _handleSignOut() => _googleSignIn.disconnect();
 
-  Future <bool> getData() async {
+  Future<void> getData() async {
     Firestore.instance
         .collection('global_users')
         .document(globals.userLoginID)
@@ -44,6 +45,7 @@ class _signInScreenState extends State<signInScreen> {
         .then((DocumentSnapshot ds) {
       // use ds as a snapshot
       var doc = ds.data;
+      print("ADMIN STATUS: " + doc["Admin"]);
       globals.admin = doc["Admin"];
       globals.uid = doc["uid"];
       globals.username = doc["Name"];
@@ -60,14 +62,15 @@ class _signInScreenState extends State<signInScreen> {
       globals.reservation_global = globals.organization + '_reservations';
       globals.items_global = globals.organization + '_items';
       globals.locations = globals.organization + '_locations';
-      
     });
-    return globals.admin;
+    // return ds.data;
+    return Future.delayed(Duration(seconds: 3), () => 'Large Latte');
   }
+
   Future getCollections() async {
     QuerySnapshot list =
         await Firestore.instance.collection(globals.locations).getDocuments();
-        print("ADDING LOCATIONS!!!");
+    print("ADDING LOCATIONS!!!");
     list.documents.forEach((doc) {
       globals.existingLocations.add(doc.data['name']);
       // globals.categories.add(doc.data['categories']);
@@ -75,7 +78,6 @@ class _signInScreenState extends State<signInScreen> {
       // print(doc.data['name']);
     });
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -105,13 +107,6 @@ class _signInScreenState extends State<signInScreen> {
                   color: Colors.teal.shade900,
                   fontSize: 20,
                   letterSpacing: 2.5,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-                width: 150,
-                child: Divider(
-                  color: Colors.teal.shade900,
                 ),
               ),
               SizedBox(height: 10, width: 150),
@@ -239,12 +234,52 @@ class _signInScreenState extends State<signInScreen> {
                               });
                         } else {
                           //Direct To SuperUserView directly
-                          print("UID??????: " + e);
+                          print("UID: " + e);
                           globals.userLoginID = "AppSignInUser" + username;
-                          getCollections();
-                          
-                          getData().then((value) {
-                          if (value) {
+                          print("------------------1--------------------");
+                          // getCollections();
+                          await Firestore.instance
+                              .collection('global_users')
+                              .document(globals.userLoginID)
+                              .get()
+                              .then((DocumentSnapshot ds) {
+                            // print("------------------2--------------------");
+                            // print(ds.data['Admin']);
+                            // // use ds as a snapshot
+                            var doc = ds.data;
+                            // print(doc['Admin']);
+                            // print('------------------------');
+                            // print(doc["Admin"]);
+                            // print(doc["uid"]);
+                            // print(doc["Name"]);
+                            // print("email STATUS: " + doc["Email"]);
+                            // print("sid STATUS: " + doc["RentalID"]);
+                            // print("url STATUS: " + doc["imageURL"]);
+                            // print("phone STATUS: " + doc["PhoneNumber"]);
+
+                            globals.admin = doc["Admin"];
+                            globals.uid = doc["uid"];
+                            globals.username = doc["Name"];
+                            globals.email = doc["Email"];
+                            globals.rentalID = doc["RentalID"];
+                            globals.userImageUrl = doc["imageURL"];
+                            globals.phoneNumber = doc["PhoneNumber"];
+                            if (globals.userImageUrl == null) {
+                              globals.userImageUrl =
+                                  "https://images.unsplash.com/photo-1581660545544-83b8812f9516?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
+                            }
+                            globals.organization = doc['organization'];
+                            globals.reservation_global =
+                                globals.organization + '_reservations';
+                            globals.items_global =
+                                globals.organization + '_items';
+                            globals.locations =
+                                globals.organization + '_locations';
+                            print("------------------END ----------------");
+                          });
+                          print("------------------3--------------------");
+                          // await getData().then((value) {
+                          if (globals.admin) {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -255,7 +290,7 @@ class _signInScreenState extends State<signInScreen> {
                                 MaterialPageRoute(
                                     builder: (context) => HomeView()));
                           }
-                          });
+                          // });
                         }
                       },
                       padding: EdgeInsets.all(10.0),
@@ -333,14 +368,14 @@ class _signInScreenState extends State<signInScreen> {
                       //     context,
                       //     MaterialPageRoute(
                       //         builder: (context) => SignUpPage()));
-                       Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    //SignUpPage(),
-                                    OrganizationSelection(),
-                              ),
-                            );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              //SignUpPage(),
+                              OrganizationSelection(),
+                        ),
+                      );
                       // showDialog(
                       //     context: context,
                       //     builder: (ctxt) {
@@ -382,9 +417,6 @@ class _signInScreenState extends State<signInScreen> {
                     ),
                   ),
                 ),
-              ),
-              Row(
-                children: <Widget>[],
               ),
             ],
           ),
