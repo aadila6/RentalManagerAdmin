@@ -25,7 +25,7 @@ class _NewLocationDialogState extends State<NewLocationDialog> {
   String _uploadedFileURL;
   html.File image;
   List<DropdownMenuItem<String>> _dropDownMenuItems;
-  String _categorySelected = globals.categories[0];
+  // String _categorySelected = globals.categories[0];
   String _collectionSelected = globals.existingLocations[0];
 
   Future pickImage() async {
@@ -41,7 +41,11 @@ class _NewLocationDialogState extends State<NewLocationDialog> {
 
   Future uploadFile() async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+
     fb.StorageReference storageRef = fb.storage().ref('images/$fileName');
+    
+    print("DEBUG REF IS: ");
+    print(storageRef);
     fb.UploadTaskSnapshot uploadTaskSnapshot =
         await storageRef.put(image).future;
     await uploadTaskSnapshot.ref.getDownloadURL().then((fileURL) {
@@ -98,7 +102,7 @@ class _NewLocationDialogState extends State<NewLocationDialog> {
                   SizedBox(height: 10),
                   _image == null
                       ? RaisedButton(
-                          child: Text('Choose Image'),
+                          child: Text('Choose Location Image'),
                           onPressed: pickImage,
                           color: Colors.cyan,
                         )
@@ -143,6 +147,7 @@ class _NewLocationDialogState extends State<NewLocationDialog> {
 
   testingUploadItem(String itemName) async {
     final databaseReference = Firestore.instance;
+    // List<dynamic> emptyList = [];
     String url;
     if (_uploadedFileURL == null) {
       print("DEBUG:  URL is Empty");
@@ -156,6 +161,8 @@ class _NewLocationDialogState extends State<NewLocationDialog> {
         .setData({
       'imageURL': url,
       'name': itemName,
+      'categories' : [],
+      //categories
     }).then((value) {
       Navigator.pop(context);
     });
@@ -202,8 +209,6 @@ class _NewLocationDialogState extends State<NewLocationDialog> {
                 print("GETTING INSIDE THE 0");
                 getCategories(optionSelected);
                  _collectionSelected = optionSelected;
-              }else{
-                _categorySelected = optionSelected;
               }
             });
           },

@@ -17,14 +17,6 @@ class _DashboardState extends State<Dashboard> {
   String numTotalInventory = '0';
   String numDamaged = '0';
 
-  Future getFirestoreData() async {
-    //   numTotalInventory = Firestore.instance.collection(globals.items_global).snapshots().length.toString();
-    //   Firestore.instance.collection(globals.items_global).getDocuments().then((myDocuments){
-    //     numTotalInventory = myDocuments.documents.length.toString();
-    // });
-    //   numUsedToday = Firestore.instance.collection(globals.reservation_global).snapshots().length.toString();
-    //   print(numTotalInventory);
-  }
   Future countDocuments() async {
     QuerySnapshot _myDoc = await Firestore.instance
         .collection(globals.items_global)
@@ -65,7 +57,7 @@ class _DashboardState extends State<Dashboard> {
                         elevation: 4,
                         centerTitle: true,
                         title: Text(
-                          'Rental Manager Admin ',
+                          'Rental Manager Admin - ' + globals.organization,
                         ),
                         backgroundColor: drawerBgColor,
                       ),
@@ -111,7 +103,6 @@ class _DashboardState extends State<Dashboard> {
                                     SizedBox(
                                       height: 20,
                                     ),
-                                  
                                   ],
                                 ),
                               ],

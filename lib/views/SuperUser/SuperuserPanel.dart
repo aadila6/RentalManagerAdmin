@@ -5,6 +5,7 @@ import 'package:RentalAdmin/views/signInScreen.dart';
 import 'package:RentalAdmin/views/SuperUser/menu.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
 import 'package:RentalAdmin/views/SuperUser/UserManagement.dart';
+import 'package:RentalAdmin/views/SuperUser/InventoryVC/TestInventory.dart';
 import 'package:RentalAdmin/views/SuperUser/ProfileDialog.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,7 +23,8 @@ class SuperuserPanelState extends State<SuperuserPanel>
   TabController tabController;
   final List<Tab> myTabs = <Tab>[
     Tab(child: Dashboard()),
-    Tab(child: SuperuserInventoryView()),
+    // Tab(child: SuperuserInventoryView()),
+    Tab(child: FirstTab()),
     Tab(child: SuperUserMgtView()),
     // Tab(child: ListPage()),
     // Tab(child: ),

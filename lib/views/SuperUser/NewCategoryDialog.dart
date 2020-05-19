@@ -8,6 +8,9 @@ import 'package:universal_html/prefer_universal/html.dart' as html;
 import 'package:RentalAdmin/views/globals.dart' as globals;
 
 class NewCategory extends StatefulWidget {
+  String locationSelected;
+  String locationName;
+  NewCategory({this.locationSelected, this.locationName});
   @override
   _NewCategoryState createState() => _NewCategoryState();
 }
@@ -17,8 +20,7 @@ class _NewCategoryState extends State<NewCategory> {
   void initState() {
     super.initState();
     print(globals.existingLocations);
-    getCollections();
-    // print(globals.existingLocations[0]);
+    getCategories(this.widget.locationName);
     // getCollections();
   }
 
@@ -26,8 +28,8 @@ class _NewCategoryState extends State<NewCategory> {
   String _uploadedFileURL;
   html.File image;
   List<DropdownMenuItem<String>> _dropDownMenuItems;
-  String _categorySelected = globals.categories[0];
-  String _collectionSelected = globals.existingLocations[0];
+  // String _categorySelected = globals.categories[0];
+  // String _collectionSelected = globals.existingLocations[0];
 
   Future pickImage() async {
     print("Begin pick Image");
@@ -53,34 +55,33 @@ class _NewCategoryState extends State<NewCategory> {
       _uploadedFileURL = fileURL.toString();
     });
   }
-  Future getCollections() async {
-    globals.existingLocations = ['Select a Location'];
-    QuerySnapshot list =
-        await Firestore.instance.collection(globals.locations).getDocuments();
-        print("ADDING LOCATIONS!!!");
-    list.documents.forEach((doc) {
-      globals.existingLocations.add(doc.data['name']);
-     
-    });
-  }
 
+  // Future getCollections() async {
+  //   globals.existingLocations = ['Select a Location'];
+  //   QuerySnapshot list =
+  //       await Firestore.instance.collection(globals.locations).getDocuments();
+  //   print("ADDING LOCATIONS!!!");
+  //   list.documents.forEach((doc) {
+  //     globals.existingLocations.add(doc.data['name']);
+  //   });
+  // }
+  //  List<dynamic> categoryList;
+  List<Map<dynamic, dynamic>> categoryList = [];
   Future getCategories(String locationName) async {
-    List<dynamic> names;
+    //First get the name
     QuerySnapshot list = await Firestore.instance
         .collection(globals.locations)
         .where('name', isEqualTo: locationName)
         .getDocuments();
     list.documents.forEach((doc) {
-      names = List.from(doc.data['categories']);
+      categoryList = List.from(doc.data['categories']);
       print("Printing NAMESSSSSSSS!!!!!!!!!!!!");
-      names.forEach((element) {
+      categoryList.forEach((element) {
         print(element['name']);
-         globals.categories.add(element['name']);
+        //  globals.categories.add(element['name']);
       });
       print("GLOBAL CAT :");
-      print(globals.categories);
-      
-
+      print(categoryList);
     });
   }
 
@@ -104,20 +105,11 @@ class _NewCategoryState extends State<NewCategory> {
                   SizedBox(height: 10),
                   _image == null
                       ? RaisedButton(
-                          child: Text('Choose Image'),
+                          child: Text('Choose Category Image'),
                           onPressed: pickImage,
                           color: Colors.cyan,
                         )
                       : Container(),
-                  // Text("Add new item"),
-                  //Selecting a location?
-                  SizedBox(
-                      child: customDropDownMwnu(
-                          globals.existingLocations, _collectionSelected,0)),
-                  //Selecting a category?
-                  // SizedBox(
-                  //     child: customDropDownMwnu(
-                  //         globals.categories, _categorySelected,1)),
                   TextField(
                     onChanged: (text) {
                       _categoryName = text;
@@ -125,29 +117,19 @@ class _NewCategoryState extends State<NewCategory> {
                     },
                     autofocus: true,
                     decoration: InputDecoration(
-                      labelText: "Item Name",
+                      labelText: "Category Name",
                     ),
                   ),
-                  // TextField(
-                  //   onChanged: (text) {
-                  //     _itemCount = text;
-                  //     print("First text field: $text");
-                  //   },
-                  //   decoration: InputDecoration(
-                  //     labelText: "Item Amount",
-                  //   ),
-                  // ),
-
                   RaisedButton(
                       onPressed: () {
                         // uploadFile().then((value) => testingUploadItem(_categoryName, _itemCount));
-                        testingUploadItem(_categoryName, _itemCount);
+                        testingUploadItem(_categoryName);
                       },
                       child: Text("Submit"))
                 ]))));
   }
 
-  testingUploadItem(String itemName, String itemCount) async {
+  testingUploadItem(String itemName) async {
     final databaseReference = Firestore.instance;
     String url;
     if (_uploadedFileURL == null) {
@@ -156,19 +138,14 @@ class _NewCategoryState extends State<NewCategory> {
     } else {
       url = _uploadedFileURL;
     }
-    await databaseReference
-        .collection(globals.items_global)
-        .document()
-        .setData({
-      'category': _categorySelected,
-      'imageURL': url,
-      'name': itemName,
-      'Location':_collectionSelected,
-      '# of items': itemCount,
-    }).then((value) {
-      Navigator.pop(context);
+
+    categoryList.add({'name': itemName, 'imageURL': url});
+    await Firestore.instance
+        .collection(globals.locations)
+        .document(this.widget.locationSelected)
+        .updateData({
+      "categories": categoryList,
     });
-    // return ;
     print("Finish uploading");
   }
 
@@ -207,12 +184,10 @@ class _NewCategoryState extends State<NewCategory> {
             print(optionSelected);
             setState(() {
               // _collectionSelected = optionSelected;
-              if(pos == 0){
+              if (pos == 0) {
                 print("GETTING INSIDE THE 0");
-                getCategories(optionSelected);
-                 _collectionSelected = optionSelected;
-              }else{
-                _categorySelected = optionSelected;
+                // getCategories(optionSelected);
+                // _collectionSelected = optionSelected;
               }
             });
           },

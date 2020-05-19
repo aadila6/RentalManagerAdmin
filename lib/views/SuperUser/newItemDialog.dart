@@ -8,6 +8,9 @@ import 'package:universal_html/prefer_universal/html.dart' as html;
 import 'package:RentalAdmin/views/globals.dart' as globals;
 
 class NewItemDialog extends StatefulWidget {
+    String categorySelected;
+  String locationSelected;
+  NewItemDialog({this.categorySelected, this.locationSelected});
   @override
   _NewItemDialogState createState() => _NewItemDialogState();
 }
@@ -26,8 +29,8 @@ class _NewItemDialogState extends State<NewItemDialog> {
   String _uploadedFileURL;
   html.File image;
   List<DropdownMenuItem<String>> _dropDownMenuItems;
-  String _categorySelected = globals.categories[0];
-  String _collectionSelected = globals.existingLocations[0];
+  // String _categorySelected = this.wicategorySelected;
+  // String _collectionSelected = globals.existingLocations[0];
 
   Future pickImage() async {
     print("Begin pick Image");
@@ -119,13 +122,13 @@ class _NewItemDialogState extends State<NewItemDialog> {
                       : Container(),
                   // Text("Add new item"),
                   //Selecting a location?
-                  SizedBox(
-                      child: customDropDownMwnu(
-                          globals.existingLocations, _collectionSelected,0)),
-                  //Selecting a category?
-                  SizedBox(
-                      child: customDropDownMwnu(
-                          globals.categories, _categorySelected,1)),
+                  // SizedBox(
+                  //     child: customDropDownMwnu(
+                  //         globals.existingLocations, _collectionSelected,0)),
+                  // //Selecting a category?
+                  // SizedBox(
+                  //     child: customDropDownMwnu(
+                  //         globals.categories, _categorySelected,1)),
                   TextField(
                     onChanged: (text) {
                       _itemName = text;
@@ -168,11 +171,11 @@ class _NewItemDialogState extends State<NewItemDialog> {
         .collection(globals.items_global)
         .document()
         .setData({
-      'category': _categorySelected,
+      'category': this.widget.categorySelected,
       'imageURL': url,
       'name': itemName,
-      'Location':_collectionSelected,
-      '# of items': itemCount,
+      'Location':this.widget.locationSelected,
+      'amount': itemCount,
     }).then((value) {
       Navigator.pop(context);
     });
@@ -215,13 +218,13 @@ class _NewItemDialogState extends State<NewItemDialog> {
             print(optionSelected);
             setState(() {
               // _collectionSelected = optionSelected;
-              if(pos == 0){
-                print("GETTING INSIDE THE 0");
-                getCategories(optionSelected);
-                 _collectionSelected = optionSelected;
-              }else{
-                _categorySelected = optionSelected;
-              }
+              // if(pos == 0){
+              //   print("GETTING INSIDE THE 0");
+              //   getCategories(optionSelected);
+              //    _collectionSelected = optionSelected;
+              // }else{
+              //   _categorySelected = optionSelected;
+              // }
             });
           },
           value: selected),
