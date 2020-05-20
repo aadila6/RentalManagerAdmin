@@ -11,11 +11,11 @@ class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
 }
-
+String numTotalInventory = '0';
 class _DashboardState extends State<Dashboard> {
   String numUsedToday = '0';
-  String numTotalInventory = '0';
-  String numDamaged = '0';
+  // numTotalInventory = '0';
+  // String numDamaged = '0';
 
   Future countDocuments() async {
     QuerySnapshot _myDoc = await Firestore.instance
@@ -23,17 +23,21 @@ class _DashboardState extends State<Dashboard> {
         .getDocuments();
     List<DocumentSnapshot> _myDocCount = _myDoc.documents;
     numTotalInventory = _myDocCount.length.toString();
-    print(globals.items_global);
+    // print(globals.items_global);
     print(numTotalInventory); // Count of Documents in Collection
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    countDocuments();
   }
 
   @override
   Widget build(BuildContext context) {
     final _media = MediaQuery.of(context).size;
-    countDocuments();
-
-    // int selectedView = 0;
-    // print(_media);
+    
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return Material(

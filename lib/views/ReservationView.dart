@@ -5,6 +5,7 @@ import 'package:RentalAdmin/widgets/resCell.dart';
 import 'package:RentalAdmin/widgets/activeActivities.dart';
 import 'package:RentalAdmin/views/InventoryView.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
+import 'package:RentalAdmin/views/SuperUser/InventoryVC/TestInventory.dart';
 //
 class ReservationListPage extends StatefulWidget {
   @override
@@ -31,7 +32,7 @@ class _ReservationListPage extends State<ReservationListPage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                LocationPage(title: 'Select a Location')));
+                               LocationPage(title: "Select Your Location")));
                   },
                   child: Icon(
                     Icons.add_to_queue,
@@ -111,7 +112,7 @@ class _ReservationListPage extends State<ReservationListPage> {
         // await firestore.collection('reservation').orderBy('startTime').getDocuments();
         await firestore
             .collection(globals.reservation_global)
-            .where('Uid', isEqualTo:globals.uid)
+            .where('uid', isEqualTo:globals.userLoginID)
             .where('status', whereIn: ['Reserved','Picked Up'])
             .getDocuments();
     return itemListDOC.documents;

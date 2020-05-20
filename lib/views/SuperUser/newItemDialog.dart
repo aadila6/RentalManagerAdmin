@@ -96,7 +96,7 @@ class _NewItemDialogState extends State<NewItemDialog> {
   // }
 
   String _itemName;
-  String _itemCount;
+  int _itemCount;
   String defaultURL =
       "https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b";
 
@@ -141,7 +141,7 @@ class _NewItemDialogState extends State<NewItemDialog> {
                   ),
                   TextField(
                     onChanged: (text) {
-                      _itemCount = text;
+                      _itemCount = int.parse(text);
                       print("First text field: $text");
                     },
                     decoration: InputDecoration(
@@ -158,7 +158,7 @@ class _NewItemDialogState extends State<NewItemDialog> {
                 ]))));
   }
 
-  testingUploadItem(String itemName, String itemCount) async {
+  testingUploadItem(String itemName, int itemCount) async {
     final databaseReference = Firestore.instance;
     String url;
     if (_uploadedFileURL == null) {

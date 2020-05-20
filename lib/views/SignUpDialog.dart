@@ -246,9 +246,9 @@ class SignUpState extends State<SignUpPage> {
 
                       // pop_window(a, b, context);
                     } else {
-                      print("printing value (uid): " + uid);
+                      print("printing value (uid): " + e);
                       print("ORG insde the Signup: " + organization);
-                      uploadData(usernameFirst, usernameLast, email, uid,
+                      uploadData(usernameFirst, usernameLast, email, e,
                           organization);
                       Navigator.push(
                           context,
@@ -282,7 +282,7 @@ class SignUpState extends State<SignUpPage> {
       'PhoneNumber': '',
       'RentalID': '',
       'organization': organization,
-      'uid' : uid,
+      
     });
   }
 }

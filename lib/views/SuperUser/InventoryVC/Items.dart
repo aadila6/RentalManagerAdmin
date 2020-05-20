@@ -81,10 +81,25 @@ class _ItemVC extends State<ItemVC> {
                           snapshot.data.documents[index].data['imageURL']
                               .toString()),
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Dashboard()),
-                        );
+                        // if(globals.admin){
+                          showDialog(
+              context: context,
+              builder: (ctxt) {
+                return UpdateItemDialog(
+                  itemSelected: snapshot.data.documents[index],
+                );
+              });
+
+                        // }else{
+                          // print("HOLAAAAA");
+
+
+                        // }
+
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => Dashboard()),
+                        // );
                         // Navigator.replace(context, oldRoute:(context) => ItemVC(), newRoute: (context) =>Dashboard());
                         // showDialog(
                         //     context: context,

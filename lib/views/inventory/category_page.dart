@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'custom_gridcell.dart';
 import "itemGrid.dart";
 import 'item_page.dart';
+import 'package:RentalAdmin/views/globals.dart' as globals;
 
 class CategoryPage extends StatefulWidget {
   final DocumentSnapshot passedFirestoreData;
@@ -10,7 +11,6 @@ class CategoryPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-
     return _CategoryPageState();
   }
 }
@@ -52,7 +52,7 @@ class _CategoryPageState extends State<CategoryPage> {
                         child: CustomCell(categoryInfo),
                       ),
                       onTap: () {
-                        // print("tapped ${categoryInfo.toString()}");
+                        print("tapped ${categoryInfo.toString()}");
                         navigateToItem(categoryInfo['name']);
                       },
                     );
@@ -63,7 +63,6 @@ class _CategoryPageState extends State<CategoryPage> {
           ),
         ],
       ),
-
     );
   }
 }
