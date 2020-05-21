@@ -29,7 +29,7 @@ class SignUpState extends State<SignUpPage> {
 
   @override
   void initState() {
-    getOrganizations().whenComplete(() => setState(() {}));
+    // getOrganizations().whenComplete(() => setState(() {}));
     super.initState();
   }
 
@@ -248,8 +248,8 @@ class SignUpState extends State<SignUpPage> {
                     } else {
                       print("printing value (uid): " + e);
                       print("ORG insde the Signup: " + organization);
-                      uploadData(usernameFirst, usernameLast, email, e,
-                          organization);
+                      uploadData(usernameFirst, usernameLast, email, e
+                          );
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -267,12 +267,12 @@ class SignUpState extends State<SignUpPage> {
   }
 
   void uploadData(
-      usernameFirst, usernameLast, email, uid, String organization) async {
+      usernameFirst, usernameLast, email, uid) async {
     print("UPLOADING");
     String fullName = usernameFirst + ' ' + usernameLast;
     final databaseReference = Firestore.instance;
     String doc = "AppSignInUser" + email;
-    String thiscollectionName = '${organization}_users';
+    String thiscollectionName = '${this.widget.organization}_users';
     await databaseReference.collection('global_users').document(doc).setData({
       'Name': fullName,
       'Email': email,
@@ -281,7 +281,7 @@ class SignUpState extends State<SignUpPage> {
           "https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b",
       'PhoneNumber': '',
       'RentalID': '',
-      'organization': organization,
+      'organization': this.widget.organization.toString(),
       
     });
   }

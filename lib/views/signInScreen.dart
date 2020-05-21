@@ -40,7 +40,7 @@ class _signInScreenState extends State<signInScreen> {
   Future<void> getData() async {
     Firestore.instance
         .collection('global_users')
-        .document(globals.userLoginID)
+        .document(globals.userLoginID.toLowerCase())
         .get()
         .then((DocumentSnapshot ds) {
       // use ds as a snapshot
@@ -235,7 +235,9 @@ class _signInScreenState extends State<signInScreen> {
                         } else {
                           //Direct To SuperUserView directly
                           print("UID: " + e);
-                          globals.userLoginID = "AppSignInUser" + username;
+                          globals.userLoginID = "AppSignInUser" + username.toLowerCase();
+                          print("name:" + globals.userLoginID);
+                          // print("Lname:" + globals.userLoginID.toLowerCase());
                           print("------------------1--------------------");
                           // getCollections();
                           await Firestore.instance
@@ -247,15 +249,15 @@ class _signInScreenState extends State<signInScreen> {
                             // print(ds.data['Admin']);
                             // // use ds as a snapshot
                             var doc = ds.data;
-                            // print(doc['Admin']);
-                            // print('------------------------');
-                            // print(doc["Admin"]);
-                            // print(doc["uid"]);
-                            // print(doc["Name"]);
-                            // print("email STATUS: " + doc["Email"]);
-                            // print("sid STATUS: " + doc["RentalID"]);
-                            // print("url STATUS: " + doc["imageURL"]);
-                            // print("phone STATUS: " + doc["PhoneNumber"]);
+                            print(doc['Admin']);
+                            print('------------------------');
+                            print(doc["Admin"]);
+                            print(doc["uid"]);
+                            print(doc["Name"]);
+                            print("email STATUS: " + doc["Email"]);
+                            print("sid STATUS: " + doc["RentalID"]);
+                            print("url STATUS: " + doc["imageURL"]);
+                            print("phone STATUS: " + doc["PhoneNumber"]);
 
                             globals.admin = doc["Admin"];
                             globals.uid = doc["uid"];
