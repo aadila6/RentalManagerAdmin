@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:universal_html/prefer_universal/html.dart' as html;
 import 'package:RentalAdmin/views/globals.dart' as globals;
+import 'package:csv/csv.dart';
 
 class ImportCSVDialog extends StatefulWidget {
   @override
@@ -36,42 +37,51 @@ class _ImportCSVDialogState extends State<ImportCSVDialog> {
   String _itemCount;
   String defaultURL =
       "https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b";
-
+  var batch = Firestore.instance.batch();
+  List<List<dynamic>> rows;
   @override
   Widget build(BuildContext context) {
     return Dialog(
-        child: RaisedButton(
+        child: Column(children: [
+      RaisedButton(
           onPressed: () {
-            var c = 0;
-            var batch = Firestore.instance.batch();
-            var collection = Firestore.instance
-              .collection(globals.items_global);
-              
+            var collection = Firestore.instance.collection(globals.items_global);
+
             var csvFuture = getFile();
-            csvFuture.then((value){
+            csvFuture.then((value) {
               print(value);
-              var rows = LineSplitter().convert(value);
+              rows = const CsvToListConverter().convert(value);
               print(rows);
-              for(var r in rows) {
-                var cols = r.split(',');
+              for (var r in rows) {
                 var docRef = collection.document();
                 batch.setData(docRef, {
                   'Category': "sport",
-                  'imageURL': defaultURL,
                   'isAvaliable': "true",
-                  'name': cols[0],
-                  'amount': int.parse(cols[1]),
+                  'name': r[0],
+                  'amount': r[1],
+                  'imageURL': r.length>3?r[2]:defaultURL
                 });
-                c+=1;
               }
-              batch.commit().then((value){
-                print("Commited $c items!");
-                Navigator.of(context).pop();
+              setState(() {
+                
               });
             });
-            
           },
-          child: Text("Select CSV File"))
-    );
+          child: Text("Select CSV File")),
+          Column(
+            children: <Widget>[Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[Text("Name"),Text("Amount")])] + (rows==null?[]:rows.map<Widget>((e) => Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [Text(e[0]),Text(e[1].toString())])).toList()),
+          ),
+          RaisedButton(
+            child: Text("Confirm & Upload"),
+            onPressed: () {
+            batch.commit().then((value) {
+              print("Commited ${rows.length} items!");
+              Navigator.of(context).pop();
+            });
+          },)
+    ]));
   }
 }
