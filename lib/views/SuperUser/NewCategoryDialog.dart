@@ -154,13 +154,9 @@ class _NewCategoryState extends State<NewCategory> {
       padding: EdgeInsets.symmetric(horizontal: 5.0),
       decoration: BoxDecoration(
         color: Colors.white,
-        // borderRadius: BorderRadius.circular(30.0),
-        // border: Border.all(
-        //     color: Colors.green, style: BorderStyle.solid, width: 2.0),
       ),
       child: DropdownButton<String>(
           isExpanded: true,
-          // dropdownColor: Colors.green,
           iconSize: 28.0,
           style: TextStyle(
             color: Colors.black,
@@ -183,11 +179,8 @@ class _NewCategoryState extends State<NewCategory> {
           onChanged: (String optionSelected) {
             print(optionSelected);
             setState(() {
-              // _collectionSelected = optionSelected;
               if (pos == 0) {
                 print("GETTING INSIDE THE 0");
-                // getCategories(optionSelected);
-                // _collectionSelected = optionSelected;
               }
             });
           },

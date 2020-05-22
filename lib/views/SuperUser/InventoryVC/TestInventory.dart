@@ -1,3 +1,4 @@
+import 'package:RentalAdmin/views/SuperUser/UpdateLocationDialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
@@ -42,7 +43,6 @@ class inventoryByLOCState extends State<inventoryByLOC> {
           backgroundColor: drawerBgColor,
         ),
       ),
-
       MaterialButton(
         color: Colors.teal,
         shape: new RoundedRectangleBorder(
@@ -60,7 +60,6 @@ class inventoryByLOCState extends State<inventoryByLOC> {
           style: TextStyle(color: Colors.white),
         ),
       ),
-     
       Expanded(
         child: StreamBuilder(
             stream:
@@ -92,7 +91,15 @@ class inventoryByLOCState extends State<inventoryByLOC> {
                                         .toString(),
                                   )),
                         );
-                      
+                      },
+                      onDoubleTap: () {
+                        print("User double tapped location!");
+                        showDialog(
+                            context: context,
+                            builder: (ctxt) {
+                              return UpdateLocationDialog(
+                                  itemSelected: snapshot.data.documents[index]);
+                            });
                       },
                     );
                   });

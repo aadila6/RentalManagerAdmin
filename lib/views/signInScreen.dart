@@ -8,7 +8,7 @@ import '../widgets/auth.dart';
 import 'package:RentalAdmin/views/SuperUser/SuperuserPanel.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:RentalAdmin/views/SuperUser/organizationSelection.dart';
-
+import 'package:progress_dialog/progress_dialog.dart';
 class signInScreen extends StatefulWidget {
   @override
   _signInScreenState createState() => _signInScreenState();
@@ -537,7 +537,85 @@ class _ResetPasswordState extends State<ResetPassword> {
                           ),
                         ],
                       ),
-                      onPressed: () async {},
+                      onPressed: () async {
+                        // check if the email exsit? 
+                        final QuerySnapshot result = await Firestore.instance
+                            .collection('global_users')
+                            .getDocuments();
+                        final List<DocumentSnapshot> documents =
+                            result.documents;
+                        List<String> userNameList = [];
+                        documents.forEach(
+                            (data) => userNameList.add(data['Email']));
+                        bool found = false;
+                        for (var i = 0; i < userNameList.length; i++) {
+                          if (email.toLowerCase() == userNameList[i]) {
+                            found = true;
+                            print("found");
+                            break;
+                          }
+                        }
+                        if(found){
+                          final FirebaseAuth auth = FirebaseAuth.instance;
+                           ProgressDialog prForgetPassword;
+                          prForgetPassword = new ProgressDialog(context,
+                              type: ProgressDialogType.Normal);
+                          prForgetPassword.update(
+                            message: 'Sending Email...',
+                            progressWidget: CircularProgressIndicator(),
+                            progressTextStyle: TextStyle(
+                                color: Colors.black,
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.w400),
+                            messageTextStyle: TextStyle(
+                                color: Colors.black,
+                                fontSize: 19.0,
+                                fontWeight: FontWeight.w600),
+                          );
+                          await prForgetPassword.show();
+                          Future.delayed(Duration(seconds: 2)).then((onValue) {
+                            prForgetPassword.update(
+                              message: "Email Sent",
+                              progressWidget: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: CircularProgressIndicator()),
+                              progressTextStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 13.0,
+                                  fontWeight: FontWeight.w400),
+                              messageTextStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 19.0,
+                                  fontWeight: FontWeight.w600),
+                            );
+                            Future.delayed(Duration(seconds: 2)).then((value) async{
+                              // authHandler.resetPassword(email);
+                              await auth.sendPasswordResetEmail(email: email);
+                              prForgetPassword.hide();
+                            });
+                          });
+                        }else{
+                           showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title:
+                                      Text('The email that you provided doesn not seem to be a registered account'),
+                                  actions: <Widget>[
+                                    new FlatButton(
+                                      child: new Text('CANCEL'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              });
+
+                        }
+                        
+
+                      },
                       padding: EdgeInsets.all(7.0),
                       disabledColor: Colors.black,
                       disabledTextColor: Colors.black,

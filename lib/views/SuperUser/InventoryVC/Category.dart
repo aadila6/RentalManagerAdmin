@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
 import 'package:RentalAdmin/views/SuperUser/UpdateItemDialog.dart';
 import 'package:RentalAdmin/views/SuperUser/NewCategoryDialog.dart';
+import 'package:RentalAdmin/views/SuperUser/UpdateCategoryDialog.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'Items.dart';
 
@@ -91,6 +92,20 @@ class _CategoryVC extends State<CategoryVC> {
                                     locationSelected: glocation,
                                   )),
                         );
+                      },
+                      onDoubleTap: () {
+                        print("User double tapped!!");
+                        // return UpdateCategoryDialog(itemSelected: snapshot.data.documents[index]);
+                        showDialog(
+                            context: context,
+                            builder: (ctxt) {
+                              return UpdateCategoryDialog(
+                                  locationSelected:
+                                      this.widget.locationSelected,
+                                  locationName : this.widget.locationName,
+                                  categorySelected: snapshot.data['categories']
+                                      [index]);
+                            });
                       },
                     );
                   });
