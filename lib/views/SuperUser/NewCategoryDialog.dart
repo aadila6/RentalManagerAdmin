@@ -138,15 +138,49 @@ class _NewCategoryState extends State<NewCategory> {
     } else {
       url = _uploadedFileURL;
     }
+    bool found = false;
+    categoryList.forEach((element) {
+      print(element['name']);
+      if (element['name'].toString().toLowerCase() == itemName.toLowerCase()) {
+        found = true;
+        print("found!!!!");
+      }else{
+        print(element['name']);
+      }
+    });
+    if (found){
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title:
+                  Text('The Item Name already exist and can not be added!'),
+              actions: <Widget>[
+                new FlatButton(
+                  child: new Text('CANCEL'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          });
 
-    categoryList.add({'name': itemName, 'imageURL': url});
+    }else{
+      print("Successfully added item " + itemName );
+       categoryList.add({'name': itemName, 'imageURL': url});
     await Firestore.instance
         .collection(globals.locations)
         .document(this.widget.locationSelected)
         .updateData({
       "categories": categoryList,
     });
+    Navigator.pop(context);
     print("Finish uploading");
+
+    }
+
+   
   }
 
   Widget customDropDownMwnu(List<String> collection, String selected, int pos) {

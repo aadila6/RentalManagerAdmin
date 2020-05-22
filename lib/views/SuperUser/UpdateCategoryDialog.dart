@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:io';
 import 'package:image_picker_web/image_picker_web.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:universal_html/prefer_universal/html.dart' as html;
@@ -54,18 +53,28 @@ class _UpdateLocationDialogState extends State<UpdateCategoryDialog> {
   String _url =
       'https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/cat.jpg?alt=media&token=78818628-9471-421d-8969-76d68b07f591';
   List<Map<dynamic, dynamic>> categoryList = [];
-
+  List<String> catNames = [];
   Future getCat() async {
+    print("Getting Cattttt");
     //First get the name
     QuerySnapshot list = await Firestore.instance
         .collection(globals.locations)
         .where('name', isEqualTo: this.widget.locationName)
         .getDocuments();
-        categoryList.clear();
+    categoryList.clear();
+    print("cleared the matrix");
     list.documents.forEach((doc) {
+       print("000000000");
       categoryList = List.from(doc.data['categories']);
-      print("Printing NAMESSSSSSSS!!!!!!!!!!!!");
+      print("11111111");
+      // catNames.add(doc.data['categories']['name']);
+      categoryList.forEach((element) {
+        print("222222222222");
+        print(element);
+        //  globals.categories.add(element['name']);
+      });
       print(categoryList);
+      print("Printing NAMESSSSSSSS!!!!!!!!!!!!");
     });
   }
 
@@ -123,7 +132,7 @@ class _UpdateLocationDialogState extends State<UpdateCategoryDialog> {
                   RaisedButton(
                       onPressed: () {
                         updateAll();
-                        Navigator.pop(context);
+                        
                       },
                       child: Text("Update Information"))
                 ]))));
@@ -131,21 +140,54 @@ class _UpdateLocationDialogState extends State<UpdateCategoryDialog> {
 
   Future updateAll() async {
     await getCat();
-    categoryList.removeWhere((item) => item['name'] == this.widget.categorySelected['name']);
-    // print(categoryList);
-    
-    categoryList.add({'name': _itemName, 'imageURL': _url});
-    await Firestore.instance
-        .collection(globals.locations)
-        .document(this.widget.locationSelected)
-        .updateData({
-      "categories": categoryList,
+    // catNames.clear();
+    bool found = false;
+    categoryList.forEach((element) {
+      print(element['name']);
+      if (element['name'].toString().toLowerCase() == _itemName.toLowerCase()) {
+        found = true;
+        print("found!!!!");
+      }else{
+        print(element['name']);
+      }
     });
+    if (found) {
+      print("ERRRR: dup category and returning a err dialog");
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title:
+                  Text('The category name already exist and can not be added!'),
+              actions: <Widget>[
+                new FlatButton(
+                  child: new Text('CANCEL'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          });
+    } else {
+      print("SUCCESS!");
+      categoryList.removeWhere(
+          (item) => item['name'] == this.widget.categorySelected['name']);
+      categoryList.add({'name': _itemName, 'imageURL': _url});
+      await Firestore.instance
+          .collection(globals.locations)
+          .document(this.widget.locationSelected)
+          .updateData({
+        "categories": categoryList,
+      });
+      Navigator.pop(context);
+    }
   }
 
   Future deleteItem() async {
     await getCat();
-    categoryList.removeWhere((item) => item['name'] == this.widget.categorySelected['name']);
+    categoryList.removeWhere(
+        (item) => item['name'] == this.widget.categorySelected['name']);
     await Firestore.instance
         .collection(globals.locations)
         .document(this.widget.locationSelected)
@@ -159,17 +201,17 @@ class _UpdateLocationDialogState extends State<UpdateCategoryDialog> {
         .where('category', isEqualTo: this.widget.categorySelected['name'])
         .where('Location', isEqualTo: this.widget.locationName)
         .getDocuments();
-    List docID = [];    
+    List docID = [];
     list.documents.forEach((doc) async {
       docID.add(doc.documentID);
     });
     print("DOC IDS: " + docID.toString());
-    docID.forEach((element) async { 
-       await Firestore.instance
-        .collection(globals.items_global).document(element)
-        .delete()
-        .catchError((error) => print(error));
+    docID.forEach((element) async {
+      await Firestore.instance
+          .collection(globals.items_global)
+          .document(element)
+          .delete()
+          .catchError((error) => print(error));
     });
-   
   }
 }

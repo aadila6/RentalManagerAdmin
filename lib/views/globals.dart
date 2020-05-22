@@ -19,6 +19,7 @@ bool admin = false;
 String rentalID = '';
 String userLoginID = '';
 String locations = '';
+String locationManager = '';
 // String existingOrganizations = '';
 List<String> existingOrganizations = [];
 List<String> existingLocations = ['Select a Location'];
