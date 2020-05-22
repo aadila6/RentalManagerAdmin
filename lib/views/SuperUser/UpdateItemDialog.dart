@@ -107,18 +107,61 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
                   RaisedButton(
                       onPressed: () {
                         updateAll();
-                          Navigator.pop(context);
+                          // Navigator.pop(context);
                         
                       },
                       child: Text("Update Item"))
                 ]))));
   }
+  List<String> itemList = [];
+  Future getItemLists() async {
+    itemList.clear();
+    QuerySnapshot list =
+        await Firestore.instance.collection(globals.items_global).where('category',isEqualTo: widget.itemSelected.data['category']).getDocuments();
+    list.documents.forEach((doc) {
+      itemList.add(doc.data['name']);
+    });
+  }
 
-  Future updateAll() {
-    updateName();
+  Future updateAll() async{
+    await getItemLists();
+    bool found = false;
+    int counter = 0;
+    // itemList.add(_itemName);
+     itemList.removeWhere(
+          (item) => item == widget.itemSelected.data['name']);
+    itemList.forEach((element) {
+      if(element == _itemName){
+        found = true;
+        counter++;
+      }
+    });
+    if(found){
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text(
+                  'The item name is already exist and can not be changed!'),
+              actions: <Widget>[
+                new FlatButton(
+                  child: new Text('CANCEL'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          });
+    }else{
+      updateName();
+    }
     updateAmount();
     updateUrl();
+    
+
   }
+
 
   Future deleteItem() async {
     final firestore = Firestore.instance;
@@ -127,6 +170,7 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
         .document(widget.itemSelected.documentID.toString())
         .delete()
         .catchError((error) => print(error));
+        Navigator.pop(context);
   }
 
   Future updateName() async {
@@ -137,6 +181,7 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
         .updateData({
       'name': _itemName,
     }).catchError((error) => print(error));
+    Navigator.pop(context);
   }
 
   Future updateAmount() async {
@@ -147,6 +192,7 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
         .updateData({
       'amount': _itemCount,
     }).catchError((error) => print(error));
+    // Navigator.pop(context);
   }
 
   Future updateUrl() async {
@@ -157,5 +203,6 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
         .updateData({
       'imageURL': _url,
     }).catchError((error) => print(error));
+
   }
 }

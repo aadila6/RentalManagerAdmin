@@ -142,23 +142,28 @@ class _UpdateLocationDialogState extends State<UpdateCategoryDialog> {
     await getCat();
     // catNames.clear();
     bool found = false;
+    int counter = 0;
+    // categoryList.add(value)
+    categoryList.removeWhere(
+          (item) => item['name'] == this.widget.categorySelected['name']);
     categoryList.forEach((element) {
       print(element['name']);
       if (element['name'].toString().toLowerCase() == _itemName.toLowerCase()) {
         found = true;
+        counter ++;
         print("found!!!!");
       }else{
         print(element['name']);
       }
     });
-    if (found) {
+    if (found ) {
       print("ERRRR: dup category and returning a err dialog");
       showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
               title:
-                  Text('The category name already exist and can not be added!'),
+                  Text('The category entered is already exist and can not be change!'),
               actions: <Widget>[
                 new FlatButton(
                   child: new Text('CANCEL'),

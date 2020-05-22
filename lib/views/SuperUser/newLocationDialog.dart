@@ -144,9 +144,27 @@ class _NewLocationDialogState extends State<NewLocationDialog> {
                       child: Text("Submit"))
                 ]))));
   }
+  List<String> locationList = [];
+  Future getLocationList() async {
+    locationList.clear();
+    QuerySnapshot list =
+        await Firestore.instance.collection(globals.locations).getDocuments();
+    list.documents.forEach((doc) {
+      locationList.add(doc.data['name']);
+    });
+  }
+
 
   testingUploadItem(String itemName) async {
-    final databaseReference = Firestore.instance;
+    await getLocationList();
+    bool found = false;
+    locationList.forEach((element) {
+      if (itemName == element) {
+        found = true;
+      }
+    });
+    if(!found){
+      final databaseReference = Firestore.instance;
     // List<dynamic> emptyList = [];
     String url;
     if (_uploadedFileURL == null) {
@@ -168,6 +186,26 @@ class _NewLocationDialogState extends State<NewLocationDialog> {
     });
     // return ;
     print("Finish uploading");
+
+    }else{
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text(
+                  'The location name is already exist and can not be added!'),
+              actions: <Widget>[
+                new FlatButton(
+                  child: new Text('CANCEL'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          });
+    }
+    
   }
 
   Widget customDropDownMwnu(List<String> collection, String selected, int pos) {

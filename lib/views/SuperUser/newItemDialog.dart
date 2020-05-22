@@ -8,7 +8,7 @@ import 'package:universal_html/prefer_universal/html.dart' as html;
 import 'package:RentalAdmin/views/globals.dart' as globals;
 
 class NewItemDialog extends StatefulWidget {
-    String categorySelected;
+  String categorySelected;
   String locationSelected;
   NewItemDialog({this.categorySelected, this.locationSelected});
   @override
@@ -63,9 +63,7 @@ class _NewItemDialogState extends State<NewItemDialog> {
         print("ADDING LOCATIONS!!!");
     list.documents.forEach((doc) {
       globals.existingLocations.add(doc.data['name']);
-      // globals.categories.add(doc.data['categories']);
-
-      // print(doc.data['name']);
+     
     });
   }
 
@@ -88,12 +86,6 @@ class _NewItemDialogState extends State<NewItemDialog> {
 
     });
   }
-
-  // Future getCollections() async {
-  //   QuerySnapshot list =
-  //       await Firestore.instance.collection(globals.locations).getDocuments();
-  //   list.documents.forEach((doc) => globals.existingLocations.add(doc.data['name']));
-  // }
 
   String _itemName;
   int _itemCount;
@@ -157,9 +149,27 @@ class _NewItemDialogState extends State<NewItemDialog> {
                       child: Text("Submit"))
                 ]))));
   }
+List<String> itemList = [];
+  Future getItemLists() async {
+    itemList.clear();
+    QuerySnapshot list =
+        await Firestore.instance.collection(globals.items_global).where('category',isEqualTo: this.widget.categorySelected).getDocuments();
+    list.documents.forEach((doc) {
+      itemList.add(doc.data['name']);
+    });
+  }
+
 
   testingUploadItem(String itemName, int itemCount) async {
-    final databaseReference = Firestore.instance;
+    await getItemLists();
+    bool found = false;
+    itemList.forEach((element) {
+      if(element == itemName){
+        found = true;
+      }
+    });
+    if(!found){
+      final databaseReference = Firestore.instance;
     String url;
     if (_uploadedFileURL == null) {
       print("DEBUG:  URL is Empty");
@@ -181,6 +191,25 @@ class _NewItemDialogState extends State<NewItemDialog> {
     });
     // return ;
     print("Finish uploading");
+    }else{
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text(
+                  'The item name is already exist and can not be added!'),
+              actions: <Widget>[
+                new FlatButton(
+                  child: new Text('CANCEL'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          });
+    }
+    
   }
 
   Widget customDropDownMwnu(List<String> collection, String selected, int pos) {
@@ -217,14 +246,7 @@ class _NewItemDialogState extends State<NewItemDialog> {
           onChanged: (String optionSelected) {
             print(optionSelected);
             setState(() {
-              // _collectionSelected = optionSelected;
-              // if(pos == 0){
-              //   print("GETTING INSIDE THE 0");
-              //   getCategories(optionSelected);
-              //    _collectionSelected = optionSelected;
-              // }else{
-              //   _categorySelected = optionSelected;
-              // }
+             
             });
           },
           value: selected),

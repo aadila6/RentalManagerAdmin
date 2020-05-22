@@ -75,7 +75,6 @@ class _UpdateLocationDialogState extends State<UpdateLocationDialog> {
                           color: Colors.cyan,
                         )
                       : Container(),
-                  // Text("Add new item"),
                   TextField(
                     controller: controller,
                     onChanged: (text) {
@@ -87,16 +86,7 @@ class _UpdateLocationDialogState extends State<UpdateLocationDialog> {
                       labelText: "Location Name",
                     ),
                   ),
-                  // TextField(
-                  //   controller: controller2,
-                  //   onChanged: (text) {
-                  //     _itemCount = int.parse(text);
-                  //     print("First text field: $text");
-                  //   },
-                  //   decoration: InputDecoration(
-                  //     labelText: "Item Amount",
-                  //   ),
-                  // ),
+                 
                   RaisedButton(
                       onPressed: () {
                         deleteItem().then((value) {
@@ -107,11 +97,19 @@ class _UpdateLocationDialogState extends State<UpdateLocationDialog> {
                   RaisedButton(
                       onPressed: () {
                         updateAll();
-                          Navigator.pop(context);
-                        
                       },
                       child: Text("Update Information"))
                 ]))));
+  }
+
+  List<String> locationList = [];
+  Future getLocationList() async {
+    locationList.clear();
+    QuerySnapshot list =
+        await Firestore.instance.collection(globals.locations).getDocuments();
+    list.documents.forEach((doc) {
+      locationList.add(doc.data['name']);
+    });
   }
 
   Future updateAll() {
@@ -126,19 +124,50 @@ class _UpdateLocationDialogState extends State<UpdateLocationDialog> {
         .document(widget.itemSelected.documentID.toString())
         .delete()
         .catchError((error) => print(error));
+    Navigator.pop(context);
   }
 
   Future updateName() async {
-    final firestore = Firestore.instance;
-    await firestore
-        .collection(globals.locations)
-        .document(widget.itemSelected.documentID.toString())
-        .updateData({
-      'name': _itemName,
-    }).catchError((error) => print(error));
+    await getLocationList();
+    bool found = false;
+    int counter = 0;
+    locationList.removeWhere(
+          (item) => item == widget.itemSelected.data['name']);
+    locationList.forEach((element) {
+      if (_itemName == element) {
+        found = true;
+        counter++;
+      }
+    });
+    if (!found) {
+      final firestore = Firestore.instance;
+      await firestore
+          .collection(globals.locations)
+          .document(widget.itemSelected.documentID.toString())
+          .updateData({
+        'name': _itemName,
+      }).catchError((error) => print(error));
+      Navigator.pop(context);
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text(
+                  'The location name is already exist and can not be changed!'),
+              actions: <Widget>[
+                new FlatButton(
+                  child: new Text('CANCEL'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          });
+    }
   }
 
-  
   Future updateUrl() async {
     final firestore = Firestore.instance;
     await firestore
