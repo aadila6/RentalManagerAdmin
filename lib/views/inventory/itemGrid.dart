@@ -6,37 +6,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:rental_manager/PlatformWidget/strings.dart';
 // import 'package:flutter/services.dart';
 import 'ItemDetails.dart';
+import 'package:RentalAdmin/views/globals.dart' as globals;
 
 class ItemGridPage extends StatefulWidget {
   String category;
   ItemGridPage({this.category});
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
 
     return _ItemGridPageState();
   }
 }
 
-// showAlertDialog(BuildContext context) {
-//   // set up the buttons
-//   Widget remindButton = RaisedButton(
-//     child: Text("Reservation have been created"),
-//     onPressed: () {
-//       // Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
-//     },
-//   );
-// }
 
 class _ItemGridPageState extends State<ItemGridPage> {
-  // Future getFirestoreData() async {
-  //   final firestore = Firestore.instance;
-  //   QuerySnapshot arrayOfLocationDocuments = await firestore
-  //       .collection('ARC_items')
-  //       .where('category', isEqualTo: widget.category)
-  //       .getDocuments();
-  //   return arrayOfLocationDocuments.documents;
-  // }
+  
   navigateToDetail(DocumentSnapshot indexedData) {
     Navigator.push(
         context,
@@ -52,7 +36,7 @@ class _ItemGridPageState extends State<ItemGridPage> {
       ),
       body: StreamBuilder(
           stream: Firestore.instance
-              .collection('ARC_items')
+              .collection(globals.items_global)
               .where('category', isEqualTo: widget.category)
               .snapshots(),
           builder: (context, snapshot) {

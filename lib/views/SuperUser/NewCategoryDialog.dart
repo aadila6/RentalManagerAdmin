@@ -7,21 +7,20 @@ import 'package:firebase/firebase.dart' as fb;
 import 'package:universal_html/prefer_universal/html.dart' as html;
 import 'package:RentalAdmin/views/globals.dart' as globals;
 
-class NewItemDialog extends StatefulWidget {
-  String categorySelected;
+class NewCategory extends StatefulWidget {
   String locationSelected;
-  NewItemDialog({this.categorySelected, this.locationSelected});
+  String locationName;
+  NewCategory({this.locationSelected, this.locationName});
   @override
-  _NewItemDialogState createState() => _NewItemDialogState();
+  _NewCategoryState createState() => _NewCategoryState();
 }
 
-class _NewItemDialogState extends State<NewItemDialog> {
+class _NewCategoryState extends State<NewCategory> {
   @override
   void initState() {
     super.initState();
     print(globals.existingLocations);
-    getCollections();
-    // print(globals.existingLocations[0]);
+    getCategories(this.widget.locationName);
     // getCollections();
   }
 
@@ -29,7 +28,7 @@ class _NewItemDialogState extends State<NewItemDialog> {
   String _uploadedFileURL;
   html.File image;
   List<DropdownMenuItem<String>> _dropDownMenuItems;
-  // String _categorySelected = this.wicategorySelected;
+  // String _categorySelected = globals.categories[0];
   // String _collectionSelected = globals.existingLocations[0];
 
   Future pickImage() async {
@@ -56,39 +55,38 @@ class _NewItemDialogState extends State<NewItemDialog> {
       _uploadedFileURL = fileURL.toString();
     });
   }
-  Future getCollections() async {
-    globals.existingLocations = ['Select a Location'];
-    QuerySnapshot list =
-        await Firestore.instance.collection(globals.locations).getDocuments();
-        print("ADDING LOCATIONS!!!");
-    list.documents.forEach((doc) {
-      globals.existingLocations.add(doc.data['name']);
-     
-    });
-  }
 
+  // Future getCollections() async {
+  //   globals.existingLocations = ['Select a Location'];
+  //   QuerySnapshot list =
+  //       await Firestore.instance.collection(globals.locations).getDocuments();
+  //   print("ADDING LOCATIONS!!!");
+  //   list.documents.forEach((doc) {
+  //     globals.existingLocations.add(doc.data['name']);
+  //   });
+  // }
+  //  List<dynamic> categoryList;
+  List<Map<dynamic, dynamic>> categoryList = [];
   Future getCategories(String locationName) async {
-    List<dynamic> names;
+    //First get the name
     QuerySnapshot list = await Firestore.instance
         .collection(globals.locations)
         .where('name', isEqualTo: locationName)
         .getDocuments();
     list.documents.forEach((doc) {
-      names = List.from(doc.data['categories']);
+      categoryList = List.from(doc.data['categories']);
       print("Printing NAMESSSSSSSS!!!!!!!!!!!!");
-      names.forEach((element) {
+      categoryList.forEach((element) {
         print(element['name']);
-         globals.categories.add(element['name']);
+        //  globals.categories.add(element['name']);
       });
       print("GLOBAL CAT :");
-      print(globals.categories);
-      
-
+      print(categoryList);
     });
   }
 
-  String _itemName;
-  int _itemCount;
+  String _categoryName;
+  String _itemCount;
   String defaultURL =
       "https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b";
 
@@ -107,69 +105,32 @@ class _NewItemDialogState extends State<NewItemDialog> {
                   SizedBox(height: 10),
                   _image == null
                       ? RaisedButton(
-                          child: Text('Choose Image'),
+                          child: Text('Choose Category Image'),
                           onPressed: pickImage,
                           color: Colors.cyan,
                         )
                       : Container(),
-                  // Text("Add new item"),
-                  //Selecting a location?
-                  // SizedBox(
-                  //     child: customDropDownMwnu(
-                  //         globals.existingLocations, _collectionSelected,0)),
-                  // //Selecting a category?
-                  // SizedBox(
-                  //     child: customDropDownMwnu(
-                  //         globals.categories, _categorySelected,1)),
                   TextField(
                     onChanged: (text) {
-                      _itemName = text;
+                      _categoryName = text;
                       print("First text field: $text");
                     },
                     autofocus: true,
                     decoration: InputDecoration(
-                      labelText: "Item Name",
+                      labelText: "Category Name",
                     ),
                   ),
-                  TextField(
-                    onChanged: (text) {
-                      _itemCount = int.parse(text);
-                      print("First text field: $text");
-                    },
-                    decoration: InputDecoration(
-                      labelText: "Item Amount",
-                    ),
-                  ),
-
                   RaisedButton(
                       onPressed: () {
-                        // uploadFile().then((value) => testingUploadItem(_itemName, _itemCount));
-                        testingUploadItem(_itemName, _itemCount);
+                        // uploadFile().then((value) => testingUploadItem(_categoryName, _itemCount));
+                        testingUploadItem(_categoryName);
                       },
                       child: Text("Submit"))
                 ]))));
   }
-List<String> itemList = [];
-  Future getItemLists() async {
-    itemList.clear();
-    QuerySnapshot list =
-        await Firestore.instance.collection(globals.items_global).where('category',isEqualTo: this.widget.categorySelected).getDocuments();
-    list.documents.forEach((doc) {
-      itemList.add(doc.data['name']);
-    });
-  }
 
-
-  testingUploadItem(String itemName, int itemCount) async {
-    await getItemLists();
-    bool found = false;
-    itemList.forEach((element) {
-      if(element == itemName){
-        found = true;
-      }
-    });
-    if(!found){
-      final databaseReference = Firestore.instance;
+  testingUploadItem(String itemName) async {
+    final databaseReference = Firestore.instance;
     String url;
     if (_uploadedFileURL == null) {
       print("DEBUG:  URL is Empty");
@@ -177,27 +138,23 @@ List<String> itemList = [];
     } else {
       url = _uploadedFileURL;
     }
-    await databaseReference
-        .collection(globals.items_global)
-        .document()
-        .setData({
-      'category': this.widget.categorySelected,
-      'imageURL': url,
-      'name': itemName,
-      'Location':this.widget.locationSelected,
-      'amount': itemCount,
-    }).then((value) {
-      Navigator.pop(context);
+    bool found = false;
+    categoryList.forEach((element) {
+      print(element['name']);
+      if (element['name'].toString().toLowerCase() == itemName.toLowerCase()) {
+        found = true;
+        print("found!!!!");
+      }else{
+        print(element['name']);
+      }
     });
-    // return ;
-    print("Finish uploading");
-    }else{
+    if (found){
       showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text(
-                  'The item name is already exist and can not be added!'),
+              title:
+                  Text('The Item Name already exist and can not be added!'),
               actions: <Widget>[
                 new FlatButton(
                   child: new Text('CANCEL'),
@@ -208,8 +165,22 @@ List<String> itemList = [];
               ],
             );
           });
+
+    }else{
+      print("Successfully added item " + itemName );
+       categoryList.add({'name': itemName, 'imageURL': url});
+    await Firestore.instance
+        .collection(globals.locations)
+        .document(this.widget.locationSelected)
+        .updateData({
+      "categories": categoryList,
+    });
+    Navigator.pop(context);
+    print("Finish uploading");
+
     }
-    
+
+   
   }
 
   Widget customDropDownMwnu(List<String> collection, String selected, int pos) {
@@ -217,13 +188,9 @@ List<String> itemList = [];
       padding: EdgeInsets.symmetric(horizontal: 5.0),
       decoration: BoxDecoration(
         color: Colors.white,
-        // borderRadius: BorderRadius.circular(30.0),
-        // border: Border.all(
-        //     color: Colors.green, style: BorderStyle.solid, width: 2.0),
       ),
       child: DropdownButton<String>(
           isExpanded: true,
-          // dropdownColor: Colors.green,
           iconSize: 28.0,
           style: TextStyle(
             color: Colors.black,
@@ -246,7 +213,9 @@ List<String> itemList = [];
           onChanged: (String optionSelected) {
             print(optionSelected);
             setState(() {
-             
+              if (pos == 0) {
+                print("GETTING INSIDE THE 0");
+              }
             });
           },
           value: selected),

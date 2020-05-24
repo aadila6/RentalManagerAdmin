@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:RentalAdmin/views/ReservationView.dart';
-
+import 'package:RentalAdmin/views/globals.dart' as globals;
 class reservationCell extends StatefulWidget {
   final DocumentSnapshot passedFirestoreData;
   reservationCell({this.passedFirestoreData});
@@ -19,7 +19,7 @@ class _reservationCell extends State<reservationCell> {
   Future pickedUp() async {
     final firestore = Firestore.instance;
     await firestore
-        .collection('reservation')
+        .collection(globals.reservation_global)
         .document(widget.passedFirestoreData.documentID.toString())
         .updateData({'status': 'Picked Up'}).catchError(
             (error) => print(error));
@@ -30,7 +30,7 @@ class _reservationCell extends State<reservationCell> {
   Future returned() async {
     final firestore = Firestore.instance;
     await firestore
-        .collection('reservation')
+        .collection(globals.reservation_global)
         .document(widget.passedFirestoreData.documentID.toString())
         .updateData({'status': 'Returned'}).catchError((error) => print(error));
     Navigator.push(context,
@@ -40,7 +40,7 @@ class _reservationCell extends State<reservationCell> {
   Future cancelReservation() async {
     final firestore = Firestore.instance;
     await firestore
-        .collection('reservation')
+        .collection(globals.reservation_global)
         .document(widget.passedFirestoreData.documentID.toString())
         .delete()
         .catchError((error) => print(error));
@@ -162,16 +162,12 @@ class _reservationCell extends State<reservationCell> {
                   borderRadius: new BorderRadius.circular(40.0),
                 ),
                 onPressed: () async {
-                  // print(widget.passedFirestoreData.documentID.toString());
                   if (widget.passedFirestoreData['status'] == 'Reserved') {
                     pickedUp();
-                    //  Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));
                   } else if (widget.passedFirestoreData['status'] ==
                       'Picked Up') {
                     returned();
-                    //  Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));
                   }
-
                   Navigator.pop(context);
                 },
                 icon: Icon(Icons.insert_emoticon, size: 30.0),

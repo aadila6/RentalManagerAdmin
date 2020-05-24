@@ -35,6 +35,7 @@ dependencies:
   http: ^0.12.1
   universal_html: ^1.2.1
   csv: ^4.0.3
+  progress_dialog: ^1.2.1
   
 dev_dependencies:
   flutter_test:

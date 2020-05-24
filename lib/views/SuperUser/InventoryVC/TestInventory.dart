@@ -1,19 +1,32 @@
+import 'package:RentalAdmin/views/SuperUser/UpdateLocationDialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
 import 'package:RentalAdmin/views/SuperUser/UpdateItemDialog.dart';
-import 'newItemDialog.dart';
+import 'package:RentalAdmin/views/SuperUser/NewLocationDialog.dart';
+import 'package:RentalAdmin/views/SuperUser/NewCategoryDialog.dart';
+import 'package:RentalAdmin/views/SuperUser/NewItemDialog.dart';
+import 'package:RentalAdmin/views/SuperUser/SuperLanding.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
-import 'ImportCSVDialog.dart';
+import 'Category.dart';
 
-class SuperuserInventoryView extends StatefulWidget {
+class FirstTab extends StatelessWidget {
   @override
-  State<StatefulWidget> createState() {
-    return SuperuserInventoryViewState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: inventoryByLOC(),
+    );
   }
 }
 
-class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
+class inventoryByLOC extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return inventoryByLOCState();
+  }
+}
+
+class inventoryByLOCState extends State<inventoryByLOC> {
   bool isReady = false;
   @override
   Widget build(BuildContext context) {
@@ -25,52 +38,32 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
           elevation: 4,
           centerTitle: true,
           title: Text(
-            'Rental Manager Admin ',
+            'Rental Manager Admin - ' + globals.organization,
           ),
           backgroundColor: drawerBgColor,
         ),
       ),
-      Row(
-        children:[
-          MaterialButton(
-            color: Colors.teal,
-            shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(20.0),
-                side: BorderSide(color: Colors.white)),
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (ctxt) {
-                    return NewItemDialog();
-                  });
-            },
-            child: Text(
-              "Add new item",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          MaterialButton(
-            color: Colors.teal,
-            shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(20.0),
-                side: BorderSide(color: Colors.white)),
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (ctxt) {
-                    return ImportCSVDialog();
-                  });
-            },
-            child: Text(
-              "Import CSV",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-      ]),
+      MaterialButton(
+        color: Colors.teal,
+        shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(20.0),
+            side: BorderSide(color: Colors.white)),
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (ctxt) {
+                return NewLocationDialog();
+              });
+        },
+        child: Text(
+          "Add Location",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
       Expanded(
         child: StreamBuilder(
             stream:
-                Firestore.instance.collection(globals.items_global).snapshots(),
+                Firestore.instance.collection(globals.locations).snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) return const Text('loading...');
 
@@ -86,13 +79,27 @@ class SuperuserInventoryViewState extends State<SuperuserInventoryView> {
                           snapshot.data.documents[index].data['imageURL']
                               .toString()),
                       onTap: () {
+                        var documentID =
+                            snapshot.data.documents[index].documentID;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CategoryVC(
+                                    locationSelected: documentID,
+                                    locationName: snapshot
+                                        .data.documents[index].data['name']
+                                        .toString(),
+                                  )),
+                        );
+                      },
+                      onDoubleTap: () {
+                        print("User double tapped location!");
                         showDialog(
                             context: context,
                             builder: (ctxt) {
-                              return UpdateItemDialog(
+                              return UpdateLocationDialog(
                                   itemSelected: snapshot.data.documents[index]);
                             });
-                        // navigateToDetail(snapshot.data.documents[index]);
                       },
                     );
                   });

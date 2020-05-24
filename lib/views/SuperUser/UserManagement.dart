@@ -2,7 +2,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
-import 'newItemDialog.dart';
 import 'HttpRequestModel.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 
@@ -50,7 +49,7 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
           elevation: 4,
           centerTitle: true,
           title: Text(
-            'Rental Manager Admin ',
+            'Rental Manager Admin - ' + globals.organization,
           ),
           backgroundColor: drawerBgColor,
         ),

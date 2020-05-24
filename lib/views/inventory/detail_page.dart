@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:rental_manager/PlatformWidget/platform_alert_dialog.dart';
 // import 'package:rental_manager/PlatformWidget/strings.dart';
 import 'package:flutter/services.dart';
+import 'package:RentalAdmin/views/globals.dart' as globals;
 
 class DetailPage extends StatefulWidget {
   var itemSelected;
@@ -92,7 +93,7 @@ class _DetailPage extends State<DetailPage> {
         alignment: Alignment.centerRight,
         child: StreamBuilder(
           stream: Firestore.instance
-              .collection('ARC_items')
+              .collection(globals.items_global)
               .document(widget.itemSelected.documentID)
               .snapshots(),
           builder: (context, snapshot) {

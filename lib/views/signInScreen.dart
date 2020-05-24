@@ -8,6 +8,7 @@ import '../widgets/auth.dart';
 import 'package:RentalAdmin/views/SuperUser/SuperuserPanel.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:RentalAdmin/views/SuperUser/organizationSelection.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 class signInScreen extends StatefulWidget {
   @override
   _signInScreenState createState() => _signInScreenState();
@@ -36,14 +37,15 @@ class _signInScreenState extends State<signInScreen> {
 
   Future<void> _handleSignOut() => _googleSignIn.disconnect();
 
-  Future <bool> getData() async {
+  Future<void> getData() async {
     Firestore.instance
         .collection('global_users')
-        .document(globals.userLoginID)
+        .document(globals.userLoginID.toLowerCase())
         .get()
         .then((DocumentSnapshot ds) {
       // use ds as a snapshot
       var doc = ds.data;
+      print("ADMIN STATUS: " + doc["Admin"]);
       globals.admin = doc["Admin"];
       globals.uid = doc["uid"];
       globals.username = doc["Name"];
@@ -51,6 +53,7 @@ class _signInScreenState extends State<signInScreen> {
       globals.rentalID = doc["RentalID"];
       globals.userImageUrl = doc["imageURL"];
       globals.phoneNumber = doc["PhoneNumber"];
+
       if (globals.userImageUrl == null) {
         globals.userImageUrl =
             "https://images.unsplash.com/photo-1581660545544-83b8812f9516?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
@@ -58,9 +61,22 @@ class _signInScreenState extends State<signInScreen> {
       globals.organization = doc['organization'];
       globals.reservation_global = globals.organization + '_reservations';
       globals.items_global = globals.organization + '_items';
-      
+      globals.locations = globals.organization + '_locations';
     });
-    return globals.admin;
+    // return ds.data;
+    return Future.delayed(Duration(seconds: 3), () => 'Large Latte');
+  }
+
+  Future getCollections() async {
+    QuerySnapshot list =
+        await Firestore.instance.collection(globals.locations).getDocuments();
+    print("ADDING LOCATIONS!!!");
+    list.documents.forEach((doc) {
+      globals.existingLocations.add(doc.data['name']);
+      // globals.categories.add(doc.data['categories']);
+
+      // print(doc.data['name']);
+    });
   }
 
   @override
@@ -91,13 +107,6 @@ class _signInScreenState extends State<signInScreen> {
                   color: Colors.teal.shade900,
                   fontSize: 20,
                   letterSpacing: 2.5,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-                width: 150,
-                child: Divider(
-                  color: Colors.teal.shade900,
                 ),
               ),
               SizedBox(height: 10, width: 150),
@@ -225,10 +234,54 @@ class _signInScreenState extends State<signInScreen> {
                               });
                         } else {
                           //Direct To SuperUserView directly
-                          print("UID??????: " + e);
-                          globals.userLoginID = "AppSignInUser" + username;
-                          getData().then((value) {
-                          if (value) {
+                          print("UID: " + e);
+                          globals.userLoginID = "AppSignInUser" + username.toLowerCase();
+                          print("name:" + globals.userLoginID);
+                          // print("Lname:" + globals.userLoginID.toLowerCase());
+                          print("------------------1--------------------");
+                          // getCollections();
+                          await Firestore.instance
+                              .collection('global_users')
+                              .document(globals.userLoginID)
+                              .get()
+                              .then((DocumentSnapshot ds) {
+                            // print("------------------2--------------------");
+                            // print(ds.data['Admin']);
+                            // // use ds as a snapshot
+                            var doc = ds.data;
+                            print(doc['Admin']);
+                            print('------------------------');
+                            print(doc["Admin"]);
+                            print(doc["uid"]);
+                            print(doc["Name"]);
+                            print("email STATUS: " + doc["Email"]);
+                            print("sid STATUS: " + doc["RentalID"]);
+                            print("url STATUS: " + doc["imageURL"]);
+                            print("phone STATUS: " + doc["PhoneNumber"]);
+
+                            globals.admin = doc["Admin"];
+                            globals.uid = doc["uid"];
+                            globals.username = doc["Name"];
+                            globals.email = doc["Email"];
+                            globals.rentalID = doc["RentalID"];
+                            globals.userImageUrl = doc["imageURL"];
+                            globals.phoneNumber = doc["PhoneNumber"];
+                            if (globals.userImageUrl == null) {
+                              globals.userImageUrl =
+                                  "https://images.unsplash.com/photo-1581660545544-83b8812f9516?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
+                            }
+                            globals.organization = doc['organization'];
+                            globals.reservation_global =
+                                globals.organization + '_reservations';
+                            globals.items_global =
+                                globals.organization + '_items';
+                            globals.locations =
+                                globals.organization + '_locations';
+                            print("------------------END ----------------");
+                          });
+                          print("------------------3--------------------");
+                          // await getData().then((value) {
+                          if (globals.admin) {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -239,7 +292,7 @@ class _signInScreenState extends State<signInScreen> {
                                 MaterialPageRoute(
                                     builder: (context) => HomeView()));
                           }
-                          });
+                          // });
                         }
                       },
                       padding: EdgeInsets.all(10.0),
@@ -317,14 +370,14 @@ class _signInScreenState extends State<signInScreen> {
                       //     context,
                       //     MaterialPageRoute(
                       //         builder: (context) => SignUpPage()));
-                       Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    //SignUpPage(),
-                                    OrganizationSelection(),
-                              ),
-                            );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              //SignUpPage(),
+                              OrganizationSelection(),
+                        ),
+                      );
                       // showDialog(
                       //     context: context,
                       //     builder: (ctxt) {
@@ -366,9 +419,6 @@ class _signInScreenState extends State<signInScreen> {
                     ),
                   ),
                 ),
-              ),
-              Row(
-                children: <Widget>[],
               ),
             ],
           ),
@@ -487,7 +537,85 @@ class _ResetPasswordState extends State<ResetPassword> {
                           ),
                         ],
                       ),
-                      onPressed: () async {},
+                      onPressed: () async {
+                        // check if the email exsit? 
+                        final QuerySnapshot result = await Firestore.instance
+                            .collection('global_users')
+                            .getDocuments();
+                        final List<DocumentSnapshot> documents =
+                            result.documents;
+                        List<String> userNameList = [];
+                        documents.forEach(
+                            (data) => userNameList.add(data['Email']));
+                        bool found = false;
+                        for (var i = 0; i < userNameList.length; i++) {
+                          if (email.toLowerCase() == userNameList[i]) {
+                            found = true;
+                            print("found");
+                            break;
+                          }
+                        }
+                        if(found){
+                          final FirebaseAuth auth = FirebaseAuth.instance;
+                           ProgressDialog prForgetPassword;
+                          prForgetPassword = new ProgressDialog(context,
+                              type: ProgressDialogType.Normal);
+                          prForgetPassword.update(
+                            message: 'Sending Email...',
+                            progressWidget: CircularProgressIndicator(),
+                            progressTextStyle: TextStyle(
+                                color: Colors.black,
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.w400),
+                            messageTextStyle: TextStyle(
+                                color: Colors.black,
+                                fontSize: 19.0,
+                                fontWeight: FontWeight.w600),
+                          );
+                          await prForgetPassword.show();
+                          Future.delayed(Duration(seconds: 2)).then((onValue) {
+                            prForgetPassword.update(
+                              message: "Email Sent",
+                              progressWidget: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: CircularProgressIndicator()),
+                              progressTextStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 13.0,
+                                  fontWeight: FontWeight.w400),
+                              messageTextStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 19.0,
+                                  fontWeight: FontWeight.w600),
+                            );
+                            Future.delayed(Duration(seconds: 2)).then((value) async{
+                              // authHandler.resetPassword(email);
+                              await auth.sendPasswordResetEmail(email: email);
+                              prForgetPassword.hide();
+                            });
+                          });
+                        }else{
+                           showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title:
+                                      Text('The email that you provided doesn not seem to be a registered account'),
+                                  actions: <Widget>[
+                                    new FlatButton(
+                                      child: new Text('CANCEL'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              });
+
+                        }
+                        
+
+                      },
                       padding: EdgeInsets.all(7.0),
                       disabledColor: Colors.black,
                       disabledTextColor: Colors.black,

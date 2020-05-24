@@ -16,31 +16,11 @@ class CheckingOut extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
             onPressed: () {
               print("pressed redeem:)");
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text('Swipe ID card'),
-                      content: TextField(
-                        autofocus: true,
-                        onChanged: (text) {
-                          if (text.length == 9) {
-                            sid = text;
-                            Navigator.push(
+              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         ReservationListPage()));
-                            _textFieldController.clear();
-                          }
-                          print("First text field: $text");
-                        },
-                        controller: _textFieldController,
-                        decoration:
-                            InputDecoration(hintText: "Please enter SID#"),
-                      ),
-                    );
-                  });
             },
             child: Padding(
               padding:

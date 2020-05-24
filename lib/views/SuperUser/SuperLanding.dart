@@ -11,37 +11,33 @@ class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
 }
-
+String numTotalInventory = '0';
 class _DashboardState extends State<Dashboard> {
   String numUsedToday = '0';
-  String numTotalInventory = '0';
-  String numDamaged = '0';
+  // numTotalInventory = '0';
+  // String numDamaged = '0';
 
-  Future getFirestoreData() async {
-    //   numTotalInventory = Firestore.instance.collection(globals.items_global).snapshots().length.toString();
-    //   Firestore.instance.collection(globals.items_global).getDocuments().then((myDocuments){
-    //     numTotalInventory = myDocuments.documents.length.toString();
-    // });
-    //   numUsedToday = Firestore.instance.collection(globals.reservation_global).snapshots().length.toString();
-    //   print(numTotalInventory);
-  }
   Future countDocuments() async {
     QuerySnapshot _myDoc = await Firestore.instance
         .collection(globals.items_global)
         .getDocuments();
     List<DocumentSnapshot> _myDocCount = _myDoc.documents;
     numTotalInventory = _myDocCount.length.toString();
-    print(globals.items_global);
+    // print(globals.items_global);
     print(numTotalInventory); // Count of Documents in Collection
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    countDocuments();
   }
 
   @override
   Widget build(BuildContext context) {
     final _media = MediaQuery.of(context).size;
-    countDocuments();
-
-    // int selectedView = 0;
-    // print(_media);
+    
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return Material(
@@ -65,7 +61,7 @@ class _DashboardState extends State<Dashboard> {
                         elevation: 4,
                         centerTitle: true,
                         title: Text(
-                          'Rental Manager Admin ',
+                          'Rental Manager Admin - ' + globals.organization,
                         ),
                         backgroundColor: drawerBgColor,
                       ),
@@ -111,32 +107,6 @@ class _DashboardState extends State<Dashboard> {
                                     SizedBox(
                                       height: 20,
                                     ),
-                                    // MaterialButton(
-                                    //   color: Colors.teal,
-                                    //   shape: RoundedRectangleBorder(
-                                    //       borderRadius: BorderRadius.all(
-                                    //           Radius.circular(20.0))),
-                                    //   onPressed: () {
-                                    //     print("Clicked Update Profile");
-
-                                    //     showDialog(
-                                    //         context: context,
-                                    //         builder: (ctxt) {
-                                    //           return UpdateProfile();
-                                    //         });
-                                    //   },
-                                    //   child: Padding(
-                                    //     padding: const EdgeInsets.symmetric(
-                                    //         vertical: 5.0, horizontal: 5.0),
-                                    //     child: Text(
-                                    //       "Update My Profile",
-                                    //       style: TextStyle(
-                                    //           fontSize: 15,
-                                    //           color: Colors.white,
-                                    //           fontWeight: FontWeight.w100),
-                                    //     ),
-                                    //   ),
-                                    // ),
                                   ],
                                 ),
                               ],

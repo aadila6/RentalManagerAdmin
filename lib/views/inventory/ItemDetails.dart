@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:RentalAdmin/views/homeView.dart';
 import 'package:intl/intl.dart';
 import 'package:RentalAdmin/views/ReservationView.dart';
+import 'package:RentalAdmin/views/globals.dart' as globals;
 class DetailPage extends StatefulWidget {
   var itemSelected;
   DetailPage({this.itemSelected});
@@ -61,12 +62,12 @@ class _DetailPage extends State<DetailPage> {
         alignment: Alignment.center,
         child: StreamBuilder(
           stream: Firestore.instance
-              .collection('ARC_items')
+              .collection(globals.items_global)
               .document(widget.itemSelected.documentID)
               .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) return const Text('loading...');
-            return Text('Instock Amount: ${snapshot.data['# of items']}',
+            return Text('Instock Amount: ${snapshot.data['amount']}',
                 style: TextStyle(
                     fontSize: 14.0,
                     color: Colors.green,
@@ -110,81 +111,61 @@ class _DetailPage extends State<DetailPage> {
   }
 
 testingReservations(String itemID) async {
-    // print(globals.uid);
-    // final QuerySnapshot result =
-    // await Firestore.instance.collection('items').getDocuments();
-    // final List<DocumentSnapshot> documents = result.documents;
-    // List<String> itemIDs = [];
-    // documents.forEach((data) => itemIDs.add(data.documentID));
-    // print(documents.length);
-    //for(int i = 0; i< snapshot.length;i++){
+  
     print(itemID);
-    //}
     var now = new DateTime.now();
     var time = DateFormat("yyyy-MM-dd hh:mm:ss").format(now);
     var pickUpBefore = now.add(new Duration(minutes: 10));
-    // print("Reservation Created time: " + time);
-    // print("Reservation pickup before time: " +
-    //     DateFormat("yyyy-MM-dd hh:mm:ss").format(pickUpBefore));
-    uploadData(itemID, 'AppSignInUserladydilaa@gmail.com', time);
+  
+    uploadData(itemID, globals.userLoginID, time);
   }
 
   void uploadData(itemID, uid, dateTime) async {
     String itemName, imageURL;
     final databaseReference = Firestore.instance;
     await Firestore.instance
-        .collection('ARC_items')
+        .collection(globals.items_global)
         .document(itemID)
         .get()
         .then((DocumentSnapshot ds) {
       try {
         itemName = ds["name"];
-        print("Found in ARC_items");
+        // print("Found in ARC_items");
       } catch (e) {
         print(e);
       }
     });
 
     await Firestore.instance
-        .collection('ARC_items')
+        .collection(globals.items_global)
         .document(itemID)
         .get()
         .then((DocumentSnapshot ds) {
       try {
         imageURL = ds["imageURL"];
-        print("Found in ARC_items");
+        // print("Found in ARC_items");
       } catch (e) {
         print(e);
       }
     });
-
     if (itemName == null) {
       print("UID Not Found");
       itemName = "UID Not Found";
     }
     if (imageURL == null) {
       print("UID Not Found");
-      imageURL = "www.gooogle.com";
+      imageURL ="https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b";
     }
-
-    // final FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    final userID = 'AppSignInUserladydilaa@gmail.com';
-    await databaseReference.collection("reservation").document().setData({
+    await databaseReference.collection(globals.reservation_global).document().setData({
       'imageURL': imageURL,
       'name': itemName,
-      'uid': uid,
+      'uid': globals.userLoginID,
       'item': itemID,
-      'userID': userID,
       'amount': "1",
       'startTime': dateTime,
       'status': "Picked Up",
       'endTime': "TBD",
     });
+    
     Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));
-    // PlatformAlertDialog(
-    //   title: 'Your item has placed',
-    //   content:
-    //       'Your reservation is successful confirmed, please pick it up on time',
-    //   defaultActionText: Strings.ok,
-    // ).show(context);
   }}

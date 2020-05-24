@@ -7,17 +7,17 @@ import 'package:firebase/firebase.dart' as fb;
 import 'package:universal_html/prefer_universal/html.dart' as html;
 import 'package:RentalAdmin/views/globals.dart' as globals;
 
-class UpdateItemDialog extends StatefulWidget {
+class UpdateLocationDialog extends StatefulWidget {
   var itemSelected;
-  UpdateItemDialog({this.itemSelected});
+  UpdateLocationDialog({this.itemSelected});
   @override
-  _UpdateItemDialogState createState() => _UpdateItemDialogState();
+  _UpdateLocationDialogState createState() => _UpdateLocationDialogState();
 }
 
 TextEditingController controller = TextEditingController();
 TextEditingController controller2 = TextEditingController();
 
-class _UpdateItemDialogState extends State<UpdateItemDialog> {
+class _UpdateLocationDialogState extends State<UpdateLocationDialog> {
   File _image;
   html.File image;
   Future pickImage() async {
@@ -46,17 +46,17 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
   }
 
   String _itemName;
-  int _itemCount;
+  // int _itemCount;
   String _url =
       'https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/cat.jpg?alt=media&token=78818628-9471-421d-8969-76d68b07f591';
 
   @override
   Widget build(BuildContext context) {
     _itemName = widget.itemSelected.data['name'];
-    _itemCount = widget.itemSelected.data['amount'];
+    // _itemCount = widget.itemSelected.data['amount'];
     _url = widget.itemSelected.data['imageURL'];
     controller.text = widget.itemSelected.data['name'];
-    controller2.text = widget.itemSelected.data['amount'].toString();
+    // controller2.text = widget.itemSelected.data['amount'].toString();
     return Dialog(
         child: ConstrainedBox(
             constraints: BoxConstraints(maxWidth: 500, maxHeight: 500),
@@ -75,7 +75,6 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
                           color: Colors.cyan,
                         )
                       : Container(),
-                  // Text("Add new item"),
                   TextField(
                     controller: controller,
                     onChanged: (text) {
@@ -84,65 +83,78 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
                     },
                     autofocus: true,
                     decoration: InputDecoration(
-                      labelText: "Item Name",
+                      labelText: "Location Name",
                     ),
                   ),
-                  TextField(
-                    controller: controller2,
-                    onChanged: (text) {
-                      _itemCount = int.parse(text);
-                      print("First text field: $text");
-                    },
-                    decoration: InputDecoration(
-                      labelText: "Item Amount",
-                    ),
-                  ),
+                 
                   RaisedButton(
                       onPressed: () {
                         deleteItem().then((value) {
                           Navigator.pop(context);
                         });
                       },
-                      child: Text("Delete Item")),
+                      child: Text("Delete Location")),
                   RaisedButton(
                       onPressed: () {
                         updateAll();
-                          // Navigator.pop(context);
-                        
                       },
-                      child: Text("Update Item"))
+                      child: Text("Update Information"))
                 ]))));
   }
-  List<String> itemList = [];
-  Future getItemLists() async {
-    itemList.clear();
+
+  List<String> locationList = [];
+  Future getLocationList() async {
+    locationList.clear();
     QuerySnapshot list =
-        await Firestore.instance.collection(globals.items_global).where('category',isEqualTo: widget.itemSelected.data['category']).getDocuments();
+        await Firestore.instance.collection(globals.locations).getDocuments();
     list.documents.forEach((doc) {
-      itemList.add(doc.data['name']);
+      locationList.add(doc.data['name']);
     });
   }
 
-  Future updateAll() async{
-    await getItemLists();
+  Future updateAll() {
+    updateName();
+    updateUrl();
+  }
+
+  Future deleteItem() async {
+    final firestore = Firestore.instance;
+    await firestore
+        .collection(globals.locations)
+        .document(widget.itemSelected.documentID.toString())
+        .delete()
+        .catchError((error) => print(error));
+    Navigator.pop(context);
+  }
+
+  Future updateName() async {
+    await getLocationList();
     bool found = false;
     int counter = 0;
-    // itemList.add(_itemName);
-     itemList.removeWhere(
+    locationList.removeWhere(
           (item) => item == widget.itemSelected.data['name']);
-    itemList.forEach((element) {
-      if(element == _itemName){
+    locationList.forEach((element) {
+      if (_itemName == element) {
         found = true;
         counter++;
       }
     });
-    if(found){
+    if (!found) {
+      final firestore = Firestore.instance;
+      await firestore
+          .collection(globals.locations)
+          .document(widget.itemSelected.documentID.toString())
+          .updateData({
+        'name': _itemName,
+      }).catchError((error) => print(error));
+      Navigator.pop(context);
+    } else {
       showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
               title: Text(
-                  'The item name is already exist and can not be changed!'),
+                  'The location name is already exist and can not be changed!'),
               actions: <Widget>[
                 new FlatButton(
                   child: new Text('CANCEL'),
@@ -153,56 +165,16 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
               ],
             );
           });
-    }else{
-      updateName();
     }
-    updateAmount();
-    updateUrl();
-    
-
-  }
-
-
-  Future deleteItem() async {
-    final firestore = Firestore.instance;
-    await firestore
-        .collection(globals.items_global)
-        .document(widget.itemSelected.documentID.toString())
-        .delete()
-        .catchError((error) => print(error));
-        Navigator.pop(context);
-  }
-
-  Future updateName() async {
-    final firestore = Firestore.instance;
-    await firestore
-        .collection(globals.items_global)
-        .document(widget.itemSelected.documentID.toString())
-        .updateData({
-      'name': _itemName,
-    }).catchError((error) => print(error));
-    Navigator.pop(context);
-  }
-
-  Future updateAmount() async {
-    final firestore = Firestore.instance;
-    await firestore
-        .collection(globals.items_global)
-        .document(widget.itemSelected.documentID.toString())
-        .updateData({
-      'amount': _itemCount,
-    }).catchError((error) => print(error));
-    // Navigator.pop(context);
   }
 
   Future updateUrl() async {
     final firestore = Firestore.instance;
     await firestore
-        .collection(globals.items_global)
+        .collection(globals.locations)
         .document(widget.itemSelected.documentID.toString())
         .updateData({
       'imageURL': _url,
     }).catchError((error) => print(error));
-
   }
 }
