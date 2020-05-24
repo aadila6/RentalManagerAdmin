@@ -42,37 +42,40 @@ class _ImportCSVDialogState extends State<ImportCSVDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-        child: Column(children: [
-      RaisedButton(
-          onPressed: () {
-            var collection = Firestore.instance.collection(globals.items_global);
+        child: Container(
+          width: 768,
+          child:Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+          Row(children:[RaisedButton(
+            onPressed: () {
+              var collection = Firestore.instance.collection(globals.items_global);
 
-            var csvFuture = getFile();
-            csvFuture.then((value) {
-              print(value);
-              rows = const CsvToListConverter().convert(value);
-              print(rows);
-              for (var r in rows) {
-                var docRef = collection.document();
-                batch.setData(docRef, {
-                  'Category': "sport",
-                  'isAvaliable': "true",
-                  'name': r[0],
-                  'amount': r[1],
-                  'imageURL': r.length>3?r[2]:defaultURL
-                });
-              }
-              setState(() {
-                
+              var csvFuture = getFile();
+              csvFuture.then((value) {
+                print(value);
+                rows = const CsvToListConverter().convert(value);
+                print(rows);
+                for (var r in rows) {
+                  var docRef = collection.document();
+                  batch.setData(docRef, {
+                    'Category': "sport",
+                    'isAvaliable': "true",
+                    'name': r[0],
+                    'amount': r[1],
+                    'imageURL': r.length>3?r[2]:defaultURL
+                  });
+                }
+                setState(() {});
               });
-            });
-          },
-          child: Text("Select CSV File")),
-          Column(
-            children: <Widget>[Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[Text("Name"),Text("Amount")])] + (rows==null?[]:rows.map<Widget>((e) => Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [Text(e[0]),Text(e[1].toString())])).toList()),
+            },
+            child: Text("Select CSV File")
+          )]
+          ),
+          Table(
+            children: <TableRow>[TableRow(children: [Text("Name"),Text("Amount")])]+(rows==null?[]:rows.map<TableRow>(
+              (e) => TableRow(children: [Text(e[0]),Text(e[1].toString())])
+            ).toList())
           ),
           RaisedButton(
             child: Text("Confirm & Upload"),
@@ -82,6 +85,6 @@ class _ImportCSVDialogState extends State<ImportCSVDialog> {
               Navigator.of(context).pop();
             });
           },)
-    ]));
+    ])));
   }
 }

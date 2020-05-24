@@ -17,14 +17,21 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
   bool isReady = false;
   var allUsers;
   List<User> allUserList = List();
-
+  List<String> allPermissions = ['Admin', 'Frontdesk', 'User'];
   void fetchFromFirebase() {
     print("Firebase request1");
     //List<User> res = List();
     Firestore.instance.collection("global_users").where('organization', isEqualTo: globals.organization)
     .snapshots().listen((s) {
       s.documents.forEach((e) {
-        allUserList.add(User(email: e.data['Email'],admin: e.data['Admin']));
+        var tu = User(email: e.data['Email']);
+        for(var i in allPermissions) {
+          if(e.data.containsKey(i))
+            tu.permissions[i] = e.data[i];
+          else
+            tu.permissions[i] = false;
+        }
+        allUserList.add(tu);
       });
       setState((){});
     });
@@ -32,8 +39,6 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
   @override
   void initState() {
     super.initState();
-    //print("@#!@#!@#!@#!@#!#@");
-    //allUserFuture = fetchUser();allUsers
     fetchFromFirebase();
     print("Init Finished");
   }
@@ -49,68 +54,34 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
           ),
           backgroundColor: drawerBgColor,
         ),
-        body: ListView.builder(
-          padding: EdgeInsets.fromLTRB(30, 20, 30, 0),
-          itemCount: allUserList.length + 1,
-          itemBuilder: (c,i){
-            if(i==0)
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Email",
+        body: Table(
+          children: [TableRow(
+            children: [
+              Text("Email",
+              style: TextStyle(
+                fontSize: 30
+              ))] + allPermissions.map((e){
+                return Text("is $e",
                   style: TextStyle(
                     fontSize: 30
-                  ),),
-                  Text("is Admin",
-                  style: TextStyle(
-                    fontSize: 30
-                  ))
-                ],
-              );
-            
-            return userRowBuilder(allUserList[i-1]);
-          }
+                  ));
+              }).toList(),
+          )] + allUserList.map((e){
+            return TableRow(children: <Widget>[Text(e.email)] +
+              allPermissions.map<Widget>((p){
+                return Checkbox(value: e.permissions[p], onChanged: (newVal){
+                  if(newVal) {
+                    modifyPermission(e.email,p,true);
+                  } else {
+                    modifyPermission(e.email,p,false);
+                  }
+                  e.permissions[p] =! e.permissions[p];
+                  setState((){});
+                });
+              }).toList()
+            );
+          }).toList()
         )
     );
   }
-
-  Widget userRowBuilder(User u) {
-    return Row(
-      //mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: <Widget>[
-        Text(u.email),
-        Spacer(),
-        Checkbox(value: u.admin, onChanged: (newVal){
-          if(newVal) {
-            modifyAdmin(u.email,true);
-          } else {
-            modifyAdmin(u.email,false);
-          }
-          u.admin =! u.admin;
-          setState((){});
-        })
-      ],
-    );
-  }
-
-//   Widget confirmationPopup(String user, String s) {
-//     return AlertDialog(
-//       title: Text("Delete"),
-//       content: Text("Deleting Role $s from user $user. Are you sure?"),
-//       actions: <Widget>[
-//         RaisedButton(
-//             child: Text("No"),
-//             onPressed: () {
-//               Navigator.of(context).pop();
-//             }),
-//         RaisedButton(
-//             child: Text("Yes"),
-//             onPressed: () {
-//               modifyRoleFake(user, s, false);
-//               setState(() {});
-//               Navigator.of(context).pop();
-//             }),
-//       ],
-//     );
-//   }
 }
