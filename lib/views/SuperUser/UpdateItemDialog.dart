@@ -170,7 +170,8 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
         .document(widget.itemSelected.documentID.toString())
         .delete()
         .catchError((error) => print(error));
-        Navigator.pop(context);
+        
+        // Navigator.pop(context);
   }
 
   Future updateName() async {

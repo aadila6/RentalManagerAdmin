@@ -185,7 +185,7 @@ List<String> itemList = [];
       'imageURL': url,
       'name': itemName,
       'Location':this.widget.locationSelected,
-      'amount': itemCount,
+      '# of items': itemCount,
     }).then((value) {
       Navigator.pop(context);
     });

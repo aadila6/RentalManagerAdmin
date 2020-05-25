@@ -116,15 +116,64 @@ class _UpdateLocationDialogState extends State<UpdateLocationDialog> {
     updateName();
     updateUrl();
   }
+  List<Map<dynamic, dynamic>> categoryList = [];
+  // List<String>CatNames = [];
+  List<String> catNames = [];
+  Future getCat() async {
+    print("Getting Cattttt");
+    //First get the name
+    QuerySnapshot list = await Firestore.instance
+        .collection(globals.locations)
+        .where('name', isEqualTo:  widget.itemSelected.data['name'])
+        .getDocuments();
+    categoryList.clear();
+    print("cleared the matrix");
+    list.documents.forEach((doc) {
+       print("000000000");
+      categoryList = List.from(doc.data['categories']);
+      print("11111111");
+      catNames.add(doc.data['categories']['name']);
+      // categoryList.forEach((element) {
+      //   print("222222222222");
+      //   print(element);
+      //   //  globals.categories.add(element['name']);
+      // });
+      print(categoryList);
+      print("Printing NAMESSSSSSSS!!!!!!!!!!!!");
+    });
+  }
 
   Future deleteItem() async {
+    // getCat();
     final firestore = Firestore.instance;
     await firestore
         .collection(globals.locations)
         .document(widget.itemSelected.documentID.toString())
         .delete()
         .catchError((error) => print(error));
-    Navigator.pop(context);
+    //delete categories inside the location
+    
+    QuerySnapshot list = await Firestore.instance
+        .collection(globals.items_global)
+        // .where('category', isEqualTo: catNames)
+        .where('Location', isEqualTo: widget.itemSelected.data['name'])
+        .getDocuments();
+    List docID = [];
+    list.documents.forEach((doc) async {
+      docID.add(doc.documentID);
+    });
+    print("DOC IDS: " + docID.toString());
+    docID.forEach((element) async {
+      await Firestore.instance
+          .collection(globals.items_global)
+          .document(element)
+          .delete()
+          .catchError((error) => print(error));
+    });
+
+    //delete items inside categories
+    
+    // Navigator.pop(context);
   }
 
   Future updateName() async {
