@@ -102,7 +102,7 @@ class _CategoryVC extends State<CategoryVC> {
                               return UpdateCategoryDialog(
                                   locationSelected:
                                       this.widget.locationSelected,
-                                  locationName : this.widget.locationName,
+                                  locationName: this.widget.locationName,
                                   categorySelected: snapshot.data['categories']
                                       [index]);
                             });

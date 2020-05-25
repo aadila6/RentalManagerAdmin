@@ -16,7 +16,7 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
   bool isReady = false;
   var allUsers;
   List<User> allUserList = List();
-  List<String> allPermissions = ['Admin', 'Frontdesk', 'User'];
+  List<String> allPermissions = ['Admin', 'User'];
   void fetchFromFirebase() {
     print("Firebase request1");
     //List<User> res = List();
@@ -59,25 +59,35 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
               Text("Email",
               style: TextStyle(
                 fontSize: 30
+              )),Text("Location Manager",
+              style: TextStyle(
+                fontSize: 30
               ))] + allPermissions.map((e){
                 return Text("is $e",
                   style: TextStyle(
                     fontSize: 30
                   ));
-              }).toList(),
+              }).toList() + [Text("")],
           )] + allUserList.map((e){
+            var rowTextController = TextEditingController();
             return TableRow(children: <Widget>[Text(e.email)] +
+            [TextField(
+              controller: rowTextController,
+            )]+
               allPermissions.map<Widget>((p){
                 return Checkbox(value: e.permissions[p], onChanged: (newVal){
-                  if(newVal) {
-                    modifyPermission(e.email,p,true);
-                  } else {
-                    modifyPermission(e.email,p,false);
-                  }
-                  e.permissions[p] =! e.permissions[p];
+                  e.permissions[p] = newVal;
                   setState((){});
                 });
-              }).toList()
+              }).toList() + [
+                RaisedButton(
+                  child:Text("Submit"),
+                  onPressed: (){
+                    //print(e.getPermissions());
+                    e.permissions['LocationManager'] = rowTextController.text;
+                    modifyAllPermissions(e);
+                })
+              ]
             );
           }).toList()
         )

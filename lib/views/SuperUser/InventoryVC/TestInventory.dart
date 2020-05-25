@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
 import 'package:RentalAdmin/views/SuperUser/UpdateItemDialog.dart';
 import 'package:RentalAdmin/views/SuperUser/NewLocationDialog.dart';
-import 'package:RentalAdmin/views/SuperUser/NewCategoryDialog.dart';
 import 'package:RentalAdmin/views/SuperUser/NewItemDialog.dart';
-import 'package:RentalAdmin/views/SuperUser/SuperLanding.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'Category.dart';
 

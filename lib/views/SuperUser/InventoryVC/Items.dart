@@ -82,34 +82,13 @@ class _ItemVC extends State<ItemVC> {
                               .toString()),
                       onTap: () {
                         // if(globals.admin){
-                          showDialog(
-              context: context,
-              builder: (ctxt) {
-                return UpdateItemDialog(
-                  itemSelected: snapshot.data.documents[index],
-                );
-              });
-
-                        // }else{
-                          // print("HOLAAAAA");
-
-
-                        // }
-
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => Dashboard()),
-                        // );
-                        // Navigator.replace(context, oldRoute:(context) => ItemVC(), newRoute: (context) =>Dashboard());
-                        // showDialog(
-                        //     context: context,
-                        //     builder: (ctxt) {
-                        //       // return UpdateItemDialog(
-                        //       //     itemSelected: snapshot.data.documents[index]);
-                        //       // return Dashboard();
-
-                        //     });
-                        // navigateToDetail(snapshot.data.documents[index]);
+                        showDialog(
+                            context: context,
+                            builder: (ctxt) {
+                              return UpdateItemDialog(
+                                itemSelected: snapshot.data.documents[index],
+                              );
+                            });
                       },
                     );
                   });
@@ -129,7 +108,6 @@ class CustommCell extends StatelessWidget {
   CustommCell(this.name, this.url);
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
