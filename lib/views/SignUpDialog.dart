@@ -9,7 +9,8 @@ import 'package:RentalAdmin/views/signInScreen.dart';
 
 class SignUpPage extends StatefulWidget {
   String organization;
-  SignUpPage({this.organization});
+  bool isNew;
+  SignUpPage({this.organization, this.isNew});
   @override
   SignUpState createState() => SignUpState();
 }
@@ -276,13 +277,15 @@ class SignUpState extends State<SignUpPage> {
     await databaseReference.collection('global_users').document(doc).setData({
       'Name': fullName,
       'Email': email,
-      'Admin': false,
+      'Admin': this.widget.isNew,
       'imageURL':
           "https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b",
       'PhoneNumber': '',
       'organization': this.widget.organization.toString(),
       'LocationManager':'',
       'Sex':'',
+      'LatestReservation':'',
+      'RentalID':''
     });
   }
 }

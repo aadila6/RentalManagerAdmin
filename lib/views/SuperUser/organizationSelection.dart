@@ -7,14 +7,14 @@ class OrganizationSelection extends StatefulWidget {
   @override
   _OrganizationSelectionState createState() => _OrganizationSelectionState();
 }
-
+bool isNEW = false;
 class _OrganizationSelectionState extends State<OrganizationSelection> {
   Future navigateToSignUp(String orgSelected, BuildContext context) {
     print("Selected the Organization: " + orgSelected);
     return Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SignUpPage(organization: orgSelected),
+        builder: (context) => SignUpPage(organization: orgSelected, isNew: isNEW),
       ),
     );
   }
@@ -35,6 +35,7 @@ class _OrganizationSelectionState extends State<OrganizationSelection> {
               MaterialButton(
                 color: Colors.blue,
                 onPressed: () {
+                  isNEW = true;
                   String noSpaceInput =
                       inputText.text.trim().replaceAll(' ', '');
                   String compateInput = noSpaceInput.toLowerCase();
@@ -45,6 +46,7 @@ class _OrganizationSelectionState extends State<OrganizationSelection> {
                   if (!toLowerList.contains(compateInput)) {
                     Navigator.of(context).pop(noSpaceInput);
                   } else {
+                    // isNEW = true;
                     exisitDialog(context);
                   }
                 },
@@ -57,6 +59,7 @@ class _OrganizationSelectionState extends State<OrganizationSelection> {
   }
 
   Future addOrganization(String newOrganization) async {
+    isNEW = true;
     await Firestore.instance
         .collection('organizations')
         .document()
@@ -109,6 +112,7 @@ class _OrganizationSelectionState extends State<OrganizationSelection> {
           IconButton(
             onPressed: () {
               inputDialog(context).then((newOrganization) async {
+                isNEW = true;
                 if (newOrganization != null && newOrganization != '') {
                   // await addOrganization(newOrganization.toString());
                   navigateToSignUp(newOrganization.toString(), context);
@@ -138,6 +142,7 @@ class _OrganizationSelectionState extends State<OrganizationSelection> {
                   ),
                 ),
                 onTap: () {
+                  isNEW = false;
                   navigateToSignUp(
                       snapshot.data.documents[index].data['name'].toString(),
                       context);

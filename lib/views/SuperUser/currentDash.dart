@@ -21,6 +21,54 @@ class _ActivityWidgetState extends State<ActivityWidget> {
     await firestore.collection(globals.reservation_global).getDocuments();
     return itemListDOC.documents;
   }
+  String returnDifferenceTime(
+      String reservationTime, String pickUpTime, String returnTime) {
+    if (returnTime != null && returnTime.isNotEmpty) {
+      if (returnTime != "NULL") {
+        reservationTime = returnTime;
+      }
+    } else {
+      if (pickUpTime != null && pickUpTime.isNotEmpty) {
+        if (pickUpTime != "NULL") {
+          pickUpTime = reservationTime;
+        }
+      }
+    }
+
+    var validTime = DateTime.parse(reservationTime);
+    var difference = DateTime.now().difference(validTime);
+    String ans = "NULL";
+    var a = difference.inSeconds,
+        b = difference.inMinutes,
+        c = difference.inHours,
+        d = difference.inDays;
+    if (a < 60) {
+      var tmp = "seconds";
+      if (a == 1) {
+        tmp = "second";
+      }
+      ans = "$a $tmp ago";
+    } else if (b >= 1 && b <= 60) {
+      var tmp = "minutes";
+      if (b == 1) {
+        tmp = "minute";
+      }
+      ans = "$b $tmp ago";
+    } else if (c >= 1 && c <= 24) {
+      var tmp = "hours";
+      if (c == 1) {
+        tmp = "hour";
+      }
+      ans = "$c $tmp ago";
+    } else if (d >= 1) {
+      var tmp = "days";
+      if (d == 1) {
+        tmp = "day";
+      }
+      ans = "$d $tmp ago";
+    }
+    return ans;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,25 +106,26 @@ class _ActivityWidgetState extends State<ActivityWidget> {
                       itemExtent: 50.0,
                       itemCount: snapshot.data.documents.length,
                       itemBuilder: (BuildContext context, int index) =>
-                          ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(
-                              snapshot.data.documents[index].data['imageURL']),
+                      
+                      ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(snapshot.data.documents[index].data['imageURL']),
+                          ),
+                          trailing: new Text(
+                            snapshot.data.documents[index].data['startTime'].toString()
+
+                              ),
+                          title: new Text(snapshot.data.documents[index].data['name']),
+                              // style: TextStyle(color: textcolor())),
+                          subtitle: new Text(
+                              snapshot.data.documents[index].data['status'] +
+                                  " by " +
+                                  snapshot.data.documents[index].data['UserName'],
+                              // style: TextStyle(color: textcolor())),
+                          // onTap: () {},
                         ),
-                        trailing:
-                            Text(snapshot.data.documents[index].data['status']),
-                        title: Text(snapshot.data.documents[index].data['name']
-                            .toString()),
-                        subtitle: Text(
-                            'Time: ${snapshot.data.documents[index].data['startTime'].toString()}'),
-                        onTap: () {
-                          // navigateToDetail(snapshot.data.documents[index]);
-                          // testingReservations(
-                          //     snapshot.data.documents[index].documentID);
-                        },
-                      ),
-                    );
-                  }),
+                    ),
+              );}),
             )
           ],
         ),

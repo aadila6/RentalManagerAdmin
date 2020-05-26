@@ -157,14 +157,26 @@ testingReservations(String itemID) async {
       imageURL ="https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b";
     }
     await databaseReference.collection(globals.reservation_global).document().setData({
+      // 'imageURL': imageURL,
+      // 'name': itemName,
+      // 'uid': globals.userLoginID,
+      // 'item': itemID,
+      // 'amount': "1",
+      // 'startTime': dateTime,
+      // 'status': "Picked Up",
+      // 'endTime': "TBD",
       'imageURL': imageURL,
       'name': itemName,
       'uid': globals.userLoginID,
       'item': itemID,
-      'amount': "1",
+      'amount': 1,
       'startTime': dateTime,
-      'status': "Picked Up",
+      'status': "Reserved",
+      'reserved time': dateTime,
+      'picked Up time': 'NULL',
+      'return time': 'NULL',
       'endTime': "TBD",
+      'UserName': globals.username,
     });
     
     Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));

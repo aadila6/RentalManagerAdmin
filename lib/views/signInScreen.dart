@@ -255,15 +255,15 @@ class _signInScreenState extends State<signInScreen> {
                             print(doc["uid"]);
                             print(doc["Name"]);
                             print("email STATUS: " + doc["Email"]);
-                            print("sid STATUS: " + doc["RentalID"]);
+                            // print("sid STATUS: " + doc["RentalID"]);
                             print("url STATUS: " + doc["imageURL"]);
                             print("phone STATUS: " + doc["PhoneNumber"]);
 
                             globals.admin = doc["Admin"];
-                            globals.uid = doc["uid"];
+                            // globals.uid = doc["uid"];
                             globals.username = doc["Name"];
                             globals.email = doc["Email"];
-                            globals.rentalID = doc["RentalID"];
+                            // globals.rentalID = doc["RentalID"];
                             globals.userImageUrl = doc["imageURL"];
                             globals.phoneNumber = doc["PhoneNumber"];
                             if (globals.userImageUrl == null) {
@@ -277,6 +277,7 @@ class _signInScreenState extends State<signInScreen> {
                                 globals.organization + '_items';
                             globals.locations =
                                 globals.organization + '_locations';
+                            globals.locationManager = doc['LocationManager'];
                             print("------------------END ----------------");
                           });
                           print("------------------3--------------------");
@@ -287,12 +288,18 @@ class _signInScreenState extends State<signInScreen> {
                                 MaterialPageRoute(
                                     builder: (context) => SuperuserPanel()));
                           } else {
+                            if(globals.locationManager!= ""){
+                               Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SuperuserPanel()));
+                            }
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => HomeView()));
                           }
-                          // });
+                         
                         }
                       },
                       padding: EdgeInsets.all(10.0),
