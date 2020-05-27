@@ -31,13 +31,12 @@ class _DashboardState extends State<Dashboard> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    countDocuments();
   }
 
   @override
   Widget build(BuildContext context) {
     final _media = MediaQuery.of(context).size;
-    
+    countDocuments();
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return Material(

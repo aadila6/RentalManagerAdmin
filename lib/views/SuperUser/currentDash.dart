@@ -96,9 +96,10 @@ class _ActivityWidgetState extends State<ActivityWidget> {
             ),
             // SizedBox(height: 20),
             Expanded(
+
               child: StreamBuilder(
                   stream: Firestore.instance
-                      .collection(globals.reservation_global)
+                      .collection(globals.reservation_global).orderBy('startTime', descending: true)// //modify here
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) return const Text('loading...');
@@ -112,8 +113,8 @@ class _ActivityWidgetState extends State<ActivityWidget> {
                             backgroundImage: NetworkImage(snapshot.data.documents[index].data['imageURL']),
                           ),
                           trailing: new Text(
-                            snapshot.data.documents[index].data['startTime'].toString()
-
+                            //snapshot.data.documents[index].data['startTime']
+                              returnDifferenceTime(snapshot.data.documents[index].data['startTime'], snapshot.data.documents[index].data['picked Up time'], snapshot.data.documents[index].data['return time']) // modify here
                               ),
                           title: new Text(snapshot.data.documents[index].data['name']),
                               // style: TextStyle(color: textcolor())),

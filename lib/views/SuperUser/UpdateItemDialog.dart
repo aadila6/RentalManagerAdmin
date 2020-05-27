@@ -53,10 +53,10 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
   @override
   Widget build(BuildContext context) {
     _itemName = widget.itemSelected.data['name'];
-    _itemCount = widget.itemSelected.data['amount'];
+    _itemCount = widget.itemSelected.data['# of items'];
     _url = widget.itemSelected.data['imageURL'];
     controller.text = widget.itemSelected.data['name'];
-    controller2.text = widget.itemSelected.data['amount'].toString();
+    controller2.text = widget.itemSelected.data['# of items'].toString();
     return Dialog(
         child: ConstrainedBox(
             constraints: BoxConstraints(maxWidth: 500, maxHeight: 500),
@@ -190,7 +190,7 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
         .collection(globals.items_global)
         .document(widget.itemSelected.documentID.toString())
         .updateData({
-      'amount': _itemCount,
+      '# of items': _itemCount,
     }).catchError((error) => print(error));
     // Navigator.pop(context);
   }
