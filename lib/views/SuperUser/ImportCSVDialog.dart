@@ -11,6 +11,9 @@ import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:csv/csv.dart';
 
 class ImportCSVDialog extends StatefulWidget {
+  final String category;
+
+  const ImportCSVDialog({Key key, this.category}) : super(key: key);
   @override
   _ImportCSVDialogState createState() => _ImportCSVDialogState();
 }
@@ -59,7 +62,7 @@ class _ImportCSVDialogState extends State<ImportCSVDialog> {
                 for (var r in rows) {
                   var docRef = collection.document();
                   batch.setData(docRef, {
-                    'Category': "sport",
+                    'category': widget.category,
                     'isAvaliable': "true",
                     'name': r[0],
                     'amount': r[1],

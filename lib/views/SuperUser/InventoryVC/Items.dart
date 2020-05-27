@@ -1,3 +1,4 @@
+import 'package:RentalAdmin/views/SuperUser/ImportCSVDialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
@@ -57,6 +58,23 @@ class _ItemVC extends State<ItemVC> {
         },
         child: Text(
           "Add New item",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      MaterialButton(
+        color: Colors.teal,
+        shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(20.0),
+            side: BorderSide(color: Colors.white)),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (ctxt) {
+              return ImportCSVDialog(category:widget.categorySelected);
+            });
+        },
+        child: Text(
+          "Import CSV",
           style: TextStyle(color: Colors.white),
         ),
       ),

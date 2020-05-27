@@ -60,6 +60,7 @@ class _CategoryVC extends State<CategoryVC> {
           style: TextStyle(color: Colors.white),
         ),
       ),
+      
       Expanded(
         child: StreamBuilder(
             stream: Firestore.instance
