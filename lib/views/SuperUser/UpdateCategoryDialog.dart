@@ -66,7 +66,7 @@ class _UpdateLocationDialogState extends State<UpdateCategoryDialog> {
     list.documents.forEach((doc) {
        print("000000000");
       categoryList = List.from(doc.data['categories']);
-      print("11111111");
+      // print("11111111");
       // catNames.add(doc.data['categories']['name']);
       categoryList.forEach((element) {
         print("222222222222");
@@ -185,8 +185,28 @@ class _UpdateLocationDialogState extends State<UpdateCategoryDialog> {
           .updateData({
         "categories": categoryList,
       });
+      updateCategoryItem();
       Navigator.pop(context);
     }
+  }
+  Future updateCategoryItem() async{
+    QuerySnapshot list = await Firestore.instance
+        .collection(globals.items_global)
+        .where('category', isEqualTo: this.widget.categorySelected['name'])
+        .where('Location', isEqualTo: this.widget.locationName)
+        .getDocuments();
+    List docID = [];
+    list.documents.forEach((doc) async {
+      docID.add(doc.documentID);
+    });
+    print("DOC IDS: " + docID.toString());
+    docID.forEach((element) async {
+      await Firestore.instance
+          .collection(globals.items_global)
+          .document(element).updateData({'category': _itemName,});
+        
+    });
+     print("Successfully updated category names associated items");
   }
 
   Future deleteItem() async {

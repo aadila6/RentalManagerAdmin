@@ -118,7 +118,7 @@ class SignUpState extends State<SignUpPage> {
                         width: 1.0,
                       ),
                     ),
-                    labelText: 'Lastname',
+                    labelText: 'Last Name',
                     prefixIcon: const Icon(Icons.person, color: Colors.black),
                     // labelStyle:
                     // new TextStyle(color: Colors.teal.shade900, fontSize: 16.0),

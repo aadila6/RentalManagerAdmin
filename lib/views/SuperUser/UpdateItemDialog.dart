@@ -162,7 +162,6 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
 
   }
 
-
   Future deleteItem() async {
     final firestore = Firestore.instance;
     await firestore
