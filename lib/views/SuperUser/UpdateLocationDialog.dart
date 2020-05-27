@@ -112,6 +112,24 @@ class _UpdateLocationDialogState extends State<UpdateLocationDialog> {
     });
   }
 
+   Future updateLocationItem() async{
+    QuerySnapshot list = await Firestore.instance
+        .collection(globals.items_global)
+        .where('Location', isEqualTo: widget.itemSelected.data['name'])
+        .getDocuments();
+    List docID = [];
+    list.documents.forEach((doc) async {
+      docID.add(doc.documentID);
+    });
+    print("DOC IDS: " + docID.toString());
+    docID.forEach((element) async {
+      await Firestore.instance
+          .collection(globals.items_global)
+          .document(element).updateData({'Location': _itemName,});
+    });
+    print("Successfully updated location names associated items");
+  }
+
   Future updateAll() {
     updateName();
     updateUrl();
@@ -133,11 +151,7 @@ class _UpdateLocationDialogState extends State<UpdateLocationDialog> {
       categoryList = List.from(doc.data['categories']);
       print("11111111");
       catNames.add(doc.data['categories']['name']);
-      // categoryList.forEach((element) {
-      //   print("222222222222");
-      //   print(element);
-      //   //  globals.categories.add(element['name']);
-      // });
+    
       print(categoryList);
       print("Printing NAMESSSSSSSS!!!!!!!!!!!!");
     });
@@ -196,6 +210,7 @@ class _UpdateLocationDialogState extends State<UpdateLocationDialog> {
           .updateData({
         'name': _itemName,
       }).catchError((error) => print(error));
+      updateLocationItem();
       Navigator.pop(context);
     } else {
       showDialog(

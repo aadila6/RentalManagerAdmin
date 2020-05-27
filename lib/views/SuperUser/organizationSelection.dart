@@ -114,7 +114,7 @@ class _OrganizationSelectionState extends State<OrganizationSelection> {
               inputDialog(context).then((newOrganization) async {
                 isNEW = true;
                 if (newOrganization != null && newOrganization != '') {
-                  // await addOrganization(newOrganization.toString());
+                  await addOrganization(newOrganization.toString());
                   navigateToSignUp(newOrganization.toString(), context);
                 }
               });
