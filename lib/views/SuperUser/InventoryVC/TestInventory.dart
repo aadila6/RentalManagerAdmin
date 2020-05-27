@@ -63,6 +63,7 @@ class inventoryByLOCState extends State<inventoryByLOC> {
             stream:
                 Firestore.instance.collection(globals.locations).snapshots(),
             builder: (context, snapshot) {
+              print("Building");
               if (!snapshot.hasData) return const Text('loading...');
 
               return GridView.builder(

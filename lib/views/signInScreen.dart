@@ -279,6 +279,11 @@ class _signInScreenState extends State<signInScreen> {
                                 globals.organization + '_locations';
                             globals.locationManager = doc['LocationManager'];
                             print("------------------END ----------------");
+                            Firestore.instance.collection(globals.locations).getDocuments().then((value){
+                              globals.existingLocations = value.documents.map<String>((e){
+                                return e.data['name'];
+                              }).toList();
+                            });
                           });
                           print("------------------3--------------------");
                           // await getData().then((value) {

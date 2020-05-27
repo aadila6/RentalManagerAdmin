@@ -15,13 +15,12 @@ class SuperUserMgtView extends StatefulWidget {
 class SuperUserMgtViewState extends State<SuperUserMgtView> {
   bool isReady = false;
   var allUsers;
-  List<User> allUserList = List();
-  List<String> allPermissions = ['Admin', 'User'];
+  List<User> allUserList;
+  List<String> allPermissions = ['Admin'];
   void fetchFromFirebase() {
     print("Firebase request1");
-    //List<User> res = List();
-    Firestore.instance.collection("global_users").where('organization', isEqualTo: globals.organization)
-    .snapshots().listen((s) {
+    allUserList = List();
+    Firestore.instance.collection("global_users").where('organization', isEqualTo: globals.organization).getDocuments().then((s) {
       s.documents.forEach((e) {
         var tu = User(email: e.data['Email']);
         for(var i in allPermissions) {
@@ -44,6 +43,8 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
 
   @override
   Widget build(BuildContext context) {
+    print(globals.existingLocations);
+    print(allUserList);
     return Scaffold(
         appBar: AppBar(
           elevation: 4,
@@ -69,11 +70,17 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
                   ));
               }).toList() + [Text("")],
           )] + allUserList.map((e){
-            var rowTextController = TextEditingController();
+            //String selectedItem = e.permissions['LocationManager'];
             return TableRow(children: <Widget>[Text(e.email)] +
-            [TextField(
-              controller: rowTextController,
-            )]+
+            [
+              DropdownButton(
+                value: e.permissions['LocationManager'],
+                items: <DropdownMenuItem>[DropdownMenuItem(child:Text("None"),value:"",)]+globals.existingLocations.map((e) => DropdownMenuItem(child: Text(e),value: e)).toList(),
+              onChanged: (n){
+                e.permissions['LocationManager'] = n;
+                setState((){});
+              })
+            ]+
               allPermissions.map<Widget>((p){
                 return Checkbox(value: e.permissions[p], onChanged: (newVal){
                   e.permissions[p] = newVal;
@@ -83,8 +90,6 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
                 RaisedButton(
                   child:Text("Submit"),
                   onPressed: (){
-                    //print(e.getPermissions());
-                    e.permissions['LocationManager'] = rowTextController.text;
                     modifyAllPermissions(e);
                 })
               ]
