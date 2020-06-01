@@ -24,6 +24,7 @@ class _ImportCSVDialogState extends State<ImportCSVDialog> {
     final completer = new Completer<String>();
     final InputElement input = document.createElement('input');
     input.type = 'file';
+    input.accept='.csv';
     input.onChange.listen((e) async {
       final List<File> files = input.files;
       final reader = new FileReader();
@@ -49,7 +50,7 @@ class _ImportCSVDialogState extends State<ImportCSVDialog> {
           width: 700,
           child: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          //crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             RaisedButton(
             onPressed: () {

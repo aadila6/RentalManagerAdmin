@@ -85,7 +85,7 @@ class _ItemVC extends State<ItemVC> {
                 .where('category', isEqualTo: this.widget.categorySelected)
                 .snapshots(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) return const Text('loading...');
+              if (!snapshot.hasData) return CircularProgressIndicator();
 
               return GridView.builder(
                   itemCount: snapshot.data.documents.length,
