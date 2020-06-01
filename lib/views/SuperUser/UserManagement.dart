@@ -54,19 +54,22 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
           ),
           backgroundColor: drawerBgColor,
         ),
-        body: Table(
+        body: Padding(
+          padding: EdgeInsets.all(30),
+          child:Table(
+            columnWidths: {0:FlexColumnWidth(2),1:FlexColumnWidth(1),2:FlexColumnWidth(1),3:FlexColumnWidth(0.5)},
           children: [TableRow(
             children: [
               Text("Email",
               style: TextStyle(
-                fontSize: 30
+                fontSize: 20
               )),Text("Location Manager",
               style: TextStyle(
-                fontSize: 30
+                fontSize: 20
               ))] + allPermissions.map((e){
                 return Text("is $e",
                   style: TextStyle(
-                    fontSize: 30
+                    fontSize: 20
                   ));
               }).toList() + [Text("")],
           )] + allUserList.map((e){
@@ -97,7 +100,7 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
               ]
             );
           }).toList()
-        )
+        ))
     );
   }
 }

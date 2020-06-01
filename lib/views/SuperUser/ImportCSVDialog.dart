@@ -36,19 +36,20 @@ class _ImportCSVDialogState extends State<ImportCSVDialog> {
     return completer.future;
   }
 
-  String _itemName;
-  String _itemCount;
-  String defaultURL =
-      "https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b";
+  String defaultURL = "https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b";
   var batch = Firestore.instance.batch();
   List<List<dynamic>> rows;
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-        child: Container(
-          width: 768,
-          child:Column(
+    return AlertDialog(
+      actions: [
+        RaisedButton(child: Text("Close"), onPressed: ()=>Navigator.of(context).pop())
+      ],
+        content:Container(
+          width: 700,
+          child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             RaisedButton(
             onPressed: () {
@@ -56,6 +57,18 @@ class _ImportCSVDialogState extends State<ImportCSVDialog> {
               csvFuture.then((value) {
                 print(value);
                 rows = const CsvToListConverter().convert(value);
+
+                for(var i in rows) {
+                  if(i.length<2 || i.length >3) {
+                    showDialog(context: context, builder: (c)=>AlertDialog(
+                      title: Text("CSV Parsing Error"),
+                      content: Text("There should be 2 or 3 columns for each row.\nError on:${i.toString()}"),
+                    ));
+                    rows = null;
+                    return;
+                  }
+                }
+
                 setState(() {});
               });
             },
@@ -85,8 +98,9 @@ class _ImportCSVDialogState extends State<ImportCSVDialog> {
             ).toList())
           ),
           RaisedButton(
+            
             child: Text("Confirm & Upload"),
-            onPressed: () {
+            onPressed: rows==null?null:() {
               var collection = Firestore.instance.collection(globals.items_global);
               print(rows);
               for (var r in rows) {
