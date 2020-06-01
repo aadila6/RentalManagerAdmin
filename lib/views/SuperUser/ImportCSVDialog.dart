@@ -50,43 +50,59 @@ class _ImportCSVDialogState extends State<ImportCSVDialog> {
           child:Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-          Row(children:[RaisedButton(
+            RaisedButton(
             onPressed: () {
-              var collection = Firestore.instance.collection(globals.items_global);
-
               var csvFuture = getFile();
               csvFuture.then((value) {
                 print(value);
                 rows = const CsvToListConverter().convert(value);
-                print(rows);
-                for (var r in rows) {
-                  var docRef = collection.document();
-                  batch.setData(docRef, {
-                    'category': widget.category,
-                    'isAvaliable': "true",
-                    'name': r[0],
-                    'amount': r[1],
-                    'imageURL': r.length>3?r[2]:defaultURL
-                  });
-                }
                 setState(() {});
               });
             },
             child: Text("Select CSV File")
-          )]
           ),
           Table(
-            children: <TableRow>[TableRow(children: [Text("Name"),Text("Amount")])]+(rows==null?[]:rows.map<TableRow>(
-              (e) => TableRow(children: [Text(e[0]),Text(e[1].toString())])
+            children: <TableRow>[
+              TableRow(
+                children: [
+                  Text("Name"),
+                  Text("Amount"),
+                  Text("")
+                ])
+              ] + (
+                rows==null?[]:rows.map<TableRow>(
+              (e) => TableRow(
+                children: [
+                  Text(e[0]),
+                  Text(e[1].toString()),
+                  IconButton(
+                    icon: Icon(Icons.clear),
+                    onPressed: (){
+                    rows.remove(e);
+                    setState(() {});
+                  })]
+              )
             ).toList())
           ),
           RaisedButton(
             child: Text("Confirm & Upload"),
             onPressed: () {
-            batch.commit().then((value) {
-              print("Commited ${rows.length} items!");
-              Navigator.of(context).pop();
-            });
+              var collection = Firestore.instance.collection(globals.items_global);
+              print(rows);
+              for (var r in rows) {
+                var docRef = collection.document();
+                batch.setData(docRef, {
+                  'category': widget.category,
+                  'isAvaliable': "true",
+                  'name': r[0],
+                  'amount': r[1],
+                  'imageURL': r.length>3?r[2]:defaultURL
+                });
+              }
+              batch.commit().then((value) {
+                print("Commited ${rows.length} items!");
+                Navigator.of(context).pop();
+              });
           },)
     ])));
   }

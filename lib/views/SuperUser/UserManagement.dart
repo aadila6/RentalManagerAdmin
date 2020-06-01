@@ -23,7 +23,7 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
     Firestore.instance.collection("global_users").where('organization', isEqualTo: globals.organization).getDocuments().then((s) {
       s.documents.forEach((e) {
         var tu = User(email: e.data['Email']);
-        for(var i in allPermissions) {
+        for(var i in ['Admin', 'LocationManager']) {
           if(e.data.containsKey(i))
             tu.permissions[i] = e.data[i];
           else
@@ -78,12 +78,14 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
                 items: <DropdownMenuItem>[DropdownMenuItem(child:Text("None"),value:"",)]+globals.existingLocations.map((e) => DropdownMenuItem(child: Text(e),value: e)).toList(),
               onChanged: (n){
                 e.permissions['LocationManager'] = n;
+                e.permissions['Admin'] = false;
                 setState((){});
               })
             ]+
               allPermissions.map<Widget>((p){
                 return Checkbox(value: e.permissions[p], onChanged: (newVal){
                   e.permissions[p] = newVal;
+                  e.permissions['LocationManager'] = "";
                   setState((){});
                 });
               }).toList() + [
