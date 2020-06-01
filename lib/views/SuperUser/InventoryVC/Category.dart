@@ -68,7 +68,7 @@ class _CategoryVC extends State<CategoryVC> {
                 .document(this.widget.locationSelected)
                 .snapshots(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) return const Text('loading...');
+              if (!snapshot.hasData) return CircularProgressIndicator();
               print("SNAPSHOT DATA - NAME");
               print(snapshot.data['name']);
               glocation = snapshot.data['name'].toString();
