@@ -178,7 +178,7 @@ class _NewLocationDialogState extends State<NewLocationDialog> {
         .document()
         .setData({
       'imageURL': url,
-      'name': itemName,
+      'name': itemName.trim(),
       'categories' : [],
       //categories
     }).then((value) {

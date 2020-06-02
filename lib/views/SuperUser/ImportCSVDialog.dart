@@ -108,9 +108,9 @@ class _ImportCSVDialogState extends State<ImportCSVDialog> {
                 var docRef = collection.document();
                 batch.setData(docRef, {
                   'category': widget.category,
-                  'isAvaliable': "true",
+                  'Location': globals.locations,
                   'name': r[0],
-                  'amount': r[1],
+                  '# of items': r[1],
                   'imageURL': r.length>3?r[2]:defaultURL
                 });
               }

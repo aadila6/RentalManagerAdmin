@@ -107,7 +107,7 @@ class _UpdateLocationDialogState extends State<UpdateLocationDialog> {
     QuerySnapshot list =
         await Firestore.instance.collection(globals.locations).getDocuments();
     list.documents.forEach((doc) {
-      locationList.add(doc.data['name']);
+      locationList.add(doc.data['name'].trim());
     });
   }
 
@@ -124,7 +124,7 @@ class _UpdateLocationDialogState extends State<UpdateLocationDialog> {
     docID.forEach((element) async {
       await Firestore.instance
           .collection(globals.items_global)
-          .document(element).updateData({'Location': _itemName,});
+          .document(element).updateData({'Location': _itemName.trim(),});
     });
     print("Successfully updated location names associated items");
   }
@@ -136,28 +136,9 @@ class _UpdateLocationDialogState extends State<UpdateLocationDialog> {
   List<Map<dynamic, dynamic>> categoryList = [];
   // List<String>CatNames = [];
   List<String> catNames = [];
-  Future getCat() async {
-    print("Getting Cattttt");
-    //First get the name
-    QuerySnapshot list = await Firestore.instance
-        .collection(globals.locations)
-        .where('name', isEqualTo:  widget.itemSelected.data['name'])
-        .getDocuments();
-    categoryList.clear();
-    print("cleared the matrix");
-    list.documents.forEach((doc) {
-       print("000000000");
-      categoryList = List.from(doc.data['categories']);
-      print("11111111");
-      catNames.add(doc.data['categories']['name']);
-    
-      print(categoryList);
-      print("Printing NAMESSSSSSSS!!!!!!!!!!!!");
-    });
-  }
+  
 
   Future deleteItem() async {
-    // getCat();
     final firestore = Firestore.instance;
     await firestore
         .collection(globals.locations)
@@ -196,7 +177,7 @@ class _UpdateLocationDialogState extends State<UpdateLocationDialog> {
     locationList.removeWhere(
           (item) => item == widget.itemSelected.data['name']);
     locationList.forEach((element) {
-      if (_itemName == element) {
+      if (_itemName.trim() == element || _itemName == element) {
         found = true;
         counter++;
       }

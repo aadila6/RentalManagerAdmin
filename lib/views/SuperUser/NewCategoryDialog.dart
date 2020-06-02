@@ -168,7 +168,7 @@ class _NewCategoryState extends State<NewCategory> {
 
     }else{
       print("Successfully added item " + itemName );
-       categoryList.add({'name': itemName, 'imageURL': url});
+       categoryList.add({'name': itemName.trim(), 'imageURL': url});
     await Firestore.instance
         .collection(globals.locations)
         .document(this.widget.locationSelected)

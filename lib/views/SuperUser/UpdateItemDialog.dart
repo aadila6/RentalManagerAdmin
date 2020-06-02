@@ -119,7 +119,7 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
     QuerySnapshot list =
         await Firestore.instance.collection(globals.items_global).where('category',isEqualTo: widget.itemSelected.data['category']).getDocuments();
     list.documents.forEach((doc) {
-      itemList.add(doc.data['name']);
+      itemList.add(doc.data['name'].trim());
     });
   }
 
@@ -131,7 +131,7 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
      itemList.removeWhere(
           (item) => item == widget.itemSelected.data['name']);
     itemList.forEach((element) {
-      if(element == _itemName){
+      if(element == _itemName.trim()){
         found = true;
         counter++;
       }
@@ -179,7 +179,7 @@ class _UpdateItemDialogState extends State<UpdateItemDialog> {
         .collection(globals.items_global)
         .document(widget.itemSelected.documentID.toString())
         .updateData({
-      'name': _itemName,
+      'name': _itemName.trim(),
     }).catchError((error) => print(error));
     Navigator.pop(context);
   }

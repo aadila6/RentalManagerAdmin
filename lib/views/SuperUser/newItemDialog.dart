@@ -183,7 +183,7 @@ List<String> itemList = [];
         .setData({
       'category': this.widget.categorySelected,
       'imageURL': url,
-      'name': itemName,
+      'name': itemName.trim(),
       'Location':this.widget.locationSelected,
       '# of items': itemCount,
     }).then((value) {

@@ -270,9 +270,9 @@ class SignUpState extends State<SignUpPage> {
   void uploadData(
       usernameFirst, usernameLast, email, uid) async {
     print("UPLOADING");
-    String fullName = usernameFirst + ' ' + usernameLast;
+    String fullName = usernameFirst.trim() + ' ' + usernameLast.trim();
     final databaseReference = Firestore.instance;
-    String doc = "AppSignInUser" + email;
+    String doc = "AppSignInUser" + email.trim();
     String thiscollectionName = '${this.widget.organization}_users';
     await databaseReference.collection('global_users').document(doc).setData({
       'Name': fullName,

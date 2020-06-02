@@ -148,7 +148,7 @@ class _UpdateLocationDialogState extends State<UpdateCategoryDialog> {
           (item) => item['name'] == this.widget.categorySelected['name']);
     categoryList.forEach((element) {
       print(element['name']);
-      if (element['name'].toString().toLowerCase() == _itemName.toLowerCase()) {
+      if (element['name'].toString().toLowerCase().trim() == _itemName.toLowerCase().trim()) {
         found = true;
         counter ++;
         print("found!!!!");
@@ -178,7 +178,7 @@ class _UpdateLocationDialogState extends State<UpdateCategoryDialog> {
       print("SUCCESS!");
       categoryList.removeWhere(
           (item) => item['name'] == this.widget.categorySelected['name']);
-      categoryList.add({'name': _itemName, 'imageURL': _url});
+      categoryList.add({'name': _itemName.trim(), 'imageURL': _url});
       await Firestore.instance
           .collection(globals.locations)
           .document(this.widget.locationSelected)
@@ -203,7 +203,7 @@ class _UpdateLocationDialogState extends State<UpdateCategoryDialog> {
     docID.forEach((element) async {
       await Firestore.instance
           .collection(globals.items_global)
-          .document(element).updateData({'category': _itemName,});
+          .document(element).updateData({'category': _itemName.trim(),});
         
     });
      print("Successfully updated category names associated items");

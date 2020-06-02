@@ -313,7 +313,6 @@ class _signInScreenState extends State<signInScreen> {
                                 MaterialPageRoute(
                                     builder: (context) => HomeView()));
                           }
-                         
                         }
                       },
                       padding: EdgeInsets.all(10.0),
@@ -324,59 +323,59 @@ class _signInScreenState extends State<signInScreen> {
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minWidth: 150,
-                      maxWidth: 300
-                    ),
-                    child: RaisedButton(
-                      highlightElevation: 0.0,
-                      splashColor: Colors.greenAccent,
-                      highlightColor: Colors.green,
-                      elevation: 0.0,
-                      color: Colors.green,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(30.0)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Image(
-                            image: NetworkImage(
-                                'https://pluspng.com/img-png/google-logo-png-open-2000.png'),
-                            height: 30,
-                          ),
-                          SizedBox(width: 20.0),
-                          Center(
-                            child: Text(
-                              "Sign In with Google",
-                              style: TextStyle(
-                                fontSize: 15,
-                                // backgroundColor:  Colors.teal[50],
-                                color: Colors.white,
-                                fontFamily: 'Montserrat',
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      onPressed: () async {
-                        _handleSignIn();
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => HomeView()));
-                      },
-                      padding: EdgeInsets.all(7.0),
-                      //color: Colors.teal.shade900,
-                      disabledColor: Colors.black,
-                      disabledTextColor: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: <Widget>[
+              //     ConstrainedBox(
+              //       constraints: BoxConstraints(
+              //         minWidth: 150,
+              //         maxWidth: 300
+              //       ),
+              //       child: RaisedButton(
+              //         highlightElevation: 0.0,
+              //         splashColor: Colors.greenAccent,
+              //         highlightColor: Colors.green,
+              //         elevation: 0.0,
+              //         color: Colors.green,
+              //         shape: RoundedRectangleBorder(
+              //             borderRadius: new BorderRadius.circular(30.0)),
+              //         child: Row(
+              //           mainAxisAlignment: MainAxisAlignment.center,
+              //           children: <Widget>[
+              //             Image(
+              //               image: NetworkImage(
+              //                   'https://pluspng.com/img-png/google-logo-png-open-2000.png'),
+              //               height: 30,
+              //             ),
+              //             SizedBox(width: 20.0),
+              //             Center(
+              //               child: Text(
+              //                 "Sign In with Google",
+              //                 style: TextStyle(
+              //                   fontSize: 15,
+              //                   // backgroundColor:  Colors.teal[50],
+              //                   color: Colors.white,
+              //                   fontFamily: 'Montserrat',
+              //                 ),
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //         onPressed: () async {
+              //           _handleSignIn();
+              //           // Navigator.push(
+              //           //     context,\\\\\\\\\7
+              //           //     MaterialPageRoute(
+              //           //         builder: (context) => HomeView()));
+              //         },
+              //         padding: EdgeInsets.all(7.0),
+              //         //color: Colors.teal.shade900,
+              //         disabledColor: Colors.black,
+              //         disabledTextColor: Colors.black,
+              //       ),
+              //     ),
+              //   ],
+              // ),
               SizedBox(
                 height: 15,
               ),
