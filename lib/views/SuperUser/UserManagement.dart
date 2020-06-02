@@ -73,7 +73,7 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
                   ));
               }).toList() + [Text("")],
           )] + allUserList.map((e){
-            //String selectedItem = e.permissions['LocationManager'];
+            print(globals.existingLocations);
             return TableRow(children: <Widget>[Text(e.email)] +
             [
               DropdownButton(
