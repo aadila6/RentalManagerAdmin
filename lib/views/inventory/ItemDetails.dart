@@ -171,7 +171,7 @@ testingReservations(String itemID) async {
       'name': itemName,
       'uid': globals.userLoginID,
       'item': itemID,
-      'amount': num.toString(),
+      'amount': num,
       'startTime': dateTime,
       'status': "Picked Up",
       'reserved time': dateTime,
