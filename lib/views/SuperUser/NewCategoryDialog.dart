@@ -27,7 +27,7 @@ class _NewCategoryState extends State<NewCategory> {
   File _image;
   String _uploadedFileURL;
   html.File image;
-  List<DropdownMenuItem<String>> _dropDownMenuItems;
+  // List<DropdownMenuItem<String>> _dropDownMenuItems;
   // String _categorySelected = globals.categories[0];
   // String _collectionSelected = globals.existingLocations[0];
 

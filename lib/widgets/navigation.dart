@@ -7,6 +7,7 @@ import 'package:RentalAdmin/views/ReservationView.dart';
 import 'package:RentalAdmin/views/ReservationView.dart';
 import 'package:RentalAdmin/views/signInScreen.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
+
 class NavigationBar extends StatelessWidget {
   const NavigationBar({Key key}) : super(key: key);
   @override
@@ -34,16 +35,13 @@ class NavigationBar extends StatelessWidget {
                       side: BorderSide(color: Colors.white)),
                   onPressed: () {
                     print("Pressed Admin login");
-                    if(globals.admin)
-                      Navigator.push(
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => SuperuserPanel()));
-                    else 
-                      print("No permission");
+                            builder: (context) => signInScreen()));
                   },
                   child: Text(
-                    "Admin Login",
+                    "Log Out",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

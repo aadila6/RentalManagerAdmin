@@ -6,7 +6,8 @@ import 'package:RentalAdmin/widgets/activeActivities.dart';
 import 'package:RentalAdmin/views/InventoryView.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:RentalAdmin/views/SuperUser/InventoryVC/TestInventory.dart';
-//
+import 'package:flutter/cupertino.dart';
+
 class ReservationListPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -32,22 +33,21 @@ class _ReservationListPage extends State<ReservationListPage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                               LocationPage(title: "Select Your Location")));
+                                LocationPage(title: "Select Your Location")));
                   },
                   child: Icon(
                     Icons.add_to_queue,
                     size: 30.0,
                   ),
                 )),
-                Padding(
+            Padding(
                 padding: EdgeInsets.only(right: 20.0),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                ActiveActivity()));
+                            builder: (context) => ActiveActivity()));
                   },
                   child: Icon(
                     Icons.history,
@@ -88,15 +88,57 @@ class _ReservationListPage extends State<ReservationListPage> {
                   ),
                 );
               } else {
+                //   return StreamBuilder(
+                //     stream: Firestore.instance
+                //         .collection(globals.reservation_global).orderBy('startTime', descending: true)// //modify here
+                //         .snapshots(),
+                //     builder: (context, snapshot) {
+                //       if (!snapshot.hasData) return CupertinoActivityIndicator();
+                //       return ListView.builder(
+                //         itemExtent: 50.0,
+                //         itemCount: snapshot.data.documents.length,
+                //         itemBuilder: (BuildContext context, int index) =>
+                //         ListTile(
+                //             leading: CircleAvatar(
+                //               backgroundImage: NetworkImage(snapshot.data.documents[index].data['imageURL']),
+                //             ),
+                //             trailing: new Text(
+                //               //snapshot.data.documents[index].data['startTime']
+                //                 returnDifferenceTime(snapshot.data.documents[index].data['startTime'], snapshot.data.documents[index].data['picked Up time'], snapshot.data.documents[index].data['return time']) // modify here
+                //                 ),
+                //             title: new Text(snapshot.data.documents[index].data['name']),
+                //                 // style: TextStyle(color: textcolor())),
+                //             subtitle: new Text(
+                //                 snapshot.data.documents[index].data['status'] +
+                //                     " by " +
+                //                     snapshot.data.documents[index].data['UserName'],
+                //                 // style: TextStyle(color: textcolor())),
+                            
+                //           ),
+                //           onTap: () {
+                //             print("RUAAAAAAAAA");
+                //             navigateToDetail(snapshot.data[index]);
+                //             },
+                //       ),
+                // );});
                 return ListView.builder(
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Card(
                           child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: NetworkImage(snapshot.data[index].data['imageURL']),
+                            ),
+                            trailing: new Text(
+                                returnDifferenceTime(snapshot.data[index].data['startTime'], snapshot.data[index].data['picked Up time'], snapshot.data[index].data['return time']) // modify here
+                                ),
                               title: Text(
                                   snapshot.data[index].data['name'].toString()),
                               subtitle: Text(
-                                snapshot.data[index].data['status'].toString(),
+                                // snapshot.data[index].data['status'].toString(),
+                                 snapshot.data[index].data['status'] +
+                                    " by " +
+                                    snapshot.data[index].data['UserName'],
                               ),
                               onTap: () {
                                navigateToDetail(snapshot.data[index]);
@@ -105,19 +147,68 @@ class _ReservationListPage extends State<ReservationListPage> {
               }
             }));
   }
-  
+
+  String returnDifferenceTime(
+      String reservationTime, String pickUpTime, String returnTime) {
+    if (returnTime != null && returnTime.isNotEmpty) {
+      if (returnTime != "NULL") {
+        reservationTime = returnTime;
+      }
+    } else {
+      if (pickUpTime != null && pickUpTime.isNotEmpty) {
+        if (pickUpTime != "NULL") {
+          pickUpTime = reservationTime;
+        }
+      }
+    }
+
+    var validTime = DateTime.parse(reservationTime);
+    var difference = DateTime.now().difference(validTime);
+    String ans = "NULL";
+    var a = difference.inSeconds,
+        b = difference.inMinutes,
+        c = difference.inHours,
+        d = difference.inDays;
+    if (a < 60) {
+      var tmp = "seconds";
+      if (a == 1) {
+        tmp = "second";
+      }
+      ans = "$a $tmp ago";
+    } else if (b >= 1 && b <= 60) {
+      var tmp = "minutes";
+      if (b == 1) {
+        tmp = "minute";
+      }
+      ans = "$b $tmp ago";
+    } else if (c >= 1 && c <= 24) {
+      var tmp = "hours";
+      if (c == 1) {
+        tmp = "hour";
+      }
+      ans = "$c $tmp ago";
+    } else if (d >= 1) {
+      var tmp = "days";
+      if (d == 1) {
+        tmp = "day";
+      }
+      ans = "$d $tmp ago";
+    }
+    return ans;
+  }
+
   Future getFirestoreData() async {
     final firestore = Firestore.instance;
     QuerySnapshot itemListDOC =
         // await firestore.collection('reservation').orderBy('startTime').getDocuments();
         await firestore
             .collection(globals.reservation_global)
-            .where('uid', isEqualTo:globals.userLoginID)
-            .where('status', whereIn: ['Reserved','Picked Up'])
-            .getDocuments();
+            .where('uid', isEqualTo: globals.userLoginID)
+            .where('status', whereIn: ['Reserved', 'Picked Up']).getDocuments();
     return itemListDOC.documents;
   }
- navigateToDetail(DocumentSnapshot indexedData) {
+
+  navigateToDetail(DocumentSnapshot indexedData) {
     Navigator.push(
         context,
         MaterialPageRoute(

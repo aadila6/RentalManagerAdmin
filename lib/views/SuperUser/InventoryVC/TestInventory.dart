@@ -80,9 +80,7 @@ class inventoryByLOCState extends State<inventoryByLOC> {
                           snapshot.data.documents[index].data['imageURL']
                               .toString()),
                       onTap: () {
-                        Fluttertoast.showToast(
-          msg: 'Double Tap To Edit Cell',
-        );
+     
                         var documentID =
                             snapshot.data.documents[index].documentID;
                         Navigator.push(

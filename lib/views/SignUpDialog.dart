@@ -38,7 +38,7 @@ class SignUpState extends State<SignUpPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Account Sign Up'),
+        title: Text('Account Sign Up For ' + this.widget.organization),
         backgroundColor: Colors.teal,
       ),
       body: Center(

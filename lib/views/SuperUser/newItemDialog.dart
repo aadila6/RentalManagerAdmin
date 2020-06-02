@@ -28,7 +28,7 @@ class _NewItemDialogState extends State<NewItemDialog> {
   File _image;
   String _uploadedFileURL;
   html.File image;
-  List<DropdownMenuItem<String>> _dropDownMenuItems;
+  // List<DropdownMenuItem<String>> _dropDownMenuItems;
   // String _categorySelected = this.wicategorySelected;
   // String _collectionSelected = globals.existingLocations[0];
 

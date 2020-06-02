@@ -52,9 +52,7 @@ class HomeView extends StatelessWidget {
       child: Column(
         children: <Widget>[
           CheckingOut(),
-          // Returning(),
-          // Landing(),
-          // ReservationCheckIn(),
+          
         ],
       ),
     );

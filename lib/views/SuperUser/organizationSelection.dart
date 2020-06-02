@@ -3,18 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:RentalAdmin/views/SignUpDialog.dart';
 import 'package:flutter/cupertino.dart';
+
 class OrganizationSelection extends StatefulWidget {
   @override
   _OrganizationSelectionState createState() => _OrganizationSelectionState();
 }
+
 bool isNEW = false;
+
 class _OrganizationSelectionState extends State<OrganizationSelection> {
   Future navigateToSignUp(String orgSelected, BuildContext context) {
     print("Selected the Organization: " + orgSelected);
     return Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SignUpPage(organization: orgSelected, isNew: isNEW),
+        builder: (context) =>
+            SignUpPage(organization: orgSelected, isNew: false),
       ),
     );
   }
@@ -36,17 +40,16 @@ class _OrganizationSelectionState extends State<OrganizationSelection> {
                 color: Colors.blue,
                 onPressed: () {
                   isNEW = true;
-                  String noSpaceInput =
-                      inputText.text.trim().replaceAll(' ', '');
-                  String compateInput = noSpaceInput.toLowerCase();
+                  String noSpaceInput = inputText.text.trim();
+                  String compateInput =
+                      noSpaceInput.toLowerCase().trim().replaceAll(' ', '');
                   List<String> toLowerList = [];
                   for (String s in globals.existingOrganizations) {
-                    toLowerList.add(s.toLowerCase());
+                    toLowerList.add(s.toLowerCase().trim().replaceAll(' ', ''));
                   }
                   if (!toLowerList.contains(compateInput)) {
                     Navigator.of(context).pop(noSpaceInput);
                   } else {
-                    // isNEW = true;
                     exisitDialog(context);
                   }
                 },
@@ -114,7 +117,7 @@ class _OrganizationSelectionState extends State<OrganizationSelection> {
               inputDialog(context).then((newOrganization) async {
                 isNEW = true;
                 if (newOrganization != null && newOrganization != '') {
-                  await addOrganization(newOrganization.toString());
+                  // await addOrganization(newOrganization.toString());
                   navigateToSignUp(newOrganization.toString(), context);
                 }
               });
@@ -126,13 +129,16 @@ class _OrganizationSelectionState extends State<OrganizationSelection> {
       body: StreamBuilder(
           stream: Firestore.instance.collection('organizations').snapshots(),
           builder: (context, snapshot) {
-           
-              if (!snapshot.hasData) return CupertinoActivityIndicator();
+            if (!snapshot.hasData) return CupertinoActivityIndicator();
+
+            globals.existingOrganizations.clear();
+            snapshot.data.documents.forEach((doc) {
+              globals.existingOrganizations.add(doc['name']);
+            });
 
             return ListView.builder(
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) => ListTile(
-                // title: Text(results.length.toString()),
                 title: Center(
                   child: Text(
                     snapshot.data.documents[index].data['name'].toString(),
@@ -144,8 +150,6 @@ class _OrganizationSelectionState extends State<OrganizationSelection> {
                   navigateToSignUp(
                       snapshot.data.documents[index].data['name'].toString(),
                       context);
-                  // testingReservations(
-                  //     snapshot.data.documents[index].documentID);
                 },
               ),
             );

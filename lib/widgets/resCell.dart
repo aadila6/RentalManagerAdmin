@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:RentalAdmin/views/ReservationView.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
+import 'package:intl/intl.dart';
 class reservationCell extends StatefulWidget {
   final DocumentSnapshot passedFirestoreData;
   reservationCell({this.passedFirestoreData});
@@ -14,25 +15,38 @@ class reservationCell extends StatefulWidget {
 }
 
 String action = "Pick Up";
-
+int itemAmount;
+String itemID;
 class _reservationCell extends State<reservationCell> {
-  Future pickedUp() async {
-    final firestore = Firestore.instance;
+  // Future pickedUp() async {
+  //   final firestore = Firestore.instance;
+  //   await firestore
+  //       .collection(globals.reservation_global)
+  //       .document(widget.passedFirestoreData.documentID.toString())
+  //       .updateData({'status': 'Picked Up'}).catchError(
+  //           (error) => print(error));
+  //   Navigator.push(context,
+  //       MaterialPageRoute(builder: (context) => ReservationListPage()));
+  // }
+   Future pickedUp() async {
+     print(widget.passedFirestoreData.documentID);
+    String date = DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());
+      final firestore = Firestore.instance;
     await firestore
-        .collection(globals.reservation_global)
         .document(widget.passedFirestoreData.documentID.toString())
-        .updateData({'status': 'Picked Up'}).catchError(
-            (error) => print(error));
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => ReservationListPage()));
+        .updateData({
+      'status': 'Picked Up',
+      'picked Up time': date,
+    }).catchError((error) => print(error));
   }
 
   Future returned() async {
+    String date = DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());
     final firestore = Firestore.instance;
     await firestore
         .collection(globals.reservation_global)
         .document(widget.passedFirestoreData.documentID.toString())
-        .updateData({'status': 'Returned'}).catchError((error) => print(error));
+        .updateData({'status': 'Returned','return time': date}).catchError((error) => print(error));
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => ReservationListPage()));
   }
@@ -47,6 +61,28 @@ class _reservationCell extends State<reservationCell> {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => ReservationListPage()));
   }
+  Future incrementItemAmount() {
+    return Firestore.instance
+        .collection(globals.organization)
+        .document(widget.passedFirestoreData.documentID)
+        .get()
+        .then(
+      (doc) {
+        Firestore.instance
+            .collection(globals.organization)
+            .document(widget.passedFirestoreData.documentID)
+            .updateData({'# of items': doc.data['# of items'] + itemAmount});
+      },
+    );
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    itemID = widget.passedFirestoreData.data['item'];
+    itemAmount = int.parse(widget.passedFirestoreData.data['amount']);
+  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +161,7 @@ class _reservationCell extends State<reservationCell> {
                       style: TextStyle(
                           fontStyle: FontStyle.italic, fontSize: 16.0)),
                   TextSpan(
-                      text: widget.passedFirestoreData['amount'],
+                      text: widget.passedFirestoreData['amount'].toString(),
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -164,6 +200,7 @@ class _reservationCell extends State<reservationCell> {
                 onPressed: () async {
                   if (widget.passedFirestoreData['status'] == 'Reserved') {
                     pickedUp();
+                    incrementItemAmount();
                   } else if (widget.passedFirestoreData['status'] ==
                       'Picked Up') {
                     returned();

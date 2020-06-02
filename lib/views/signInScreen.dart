@@ -12,31 +12,39 @@ import 'package:progress_dialog/progress_dialog.dart';
 class signInScreen extends StatefulWidget {
   @override
   _signInScreenState createState() => _signInScreenState();
+  
 }
 
+
 class _signInScreenState extends State<signInScreen> {
+  
   String username, password, resetPassword;
 
   bool _Accountvalidate = false;
   String _contactText;
-  GoogleSignInAccount _currentUser;
-  GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: [
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ],
-  );
+  // GoogleSignInAccount _currentUser;
+  // GoogleSignIn _googleSignIn = GoogleSignIn(
+  //   scopes: [
+  //     'email',
+  //     'https://www.googleapis.com/auth/contacts.readonly',
+  //   ],
+  // );
 
-  Future<void> _handleSignIn() async {
-    try {
-      await _googleSignIn.signIn();
-    } catch (error) {
-      print(error);
-    }
+  // Future<void> _handleSignIn() async {
+  //   try {
+  //     await _googleSignIn.signIn();
+  //   } catch (error) {
+  //     print(error);
+  //   }
+  // }
+  @override
+  void initState() {
+    // getOrganizations().whenComplete(() => setState(() {}));
+    super.initState();
+    getCollections();
   }
-
-  Future<void> _handleSignOut() => _googleSignIn.disconnect();
-
+  
+  // Future<void> _handleSignOut() => _googleSignIn.disconnect();
   Future<void> getData() async {
     Firestore.instance
         .collection('global_users')
@@ -68,15 +76,16 @@ class _signInScreenState extends State<signInScreen> {
   }
 
   Future getCollections() async {
+    globals.existingOrganizations.clear();
     QuerySnapshot list =
-        await Firestore.instance.collection(globals.locations).getDocuments();
+        await Firestore.instance.collection('organizations').getDocuments();
     print("ADDING LOCATIONS!!!");
     list.documents.forEach((doc) {
-      globals.existingLocations.add(doc.data['name']);
-      // globals.categories.add(doc.data['categories']);
-
-      // print(doc.data['name']);
+      globals.existingOrganizations.add(doc.data['name']);
+       print("loctaion: " + doc.data['name']);
     });
+    print("INITING ");
+    print(globals.existingOrganizations.toString());
   }
 
   @override
@@ -243,20 +252,16 @@ class _signInScreenState extends State<signInScreen> {
                               });
                         } else {
                           //Direct To SuperUserView directly
+                          // getCollections();
                           print("UID: " + e);
                           globals.userLoginID = "AppSignInUser" + username.toLowerCase();
                           print("name:" + globals.userLoginID);
-                          // print("Lname:" + globals.userLoginID.toLowerCase());
                           print("------------------1--------------------");
-                          // getCollections();
                           await Firestore.instance
                               .collection('global_users')
                               .document(globals.userLoginID)
                               .get()
-                              .then((DocumentSnapshot ds) {
-                            // print("------------------2--------------------");
-                            // print(ds.data['Admin']);
-                            // // use ds as a snapshot
+                              .then((DocumentSnapshot ds) async {
                             var doc = ds.data;
                             print(doc['Admin']);
                             print('------------------------');
@@ -288,13 +293,29 @@ class _signInScreenState extends State<signInScreen> {
                                 globals.organization + '_locations';
                             globals.locationManager = doc['LocationManager'];
                             print("------------------END ----------------");
-                            Firestore.instance.collection(globals.locations).getDocuments().then((value){
-                              globals.existingLocations = value.documents.map<String>((e){
-                                return e.data['name'];
-                              }).toList();
-                            });
+                            // Firestore.instance.collection(globals.locations).getDocuments().then((value){
+                            //   globals.existingLocations = value.documents.map<String>((e){
+                            //     return e.data['name'];
+                            //   }).toList();
+                            // });
+
+                            print("BEFORE LOG IN");
+                            print(globals.existingOrganizations);
+                            if (!globals.existingOrganizations
+                                            .contains(doc['organization']) &&
+                                        doc['Admin'] == false) {
+                                      await Firestore.instance
+                                          .collection('global_users')
+                                          .document(globals.userLoginID)
+                                          .updateData({'Admin': true});
+                                      await Firestore.instance
+                                          .collection('organizations')
+                                          .document()
+                                          .setData(
+                                              {'name': doc['organization']});
+                                      globals.admin = true;
+                                    }
                           });
-                          print("------------------3--------------------");
                           // await getData().then((value) {
                           if (globals.admin) {
                             Navigator.push(
