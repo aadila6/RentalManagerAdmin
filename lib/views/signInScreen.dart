@@ -329,10 +329,12 @@ class _signInScreenState extends State<signInScreen> {
                                 MaterialPageRoute(
                                     builder: (context) => SuperuserPanel()));
                             }
+                            else{
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => HomeView()));
+                            }
                           }
                         }
                       },
