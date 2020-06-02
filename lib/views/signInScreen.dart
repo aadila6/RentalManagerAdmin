@@ -76,6 +76,12 @@ class _signInScreenState extends State<signInScreen> {
   }
 
   Future getCollections() async {
+    globals.existingLocations.clear();
+    QuerySnapshot list1 = await Firestore.instance.collection(globals.locations).getDocuments();
+    list1.documents.forEach((doc) {
+      globals.existingLocations.add(doc.data['name']);
+    });
+
     globals.existingOrganizations.clear();
     QuerySnapshot list =
         await Firestore.instance.collection('organizations').getDocuments();
@@ -269,7 +275,6 @@ class _signInScreenState extends State<signInScreen> {
                             print(doc["uid"]);
                             print(doc["Name"]);
                             print("email STATUS: " + doc["Email"]);
-                            // print("sid STATUS: " + doc["RentalID"]);
                             print("url STATUS: " + doc["imageURL"]);
                             print("phone STATUS: " + doc["PhoneNumber"]);
 
@@ -298,7 +303,7 @@ class _signInScreenState extends State<signInScreen> {
                             //     return e.data['name'];
                             //   }).toList();
                             // });
-
+print(globals.locations);
                             print("BEFORE LOG IN");
                             print(globals.existingOrganizations);
                             if (!globals.existingOrganizations
@@ -346,59 +351,6 @@ class _signInScreenState extends State<signInScreen> {
                   ),
                 ],
               ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: <Widget>[
-              //     ConstrainedBox(
-              //       constraints: BoxConstraints(
-              //         minWidth: 150,
-              //         maxWidth: 300
-              //       ),
-              //       child: RaisedButton(
-              //         highlightElevation: 0.0,
-              //         splashColor: Colors.greenAccent,
-              //         highlightColor: Colors.green,
-              //         elevation: 0.0,
-              //         color: Colors.green,
-              //         shape: RoundedRectangleBorder(
-              //             borderRadius: new BorderRadius.circular(30.0)),
-              //         child: Row(
-              //           mainAxisAlignment: MainAxisAlignment.center,
-              //           children: <Widget>[
-              //             Image(
-              //               image: NetworkImage(
-              //                   'https://pluspng.com/img-png/google-logo-png-open-2000.png'),
-              //               height: 30,
-              //             ),
-              //             SizedBox(width: 20.0),
-              //             Center(
-              //               child: Text(
-              //                 "Sign In with Google",
-              //                 style: TextStyle(
-              //                   fontSize: 15,
-              //                   // backgroundColor:  Colors.teal[50],
-              //                   color: Colors.white,
-              //                   fontFamily: 'Montserrat',
-              //                 ),
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //         onPressed: () async {
-              //           _handleSignIn();
-              //           // Navigator.push(
-              //           //     context,\\\\\\\\\7
-              //           //     MaterialPageRoute(
-              //           //         builder: (context) => HomeView()));
-              //         },
-              //         padding: EdgeInsets.all(7.0),
-              //         //color: Colors.teal.shade900,
-              //         disabledColor: Colors.black,
-              //         disabledTextColor: Colors.black,
-              //       ),
-              //     ),
-              //   ],
-              // ),
               SizedBox(
                 height: 15,
               ),
@@ -412,10 +364,6 @@ class _signInScreenState extends State<signInScreen> {
                   SizedBox(width: 5.0),
                   InkWell(
                     onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => SignUpPage()));
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -424,11 +372,6 @@ class _signInScreenState extends State<signInScreen> {
                               OrganizationSelection(),
                         ),
                       );
-                      // showDialog(
-                      //     context: context,
-                      //     builder: (ctxt) {
-                      //       return SignUpPage();
-                      //     });
                     },
                     child: Text(
                       'Register',
