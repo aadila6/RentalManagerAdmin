@@ -110,8 +110,11 @@ class _signInScreenState extends State<signInScreen> {
                 ),
               ),
               SizedBox(height: 10, width: 150),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: 200,
+                  maxWidth: 500
+                ),
                 child: TextField(
                   onChanged: (text) {
                     username = text;
@@ -139,8 +142,11 @@ class _signInScreenState extends State<signInScreen> {
                 ),
               ),
               SizedBox(height: 20, width: 150),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 450),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: 200,
+                  maxWidth: 500
+                ),
                 child: TextField(
                   onChanged: (text) {
                     password = text;
@@ -170,8 +176,11 @@ class _signInScreenState extends State<signInScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 20 * 5,
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minWidth: 150,
+                      maxWidth: 300
+                    ),
                     child: RaisedButton(
                       highlightElevation: 0.0,
                       splashColor: Colors.greenAccent,
@@ -318,8 +327,11 @@ class _signInScreenState extends State<signInScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 20 * 5,
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minWidth: 150,
+                      maxWidth: 300
+                    ),
                     child: RaisedButton(
                       highlightElevation: 0.0,
                       splashColor: Colors.greenAccent,
