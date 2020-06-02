@@ -8,7 +8,7 @@ import 'package:RentalAdmin/views/SuperUser/NewCategoryDialog.dart';
 import 'package:RentalAdmin/views/SuperUser/NewItemDialog.dart';
 import 'package:RentalAdmin/views/SuperUser/SuperLanding.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
-
+import 'package:flutter/cupertino.dart';
 class ItemVC extends StatefulWidget {
   String categorySelected;
   String locationSelected;
@@ -85,7 +85,7 @@ class _ItemVC extends State<ItemVC> {
                 .where('category', isEqualTo: this.widget.categorySelected)
                 .snapshots(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) return const Text('loading...');
+              if (!snapshot.hasData) return CupertinoActivityIndicator();
 
               return GridView.builder(
                   itemCount: snapshot.data.documents.length,

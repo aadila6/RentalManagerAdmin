@@ -6,7 +6,9 @@ import 'package:RentalAdmin/views/SuperUser/UpdateItemDialog.dart';
 import 'package:RentalAdmin/views/SuperUser/NewLocationDialog.dart';
 import 'package:RentalAdmin/views/SuperUser/NewItemDialog.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
+import 'package:fluttertoast/fluttertoast.dart';
 import 'Category.dart';
+import 'package:flutter/cupertino.dart';
 
 class FirstTab extends StatelessWidget {
   @override
@@ -64,7 +66,7 @@ class inventoryByLOCState extends State<inventoryByLOC> {
                 Firestore.instance.collection(globals.locations).snapshots(),
             builder: (context, snapshot) {
               print("Building");
-              if (!snapshot.hasData) return const Text('loading...');
+              if (!snapshot.hasData) return CupertinoActivityIndicator();
 
               return GridView.builder(
                   itemCount: snapshot.data.documents.length,
@@ -78,6 +80,9 @@ class inventoryByLOCState extends State<inventoryByLOC> {
                           snapshot.data.documents[index].data['imageURL']
                               .toString()),
                       onTap: () {
+                        Fluttertoast.showToast(
+          msg: 'Double Tap To Edit Cell',
+        );
                         var documentID =
                             snapshot.data.documents[index].documentID;
                         Navigator.push(

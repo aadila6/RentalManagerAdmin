@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'custom_gridcell.dart';
 import "itemGrid.dart";
-import 'item_page.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 
 class CategoryPage extends StatefulWidget {

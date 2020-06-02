@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import '../globals.dart' as globals;
-// import 'package:intl/intl.dart';
-// import 'package:rental_manager/PlatformWidget/platform_alert_dialog.dart';
-// import 'package:rental_manager/PlatformWidget/strings.dart';
-// import 'package:flutter/services.dart';
+import 'package:flutter/cupertino.dart';
 import 'ItemDetails.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 
@@ -40,7 +36,7 @@ class _ItemGridPageState extends State<ItemGridPage> {
               .where('category', isEqualTo: widget.category)
               .snapshots(),
           builder: (context, snapshot) {
-            if (!snapshot.hasData) return const Text('loading...');
+            if (!snapshot.hasData) return CupertinoActivityIndicator();
 
             return GridView.builder(
               itemCount: snapshot.data.documents.length,

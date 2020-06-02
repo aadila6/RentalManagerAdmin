@@ -6,7 +6,7 @@ import 'package:RentalAdmin/views/SuperUser/NewCategoryDialog.dart';
 import 'package:RentalAdmin/views/SuperUser/UpdateCategoryDialog.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'Items.dart';
-
+import 'package:flutter/cupertino.dart';
 class CategoryVC extends StatefulWidget {
   String locationSelected;
   String locationName;
@@ -68,7 +68,7 @@ class _CategoryVC extends State<CategoryVC> {
                 .document(this.widget.locationSelected)
                 .snapshots(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) return const Text('loading...');
+              if (!snapshot.hasData) return CupertinoActivityIndicator();
               print("SNAPSHOT DATA - NAME");
               print(snapshot.data['name']);
               glocation = snapshot.data['name'].toString();

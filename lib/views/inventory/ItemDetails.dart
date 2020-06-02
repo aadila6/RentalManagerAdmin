@@ -4,6 +4,7 @@ import 'package:RentalAdmin/views/homeView.dart';
 import 'package:intl/intl.dart';
 import 'package:RentalAdmin/views/ReservationView.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
+import 'package:flutter/cupertino.dart';
 class DetailPage extends StatefulWidget {
   var itemSelected;
   DetailPage({this.itemSelected});
@@ -15,7 +16,6 @@ class DetailPage extends StatefulWidget {
 }
 
 TextEditingController _textFieldController = TextEditingController();
-
 class _DetailPage extends State<DetailPage> {
   Container reserveButton() {
     return Container(
@@ -66,7 +66,7 @@ class _DetailPage extends State<DetailPage> {
               .document(widget.itemSelected.documentID)
               .snapshots(),
           builder: (context, snapshot) {
-            if (!snapshot.hasData) return const Text('loading...');
+            if (!snapshot.hasData) return CupertinoActivityIndicator();
             return Text('Instock Amount: ${snapshot.data['amount']}',
                 style: TextStyle(
                     fontSize: 14.0,
@@ -157,14 +157,6 @@ testingReservations(String itemID) async {
       imageURL ="https://firebasestorage.googleapis.com/v0/b/rentalmanager-f94f1.appspot.com/o/images%2F1588472194089?alt=media&token=d529dcfc-4f5d-4f3f-9de3-54d9f441408b";
     }
     await databaseReference.collection(globals.reservation_global).document().setData({
-      // 'imageURL': imageURL,
-      // 'name': itemName,
-      // 'uid': globals.userLoginID,
-      // 'item': itemID,
-      // 'amount': "1",
-      // 'startTime': dateTime,
-      // 'status': "Picked Up",
-      // 'endTime': "TBD",
       'imageURL': imageURL,
       'name': itemName,
       'uid': globals.userLoginID,
@@ -177,6 +169,8 @@ testingReservations(String itemID) async {
       'return time': 'NULL',
       'endTime': "TBD",
       'UserName': globals.username,
+      'location': globals.locations,
+      'category': widget.itemSelected.data['category'],
     });
     
     Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationListPage()));

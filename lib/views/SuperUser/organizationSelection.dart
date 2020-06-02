@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:RentalAdmin/views/SignUpDialog.dart';
-
+import 'package:flutter/cupertino.dart';
 class OrganizationSelection extends StatefulWidget {
   @override
   _OrganizationSelectionState createState() => _OrganizationSelectionState();
@@ -126,10 +126,8 @@ class _OrganizationSelectionState extends State<OrganizationSelection> {
       body: StreamBuilder(
           stream: Firestore.instance.collection('organizations').snapshots(),
           builder: (context, snapshot) {
-            if (!snapshot.hasData)
-              return Center(
-                child: Text('Loading...'),
-              );
+           
+              if (!snapshot.hasData) return CupertinoActivityIndicator();
 
             return ListView.builder(
               itemCount: snapshot.data.documents.length,

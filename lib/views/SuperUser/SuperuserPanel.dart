@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:RentalAdmin/views/SuperUser/SuperInventoryView.dart';
 import 'package:RentalAdmin/views/SuperUser/SuperLanding.dart';
 import 'package:RentalAdmin/views/signInScreen.dart';
 import 'package:RentalAdmin/views/SuperUser/menu.dart';
@@ -8,7 +7,6 @@ import 'package:RentalAdmin/views/SuperUser/UserManagement.dart';
 import 'package:RentalAdmin/views/SuperUser/InventoryVC/TestInventory.dart';
 import 'package:RentalAdmin/views/SuperUser/ProfileDialog.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 // import 'package:RentalAdmin/views/SuperUser/theme.dart';
 class SuperuserPanel extends StatefulWidget {

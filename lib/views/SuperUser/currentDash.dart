@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_web_dashboard/src/commons/theme.dart';
 import 'package:RentalAdmin/views/SuperUser/theme.dart';
-// import 'package:flutter_web_dashboard/src/commons/theme.dart';
-// import 'package:RentalAdmin/views/SuperUser/RecentAct.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 
 class ActivityWidget extends StatefulWidget {
@@ -102,7 +100,7 @@ class _ActivityWidgetState extends State<ActivityWidget> {
                       .collection(globals.reservation_global).orderBy('startTime', descending: true)// //modify here
                       .snapshots(),
                   builder: (context, snapshot) {
-                    if (!snapshot.hasData) return const Text('loading...');
+                    if (!snapshot.hasData) return CupertinoActivityIndicator();
                     return ListView.builder(
                       itemExtent: 50.0,
                       itemCount: snapshot.data.documents.length,
