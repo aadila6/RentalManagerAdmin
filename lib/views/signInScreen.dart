@@ -295,6 +295,7 @@ class _signInScreenState extends State<signInScreen> {
                             });
                           });
                           print("------------------3--------------------");
+                          print(globals.locationManager);
                           // await getData().then((value) {
                           if (globals.admin) {
                             Navigator.push(
@@ -308,10 +309,12 @@ class _signInScreenState extends State<signInScreen> {
                                 MaterialPageRoute(
                                     builder: (context) => SuperuserPanel()));
                             }
+                            else{
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => HomeView()));
+                            }
                           }
                         }
                       },

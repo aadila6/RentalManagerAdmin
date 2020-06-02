@@ -21,16 +21,16 @@ class SuperuserPanelState extends State<SuperuserPanel>
   TabController tabController;
   final List<Tab> myTabs = <Tab>[
     Tab(child: Dashboard()),
-    // Tab(child: SuperuserInventoryView()),
     Tab(child: FirstTab()),
     Tab(child: SuperUserMgtView()),
-    // Tab(child: ListPage()),
-    // Tab(child: ),
   ];
 
   @override
   void initState() {
     super.initState();
+    if(globals.admin== false) {
+      myTabs.removeAt(2);
+    }
     tabController = TabController(vsync: this, length: myTabs.length);
   }
 
@@ -113,37 +113,17 @@ class SuperuserPanelState extends State<SuperuserPanel>
                 ),
               ],
             ),
-          ),
-          // SizedBox(
-          //   height: 40,
-          // ),
-          ListTile(
-            leading: Icon(menuItems[0].icon, size: 40),
-            title: Text(menuItems[0].title, style: menuListTileDefaultText),
-            selected: tabController.index == 0 ? true : false,
-            onTap: () {
-              tabController.animateTo(0);
-              setState(() {});
-            },
-          ),
-          ListTile(
-            leading: Icon(menuItems[1].icon, size: 40),
-            title: Text(menuItems[1].title, style: menuListTileDefaultText),
-            selected: tabController.index == 1 ? true : false,
-            onTap: () {
-              tabController.animateTo(1);
-              setState(() {});
-            },
-          ),
-          ListTile(
-            leading: Icon(menuItems[2].icon, size: 40),
-            title: Text(menuItems[2].title, style: menuListTileDefaultText),
-            selected: tabController.index == 2 ? true : false,
-            onTap: () {
-              tabController.animateTo(2);
-              setState(() {});
-            },
-          ),
+          )]+List.generate(myTabs.length, (i){
+            return ListTile(
+              leading: Icon(menuItems[i].icon, size: 40),
+              title: Text(menuItems[i].title, style: menuListTileDefaultText),
+              selected: tabController.index == i ? true : false,
+              onTap: () {
+                tabController.animateTo(i);
+                setState(() {});
+              },
+            );
+          })+ <Widget>[
           ListTile(
             leading: Icon(
               menuItems[3].icon,
@@ -157,7 +137,7 @@ class SuperuserPanelState extends State<SuperuserPanel>
               setState(() {});
             },
           ),
-        ],
+        ]
       ),
     );
   }

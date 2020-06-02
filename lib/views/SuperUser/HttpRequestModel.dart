@@ -27,14 +27,6 @@ class User {
   }
 }
 
-// void modifyPermission(String email, String p, dynamic op) {
-//   print("Firebase request2");
-//   String path = "AppSignInUser"+ globals.email;
-//   var col = Firestore.instance.collection("global_users");
-//   col.document(path).setData({p:op},merge: true);
-
-// }
-
 void modifyAllPermissions(User u) {
   //print(u.getPermissions());
   print("Firebase request3");
