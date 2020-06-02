@@ -15,7 +15,7 @@ class reservationCell extends StatefulWidget {
 }
 
 String action = "Pick Up";
-int itemAmount;
+// int itemAmount;
 String itemID;
 class _reservationCell extends State<reservationCell> {
   // Future pickedUp() async {
@@ -38,6 +38,8 @@ class _reservationCell extends State<reservationCell> {
       'status': 'Picked Up',
       'picked Up time': date,
     }).catchError((error) => print(error));
+       Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ReservationListPage()));
   }
 
   Future returned() async {
@@ -71,7 +73,7 @@ class _reservationCell extends State<reservationCell> {
         Firestore.instance
             .collection(globals.organization)
             .document(widget.passedFirestoreData.documentID)
-            .updateData({'# of items': doc.data['# of items'] + itemAmount});
+            .updateData({'# of items': doc.data['# of items'] + 1});
       },
     );
   }
@@ -79,8 +81,9 @@ class _reservationCell extends State<reservationCell> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print(widget.passedFirestoreData.data['amount']);
     itemID = widget.passedFirestoreData.data['item'];
-    itemAmount = int.parse(widget.passedFirestoreData.data['amount']);
+    // itemAmount = widget.passedFirestoreData.data['amount'];
   }
  
 

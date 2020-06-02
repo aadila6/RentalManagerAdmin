@@ -40,20 +40,20 @@ class _ReservationListPage extends State<ReservationListPage> {
                     size: 30.0,
                   ),
                 )),
-            Padding(
-                padding: EdgeInsets.only(right: 20.0),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ActiveActivity()));
-                  },
-                  child: Icon(
-                    Icons.history,
-                    size: 30.0,
-                  ),
-                )),
+            // Padding(
+            //     padding: EdgeInsets.only(right: 20.0),
+            //     child: GestureDetector(
+            //       onTap: () {
+            //         Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //                 builder: (context) => ActiveActivity()));
+            //       },
+            //       child: Icon(
+            //         Icons.history,
+            //         size: 30.0,
+            //       ),
+            //     )),
             Padding(
                 padding: EdgeInsets.only(right: 20.0),
                 child: GestureDetector(
