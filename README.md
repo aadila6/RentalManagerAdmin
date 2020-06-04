@@ -21,8 +21,7 @@ Live Demo : [Flutter Rental Manager App Web&Mobile Demo](https://youtu.be/uWN17Y
 
 ### Created & Maintained By
 
-[Sanskar Tiwari](https://github.com/theindianappguy) ([@theindianappguy](https://twitter.com/Theindianappguy)) ([YouTube](https://www.youtube.com/c/SanskarTiwari))
-> 
+> Team Cowculator
 
 ### License
 
