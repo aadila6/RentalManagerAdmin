@@ -5,7 +5,7 @@ This is a flutter web application for rental manager app.
 ## Getting Started
 
 Live Demo : [Flutter Rental Manager App Web&Mobile Demo](https://youtu.be/uWN17YViIzk)
-
+Mobile Version: [Github Repository Link](https://github.com/AlessandroAlleAlex/RentalManager)
 
 ## How to Create and Deploy
 Follow the links below to learn more about how to create and deploy web applications in flutter.
@@ -80,11 +80,10 @@ This directory contains all the application level constants. A separate file is 
 
 ```
 views/
-|- SuperUser 
-|- User
+|- SignInUp 
+|- SuperUser	
+|- User	
 |- globals.dart
-|- signInScreen.dart
-|- SignUpDialog.dart
 ```
 
 ### SuperUser
@@ -93,28 +92,27 @@ This directory contains all the ui of your application. Each screen is located i
 
 ```
 SuperUser /
-|- HttpRequestModel.dart
-|- globals.dart
-|- signInScreen.dart
-|- SignUpDialog.dart
-|- ImportCSVDialog.dart
-|- NewCategoryDialog.dart	
-|- ProfileDialog.dart
-|- RecentAct.dart
-|- SuperLanding.dart
-|- SuperuserPanel.dart
-|- UpdateCategoryDialog.dart
-|- UpdateItemDialog.dart
-|- UpdateLocationDialog.dart
-|- UserManagement.dart
-|- cardTiles.dart
-|- currentDash.dart
-|- menu.dart
-|- menu_tile.dart
-|- newItemDialog.dart
-|- newLocationDialog.dart
-|- organizationSelection.dart
+|- DashBoard	
+ 	|- ProfileDialog.dart	
+	|- RecentAct.dart	
+	|- SuperLanding.dart
+	|- SuperuserPanel.dart	
+	|- cardTiles.dart	
+	|- currentDash.dart	
+	|- menu.dart	
+	|- menu_tile.dart	
+	|- theme.dart	
 
+|-InventoryVC	
+  |- ItemManagement folder for add/update items views files
+  |- TestInventory.dart
+	|- Category.dart	
+	|- ImportCSVDialog.dart
+	|- Items.dart
+		
+|-UserPermission	
+  	|- HttpRequestModel.dart	
+	  |- UserManagement.dart	
 ```
 
 ### User
@@ -122,14 +120,11 @@ SuperUser /
 Contains the common file(s) and utilities used in a project. The folder structure is as follows: 
 
 ```
-|- 
-|- 
-|- 
-|- 
-|- 
-|- 
-
-
+|- UI
+  |- LandingView.dart	
+	|- ReservationView.dart	Update!!!	1 hour ago
+	|- homeView.dart
+|- inventory folder for user panel inventory view
 ```
 
 ### Widgets
@@ -138,11 +133,14 @@ Contains the common widgets that are shared across multiple screens. For example
 
 ```
 widgets/
-|- 
-|- 
-|- 
-|- 
-
+|- activeActivities.dart
+|- allActivities.dart
+|- auth.dart
+|- centerer.dart
+|- googleSignin.dart
+|- inventoryList.dart
+|- navigation.dart
+|- resCell.dart
 ```
 
 ### Main
@@ -175,8 +173,11 @@ class MyApp extends StatelessWidget {
 
 ```
 ### Created & Maintained By
-
 > Team Cowculator
+  Abudureheman Adila aadila@ucdavis.edu
+  Alessandro Liu aleliu@ucdavis.edu
+  Jiayi Zhang pkazhang@ucdavis.edu
+  Jing Gao jagao@ucdavis.edu
 
 ### License
 
