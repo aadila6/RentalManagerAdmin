@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_storage/firebase_storage.dart';
 import 'category_page.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
+
 class ListPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -42,9 +43,7 @@ class _ListPageState extends State<ListPage> {
             return ListView.builder(
                 itemCount: snapshot.data.length,
                 itemBuilder: (BuildContext context, int index) =>
-                    customCard(index, snapshot)
-                
-                );
+                    customCard(index, snapshot));
           }
         },
       ),

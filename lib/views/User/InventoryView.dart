@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
-import '../views/inventory/list_page.dart';
-import '../views/InventoryView.dart';
-
+import 'package:RentalAdmin/views/inventory/list_page.dart';
+import 'package:RentalAdmin/views/User/InventoryView.dart';
 
 class LocationPage extends StatefulWidget {
   final String title;
@@ -23,9 +21,8 @@ class _LocationPageState extends State<LocationPage> {
       appBar: AppBar(
         title: Text(widget.title),
         backgroundColor: Colors.teal,
-        ),
+      ),
       body: ListPage(),
     );
   }
 }
-

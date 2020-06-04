@@ -9,7 +9,6 @@ class CategoryPage extends StatefulWidget {
   CategoryPage({this.passedFirestoreData});
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _CategoryPageState();
   }
 }
@@ -21,10 +20,9 @@ class _CategoryPageState extends State<CategoryPage> {
         MaterialPageRoute(
             builder: (context) => ItemGridPage(category: categorySelected)));
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: Text('Category Selection Page'),

@@ -1,10 +1,10 @@
 import 'package:RentalAdmin/views/SuperUser/SuperuserPanel.dart';
-import 'package:RentalAdmin/views/homeView.dart';
+import 'package:RentalAdmin/views/User/homeView.dart';
 import 'package:flutter/material.dart';
-import 'package:RentalAdmin/views/InventoryView.dart';
+import 'package:RentalAdmin/views/User/InventoryView.dart';
 // import 'package:RentalAdmin/views/chatBoxView.dart';
-import 'package:RentalAdmin/views/ReservationView.dart';
-import 'package:RentalAdmin/views/ReservationView.dart';
+import 'package:RentalAdmin/views/User/ReservationView.dart';
+import 'package:RentalAdmin/views/User/ReservationView.dart';
 import 'package:RentalAdmin/views/signInScreen.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 
@@ -31,7 +31,6 @@ class NavigationBar extends StatelessWidget {
                 MaterialButton(
                   color: Colors.teal,
                   shape: new RoundedRectangleBorder(
-                      // borderRadius: new BorderRadius.circular(18.0),
                       side: BorderSide(color: Colors.white)),
                   onPressed: () {
                     print("Pressed Admin login");

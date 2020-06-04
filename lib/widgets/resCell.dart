@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:RentalAdmin/views/ReservationView.dart';
+import 'package:RentalAdmin/views/User/ReservationView.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:intl/intl.dart';
 class reservationCell extends StatefulWidget {
@@ -49,6 +49,7 @@ class _reservationCell extends State<reservationCell> {
         .collection(globals.reservation_global)
         .document(widget.passedFirestoreData.documentID.toString())
         .updateData({'status': 'Returned','return time': date}).catchError((error) => print(error));
+        incrementItemAmount();
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => ReservationListPage()));
   }
@@ -60,6 +61,7 @@ class _reservationCell extends State<reservationCell> {
         .document(widget.passedFirestoreData.documentID.toString())
         .delete()
         .catchError((error) => print(error));
+        incrementItemAmount();
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => ReservationListPage()));
   }
@@ -73,7 +75,7 @@ class _reservationCell extends State<reservationCell> {
         Firestore.instance
             .collection(globals.organization)
             .document(widget.passedFirestoreData.documentID)
-            .updateData({'# of items': doc.data['# of items'] + 1});
+            .updateData({'# of items': int.parse(doc.data['# of items'] + 1)});
       },
     );
   }

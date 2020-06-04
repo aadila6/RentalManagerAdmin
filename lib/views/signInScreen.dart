@@ -1,4 +1,4 @@
-import 'package:RentalAdmin/views/homeView.dart';
+import 'package:RentalAdmin/views/User/homeView.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,15 +9,13 @@ import 'package:RentalAdmin/views/SuperUser/SuperuserPanel.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:RentalAdmin/views/SuperUser/organizationSelection.dart';
 import 'package:progress_dialog/progress_dialog.dart';
+
 class signInScreen extends StatefulWidget {
   @override
   _signInScreenState createState() => _signInScreenState();
-  
 }
 
-
 class _signInScreenState extends State<signInScreen> {
-  
   String username, password, resetPassword;
 
   bool _Accountvalidate = false;
@@ -43,7 +41,7 @@ class _signInScreenState extends State<signInScreen> {
     super.initState();
     getCollections();
   }
-  
+
   // Future<void> _handleSignOut() => _googleSignIn.disconnect();
   Future<void> getData() async {
     Firestore.instance
@@ -77,7 +75,8 @@ class _signInScreenState extends State<signInScreen> {
 
   Future getCollections() async {
     globals.existingLocations.clear();
-    QuerySnapshot list1 = await Firestore.instance.collection(globals.locations).getDocuments();
+    QuerySnapshot list1 =
+        await Firestore.instance.collection(globals.locations).getDocuments();
     list1.documents.forEach((doc) {
       globals.existingLocations.add(doc.data['name']);
     });
@@ -88,7 +87,7 @@ class _signInScreenState extends State<signInScreen> {
     print("ADDING LOCATIONS!!!");
     list.documents.forEach((doc) {
       globals.existingOrganizations.add(doc.data['name']);
-       print("loctaion: " + doc.data['name']);
+      print("loctaion: " + doc.data['name']);
     });
     print("INITING ");
     print(globals.existingOrganizations.toString());
@@ -126,10 +125,7 @@ class _signInScreenState extends State<signInScreen> {
               ),
               SizedBox(height: 10, width: 150),
               ConstrainedBox(
-                constraints: BoxConstraints(
-                  minWidth: 200,
-                  maxWidth: 500
-                ),
+                constraints: BoxConstraints(minWidth: 200, maxWidth: 500),
                 child: TextField(
                   onChanged: (text) {
                     username = text;
@@ -158,10 +154,7 @@ class _signInScreenState extends State<signInScreen> {
               ),
               SizedBox(height: 20, width: 150),
               ConstrainedBox(
-                constraints: BoxConstraints(
-                  minWidth: 200,
-                  maxWidth: 500
-                ),
+                constraints: BoxConstraints(minWidth: 200, maxWidth: 500),
                 child: TextField(
                   onChanged: (text) {
                     password = text;
@@ -192,10 +185,7 @@ class _signInScreenState extends State<signInScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minWidth: 150,
-                      maxWidth: 300
-                    ),
+                    constraints: BoxConstraints(minWidth: 150, maxWidth: 300),
                     child: RaisedButton(
                       highlightElevation: 0.0,
                       splashColor: Colors.greenAccent,
@@ -260,7 +250,8 @@ class _signInScreenState extends State<signInScreen> {
                           //Direct To SuperUserView directly
                           // getCollections();
                           print("UID: " + e);
-                          globals.userLoginID = "AppSignInUser" + username.toLowerCase();
+                          globals.userLoginID =
+                              "AppSignInUser" + username.toLowerCase();
                           print("name:" + globals.userLoginID);
                           print("------------------1--------------------");
                           await Firestore.instance
@@ -303,23 +294,24 @@ class _signInScreenState extends State<signInScreen> {
                             //     return e.data['name'];
                             //   }).toList();
                             // });
-print(globals.locations);
+                            print(globals.locations);
                             print("BEFORE LOG IN");
                             print(globals.existingOrganizations);
                             if (!globals.existingOrganizations
-                                            .contains(doc['organization']) &&
-                                        doc['Admin'] == false) {
-                                      await Firestore.instance
-                                          .collection('global_users')
-                                          .document(globals.userLoginID)
-                                          .updateData({'Admin': true});
-                                      await Firestore.instance
-                                          .collection('organizations')
-                                          .document()
-                                          .setData(
-                                              {'name': doc['organization']});
-                                      globals.admin = true;
-                                    }
+                                    .contains(doc['organization']) &&
+                                doc['Admin'] == false) {
+                              print(
+                                  "INSIDE FIRST ADMIN IF STATEMENT!!!!!!!!!!!!");
+                              await Firestore.instance
+                                  .collection('global_users')
+                                  .document(globals.userLoginID)
+                                  .updateData({'Admin': true});
+                              await Firestore.instance
+                                  .collection('organizations')
+                                  .document()
+                                  .setData({'name': doc['organization']});
+                              globals.admin = true;
+                            }
                           });
                           // await getData().then((value) {
                           if (globals.admin) {
@@ -328,23 +320,21 @@ print(globals.locations);
                                 MaterialPageRoute(
                                     builder: (context) => SuperuserPanel()));
                           } else {
-                            if(globals.locationManager!= ""){
-                               Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SuperuserPanel()));
-                            }
-                            else{
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomeView()));
+                            if (globals.locationManager != "") {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SuperuserPanel()));
+                            } else {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomeView()));
                             }
                           }
                         }
                       },
                       padding: EdgeInsets.all(10.0),
-                      //color: Colors.teal.shade900,
                       disabledColor: Colors.black,
                       disabledTextColor: Colors.black,
                     ),
@@ -368,7 +358,6 @@ print(globals.locations);
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              //SignUpPage(),
                               OrganizationSelection(),
                         ),
                       );
@@ -389,8 +378,6 @@ print(globals.locations);
               ),
               Center(
                 child: Container(
-                  //alignment: Alignment(1.0, 0.0),
-                  //padding: EdgeInsets.only(top: 15.0, left: 20.0),
                   child: InkWell(
                     onTap: () {
                       Navigator.push(
@@ -527,15 +514,15 @@ class _ResetPasswordState extends State<ResetPassword> {
                         ],
                       ),
                       onPressed: () async {
-                        // check if the email exsit? 
+                        // check if the email exsit?
                         final QuerySnapshot result = await Firestore.instance
                             .collection('global_users')
                             .getDocuments();
                         final List<DocumentSnapshot> documents =
                             result.documents;
                         List<String> userNameList = [];
-                        documents.forEach(
-                            (data) => userNameList.add(data['Email']));
+                        documents
+                            .forEach((data) => userNameList.add(data['Email']));
                         bool found = false;
                         for (var i = 0; i < userNameList.length; i++) {
                           if (email.toLowerCase() == userNameList[i]) {
@@ -544,9 +531,9 @@ class _ResetPasswordState extends State<ResetPassword> {
                             break;
                           }
                         }
-                        if(found){
+                        if (found) {
                           final FirebaseAuth auth = FirebaseAuth.instance;
-                           ProgressDialog prForgetPassword;
+                          ProgressDialog prForgetPassword;
                           prForgetPassword = new ProgressDialog(context,
                               type: ProgressDialogType.Normal);
                           prForgetPassword.update(
@@ -577,19 +564,20 @@ class _ResetPasswordState extends State<ResetPassword> {
                                   fontSize: 19.0,
                                   fontWeight: FontWeight.w600),
                             );
-                            Future.delayed(Duration(seconds: 2)).then((value) async{
+                            Future.delayed(Duration(seconds: 2))
+                                .then((value) async {
                               // authHandler.resetPassword(email);
                               await auth.sendPasswordResetEmail(email: email);
                               prForgetPassword.hide();
                             });
                           });
-                        }else{
-                           showDialog(
+                        } else {
+                          showDialog(
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title:
-                                      Text('The email that you provided doesn not seem to be a registered account'),
+                                  title: Text(
+                                      'The email that you provided doesn not seem to be a registered account'),
                                   actions: <Widget>[
                                     new FlatButton(
                                       child: new Text('CANCEL'),
@@ -600,10 +588,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                                   ],
                                 );
                               });
-
                         }
-                        
-
                       },
                       padding: EdgeInsets.all(7.0),
                       disabledColor: Colors.black,

@@ -9,14 +9,11 @@ class ItemGridPage extends StatefulWidget {
   ItemGridPage({this.category});
   @override
   State<StatefulWidget> createState() {
-
     return _ItemGridPageState();
   }
 }
 
-
 class _ItemGridPageState extends State<ItemGridPage> {
-  
   navigateToDetail(DocumentSnapshot indexedData) {
     Navigator.push(
         context,
@@ -39,22 +36,22 @@ class _ItemGridPageState extends State<ItemGridPage> {
             if (!snapshot.hasData) return CupertinoActivityIndicator();
 
             return GridView.builder(
-              itemCount: snapshot.data.documents.length,
-              gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 5),
-              itemBuilder: (BuildContext context, int index) {
-                return InkWell(
-                  child: CustommCell(
-                  snapshot.data.documents[index].data['name'].toString(),
-                  snapshot.data.documents[index].data['imageURL'].toString()),
-                  onTap: (){
-                    print(snapshot.data.documents[index].data['name'].toString());
-                    navigateToDetail(snapshot.data.documents[index]);
-                  },
-                );
-
-              }
-            );
+                itemCount: snapshot.data.documents.length,
+                gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 5),
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                    child: CustommCell(
+                        snapshot.data.documents[index].data['name'].toString(),
+                        snapshot.data.documents[index].data['imageURL']
+                            .toString()),
+                    onTap: () {
+                      print(snapshot.data.documents[index].data['name']
+                          .toString());
+                      navigateToDetail(snapshot.data.documents[index]);
+                    },
+                  );
+                });
           }),
     );
   }

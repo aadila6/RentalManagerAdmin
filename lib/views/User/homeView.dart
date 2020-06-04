@@ -1,12 +1,6 @@
-
-import 'package:RentalAdmin/views/inventory/return.dart';
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/widgets/navigation.dart';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:RentalAdmin/views/inventory/checkOutB.dart';
-import 'package:RentalAdmin/views/LandingView.dart';
-
 
 class HomeView extends StatelessWidget {
   const HomeView({Key key}) : super(key: key);
@@ -52,7 +46,6 @@ class HomeView extends StatelessWidget {
       child: Column(
         children: <Widget>[
           CheckingOut(),
-          
         ],
       ),
     );

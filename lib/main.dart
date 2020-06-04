@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:RentalAdmin/views/homeView.dart';
+import 'package:RentalAdmin/views/User/homeView.dart';
 import 'package:RentalAdmin/views/signInScreen.dart';
-
 import 'package:RentalAdmin/views/SuperUser/SuperuserPanel.dart';
 
 import 'views/signInScreen.dart';

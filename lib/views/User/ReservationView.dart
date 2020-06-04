@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:RentalAdmin/views/homeView.dart';
 import 'package:RentalAdmin/widgets/resCell.dart';
 import 'package:RentalAdmin/widgets/activeActivities.dart';
-import 'package:RentalAdmin/views/InventoryView.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:RentalAdmin/views/SuperUser/InventoryVC/TestInventory.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:RentalAdmin/views/User/homeView.dart';
+import 'package:RentalAdmin/views/User/InventoryView.dart';
 class ReservationListPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -113,7 +112,7 @@ class _ReservationListPage extends State<ReservationListPage> {
                 //                     " by " +
                 //                     snapshot.data.documents[index].data['UserName'],
                 //                 // style: TextStyle(color: textcolor())),
-                            
+
                 //           ),
                 //           onTap: () {
                 //             print("RUAAAAAAAAA");
@@ -126,22 +125,27 @@ class _ReservationListPage extends State<ReservationListPage> {
                     itemBuilder: (BuildContext context, int index) {
                       return Card(
                           child: ListTile(
-                            leading: CircleAvatar(
-                              backgroundImage: NetworkImage(snapshot.data[index].data['imageURL']),
-                            ),
-                            trailing: new Text(
-                                returnDifferenceTime(snapshot.data[index].data['startTime'], snapshot.data[index].data['picked Up time'], snapshot.data[index].data['return time']) // modify here
-                                ),
+                              leading: CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                    snapshot.data[index].data['imageURL']),
+                              ),
+                              trailing: new Text(returnDifferenceTime(
+                                      snapshot.data[index].data['startTime'],
+                                      snapshot
+                                          .data[index].data['picked Up time'],
+                                      snapshot.data[index]
+                                          .data['return time']) // modify here
+                                  ),
                               title: Text(
                                   snapshot.data[index].data['name'].toString()),
                               subtitle: Text(
                                 // snapshot.data[index].data['status'].toString(),
-                                 snapshot.data[index].data['status'] +
+                                snapshot.data[index].data['status'] +
                                     " by " +
                                     snapshot.data[index].data['UserName'],
                               ),
                               onTap: () {
-                               navigateToDetail(snapshot.data[index]);
+                                navigateToDetail(snapshot.data[index]);
                               }));
                     });
               }

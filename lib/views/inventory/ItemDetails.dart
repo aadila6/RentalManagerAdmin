@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:RentalAdmin/views/homeView.dart';
+import 'package:RentalAdmin/views/User/homeView.dart';
 import 'package:intl/intl.dart';
-import 'package:RentalAdmin/views/ReservationView.dart';
+import 'package:RentalAdmin/views/User/ReservationView.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:flutter/cupertino.dart';
 class DetailPage extends StatefulWidget {
@@ -34,17 +34,12 @@ class _DetailPage extends State<DetailPage> {
 
   Container top() {
     return Container(
-      // padding: EdgeInsets.symmetric(vertical: 16.0),
       alignment: Alignment.center,
-      // width: MediaQuery.of(context).size.width,
-      // padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
       height: MediaQuery.of(context).size.height * 0.5 / 2,
       width: MediaQuery.of(context).size.width * 0.5 / 2,
       decoration: new BoxDecoration(
         image: new DecorationImage(
           image: NetworkImage(widget.itemSelected.data['imageURL']),
-          // image: new AssetImage("drive-steering-wheel.jpg"),
-          // fit: BoxFit.cover,
         ),
       ),
     );
@@ -116,7 +111,7 @@ class _DetailPage extends State<DetailPage> {
         Firestore.instance
             .collection(globals.items_global)
             .document(widget.itemSelected.documentID)
-            .updateData({'# of items': (widget.itemSelected['# of items']-1).toString()});
+            .updateData({'# of items': widget.itemSelected['# of items']-1});
   }
 
 testingReservations(String itemID) async {
