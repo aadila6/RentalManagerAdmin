@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:RentalAdmin/views/SuperUser/SuperLanding.dart';
-import 'package:RentalAdmin/views/signInScreen.dart';
-import 'package:RentalAdmin/views/SuperUser/menu.dart';
-import 'package:RentalAdmin/views/SuperUser/theme.dart';
-import 'package:RentalAdmin/views/SuperUser/UserManagement.dart';
+import 'package:RentalAdmin/views/SuperUser/DashBoard/SuperLanding.dart';
+import 'package:RentalAdmin/views/SignInUp/signInScreen.dart';
+import 'package:RentalAdmin/views/SuperUser/DashBoard/menu.dart';
+import 'package:RentalAdmin/views/SuperUser/DashBoard/theme.dart';
+import 'package:RentalAdmin/views/SuperUser/UserPermission/UserManagement.dart';
 import 'package:RentalAdmin/views/SuperUser/InventoryVC/TestInventory.dart';
-import 'package:RentalAdmin/views/SuperUser/ProfileDialog.dart';
+import 'package:RentalAdmin/views/SuperUser/DashBoard/ProfileDialog.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 
 // import 'package:RentalAdmin/views/SuperUser/theme.dart';

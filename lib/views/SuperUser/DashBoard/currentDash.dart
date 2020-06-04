@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:RentalAdmin/views/SuperUser/theme.dart';
+import 'package:RentalAdmin/views/SuperUser/DashBoard/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;

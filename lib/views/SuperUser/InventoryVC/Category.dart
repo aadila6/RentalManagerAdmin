@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:RentalAdmin/views/SuperUser/theme.dart';
-import 'package:RentalAdmin/views/SuperUser/UpdateItemDialog.dart';
-import 'package:RentalAdmin/views/SuperUser/NewCategoryDialog.dart';
-import 'package:RentalAdmin/views/SuperUser/UpdateCategoryDialog.dart';
+import 'package:RentalAdmin/views/SuperUser/DashBoard/theme.dart';
+import 'package:RentalAdmin/views/SuperUser/InventoryVC/ItemManagement/UpdateItemDialog.dart';
+import 'package:RentalAdmin/views/SuperUser/InventoryVC/ItemManagement/NewCategoryDialog.dart';
+import 'package:RentalAdmin/views/SuperUser/InventoryVC/ItemManagement/UpdateCategoryDialog.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'Items.dart';
 import 'package:flutter/cupertino.dart';

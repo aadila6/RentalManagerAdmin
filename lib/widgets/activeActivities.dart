@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:RentalAdmin/widgets/reservationCell.dart';
-import 'package:RentalAdmin/views/User/homeView.dart';
+import 'package:RentalAdmin/views/User/UI/homeView.dart';
 
 //
 class ActiveActivity extends StatefulWidget {

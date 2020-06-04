@@ -1,13 +1,12 @@
-import 'package:RentalAdmin/views/User/homeView.dart';
+import 'package:RentalAdmin/views/User/UI/homeView.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:RentalAdmin/views/SignUpDialog.dart';
-import '../widgets/auth.dart';
-import 'package:RentalAdmin/views/SuperUser/SuperuserPanel.dart';
+import 'package:RentalAdmin/widgets/auth.dart';
+import 'package:RentalAdmin/views/SuperUser/DashBoard/SuperuserPanel.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
-import 'package:RentalAdmin/views/SuperUser/organizationSelection.dart';
+import 'package:RentalAdmin/views/SignInUp/organizationSelection.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 class signInScreen extends StatefulWidget {

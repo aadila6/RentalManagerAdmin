@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/widgets/navigation.dart';
-import 'package:RentalAdmin/views/inventory/checkOutB.dart';
+import 'package:RentalAdmin/views/User/inventory/checkOutB.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key key}) : super(key: key);

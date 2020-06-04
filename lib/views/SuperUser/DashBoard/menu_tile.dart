@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:RentalAdmin/views/SuperUser/theme.dart';
+import 'package:RentalAdmin/views/SuperUser/DashBoard/theme.dart';
 
 class MenuItemTile extends StatefulWidget {
   final String title;

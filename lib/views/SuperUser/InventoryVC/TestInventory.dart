@@ -1,10 +1,10 @@
-import 'package:RentalAdmin/views/SuperUser/UpdateLocationDialog.dart';
+import 'package:RentalAdmin/views/SuperUser/InventoryVC/ItemManagement/UpdateLocationDialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:RentalAdmin/views/SuperUser/theme.dart';
-import 'package:RentalAdmin/views/SuperUser/UpdateItemDialog.dart';
-import 'package:RentalAdmin/views/SuperUser/NewLocationDialog.dart';
-import 'package:RentalAdmin/views/SuperUser/NewItemDialog.dart';
+import 'package:RentalAdmin/views/SuperUser/DashBoard/theme.dart';
+import 'package:RentalAdmin/views/SuperUser/InventoryVC/ItemManagement/UpdateItemDialog.dart';
+import 'package:RentalAdmin/views/SuperUser/InventoryVC/ItemManagement/NewLocationDialog.dart';
+import 'package:RentalAdmin/views/SuperUser/InventoryVC/ItemManagement/NewItemDialog.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'Category.dart';

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:RentalAdmin/widgets/resCell.dart';
-import 'package:RentalAdmin/widgets/activeActivities.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
-import 'package:RentalAdmin/views/SuperUser/InventoryVC/TestInventory.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:RentalAdmin/views/User/homeView.dart';
-import 'package:RentalAdmin/views/User/InventoryView.dart';
+import 'package:RentalAdmin/views/User/UI/homeView.dart';
+import 'package:RentalAdmin/views/User/inventory/InventoryView.dart';
 class ReservationListPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

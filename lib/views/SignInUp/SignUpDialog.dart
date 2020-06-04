@@ -5,7 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:RentalAdmin/views/signInScreen.dart';
+import 'package:RentalAdmin/views/SignInUp/signInScreen.dart';
 
 class SignUpPage extends StatefulWidget {
   String organization;

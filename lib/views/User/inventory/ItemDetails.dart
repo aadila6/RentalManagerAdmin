@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:RentalAdmin/views/User/homeView.dart';
+import 'package:RentalAdmin/views/User/UI/homeView.dart';
 import 'package:intl/intl.dart';
-import 'package:RentalAdmin/views/User/ReservationView.dart';
+import 'package:RentalAdmin/views/User/UI/ReservationView.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:flutter/cupertino.dart';
 class DetailPage extends StatefulWidget {

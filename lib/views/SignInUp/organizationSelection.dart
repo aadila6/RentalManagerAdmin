@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
-import 'package:RentalAdmin/views/SignUpDialog.dart';
+import 'package:RentalAdmin/views/SignInUp/SignUpDialog.dart';
 import 'package:flutter/cupertino.dart';
 
 class OrganizationSelection extends StatefulWidget {

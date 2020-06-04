@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:RentalAdmin/views/SuperUser/theme.dart';
+import 'package:RentalAdmin/views/SuperUser/DashBoard/theme.dart';
 
 class CardTile extends StatelessWidget {
   final String cardTitle;

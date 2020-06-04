@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:RentalAdmin/views/inventory/list_page.dart';
-import 'package:RentalAdmin/views/User/InventoryView.dart';
+import 'package:RentalAdmin/views/User/inventory/list_page.dart';
+import 'package:RentalAdmin/views/User/inventory/InventoryView.dart';
 
 class LocationPage extends StatefulWidget {
   final String title;

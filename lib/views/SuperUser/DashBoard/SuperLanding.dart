@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:RentalAdmin/views/SuperUser/theme.dart';
-import 'package:RentalAdmin/views/SuperUser/cardTiles.dart';
-import 'package:RentalAdmin/views/SuperUser/currentDash.dart';
+import 'package:RentalAdmin/views/SuperUser/DashBoard/theme.dart';
+import 'package:RentalAdmin/views/SuperUser/DashBoard/cardTiles.dart';
+import 'package:RentalAdmin/views/SuperUser/DashBoard/currentDash.dart';
 import 'package:RentalAdmin/views/globals.dart' as globals;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:RentalAdmin/views/SuperUser/ProfileDialog.dart';
 
 class Dashboard extends StatefulWidget {
   @override
