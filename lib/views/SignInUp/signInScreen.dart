@@ -73,13 +73,6 @@ class _signInScreenState extends State<signInScreen> {
   }
 
   Future getCollections() async {
-    globals.existingLocations.clear();
-    QuerySnapshot list1 =
-        await Firestore.instance.collection(globals.locations).getDocuments();
-    list1.documents.forEach((doc) {
-      globals.existingLocations.add(doc.data['name']);
-    });
-
     globals.existingOrganizations.clear();
     QuerySnapshot list =
         await Firestore.instance.collection('organizations').getDocuments();
@@ -288,11 +281,12 @@ class _signInScreenState extends State<signInScreen> {
                                 globals.organization + '_locations';
                             globals.locationManager = doc['LocationManager'];
                             print("------------------END ----------------");
-                            // Firestore.instance.collection(globals.locations).getDocuments().then((value){
-                            //   globals.existingLocations = value.documents.map<String>((e){
-                            //     return e.data['name'];
-                            //   }).toList();
-                            // });
+                            globals.existingLocations.clear();
+                            QuerySnapshot list1 =
+                                await Firestore.instance.collection(globals.locations).getDocuments();
+                            list1.documents.forEach((doc) {
+                              globals.existingLocations.add(doc.data['name']);
+                            });
                             print(globals.locations);
                             print("BEFORE LOG IN");
                             print(globals.existingOrganizations);
