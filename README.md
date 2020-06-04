@@ -14,7 +14,7 @@ flutter pub get
 Usage 
 
 ```
-flutter run
+flutter run -d chrome
 ```
 
 Live Demo : [Flutter Rental Manager App Web&Mobile Demo](https://youtu.be/uWN17YViIzk)
