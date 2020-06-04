@@ -112,7 +112,7 @@ SuperUser /
 		
 |-UserPermission	
   	|- HttpRequestModel.dart	
-	  |- UserManagement.dart	
+	|- UserManagement.dart	
 ```
 
 ### User
@@ -121,15 +121,15 @@ Contains the common file(s) and utilities used in a project. The folder structur
 
 ```
 |- UI
-  |- LandingView.dart	
-	|- ReservationView.dart	Update!!!	1 hour ago
+	|- LandingView.dart	
+	|- ReservationView.dart	
 	|- homeView.dart
-|- inventory folder for user panel inventory view
+|- inventory /*folder for user panel inventory view*/
 ```
 
 ### Widgets
 
-Contains the common widgets that are shared across multiple screens. For example, Button, TextField etc.
+Contains the common widgets that are shared across multiple screens. For example, Button, TextFields,widgets used in parts of views.
 
 ```
 widgets/
