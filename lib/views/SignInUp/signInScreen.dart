@@ -19,21 +19,21 @@ class _signInScreenState extends State<signInScreen> {
 
   bool _Accountvalidate = false;
   String _contactText;
-  // GoogleSignInAccount _currentUser;
-  // GoogleSignIn _googleSignIn = GoogleSignIn(
-  //   scopes: [
-  //     'email',
-  //     'https://www.googleapis.com/auth/contacts.readonly',
-  //   ],
-  // );
+  GoogleSignInAccount _currentUser;
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
 
-  // Future<void> _handleSignIn() async {
-  //   try {
-  //     await _googleSignIn.signIn();
-  //   } catch (error) {
-  //     print(error);
-  //   }
-  // }
+  Future<void> _handleSignIn() async {
+    try {
+      await _googleSignIn.signIn();
+    } catch (error) {
+      print(error);
+    }
+  }
   @override
   void initState() {
     // getOrganizations().whenComplete(() => setState(() {}));
@@ -41,7 +41,7 @@ class _signInScreenState extends State<signInScreen> {
     getCollections();
   }
 
-  // Future<void> _handleSignOut() => _googleSignIn.disconnect();
+  Future<void> _handleSignOut() => _googleSignIn.disconnect();
   Future<void> getData() async {
     Firestore.instance
         .collection('global_users')
@@ -328,6 +328,56 @@ class _signInScreenState extends State<signInScreen> {
                         }
                       },
                       padding: EdgeInsets.all(10.0),
+                      disabledColor: Colors.black,
+                      disabledTextColor: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 20 * 5,
+                    child: RaisedButton(
+                      highlightElevation: 0.0,
+                      splashColor: Colors.greenAccent,
+                      highlightColor: Colors.green,
+                      elevation: 0.0,
+                      color: Colors.green,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image(
+                            image: NetworkImage(
+                                'https://pluspng.com/img-png/google-logo-png-open-2000.png'),
+                            height: 30,
+                          ),
+                          SizedBox(width: 20.0),
+                          Center(
+                            child: Text(
+                              "Sign In with Google",
+                              style: TextStyle(
+                                fontSize: 15,
+                                // backgroundColor:  Colors.teal[50],
+                                color: Colors.white,
+                                fontFamily: 'Montserrat',
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      onPressed: () async {
+                        _handleSignIn();
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => HomeView()));
+                      },
+                      padding: EdgeInsets.all(7.0),
+                      //color: Colors.teal.shade900,
                       disabledColor: Colors.black,
                       disabledTextColor: Colors.black,
                     ),
