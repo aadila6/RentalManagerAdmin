@@ -120,7 +120,7 @@ testingReservations(String itemID) async {
   
     print(itemID);
     var now = new DateTime.now();
-    var time = DateFormat("yyyy-MM-dd hh:mm:ss").format(now);
+    var time = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
     var pickUpBefore = now.add(new Duration(minutes: 10));
   
     uploadData(itemID, globals.userLoginID, time);
