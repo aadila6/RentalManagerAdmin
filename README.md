@@ -188,7 +188,9 @@ class MyApp extends StatelessWidget {
 
 ### License
 
-    Copyright 2020 Abudureheman Adila, Jiayi Zhang, Jing Gao, Alessandro Liu @ UC Davis 
+    Copyright 2020 Abudureheman Adila, Jiayi Zhang, Jing Gao, Alessandro Liu  
+    Please note: You are granted to fork this git repo and develop it. 
+    But You may not publish it on App Store or Google Play.
 
 
 
