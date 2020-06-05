@@ -290,8 +290,12 @@ class _signInScreenState extends State<signInScreen> {
                             print(globals.locations);
                             print("BEFORE LOG IN");
                             print(globals.existingOrganizations);
+                            // if(!globals.existingOrganizations
+                            //         .contains(globals.organization)){
+                            //           print("!globals.existingOrganizations.contains");
+                            //         }
                             if (!globals.existingOrganizations
-                                    .contains(doc['organization']) &&
+                                    .contains(globals.organization) &&
                                 doc['Admin'] == false) {
                               print(
                                   "INSIDE FIRST ADMIN IF STATEMENT!!!!!!!!!!!!");

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:RentalAdmin/views/SignInUp/signInScreen.dart';
-
+import 'package:RentalAdmin/views/globals.dart' as globals;
 class NavigationBar extends StatelessWidget {
   const NavigationBar({Key key}) : super(key: key);
   @override
@@ -27,6 +27,7 @@ class NavigationBar extends StatelessWidget {
                       side: BorderSide(color: Colors.white)),
                   onPressed: () {
                     print("Pressed Admin login");
+                    globals.reset();
                     Navigator.push(
                         context,
                         MaterialPageRoute(

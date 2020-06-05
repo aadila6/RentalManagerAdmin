@@ -140,6 +140,7 @@ class SuperuserPanelState extends State<SuperuserPanel>
   }
 
   static Signout(BuildContext context) {
+    globals.reset();
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => signInScreen()), (route) => false);
     //Navigator.push(context, MaterialPageRoute(builder: (context) => signInScreen()));
   }

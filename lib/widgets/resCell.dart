@@ -31,6 +31,7 @@ class _reservationCell extends State<reservationCell> {
    Future pickedUp() async {
      print(widget.passedFirestoreData.documentID);
     String date = DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());
+    print("PickUp" + date);
       final firestore = Firestore.instance;
     await firestore
         .document(widget.passedFirestoreData.documentID.toString())

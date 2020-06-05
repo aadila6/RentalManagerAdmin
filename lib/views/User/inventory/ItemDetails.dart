@@ -50,6 +50,7 @@ class _DetailPage extends State<DetailPage> {
         style: TextStyle(fontSize: 18.0));
   }
 
+
   Widget amount() {
     print("globals items" + globals.items_global);
     print("item name" + this.widget.itemSelected['name']);
@@ -113,6 +114,7 @@ class _DetailPage extends State<DetailPage> {
             .document(widget.itemSelected.documentID)
             .updateData({'# of items': widget.itemSelected['# of items']-1});
   }
+  
 
 testingReservations(String itemID) async {
   
@@ -123,6 +125,7 @@ testingReservations(String itemID) async {
   
     uploadData(itemID, globals.userLoginID, time);
   }
+
 
   void uploadData(itemID, uid, dateTime) async {
     String itemName, imageURL;
@@ -170,7 +173,7 @@ testingReservations(String itemID) async {
       'startTime': dateTime,
       'status': "Picked Up",
       'reserved time': dateTime,
-      'picked Up time': 'NULL',
+      'picked Up time': dateTime,
       'return time': 'NULL',
       'endTime': "TBD",
       'UserName': globals.username,
