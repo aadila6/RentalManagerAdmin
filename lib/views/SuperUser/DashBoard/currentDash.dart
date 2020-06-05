@@ -112,7 +112,7 @@ class _ActivityWidgetState extends State<ActivityWidget> {
                           ),
                           trailing: new Text(
                             //snapshot.data.documents[index].data['startTime']
-                              returnDifferenceTime(snapshot.data.documents[index].data['startTime'], snapshot.data.documents[index].data['picked Up time'], snapshot.data.documents[index].data['return time']) // modify here
+                              returnDifferenceTime(snapshot.data.documents[index].data['reserved time'], snapshot.data.documents[index].data['picked Up time'], snapshot.data.documents[index].data['return time']) // modify here
                               ),
                           title: new Text(snapshot.data.documents[index].data['name']),
                               // style: TextStyle(color: textcolor())),

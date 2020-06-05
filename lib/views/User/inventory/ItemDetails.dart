@@ -117,15 +117,13 @@ class _DetailPage extends State<DetailPage> {
   
 
 testingReservations(String itemID) async {
-  
     print(itemID);
     var now = new DateTime.now();
     var time = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
+    print("time");
     var pickUpBefore = now.add(new Duration(minutes: 10));
-  
     uploadData(itemID, globals.userLoginID, time);
   }
-
 
   void uploadData(itemID, uid, dateTime) async {
     String itemName, imageURL;
