@@ -45,6 +45,13 @@ To run this application simply type in the following command:
 flutter run -d chrome
 ```
 
+**Release**
+To build a release version, run
+```
+flutter build web
+```
+By default, the output files will be located at build/web
+
 ## Folder Structure
 Here is the core folder structure which flutter provides.
 
@@ -71,12 +78,12 @@ Now, lets dive into the lib folder which has the main code for the application.
 ```
 1- views - All the application level views files including inventory,SuperUser and signin/signout views 
 2- widgets — Contains the common widgets for the applications, but mainly components like widgets that gets called repeatedly.
-3- main.dart - This is the starting point of the application. All the application level configurations are defined in this file.
+3- main.dart - This is the entry point of the application. All the application level configurations are defined in this file.
 ```
 
 ### Views
 
-This directory contains all the application level constants. A separate file is created for each type as shown in example below:
+This directory contains a file that defines all the application level constants; Three folders are created for each major view inside the app.
 
 ```
 views/
@@ -181,7 +188,9 @@ class MyApp extends StatelessWidget {
 
 ### License
 
-    Copyright 2020 Abudureheman Adila, Jiayi Zhang, Jing Gao, Alessandro Liu @ UC Davis 
+    Copyright 2020 Abudureheman Adila, Jiayi Zhang, Jing Gao, Alessandro Liu  
+    Please note: You are granted to fork this git repo and develop it. 
+    But You may not publish it on App Store or Google Play.
 
 
 

@@ -62,52 +62,60 @@ class inventoryByLOCState extends State<inventoryByLOC> {
       ),
       Expanded(
         child: StreamBuilder(
-            stream:
-                Firestore.instance.collection(globals.locations).snapshots(),
+            stream: Firestore.instance.collection(globals.locations).snapshots(),
             builder: (context, snapshot) {
               print("Building");
               if (!snapshot.hasData) return CupertinoActivityIndicator();
-
-              return GridView.builder(
-                  itemCount: snapshot.data.documents.length,
+              List dataRef = snapshot.data.documents;
+              dataRef.removeWhere((element){
+                print(element.data['name']);
+                if(globals.admin==true) {
+                  return false;
+                }
+                else if(globals.locationManager != element.data['name']) {
+                  return true;
+                }
+                return false;
+              });
+              return GridView(
                   gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 5),
-                  itemBuilder: (BuildContext context, int index) {
-                    return InkWell(
-                      child: CustommCell(
-                          snapshot.data.documents[index].data['name']
-                              .toString(),
-                          snapshot.data.documents[index].data['imageURL']
-                              .toString()),
-                      onTap: () {
-     
-                        var documentID =
-                            snapshot.data.documents[index].documentID;
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CategoryVC(
-                                    locationSelected: documentID,
-                                    locationName: snapshot
-                                        .data.documents[index].data['name']
-                                        .toString(),
-                                  )),
-                        );
-                      },
-                      onDoubleTap: () {
-                        print("User double tapped location!");
-                        showDialog(
-                            context: context,
-                            builder: (ctxt) {
-                              return UpdateLocationDialog(
-                                  itemSelected: snapshot.data.documents[index]);
-                            });
-                      },
-                    );
-                  });
+                  children: dataRef.map((e) => buildBox(e)).toList()
+              );
             }),
       )
     ]);
+  }
+
+  Widget buildBox(doc) {
+    return InkWell(
+      child: CustommCell(
+        doc.data['name'].toString(),
+        doc.data['imageURL'].toString()
+      ),
+      onTap: () {
+        var documentID = doc.documentID;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CategoryVC(
+              locationSelected: documentID,
+              locationName: doc.data['name'].toString(),
+            )
+          ),
+        );
+      },
+      onDoubleTap: () {
+        print("User double tapped location!");
+        showDialog(
+          context: context,
+          builder: (ctxt) {
+            return UpdateLocationDialog(
+              itemSelected: doc);
+          }
+        );
+      },
+    );
   }
 
   navigateToDetail(DocumentSnapshot indexedData) {
