@@ -28,9 +28,6 @@ class SuperuserPanelState extends State<SuperuserPanel>
   @override
   void initState() {
     super.initState();
-    if(globals.admin== false) {
-      myTabs.removeAt(2);
-    }
     tabController = TabController(vsync: this, length: myTabs.length);
   }
 
@@ -143,7 +140,7 @@ class SuperuserPanelState extends State<SuperuserPanel>
   }
 
   static Signout(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => signInScreen()));
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => signInScreen()), (route) => false);
+    //Navigator.push(context, MaterialPageRoute(builder: (context) => signInScreen()));
   }
 }

@@ -75,22 +75,26 @@ class SuperUserMgtViewState extends State<SuperUserMgtView> {
           )] + allUserList.map((e){
             print(globals.existingLocations);
             return TableRow(children: <Widget>[Text(e.email)] +
-            [
-              DropdownButton(
-                value: e.permissions['LocationManager'],
-                items: <DropdownMenuItem>[DropdownMenuItem(child:Text("None"),value:"",)]+globals.existingLocations.map((e) => DropdownMenuItem(child: Text(e),value: e)).toList(),
+            [DropdownButton(
+              value: e.permissions['LocationManager'],
+              items: <DropdownMenuItem>[
+                DropdownMenuItem(child:Text("None"),value:"",)
+              ] + (globals.admin?(globals.existingLocations.map((e) => DropdownMenuItem(child: Text(e),value: e)).toList()):[DropdownMenuItem(child: Text(globals.locationManager),value: globals.locationManager)]),
               onChanged: (n){
                 e.permissions['LocationManager'] = n;
                 e.permissions['Admin'] = false;
                 setState((){});
-              })
-            ]+
+              }
+            )]+
               allPermissions.map<Widget>((p){
-                return Checkbox(value: e.permissions[p], onChanged: (newVal){
-                  e.permissions[p] = newVal;
-                  e.permissions['LocationManager'] = "";
-                  setState((){});
-                });
+                return Checkbox(
+                  value: e.permissions[p],
+                  onChanged: globals.admin==false?null:(newVal){
+                    e.permissions[p] = newVal;
+                    e.permissions['LocationManager'] = "";
+                    setState((){});
+                  }
+                );
               }).toList() + [
                 RaisedButton(
                   child:Text("Submit"),
